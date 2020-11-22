@@ -1,19 +1,16 @@
 import L from "leaflet";
-
-const TILE_LAYER = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-const BOUNDS = new L.LatLngBounds(
-  new L.LatLng(18.385844, -70.069322),
-  new L.LatLng(18.647996, -69.751352)
-);
+const token =
+  "pk.eyJ1IjoiYW5kcmVzOTYxOSIsImEiOiJjanExdTFodjMwYXQyNDNuMmVvazV6eHBlIn0.kOpHKEx5EBGD8YIXmKRQWA";
+const center = new L.LatLng(3.399992, -76.516708);
+const TILE_LAYER = `https://api.mapbox.com/styles/v1/andres9619/ckhjmykyt17vf19mx0tn74dzg/tiles/256/{z}/{x}/{y}@2x?access_token=${token}`;
 const VISCOSITY = 0.5;
 const MAX_ZOOM_MAP = 18;
 const INITIAL_ZOOM = 13;
 const MAP_OPTIONS = {
+  center,
   zoom: INITIAL_ZOOM,
-  center: BOUNDS.getCenter(),
   minZoom: INITIAL_ZOOM,
   maxZoom: MAX_ZOOM_MAP,
-  maxBounds: BOUNDS,
   maxBoundsViscosity: VISCOSITY,
 };
 export { TILE_LAYER };

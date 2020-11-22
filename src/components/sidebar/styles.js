@@ -6,6 +6,9 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     height: "100%",
   },
+  grow: {
+    flexGrow: 1,
+  },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
@@ -32,13 +35,6 @@ export const useStyles = makeStyles((theme) => ({
     flexShrink: 0,
     whiteSpace: "nowrap",
   },
-  drawerOpen: {
-    width: drawerWidth,
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
   drawerClose: {
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
@@ -62,5 +58,8 @@ export const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     height: "100%",
     padding: theme.spacing(3),
+  },
+  buttons: {
+    alignSelf: "flex-end",
   },
 }));
