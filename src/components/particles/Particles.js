@@ -16,10 +16,10 @@ export default function CustomParticles() {
         particles: {
           color: { value: theme.palette.secondary.main },
           number: {
-            value: 70,
+            value: 80,
           },
           size: {
-            value: 4,
+            value: 5,
           },
           line_linked: {
             color: theme.palette.secondary.main,
