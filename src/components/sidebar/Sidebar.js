@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -6,7 +6,9 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -14,12 +16,14 @@ import HomeIcon from "@material-ui/icons/HomeOutlined";
 import PersonIcon from "@material-ui/icons/PersonOutlined";
 import GamepadIcon from "@material-ui/icons/GamepadOutlined";
 import WorkIcon from "@material-ui/icons/WorkOutlineOutlined";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import EmailIcon from "@material-ui/icons/EmailOutlined";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness5Icon from "@material-ui/icons/Brightness5";
 import TranslateIcon from "@material-ui/icons/Translate";
 import { useHistory } from "react-router-dom";
 import { useStyles } from "./styles";
+import { Trans, useTranslation } from "react-i18next";
 
 export default function Sidebar({ children, toggleDarkMode }) {
   const classes = useStyles();
@@ -33,10 +37,8 @@ export default function Sidebar({ children, toggleDarkMode }) {
         <Toolbar>
           <div className={classes.grow}>LOGO</div>
           <div className={classes.buttons}>
-            <IconButton color="inherit" aria-label="change language">
-              <TranslateIcon />
-            </IconButton>
-            <IconButton
+            <LanguageButton />
+            <Button
               color="inherit"
               aria-label="toggle dark mode"
               onClick={toggleDarkMode}
@@ -46,7 +48,7 @@ export default function Sidebar({ children, toggleDarkMode }) {
               ) : (
                 <Brightness5Icon />
               )}
-            </IconButton>
+            </Button>
           </div>
         </Toolbar>
       </AppBar>
@@ -76,6 +78,62 @@ export default function Sidebar({ children, toggleDarkMode }) {
     </div>
   );
 }
+
+function LanguageButton(props) {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const { i18n } = useTranslation();
+
+  const getLanguageOption = (lang) =>
+    languageOptions.find((o) => o.value === lang);
+
+  const handleClick = (newlang) => () => {
+    if (!newlang) return;
+    let languageOption = getLanguageOption(newlang);
+    console.log("newlang", { newlang, languageOption });
+    i18n.changeLanguage(newlang);
+    handleClose();
+  };
+
+  const handleOpen = (event) => setAnchorEl(event.currentTarget);
+
+  const handleClose = () => setAnchorEl(null);
+
+  const currentLanguage = getLanguageOption(i18n.language);
+
+  return (
+    <>
+      <Button
+        color="inherit"
+        startIcon={<TranslateIcon />}
+        endIcon={<ExpandMoreIcon />}
+        aria-label="change language"
+        onClick={handleOpen}
+      >
+        {currentLanguage.label}
+      </Button>
+      <Menu
+        keepMounted
+        id="language-menu"
+        open={!!anchorEl}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+      >
+        {languageOptions.map((lo, i) => (
+          <MenuItem key={i} onClick={handleClick(lo.value)}>
+            {lo.label}
+          </MenuItem>
+        ))}
+      </Menu>
+    </>
+  );
+}
+
+const languageOptions = [
+  { label: "Español", value: "es" },
+  { label: "English", value: "en" },
+  { label: "Deutsch", value: "ger" },
+  { label: "Français", value: "fre" },
+];
 
 const options = [
   {

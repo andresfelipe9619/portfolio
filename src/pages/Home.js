@@ -5,8 +5,10 @@ import Particles from "../components/particles/Particles";
 import Typist from "react-typist";
 import "react-typist/dist/Typist.css";
 import { makeStyles } from "@material-ui/core/styles";
+import { useTranslation, Trans } from "react-i18next";
 
-export default function Home() {
+function Home() {
+  const [t] = useTranslation();
   const classes = useStyles();
   return (
     <Grid container>
@@ -17,10 +19,10 @@ export default function Home() {
         >
           <Typist avgTypingDelay={120}>
             <Typist.Delay ms={300} />
-            <Text>Hi,</Text>
+            <Text>{t("hi")}, </Text>
             <Typist.Delay ms={300} />
             <br />
-            <Text>{"I'm Andrés Suárez,"}</Text>
+            <Text>{t("iam")} Andrés Suárez</Text>
             <br />
             <Text>Full-Stack Developer.</Text>
           </Typist>
@@ -52,3 +54,5 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.common.white,
   },
 }));
+
+export default Home;

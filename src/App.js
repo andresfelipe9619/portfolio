@@ -4,6 +4,7 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { useDarkMode } from "./theme";
 import RouterApp from "./router/router.app";
 import Sidebar from "./components/sidebar/Sidebar";
+import "./i18n";
 
 function App() {
   const [theme, toggleDarkMode] = useDarkMode();
