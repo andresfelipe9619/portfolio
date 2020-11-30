@@ -98,7 +98,7 @@ function LanguageButton(props) {
   const handleClose = () => setAnchorEl(null);
 
   const currentLanguage = getLanguageOption(i18n.language);
-
+  if (!currentLanguage) return null;
   return (
     <>
       <Button
