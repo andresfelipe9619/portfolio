@@ -1,13 +1,13 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
+// import Box from "@material-ui/core/Box";
 import Particles from "../components/particles/Particles";
 import Typist from "react-typist";
 import "react-typist/dist/Typist.css";
 import { makeStyles } from "@material-ui/core/styles";
-import { useTranslation, Trans } from "react-i18next";
-import Icon from "@material-ui/core/Icon";
+import { useTranslation } from "react-i18next";
+// import Icon from "@material-ui/core/Icon";
 
 function Home() {
   const [t] = useTranslation();
@@ -40,27 +40,27 @@ function Home() {
   );
 }
 
-const Technologies = () => (
-  <>
-    <Box display="flex" mt={2}>
-      <Icon className="fab fa-js" color="primary" fontSize="large" />
-      <Icon className="fab fa-react" color="primary" fontSize="large" />
-      <Icon className="fab fa-html5" color="primary" fontSize="large" />
-      <Icon className="fab fa-css3-alt" color="primary" fontSize="large" />
-    </Box>
-    <Box display="flex" mt={2}>
-      <Icon className="fab fa-aws" color="primary" fontSize="large" />
-      <Icon className="fab fa-node-js" color="primary" fontSize="large" />
-      <Icon className="fab fa-git-alt" color="primary" fontSize="large" />
-      <Icon className="fab fa-github" color="primary" fontSize="large" />
-    </Box>
-    <Box display="flex" mt={2}>
-      <Icon className="fab fa-apple" color="primary" fontSize="large" />
-      <Icon className="fab fa-linux" color="primary" fontSize="large" />
-      <Icon className="fab fa-windows" color="primary" fontSize="large" />
-    </Box>
-  </>
-);
+// const Technologies = () => (
+//   <>
+//     <Box display="flex" mt={2}>
+//       <Icon className="fab fa-js" color="primary" fontSize="large" />
+//       <Icon className="fab fa-react" color="primary" fontSize="large" />
+//       <Icon className="fab fa-html5" color="primary" fontSize="large" />
+//       <Icon className="fab fa-css3-alt" color="primary" fontSize="large" />
+//     </Box>
+//     <Box display="flex" mt={2}>
+//       <Icon className="fab fa-aws" color="primary" fontSize="large" />
+//       <Icon className="fab fa-node-js" color="primary" fontSize="large" />
+//       <Icon className="fab fa-git-alt" color="primary" fontSize="large" />
+//       <Icon className="fab fa-github" color="primary" fontSize="large" />
+//     </Box>
+//     <Box display="flex" mt={2}>
+//       <Icon className="fab fa-apple" color="primary" fontSize="large" />
+//       <Icon className="fab fa-linux" color="primary" fontSize="large" />
+//       <Icon className="fab fa-windows" color="primary" fontSize="large" />
+//     </Box>
+//   </>
+// );
 
 const Text = ({ children }) => {
   const classes = useStyles();
