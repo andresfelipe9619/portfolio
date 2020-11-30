@@ -25,11 +25,16 @@ const Palette = {
   },
 };
 
+const Typography = {
+  fontSize: 14,
+  htmlFontSize: 14,
+  useNextVariants: true,
+  fontFamily: ["Montserrat", "open-sans"].join(","),
+};
+
 const Theme = {
   palette: Palette,
-  typography: {
-    fontSize: 12,
-  },
+  typography: Typography,
 };
 
 export function useDarkMode() {

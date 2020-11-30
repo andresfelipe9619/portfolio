@@ -4,6 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Map from "../components/map/Map";
+import Title from "../components/text/Title";
 import { makeStyles } from "@material-ui/core/styles";
 import { Formik } from "formik";
 export default function Contact() {
@@ -12,9 +13,7 @@ export default function Contact() {
   return (
     <Grid container className={classes.root} spacing={2}>
       <Grid container item md={5}>
-        <Typography component="h1" variant="h3" color="primary">
-          Contact me
-        </Typography>
+        <Title>Contact me</Title>
         <Typography variant="h6" component="p">
           I am interested in freelance opportunities – especially ambitious or
           large projects. However, if you have other request or question, don’t

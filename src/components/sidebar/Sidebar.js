@@ -23,7 +23,7 @@ import Brightness5Icon from "@material-ui/icons/Brightness5";
 import TranslateIcon from "@material-ui/icons/Translate";
 import { useHistory } from "react-router-dom";
 import { useStyles } from "./styles";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 export default function Sidebar({ children, toggleDarkMode }) {
   const classes = useStyles();
@@ -35,21 +35,21 @@ export default function Sidebar({ children, toggleDarkMode }) {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <div className={classes.grow}>LOGO</div>
-          <div className={classes.buttons}>
-            <LanguageButton />
-            <Button
-              color="inherit"
-              aria-label="toggle dark mode"
-              onClick={toggleDarkMode}
-            >
-              {theme.palette.type === "light" ? (
-                <Brightness4Icon />
-              ) : (
-                <Brightness5Icon />
-              )}
-            </Button>
-          </div>
+          <div className={classes.grow}>Andrés Suárez</div>
+          {/* <div className={classes.buttons}> */}
+          <LanguageButton />
+          <Button
+            color="inherit"
+            aria-label="toggle dark mode"
+            onClick={toggleDarkMode}
+          >
+            {theme.palette.type === "light" ? (
+              <Brightness4Icon />
+            ) : (
+              <Brightness5Icon />
+            )}
+          </Button>
+          {/* </div> */}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -59,7 +59,6 @@ export default function Sidebar({ children, toggleDarkMode }) {
           paper: classes.drawerClose,
         }}
       >
-        <div className={classes.toolbar} />
         <List>
           {options.map(({ name, path, icon: Icon }, index) => (
             <ListItem button key={name} onClick={() => history.push(path)}>
