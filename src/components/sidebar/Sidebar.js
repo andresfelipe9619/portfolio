@@ -23,8 +23,8 @@ import Brightness5Icon from "@material-ui/icons/Brightness5";
 import TranslateIcon from "@material-ui/icons/Translate";
 import { useHistory } from "react-router-dom";
 import { useStyles } from "./styles";
-import { useTranslation } from "react-i18next";
-
+import { useLingui } from "@lingui/react";
+import { dynamicActivate } from "../../i18n";
 export default function Sidebar({ children, toggleDarkMode }) {
   const classes = useStyles();
   const theme = useTheme();
@@ -80,7 +80,7 @@ export default function Sidebar({ children, toggleDarkMode }) {
 
 function LanguageButton(props) {
   const [anchorEl, setAnchorEl] = useState(null);
-  const { i18n } = useTranslation();
+  const { i18n } = useLingui();
 
   const getLanguageOption = (lang) =>
     languageOptions.find((o) => o.value === lang);
@@ -89,15 +89,15 @@ function LanguageButton(props) {
     if (!newlang) return;
     let languageOption = getLanguageOption(newlang);
     console.log("newlang", { newlang, languageOption });
-    i18n.changeLanguage(newlang);
+    dynamicActivate(newlang);
     handleClose();
   };
 
   const handleOpen = (event) => setAnchorEl(event.currentTarget);
 
   const handleClose = () => setAnchorEl(null);
-
-  const currentLanguage = getLanguageOption(i18n.language);
+  console.log("i18n", i18n);
+  const currentLanguage = getLanguageOption(i18n.locale);
   if (!currentLanguage) return null;
   return (
     <>
@@ -130,8 +130,8 @@ function LanguageButton(props) {
 const languageOptions = [
   { label: "Español", value: "es" },
   { label: "English", value: "en" },
-  { label: "Deutsch", value: "ger" },
-  { label: "Français", value: "fre" },
+  { label: "Deutsch", value: "de" },
+  { label: "Français", value: "fr" },
 ];
 
 const options = [

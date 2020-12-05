@@ -1,42 +1,30 @@
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
-// import XHR from "i18next-xhr-backend";
+import { i18n } from "@lingui/core";
+import { en, es, fr, de } from "make-plural/plurals";
 
-import translationEng from "./locales/en/translation.json";
-import translationGer from "./locales/ger/translation.json";
-import translationFre from "./locales/fre/translation.json";
-import translationEs from "./locales/es/translation.json";
+export const locales = {
+  en: "English",
+  de: "Deutsch",
+  es: "Español",
+  fr: "Français",
+};
 
-i18n
-  // .use(XHR)
-  .use(LanguageDetector)
-  .use(initReactI18next) // passes i18n down to react-i18next
-  .init({
-    debug: true,
-    fallbackLng: "en", // use en if detected lng is not available
+export const defaultLocale = "en";
 
-    keySeparator: false, // we do not use keys in form messages.welcome
+i18n.loadLocaleData({
+  en: { plurals: en },
+  es: { plurals: es },
+  fr: { plurals: fr },
+  de: { plurals: de },
+});
 
-    interpolation: {
-      escapeValue: false, // react already safes from xss
-    },
-    react: { useSuspense: false },
-
-    resources: {
-      en: {
-        translation: translationEng,
-      },
-      ger: {
-        translation: translationGer,
-      },
-      fre: {
-        translation: translationFre,
-      },
-      es: {
-        translation: translationEs,
-      },
-    },
-  });
+/**
+ * We do a dynamic import of just the catalog that we need
+ * @param locale any locale string
+ */
+export async function dynamicActivate(locale) {
+  const messages = await import(`./locales/${locale}/translation.json`);
+  i18n.load(locale, messages);
+  i18n.activate(locale);
+}
 
 export default i18n;

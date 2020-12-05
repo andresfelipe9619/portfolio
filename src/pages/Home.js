@@ -6,11 +6,10 @@ import Particles from "../components/particles/Particles";
 import Typist from "react-typist";
 import "react-typist/dist/Typist.css";
 import { makeStyles } from "@material-ui/core/styles";
-import { useTranslation } from "react-i18next";
+import { i18n } from "@lingui/core";
 // import Icon from "@material-ui/core/Icon";
 
 function Home() {
-  const [t] = useTranslation();
   const classes = useStyles();
   return (
     <Grid container>
@@ -23,12 +22,12 @@ function Home() {
         >
           <Typist avgTypingDelay={120}>
             <Typist.Delay ms={300} />
-            <Text>{t("hi")}, </Text>
+            <Text>{i18n._("hi")}, </Text>
             <Typist.Delay ms={300} />
             <br />
-            <Text>{t("iam")} Andrés Suárez</Text>
+            <Text>{i18n._("iam")} Andrés Suárez</Text>
             <br />
-            <Text>Full-Stack {t("dev")}.</Text>
+            <Text>Full-Stack {i18n._("dev")}.</Text>
           </Typist>
         </Typography>
         {/* <Technologies /> */}
