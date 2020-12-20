@@ -3,12 +3,13 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Particles from "../components/particles/Particles";
 import Title from "../components/text/Title";
+import { i18n } from "@lingui/core";
 
 export default function About() {
   return (
     <Grid container>
       <Grid item md={5}>
-        <Title>About me</Title>
+        <Title>{i18n._("aboutTitle")}</Title>
         <Typography paragraph variant="h6" component="p">
           Professionally connected with the web development industry and
           information technology for many years.

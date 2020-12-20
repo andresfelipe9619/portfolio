@@ -7,13 +7,15 @@ import Map from "../components/map/Map";
 import Title from "../components/text/Title";
 import { makeStyles } from "@material-ui/core/styles";
 import { Formik } from "formik";
+import { i18n } from "@lingui/core";
+
 export default function Contact() {
   const classes = useStyles();
 
   return (
     <Grid container className={classes.root} spacing={2}>
       <Grid container item md={5}>
-        <Title>Contact me</Title>
+        <Title>{i18n._("contactTitle")}</Title>
         <Typography variant="h6" component="p">
           I am interested in freelance opportunities – especially ambitious or
           large projects. However, if you have other request or question, don’t

@@ -1,5 +1,13 @@
 {
   "hi": "Hi",
   "iam": "I'm",
-  "dev": "Developer"
+  "dev": "Full-Stack Developer",
+  "skillsTitle": "Skills & Experience",
+  "skillsContent": "",
+  "contactTitle": "Contact me",
+  "contactContent": "",
+  "aboutTitle": "About me",
+  "aboutContent": "",
+  "workTitle": "My Work",
+  "workContent": ""
 }

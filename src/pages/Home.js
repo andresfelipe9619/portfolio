@@ -15,7 +15,7 @@ function Home() {
     <Grid container>
       <Grid item md={5}>
         <Typography
-          variant="h2"
+          variant="h3"
           component="h1"
           aria-label="Hi, I'am Andrés Suárez, Full-Stack Developer"
           className={classes.typist}
@@ -27,7 +27,7 @@ function Home() {
             <br />
             <Text>{i18n._("iam")} Andrés Suárez</Text>
             <br />
-            <Text>Full-Stack {i18n._("dev")}.</Text>
+            <Text>{i18n._("dev")}.</Text>
           </Typist>
         </Typography>
         {/* <Technologies /> */}

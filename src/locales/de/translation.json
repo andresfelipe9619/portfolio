@@ -1,5 +1,13 @@
 {
   "hi": "Hallo",
   "iam": "ich bin",
-  "dev": "Entwickler"
+  "dev": "Full-Stack Entwickler",
+  "skillsTitle": "Fähigkeiten & Erfahrung",
+  "skillsContent": "",
+  "contactTitle": "Kontaktiere mich",
+  "contactContent": "",
+  "aboutTitle": "Über mich",
+  "aboutContent": "",
+  "workTitle": "Meine Arbeit",
+  "workContent": ""
 }
