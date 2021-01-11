@@ -1,0 +1,2 @@
+(this.webpackJsonpportfolio=this.webpackJsonpportfolio||[]).push([[17],{148:function(o){o.exports=JSON.parse('{"hi":"Hola","iam":"Yo soy","dev":"Desarrollador Full-Stack","skillsTitle":"Habilidades y Experiencia","skillsContent":"","contactTitle":"Contactame","contactContent":"","aboutTitle":"Acerca de m\xed","aboutContent":"","workTitle":"M\xed Trabajo","workContent":""}')}}]);
+//# sourceMappingURL=17.cdf835de.chunk.js.map
