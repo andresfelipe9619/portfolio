@@ -21,7 +21,7 @@ import EmailIcon from "@material-ui/icons/EmailOutlined";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness5Icon from "@material-ui/icons/Brightness5";
 import TranslateIcon from "@material-ui/icons/Translate";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useStyles } from "./styles";
 import { useLingui } from "@lingui/react";
 import { dynamicActivate } from "../../i18n";
@@ -29,6 +29,10 @@ export default function Sidebar({ children, toggleDarkMode }) {
   const classes = useStyles();
   const theme = useTheme();
   const history = useHistory();
+  const location = useLocation();
+
+  const goTo = (path) => () => history.push(path);
+  const isSelected = (path) => location.pathname === path;
 
   return (
     <div className={classes.root}>
@@ -36,7 +40,6 @@ export default function Sidebar({ children, toggleDarkMode }) {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <div className={classes.grow}>Andrés Suárez</div>
-          {/* <div className={classes.buttons}> */}
           <LanguageButton />
           <Button
             color="inherit"
@@ -49,7 +52,6 @@ export default function Sidebar({ children, toggleDarkMode }) {
               <Brightness5Icon />
             )}
           </Button>
-          {/* </div> */}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -61,7 +63,12 @@ export default function Sidebar({ children, toggleDarkMode }) {
       >
         <List>
           {options.map(({ name, path, icon: Icon }, index) => (
-            <ListItem button key={name} onClick={() => history.push(path)}>
+            <ListItem
+              button
+              key={name}
+              onClick={goTo(path)}
+              selected={isSelected(path)}
+            >
               <ListItemIcon>
                 <Icon color="secondary" fontSize="large" />
               </ListItemIcon>

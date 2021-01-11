@@ -7,8 +7,8 @@ export default function CustomParticles() {
   return (
     <Particles
       id="simple"
-      width="auto"
-      height="90vh"
+      width="100%"
+      height="84vh"
       style={{
         backgroundColor: "inherit",
       }}
@@ -16,7 +16,7 @@ export default function CustomParticles() {
         particles: {
           color: { value: theme.palette.secondary.main },
           number: {
-            value: 80,
+            value: 100,
           },
           size: {
             value: 5,

@@ -8,25 +8,44 @@ import Title from "../components/text/Title";
 import { makeStyles } from "@material-ui/core/styles";
 import { Formik } from "formik";
 import { i18n } from "@lingui/core";
+import * as Yup from "yup";
+
+const initialValues = { name: "", email: "", subject: "", message: "" };
+
+const contactSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(2, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
+  subject: Yup.string()
+    .min(2, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
+  message: Yup.string().min(2, "Too Short!").required("Required"),
+  email: Yup.string().email("Invalid email").required("Required"),
+});
 
 export default function Contact() {
   const classes = useStyles();
+
+  const handleSubmit = async (values) => {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    alert(JSON.stringify(values, null, 2));
+  };
 
   return (
     <Grid container className={classes.root} spacing={2}>
       <Grid container item md={5}>
         <Title>{i18n._("contactTitle")}</Title>
-        <Typography variant="h6" component="p">
+        <Typography variant="h6" component="p" paragraph>
           I am interested in freelance opportunities – especially ambitious or
           large projects. However, if you have other request or question, don’t
           hesitate to contact me using below form either.
         </Typography>
         <Formik
-          initialValues={{ name: "", email: "", subject: "", message: "" }}
-          onSubmit={async (values) => {
-            await new Promise((resolve) => setTimeout(resolve, 500));
-            alert(JSON.stringify(values, null, 2));
-          }}
+          onSubmit={handleSubmit}
+          initialValues={initialValues}
+          validationSchema={contactSchema}
         >
           {({
             values,
@@ -48,6 +67,7 @@ export default function Contact() {
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.name}
+                    error={!!touched.name && !!errors.name}
                     variant="outlined"
                   />
                 </Grid>
@@ -60,6 +80,7 @@ export default function Contact() {
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.email}
+                    error={!!touched.email && !!errors.email}
                     variant="outlined"
                   />
                 </Grid>
@@ -72,6 +93,7 @@ export default function Contact() {
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.subject}
+                    error={!!touched.subject && !!errors.subject}
                     variant="outlined"
                   />
                 </Grid>
@@ -86,11 +108,16 @@ export default function Contact() {
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.message}
+                    error={!!touched.message && !!errors.message}
                     variant="outlined"
                   />
                 </Grid>
                 <Grid item md={12} container justify="flex-end">
-                  <Button color="primary" variant="outlined">
+                  <Button
+                    color="primary"
+                    variant="outlined"
+                    disabled={isSubmitting}
+                  >
                     Submit
                   </Button>
                 </Grid>

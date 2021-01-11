@@ -22,9 +22,17 @@ i18n.loadLocaleData({
  * @param locale any locale string
  */
 export async function dynamicActivate(locale) {
-  const messages = await import(`./locales/${locale}/translation.json`);
-  i18n.load(locale, messages);
-  i18n.activate(locale);
+  try {
+    if (!locale) throw new Error("Locale is mandatory!");
+    console.log("Loading language...");
+    const messages = await import(`./locales/${locale}/translation.json`);
+    i18n.load(locale, messages);
+    i18n.activate(locale);
+  } catch (error) {
+    console.error("Error loading language", error);
+  } finally {
+    console.log("Finish loading language...");
+  }
 }
 
 export default i18n;

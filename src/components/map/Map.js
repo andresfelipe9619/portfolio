@@ -4,7 +4,9 @@ import MAP_OPTIONS, { TILE_LAYER } from "./map.options";
 import { makeStyles } from "@material-ui/core/styles";
 
 export default function Map() {
+  const myPosition = [3.399995, -76.517272];
   const classes = useStyles();
+
   const initMarker = (ref) => {
     if (ref && ref.leafletElement) {
       ref.leafletElement.openPopup();
@@ -20,7 +22,7 @@ export default function Map() {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url={TILE_LAYER}
       />
-      <Marker position={[3.399995, -76.517272]} ref={initMarker}>
+      <Marker position={myPosition} ref={initMarker}>
         <Popup closeButton>{"I'm here"}</Popup>
       </Marker>
     </MapContainer>

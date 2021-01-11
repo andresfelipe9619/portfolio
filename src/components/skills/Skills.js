@@ -4,6 +4,7 @@ import { useTheme as useNivoTheme } from "@nivo/core";
 import { useTheme } from "@material-ui/core";
 
 export default function Skills() {
+  const theme = useTheme();
   return (
     <ResponsiveBar
       data={data}
@@ -11,7 +12,7 @@ export default function Skills() {
       padding={0.3}
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
-      colors={{ scheme: "nivo" }}
+      colors={theme.palette.secondary.main}
       borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
       axisTop={null}
       axisRight={null}
@@ -33,7 +34,7 @@ export default function Skills() {
         legendPosition: "middle",
         legendOffset: 32,
       }}
-      // labelTextColor={theme.palette.text.primary}
+      labelTextColor={"white"}
       labelSkipWidth={12}
       labelSkipHeight={12}
       legends={[
@@ -72,7 +73,12 @@ const CustomTick = (tick) => {
   const theme = useTheme();
   return (
     <g transform={`translate(${tick.x},${tick.y + 22})`}>
-      <line stroke="rgb(232, 193, 160)" strokeWidth={1.5} y1={-22} y2={-12} />
+      <line
+        stroke={theme.palette.primary.main}
+        strokeWidth={1.5}
+        y1={-22}
+        y2={-12}
+      />
       <text
         textAnchor="middle"
         dominantBaseline="middle"
