@@ -44,16 +44,23 @@ const Technologies = ({ classes }) => (
       <AnimatedIcon icon="fa-js" />
       <AnimatedIcon icon="fa-react" />
       <AnimatedIcon icon="fa-html5" />
+      <AnimatedIcon icon="fa-figma" />
       <AnimatedIcon icon="fa-css3-alt" />
+      <AnimatedIcon icon="fa-sass" />
     </Box>
     <Box display="flex" mt={2} justifyContent="space-around">
       <AnimatedIcon icon="fa-aws" />
+      <AnimatedIcon icon="fa-yarn" />
+      <AnimatedIcon icon="fa-npm" />
       <AnimatedIcon icon="fa-node-js" />
       <AnimatedIcon icon="fa-git-alt" />
       <AnimatedIcon icon="fa-github" />
+      <AnimatedIcon icon="fa-bitbucket" />
     </Box>
     <Box display="flex" mt={2} justifyContent="space-around">
+      <AnimatedIcon icon="fa-docker" />
       <AnimatedIcon icon="fa-apple" />
+      <AnimatedIcon icon="fa-android" />
       <AnimatedIcon icon="fa-linux" />
       <AnimatedIcon icon="fa-windows" />
     </Box>
@@ -69,8 +76,8 @@ const variants = {
     opacity: 0,
     y: 100,
     transition: {
-      delay: i * 0.5,
-      duration: 8,
+      delay: i * 0.8,
+      duration: i + 6,
       loop: Infinity,
       ease: "linear",
     },
@@ -84,15 +91,20 @@ function getRandomArbitrary(min = 1, max = 10) {
 const AnimatedIcon = ({ icon }) => {
   const classes = useStyles();
   return (
-    <motion.div
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignContent="center"
+      boxShadow={10}
+      component={motion.div}
       custom={getRandomArbitrary()}
       initial="visible"
       animate="hidden"
       variants={variants}
       className={classes.icon}
     >
-      <Icon className={`fab ${icon}`} color="secondary" fontSize="default" />
-    </motion.div>
+      <Icon className={`fab ${icon}`} color="secondary" fontSize="small" />
+    </Box>
   );
 };
 
@@ -110,9 +122,15 @@ const useStyles = makeStyles((theme) => ({
     top: "20%",
   },
   tech: {
-    width: "50%",
     position: "absolute",
     bottom: "20%",
+    zIndex: -10,
+    [theme.breakpoints.down("sm")]: {
+      width: "80%",
+    },
+    [theme.breakpoints.up("md")]: {
+      width: "50%",
+    },
   },
   icon: {
     borderRadius: "50%",

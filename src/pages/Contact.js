@@ -9,7 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Formik } from "formik";
 import { i18n } from "@lingui/core";
 import * as Yup from "yup";
-
+import { sendMessage } from "../api";
 const initialValues = { name: "", email: "", subject: "", message: "" };
 
 const contactSchema = Yup.object().shape({
@@ -28,9 +28,12 @@ const contactSchema = Yup.object().shape({
 export default function Contact() {
   const classes = useStyles();
 
-  const handleSubmit = async (values) => {
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    alert(JSON.stringify(values, null, 2));
+  const handleFormSubmit = async (values) => {
+    try {
+      await sendMessage(values);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -43,7 +46,7 @@ export default function Contact() {
           hesitate to contact me using below form either.
         </Typography>
         <Formik
-          onSubmit={handleSubmit}
+          onSubmit={handleFormSubmit}
           initialValues={initialValues}
           validationSchema={contactSchema}
         >
@@ -64,6 +67,7 @@ export default function Contact() {
                     fullWidth
                     id="name"
                     label="Name"
+                    disabled={isSubmitting}
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.name}
@@ -77,6 +81,7 @@ export default function Contact() {
                     fullWidth
                     id="email"
                     label="Email"
+                    disabled={isSubmitting}
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.email}
@@ -90,6 +95,7 @@ export default function Contact() {
                     fullWidth
                     id="subject"
                     label="Subject"
+                    disabled={isSubmitting}
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.subject}
@@ -105,6 +111,7 @@ export default function Contact() {
                     rows={6}
                     id="message"
                     label="Message"
+                    disabled={isSubmitting}
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.message}
@@ -114,6 +121,7 @@ export default function Contact() {
                 </Grid>
                 <Grid item md={12} container justify="flex-end">
                   <Button
+                    type="submit"
                     color="primary"
                     variant="outlined"
                     disabled={isSubmitting}
