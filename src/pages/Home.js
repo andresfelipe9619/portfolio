@@ -68,23 +68,23 @@ const Technologies = ({ classes }) => (
 );
 
 const variants = {
-  visible: {
-    opacity: 1,
-    y: 0,
-  },
-  hidden: (i) => ({
-    opacity: 0,
-    y: 100,
+  visible: (i) => ({
+    opacity: [0, 1, 0],
+    y: [0, 0, 100],
     transition: {
       delay: i * 0.8,
-      duration: i + 6,
+      duration: i * 2.5,
       loop: Infinity,
       ease: "linear",
     },
   }),
+  hidden: {
+    opacity: 0,
+    y: 0,
+  },
 };
 
-function getRandomArbitrary(min = 1, max = 10) {
+function getRandomArbitrary(min = 4, max = 12) {
   return Math.random() * (max - min) + min;
 }
 
@@ -98,8 +98,8 @@ const AnimatedIcon = ({ icon }) => {
       boxShadow={10}
       component={motion.div}
       custom={getRandomArbitrary()}
-      initial="visible"
-      animate="hidden"
+      initial="hidden"
+      animate="visible"
       variants={variants}
       className={classes.icon}
     >

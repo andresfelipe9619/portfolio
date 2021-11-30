@@ -1,4 +1,5 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import MuiListItem from "@material-ui/core/ListItem";
 const drawerWidth = 240;
 
 export const useStyles = makeStyles((theme) => ({
@@ -46,6 +47,9 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       width: theme.spacing(9) + 1,
     },
+  },
+  paperAnchorLeft: {
+    borderRight: [[1, "solid", theme.palette.background.default]],
   },
   toolbar: {
     display: "flex",

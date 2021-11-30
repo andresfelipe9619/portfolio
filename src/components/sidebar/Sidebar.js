@@ -9,7 +9,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import HomeIcon from "@material-ui/icons/HomeOutlined";
@@ -21,10 +20,12 @@ import EmailIcon from "@material-ui/icons/EmailOutlined";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness5Icon from "@material-ui/icons/Brightness5";
 import TranslateIcon from "@material-ui/icons/Translate";
+import ListItem from "@material-ui/core/ListItem";
 import { useHistory, useLocation } from "react-router-dom";
 import { useStyles } from "./styles";
 import { useLingui } from "@lingui/react";
 import { dynamicActivate } from "../../i18n";
+
 export default function Sidebar({ children, toggleDarkMode }) {
   const classes = useStyles();
   const theme = useTheme();
@@ -59,6 +60,7 @@ export default function Sidebar({ children, toggleDarkMode }) {
         className={clsx(classes.drawer, classes.drawerClose)}
         classes={{
           paper: classes.drawerClose,
+          paperAnchorLeft: classes.paperAnchorLeft,
         }}
       >
         <List>

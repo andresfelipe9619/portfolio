@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const primaryColor = "#53ef30";
-const secondaryColor = "#D64064";
+const secondaryColor = "#F03224";
 
 const Palette = {
   type: "dark",
