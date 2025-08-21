@@ -1,11 +1,9 @@
 import Navbar from '@/components/navbar';
-import { ThemeProvider } from '@/components/theme-provider';
-import { TooltipProvider } from '@/components/ui/tooltip';
-import { cn } from '@/lib/utils';
-import { Route, Routes } from 'react-router-dom';
+import {ThemeProvider} from '@/components/theme-provider';
+import {TooltipProvider} from '@/components/ui/tooltip';
+import {cn} from '@/lib/utils';
+import {Route, Routes} from 'react-router-dom';
 import Home from './pages/Home';
-import Blog from './pages/blog/Blog';
-import Post from './pages/blog/Post';
 
 export default function App() {
   return (
@@ -19,8 +17,6 @@ export default function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<Post />} />
           </Routes>
         </div>
       </TooltipProvider>
