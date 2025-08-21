@@ -1,6 +1,6 @@
-import BlurFade from "@/components/magicui/blur-fade";
-import { getBlogPosts } from "@/data/blog";
-import { Link } from "react-router-dom";
+import BlurFade from '@/components/magicui/blur-fade';
+import { getBlogPosts } from '@/data/blog';
+import { Link } from 'react-router-dom';
 
 const BLUR_FADE_DELAY = 0.04;
 

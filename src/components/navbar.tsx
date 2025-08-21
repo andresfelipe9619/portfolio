@@ -1,15 +1,15 @@
-import { Dock, DockIcon } from "@/components/magicui/dock";
-import { ModeToggle } from "@/components/mode-toggle";
-import { buttonVariants } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
+import { Dock, DockIcon } from '@/components/magicui/dock';
+import { ModeToggle } from '@/components/mode-toggle';
+import { buttonVariants } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { DATA } from "@/data/resume";
-import { cn } from "@/lib/utils";
-import { Link } from "react-router-dom";
+} from '@/components/ui/tooltip';
+import { DATA } from '@/data/resume';
+import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
   return (
@@ -23,8 +23,8 @@ export default function Navbar() {
                 <Link
                   to={item.href}
                   className={cn(
-                    buttonVariants({ variant: "ghost", size: "icon" }),
-                    "size-12"
+                    buttonVariants({ variant: 'ghost', size: 'icon' }),
+                    'size-12',
                   )}
                 >
                   <item.icon className="size-4" />
@@ -46,8 +46,8 @@ export default function Navbar() {
                   <Link
                     to={social.url}
                     className={cn(
-                      buttonVariants({ variant: "ghost", size: "icon" }),
-                      "size-12"
+                      buttonVariants({ variant: 'ghost', size: 'icon' }),
+                      'size-12',
                     )}
                   >
                     <social.icon className="size-4" />

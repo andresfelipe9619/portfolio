@@ -2,10 +2,10 @@
 
 This is a CLI agent powered by Google's Gemini model. It can help you with a variety of tasks, such as:
 
-*   Answering questions
-*   Generating code
-*   Refactoring code
-*   And much more!
+- Answering questions
+- Generating code
+- Refactoring code
+- And much more!
 
 ## How to use
 

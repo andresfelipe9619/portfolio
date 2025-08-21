@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardHeader } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
-import { ChevronRightIcon } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardHeader } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
+import { ChevronRightIcon } from 'lucide-react';
 
-import React from "react";
+import React from 'react';
 
 interface ResumeCardProps {
   logoUrl: string;
@@ -40,7 +40,7 @@ export const ResumeCard = ({
 
   return (
     <a
-      href={href || "#"}
+      href={href || '#'}
       className="block cursor-pointer"
       onClick={handleClick}
     >
@@ -75,8 +75,8 @@ export const ResumeCard = ({
                 )}
                 <ChevronRightIcon
                   className={cn(
-                    "size-4 translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100",
-                    isExpanded ? "rotate-90" : "rotate-0"
+                    'size-4 translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100',
+                    isExpanded ? 'rotate-90' : 'rotate-0',
                   )}
                 />
               </h3>
@@ -92,7 +92,7 @@ export const ResumeCard = ({
               animate={{
                 opacity: isExpanded ? 1 : 0,
 
-                height: isExpanded ? "auto" : 0,
+                height: isExpanded ? 'auto' : 0,
               }}
               transition={{
                 duration: 0.7,
