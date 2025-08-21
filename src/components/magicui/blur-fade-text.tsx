@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { AnimatePresence, motion, Variants } from 'framer-motion';
+import { AnimatePresence, motion, type Variants } from 'framer-motion';
 import { useMemo } from 'react';
 
 interface BlurFadeTextProps {
@@ -45,7 +45,8 @@ const BlurFadeText = ({
               exit="hidden"
               variants={combinedVariants}
               transition={{
-                yoyo: Infinity,
+                repeat: Infinity,
+                repeatType: 'reverse',
                 delay: delay + i * characterDelay,
                 ease: 'easeOut',
               }}
@@ -69,7 +70,8 @@ const BlurFadeText = ({
           exit="hidden"
           variants={combinedVariants}
           transition={{
-            yoyo: Infinity,
+            repeat: Infinity,
+            repeatType: 'reverse',
             delay,
             ease: 'easeOut',
           }}

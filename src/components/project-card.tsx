@@ -8,8 +8,6 @@ import {
 } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 
-import Markdown from 'react-markdown';
-
 interface Props {
   title: string;
   href?: string;
@@ -30,7 +28,6 @@ interface Props {
 export function ProjectCard({
   title,
   href,
-  description,
   dates,
   tags,
   link,
