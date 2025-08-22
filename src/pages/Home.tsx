@@ -24,8 +24,37 @@ import {
   Quote as QuoteIcon,
 } from 'lucide-react';
 import { Globe } from '@/components/magicui/globe'; // MagicUI extras
+import { type COBEOptions } from 'cobe';
+
+const GLOBE_CONFIG: COBEOptions = {
+  width: 800,
+  height: 800,
+  onRender: () => {},
+  devicePixelRatio: 2,
+  phi: 0,
+  theta: 0.3,
+  dark: 0,
+  diffuse: 0.4,
+  mapSamples: 16000,
+  mapBrightness: 1.2,
+  baseColor: [1, 1, 1],
+  markerColor: [251 / 255, 100 / 255, 21 / 255],
+  glowColor: [1, 1, 1],
+  markers: [
+    { location: [14.5995, 120.9842], size: 0.03 },
+    { location: [19.076, 72.8777], size: 0.1 },
+    { location: [23.8103, 90.4125], size: 0.05 },
+    { location: [30.0444, 31.2357], size: 0.07 },
+    { location: [39.9042, 116.4074], size: 0.08 },
+    { location: [-23.5505, -46.6333], size: 0.1 },
+    { location: [19.4326, -99.1332], size: 0.1 },
+    { location: [40.7128, -74.006], size: 0.1 },
+    { location: [34.6937, 135.5022], size: 0.05 },
+    { location: [41.0082, 28.9784], size: 0.06 },
+  ],
+};
 import { Terminal } from '@/components/magicui/terminal';
-import { Dock } from '@/components/magicui/dock'; // shadcn sheet for mobile nav
+import { Dock, DockIcon } from '@/components/magicui/dock'; // shadcn sheet for mobile nav
 import {
   Sheet,
   SheetContent,
@@ -71,15 +100,17 @@ export default function Home() {
           </div>
           {/* Desktop dock nav */}
           <div className="hidden md:block">
-            <Dock
-              items={[
-                { title: 'Home', href: '#hero' },
-                { title: 'Services', href: '#services' },
-                { title: 'Projects', href: '#projects-links' },
-                { title: 'Content', href: '#content' },
-                { title: 'Contact', href: '#ready' },
-              ]}
-            />
+            <Dock>
+              {
+                [
+                  { title: 'Home', href: '#hero' },
+                  { title: 'Services', href: '#services' },
+                  { title: 'Projects', href: '#projects-links' },
+                  { title: 'Content', href: '#content' },
+                  { title: 'Contact', href: '#ready' },
+                ].map(item => <DockIcon key={item.title}><a href={item.href}>{item.title}</a></DockIcon>)
+              }
+            </Dock>
           </div>
           {/* Mobile hamburger showing folder structure */}
           <Sheet>
@@ -107,7 +138,9 @@ export default function Home() {
 
       <section id="hero" className="relative overflow-hidden py-24">
         <div className="absolute inset-0 -z-10">
-          <GridBeams />
+          <GridBeams >
+            <div />
+          </GridBeams>
           <DotPattern className="opacity-20" />
         </div>
         <div className="relative z-10 mx-auto flex w-full max-w-none flex-col items-center px-6">
@@ -151,23 +184,12 @@ export default function Home() {
             </Card>
 
             <div className="rounded-2xl ring-1 ring-white/10">
-              <Terminal
-                title="andres@portfolio"
-                lines={[
-                  { prompt: '>', text: 'npx create-saas-app', color: 'green' },
-                  {
-                    prompt: '✔',
-                    text: ' Scaffolding Next.js + tRPC + shadcn/ui',
-                    color: 'cyan',
-                  },
-                  { prompt: '>', text: 'pnpm run dev', color: 'green' },
-                  {
-                    prompt: 'ℹ',
-                    text: ' Ready on http://localhost:5173',
-                    color: 'yellow',
-                  },
-                ]}
-              />
+              <Terminal>
+                <p style={{ color: 'green' }}>{`>`} npx create-saas-app</p>
+                <p style={{ color: 'cyan' }}>{`✔`} Scaffolding Next.js + tRPC + shadcn/ui</p>
+                <p style={{ color: 'green' }}>{`>`} pnpm run dev</p>
+                <p style={{ color: 'yellow' }}>{`ℹ`} Ready on http://localhost:5173</p>
+              </Terminal>
             </div>
           </div>
 
@@ -175,7 +197,7 @@ export default function Home() {
             <div className="mx-auto h-80 w-80 sm:h-96 sm:w-96">
               <Globe
                 className="h-full w-full"
-                globeConfig={{ glowColor: '#60a5fa' }}
+                config={{ ...GLOBE_CONFIG, glowColor: [96 / 255, 165 / 255, 250 / 255] }}
               />
             </div>
             <p className="mt-3 text-center text-sm text-white/70">

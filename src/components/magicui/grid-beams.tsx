@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import React, { HTMLAttributes, useMemo } from "react";
+import React, { type HTMLAttributes, useMemo } from "react";
 import { cn } from "@/lib/utils";
 
 const createGridMask = (start: number, end: number): string => {

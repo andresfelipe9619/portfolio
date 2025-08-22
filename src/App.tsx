@@ -7,7 +7,7 @@ import Home from './pages/Home.jsx';
 
 export default function App() {
   return (
-    <ThemeProvider defaultTheme="light">
+    <ThemeProvider defaultTheme="dark">
       <TooltipProvider delayDuration={0}>
         <div
           className={cn(
