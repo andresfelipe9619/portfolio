@@ -14,16 +14,97 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion';
-import { ArrowUpRight } from 'lucide-react';
-import { Globe } from '@/components/magicui/globe';
+} from '@/components/ui/accordion'; // icons
+import {
+  ArrowUpRight,
+  ChevronRight,
+  FileText,
+  Folder as FolderIcon,
+  Menu,
+  Quote as QuoteIcon,
+} from 'lucide-react';
+import { Globe } from '@/components/magicui/globe'; // MagicUI extras
+import { Terminal } from '@/components/magicui/terminal';
+import { Dock } from '@/components/magicui/dock'; // shadcn sheet for mobile nav
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 
 const BLUR_FADE_DELAY = 0.04;
+
+const PAGES = [
+  {
+    name: 'app',
+    children: [
+      { name: 'page.tsx' },
+      {
+        name: '(marketing)',
+        children: [
+          { name: 'home.tsx' },
+          { name: 'projects.tsx' },
+          { name: 'contact.tsx' },
+        ],
+      },
+      {
+        name: '(blog)',
+        children: [{ name: 'index.tsx' }, { name: '[slug].tsx' }],
+      },
+    ],
+  },
+  { name: 'components', children: [{ name: 'ui' }, { name: 'magicui' }] },
+];
 
 export default function Home() {
   return (
     <main className="relative flex flex-col min-h-[100dvh] overflow-hidden bg-gray-950 text-white">
       {/* HERO */}
+      {/* HEADER */}
+      <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-gray-950/80 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
+          <div className="flex items-center gap-3">
+            <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-blue-500 to-cyan-400" />
+            <span className="text-sm font-semibold">{DATA.initials}</span>
+          </div>
+          {/* Desktop dock nav */}
+          <div className="hidden md:block">
+            <Dock
+              items={[
+                { title: 'Home', href: '#hero' },
+                { title: 'Services', href: '#services' },
+                { title: 'Projects', href: '#projects-links' },
+                { title: 'Content', href: '#content' },
+                { title: 'Contact', href: '#ready' },
+              ]}
+            />
+          </div>
+          {/* Mobile hamburger showing folder structure */}
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="md:hidden">
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent
+              side="right"
+              className="bg-gray-950 text-white border-white/10"
+            >
+              <SheetHeader>
+                <SheetTitle className="text-white">Pages</SheetTitle>
+              </SheetHeader>
+              <nav className="mt-4 space-y-2 text-sm">
+                {PAGES.map((entry, i) => (
+                  <Folder key={i} entry={entry} depth={0} />
+                ))}
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </header>
+
       <section id="hero" className="relative overflow-hidden py-24">
         <div className="absolute inset-0 -z-10">
           <GridBeams />
@@ -52,6 +133,44 @@ export default function Home() {
               </Button>
             </div>
           </div>
+          {/* Quote + Terminal */}
+          <div className="mt-10 grid w-full max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
+            <Card className="border-white/10 bg-white/5">
+              <CardContent className="relative p-6">
+                <div className="mb-3 flex items-center gap-2 text-blue-300">
+                  <QuoteIcon className="h-4 w-4" />
+                  <span className="text-sm font-medium">Favorite Quote</span>
+                </div>
+                <blockquote className="text-lg italic leading-relaxed">
+                  "One man's crappy software is another man's full‑time job."
+                </blockquote>
+                <div className="mt-2 text-sm text-white/60">
+                  — Jessica Gaston
+                </div>
+              </CardContent>
+            </Card>
+
+            <div className="rounded-2xl ring-1 ring-white/10">
+              <Terminal
+                title="andres@portfolio"
+                lines={[
+                  { prompt: '>', text: 'npx create-saas-app', color: 'green' },
+                  {
+                    prompt: '✔',
+                    text: ' Scaffolding Next.js + tRPC + shadcn/ui',
+                    color: 'cyan',
+                  },
+                  { prompt: '>', text: 'pnpm run dev', color: 'green' },
+                  {
+                    prompt: 'ℹ',
+                    text: ' Ready on http://localhost:5173',
+                    color: 'yellow',
+                  },
+                ]}
+              />
+            </div>
+          </div>
+
           <div className="mt-12">
             <div className="mx-auto h-80 w-80 sm:h-96 sm:w-96">
               <Globe
@@ -77,6 +196,9 @@ export default function Home() {
           </svg>
         </div>
       </section>
+
+      {/* PROJECTS anchor for dock */}
+      <span id="projects" />
 
       {/* EXPERT */}
       <section id="expert" className="bg-white text-gray-900 py-16">
@@ -309,5 +431,30 @@ export default function Home() {
         </div>
       </section>
     </main>
+  );
+}
+
+// Simple recursive folder view for the hamburger menu
+function Folder({ entry, depth }: { entry: any; depth: number }) {
+  const isDir = !!entry.children;
+  return (
+    <div className="pl-2">
+      <div className="flex items-center gap-2 py-1">
+        <ChevronRight className="h-3 w-3 opacity-60" />
+        {isDir ? (
+          <FolderIcon className="h-4 w-4" />
+        ) : (
+          <FileText className="h-4 w-4" />
+        )}
+        <span className="opacity-90">{entry.name}</span>
+      </div>
+      {isDir && (
+        <div className="ml-4 border-l border-white/10 pl-3">
+          {entry.children.map((c: any, idx: number) => (
+            <Folder key={idx} entry={c} depth={depth + 1} />
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
