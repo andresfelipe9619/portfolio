@@ -13,7 +13,7 @@ export default function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 10000);
+    }, 12000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -22,7 +22,7 @@ export default function App() {
       <TooltipProvider delayDuration={0}>
         <div className={cn('min-h-screen bg-background font-sans antialiased')}>
           {isLoading ? (
-            <LoadingScreen />
+            <LoadingScreen onSkip={() => setIsLoading(false)} />
           ) : (
             <>
               <Navbar />
