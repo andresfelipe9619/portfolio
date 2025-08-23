@@ -1,8 +1,9 @@
-"use client";
+'use client';
+//eslint-ignore-file @
 
-import { cn } from "@/lib/utils";
-import { motion, type MotionProps, useInView } from "motion/react";
-import {
+import { cn } from '@/lib/utils';
+import { motion, type MotionProps, useInView } from 'motion/react';
+import React, {
   Children,
   createContext,
   useContext,
@@ -10,7 +11,7 @@ import {
   useMemo,
   useRef,
   useState,
-} from "react";
+} from 'react';
 
 interface SequenceContextValue {
   completeItem: (index: number) => void;
@@ -65,7 +66,7 @@ export const AnimatedSpan = ({
       initial={{ opacity: 0, y: -5 }}
       animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: -5 }}
       transition={{ duration: 0.3, delay: sequence ? 0 : delay / 1000 }}
-      className={cn("grid text-sm font-normal tracking-tight", className)}
+      className={cn('grid text-sm font-normal tracking-tight', className)}
       onAnimationComplete={() => {
         if (!sequence) return;
         if (itemIndex === null) return;
@@ -92,12 +93,12 @@ export const TypingAnimation = ({
   className,
   duration = 5,
   delay = 0,
-  as: Component = "span",
+  as: Component = 'span',
   startOnView = true,
   ...props
 }: TypingAnimationProps) => {
-  if (typeof children !== "string") {
-    throw new Error("TypingAnimation: children must be a string. Received:");
+  if (typeof children !== 'string') {
+    throw new Error('TypingAnimation: children must be a string. Received:');
   }
 
   const MotionComponent = useMemo(
@@ -108,7 +109,7 @@ export const TypingAnimation = ({
     [Component],
   );
 
-  const [displayedText, setDisplayedText] = useState<string>("");
+  const [displayedText, setDisplayedText] = useState<string>('');
   const [started, setStarted] = useState(false);
   const elementRef = useRef<HTMLElement | null>(null);
   const isInView = useInView(elementRef as React.RefObject<Element>, {
@@ -167,12 +168,13 @@ export const TypingAnimation = ({
     return () => {
       clearInterval(typingEffect);
     };
+    // eslint-disable-next-line
   }, [children, duration, started]);
 
   return (
     <MotionComponent
       ref={elementRef}
-      className={cn("text-sm font-normal tracking-tight", className)}
+      className={cn('text-sm font-normal tracking-tight', className)}
       {...props}
     >
       {displayedText}
@@ -229,7 +231,7 @@ export const Terminal = ({
     <div
       ref={containerRef}
       className={cn(
-        "z-0 h-full rounded-xl border border-border bg-background",
+        'z-0 h-full rounded-xl border border-border bg-background',
         className,
       )}
     >

@@ -1,6 +1,5 @@
 import { Dock, DockIcon } from '@/components/magicui/dock';
 import { ModeToggle } from '@/components/mode-toggle';
-import { buttonVariants } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import {
   Tooltip,
@@ -10,6 +9,7 @@ import {
 import { DATA } from '@/data/resume';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
+import { buttonVariants } from "@/components/ui/constants.ts";
 
 export default function Navbar() {
   return (
