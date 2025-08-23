@@ -53,30 +53,40 @@ const LoadingScreen = ({
       <BlurFade duration={0.2} blur={'0px'} yOffset={0}>
         <div className="relative z-10 w-[60vw] h-[60vh]">
           <Terminal className="text-green-300 font-mono text-sm h-full w-[60vw]">
-            {/* línea de arranque estilo shell */}
             <TypingAnimation className="text-zinc-400">
               {`$ boot renderer --target=${site} --secure --${useH3 ? 'h3' : 'h2'} --gpu --measure`}
             </TypingAnimation>
-
-            {/* === LÍNEAS TÉCNICAS DEL NAVEGADOR (solo texto/emoji sutil) === */}
-            <TypingAnimation>{`🌐 UA: Mozilla/5.0 (Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36`}</TypingAnimation>
-            <TypingAnimation>{`🔎 DNS lookup ${site} → 93.184.216.34 (${t.dns}ms) [OK]`}</TypingAnimation>
-            <TypingAnimation>{`⇄ TCP handshake : [SYN → SYN-ACK → ACK] (${t.tcp}ms) [OK]`}</TypingAnimation>
-            <TypingAnimation>{`🔐 TLS 1.3 (ALPN=${alpn}, cipher=TLS_AES_128_GCM_SHA256, OCSP stapled) (${t.tls}ms) [OK]`}</TypingAnimation>
-            <TypingAnimation>{`${proto} CONNECTED | SETTINGS: MAX_CONCURRENT_STREAMS=100, INITIAL_WINDOW=65535`}</TypingAnimation>
-            <TypingAnimation>{`GET / → 200 OK  content-type:text/html; charset=utf-8  TTFB=${t.ttfb}ms`}</TypingAnimation>
-            <TypingAnimation>{`Cache: MISS | HSTS: enabled | CSP: default-src 'self' https:`}</TypingAnimation>
-            <TypingAnimation>{`Preload/Prefetch: fonts.css, app.bundle.js, hero.jpg (priority hints applied)`}</TypingAnimation>
-            <TypingAnimation>{`HTML parse=${t.parse}ms  CSSOM=${t.css}ms  JS compile=${t.jsCompile}ms`}</TypingAnimation>
-            <TypingAnimation>{`FCP=${t.fcp}ms  LCP=${t.lcp}ms  CLS=0.01  INP=120ms  TBT≈0`}</TypingAnimation>
-            <TypingAnimation>{`IndexedDB open "app-db" (${t.idb}ms)  stores: settings, cache, sessions [OK]`}</TypingAnimation>
-            <TypingAnimation className="text-blue-400">{`🚀 READY: ${site} loaded successfully`}</TypingAnimation>
+            {/* === 1. BROWSER ID === */}
+            <TypingAnimation>{`🌐 UA: Mozilla/5.0 (Win64; x64)… [the classic "totally not a bot" disguise]`}</TypingAnimation>
+            {/* === 2. NETWORK RESOLUTION === */}
+            <TypingAnimation>{`🔎 DNS lookup ${site} → 93.184.216.34 (${t.dns}ms) [faster than your ex texting back]`}</TypingAnimation>
+            <TypingAnimation>{`⇄ TCP handshake (${t.tcp}ms): [SYN → SYN-ACK → ACK] [world’s most awkward handshake, completed]`}</TypingAnimation>
+            {/* === 3. SECURITY LAYER === */}
+            <TypingAnimation>{`🔐 TLS 1.3 (ALPN=${alpn}, cipher=TLS_AES_128_GCM_SHA256) (${t.tls}ms) [basically Fort Knox with emojis]`}</TypingAnimation>
+            <TypingAnimation>{`${proto} CONNECTED | SETTINGS: max_streams=∞ | window=legendary`}</TypingAnimation>
+            {/* === 4. REQUEST / RESPONSE === */}
+            <TypingAnimation>{`GET / → 200 OK  content-type:text/html; charset=utf-8  TTFB=${t.ttfb}ms [Google envies this speed]`}</TypingAnimation>
+            <TypingAnimation>{`Cache: MISS | HSTS: enabled | CSP: "trust me bro"`}</TypingAnimation>
+            <TypingAnimation>{`Preload: fonts.css, app.bundle.js, hero.jpg [priority hints applied like VIP passes]`}</TypingAnimation>
+            {/* === 5. RENDERING STAGE === */}
+            <TypingAnimation>{`HTML parse=${t.parse}ms  CSSOM=${t.css}ms  JS compile=${t.jsCompile}ms [done while sipping ☕️]`}</TypingAnimation>
+            <TypingAnimation>{`🎨 Layout=${t.layout}ms  Paint=${t.paint}ms [pixels aligned with OCD precision]`}</TypingAnimation>
+            <TypingAnimation>{`FCP=${t.fcp}ms  LCP=${t.lcp}ms  CLS=0.01 [smoother than your favorite playlist]`}</TypingAnimation>
+            {/* === 6. BACKGROUND GOODIES === */}
+            <TypingAnimation>{`IndexedDB: opened in ${t.idb}ms → settings, cache, secrets [don’t tell the NSA]`}</TypingAnimation>
+            <TypingAnimation>{`ServiceWorker registered in ${t.sw}ms [silent ninja engaged]`}</TypingAnimation>
+            <TypingAnimation>{`WebSocket alive (${t.ws}ms) [heartbeat steady, not a Tamagotchi]`}</TypingAnimation>
+            {/* === 7. FINAL READY === */}
+            <TypingAnimation className="text-blue-400">{`🚀 READY: ${site} is live. Respect the drip.`}</TypingAnimation>
+            {/* === EXTRA PUNCHLINES === */}
+            <TypingAnimation>{`👾 Fun fact: This portfolio loads faster than microwave popcorn.`}</TypingAnimation>
+            <TypingAnimation>{`🥷 Pro tip: Hire this dev before Netflix makes a docuseries.`}</TypingAnimation>{' '}
           </Terminal>
         </div>
         {/* Footer with the skip action */}
         <div className="flex items-center justify-between border-t border-white/10 px-4 py-2 ">
           <ShimmerButton className="text-sm text-white" onClick={onSkip}>
-            😎 Too sexy for this, skip →
+            	🤖 I’m not here for logs, show me the code →
           </ShimmerButton>
         </div>
       </BlurFade>
