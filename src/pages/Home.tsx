@@ -101,15 +101,17 @@ export default function Home() {
           {/* Desktop dock nav */}
           <div className="hidden md:block">
             <Dock>
-              {
-                [
-                  { title: 'Home', href: '#hero' },
-                  { title: 'Services', href: '#services' },
-                  { title: 'Projects', href: '#projects-links' },
-                  { title: 'Content', href: '#content' },
-                  { title: 'Contact', href: '#ready' },
-                ].map(item => <DockIcon key={item.title}><a href={item.href}>{item.title}</a></DockIcon>)
-              }
+              {[
+                { title: 'Home', href: '#hero' },
+                { title: 'Services', href: '#services' },
+                { title: 'Projects', href: '#projects-links' },
+                { title: 'Content', href: '#content' },
+                { title: 'Contact', href: '#ready' },
+              ].map((item) => (
+                <DockIcon key={item.title}>
+                  <a href={item.href}>{item.title}</a>
+                </DockIcon>
+              ))}
             </Dock>
           </div>
           {/* Mobile hamburger showing folder structure */}
@@ -138,7 +140,7 @@ export default function Home() {
 
       <section id="hero" className="relative overflow-hidden py-24">
         <div className="absolute inset-0 -z-10">
-          <GridBeams >
+          <GridBeams>
             <div />
           </GridBeams>
           <DotPattern className="opacity-20" />
@@ -166,45 +168,52 @@ export default function Home() {
               </Button>
             </div>
           </div>
-          {/* Quote + Terminal */}
-          <div className="mt-10 grid w-full max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
-            <Card className="border-white/10 bg-white/5">
-              <CardContent className="relative p-6">
-                <div className="mb-3 flex items-center gap-2 text-blue-300">
-                  <QuoteIcon className="h-4 w-4" />
-                  <span className="text-sm font-medium">Favorite Quote</span>
-                </div>
-                <blockquote className="text-lg italic leading-relaxed">
-                  "One man's crappy software is another man's full‑time job."
-                </blockquote>
-                <div className="mt-2 text-sm text-white/60">
-                  — Jessica Gaston
-                </div>
-              </CardContent>
-            </Card>
-
-            <div className="rounded-2xl ring-1 ring-white/10">
-              <Terminal>
-                <p style={{ color: 'green' }}>{`>`} npx create-saas-app</p>
-                <p style={{ color: 'cyan' }}>{`✔`} Scaffolding Next.js + tRPC + shadcn/ui</p>
-                <p style={{ color: 'green' }}>{`>`} pnpm run dev</p>
-                <p style={{ color: 'yellow' }}>{`ℹ`} Ready on http://localhost:5173</p>
-              </Terminal>
-            </div>
-          </div>
-
-          <div className="mt-12">
-            <div className="mx-auto h-80 w-80 sm:h-96 sm:w-96">
+          <div className="mt-10 flex w-full max-w-5xl flex-col items-center gap-6">
+            <div className="mx-auto">
               <Globe
-                className="h-full w-full"
-                config={{ ...GLOBE_CONFIG, glowColor: [96 / 255, 165 / 255, 250 / 255] }}
+                className="h-80 w-80 sm:h-96 sm:w-96"
+                config={{
+                  ...GLOBE_CONFIG,
+                  glowColor: [96 / 255, 165 / 255, 250 / 255],
+                }}
               />
             </div>
             <p className="mt-3 text-center text-sm text-white/70">
               Building digital experiences{' '}
               <span className="text-blue-400">across the globe</span>
             </p>
+            {/* Quote + Terminal */}
+            <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2">
+              <Card className="border-white/10 bg-white/5">
+                <CardContent className="relative p-6">
+                  <div className="mb-3 flex items-center gap-2 text-blue-300">
+                    <QuoteIcon className="h-4 w-4" />
+                    <span className="text-sm font-medium">Favorite Quote</span>
+                  </div>
+                  <blockquote className="text-lg italic leading-relaxed">
+                    "One man's crappy software is another man's full‑time job."
+                  </blockquote>
+                  <div className="mt-2 text-sm text-white/60">
+                    — Jessica Gaston
+                  </div>
+                </CardContent>
+              </Card>
+
+              <div className="rounded-2xl ring-1 ring-white/10">
+                <Terminal>
+                  <p style={{ color: 'green' }}>{`>`} npx create-saas-app</p>
+                  <p style={{ color: 'cyan' }}>
+                    {`✔`} Scaffolding Next.js + tRPC + shadcn/ui
+                  </p>
+                  <p style={{ color: 'green' }}>{`>`} pnpm run dev</p>
+                  <p style={{ color: 'yellow' }}>
+                    {`ℹ`} Ready on http://localhost:5173
+                  </p>
+                </Terminal>
+              </div>
+            </div>
           </div>
+
           <svg
             className="pointer-events-none mt-16 w-full"
             viewBox="0 0 1440 120"
