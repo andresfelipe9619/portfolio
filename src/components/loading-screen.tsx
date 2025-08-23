@@ -1,10 +1,10 @@
 'use client';
 
 import { Terminal, TypingAnimation } from '@/components/magicui/terminal';
-import { Button } from '@/components/ui/button.tsx';
 import type { MouseEventHandler } from 'react';
 import { InteractiveGridPattern } from '@/components/magicui/interactive-grid-pattern.tsx';
 import BlurFade from '@/components/magicui/blur-fade.tsx';
+import { ShimmerButton } from '@/components/magicui/shimmer-button.tsx';
 
 type LoadingScreenProps = {
   site?: string; // dominio simulado
@@ -74,18 +74,10 @@ const LoadingScreen = ({
           </Terminal>
         </div>
         {/* Footer with the skip action */}
-        <div className="flex items-center justify-between border-t border-white/10 px-4 py-2">
-          <span className="text-[10px] uppercase tracking-wide text-white/50">
-            Boot log (read-only)
-          </span>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-pink-500 hover:bg-transparent hover:text-pink-600"
-            onClick={onSkip}
-          >
+        <div className="flex items-center justify-between border-t border-white/10 px-4 py-2 ">
+          <ShimmerButton className="text-sm text-white" onClick={onSkip}>
             😎 Too sexy for this, skip →
-          </Button>
+          </ShimmerButton>
         </div>
       </BlurFade>
     </div>
