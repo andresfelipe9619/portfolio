@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import BlurFadeText from '@/components/magicui/blur-fade-text';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -15,16 +16,19 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'; // icons
-import {
-  ArrowUpRight,
-  ChevronRight,
-  FileText,
-  Folder as FolderIcon,
-  Menu,
-  Quote as QuoteIcon,
-} from 'lucide-react';
+import { ArrowUpRight, Menu, Quote as QuoteIcon } from 'lucide-react';
+import { Tree, Folder, File } from '@/components/magicui/file-tree';
 import { Globe } from '@/components/magicui/globe'; // MagicUI extras
 import { type COBEOptions } from 'cobe';
+import { Terminal } from '@/components/magicui/terminal';
+import { Dock, DockIcon } from '@/components/magicui/dock'; // shadcn sheet for mobile nav
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 
 const GLOBE_CONFIG: COBEOptions = {
   width: 800,
@@ -53,41 +57,199 @@ const GLOBE_CONFIG: COBEOptions = {
     { location: [41.0082, 28.9784], size: 0.06 },
   ],
 };
-import { Terminal } from '@/components/magicui/terminal';
-import { Dock, DockIcon } from '@/components/magicui/dock'; // shadcn sheet for mobile nav
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
 
 const BLUR_FADE_DELAY = 0.04;
 
-const PAGES = [
-  {
-    name: 'app',
-    children: [
-      { name: 'page.tsx' },
-      {
-        name: '(marketing)',
-        children: [
-          { name: 'home.tsx' },
-          { name: 'projects.tsx' },
-          { name: 'contact.tsx' },
-        ],
-      },
-      {
-        name: '(blog)',
-        children: [{ name: 'index.tsx' }, { name: '[slug].tsx' }],
-      },
-    ],
-  },
-  { name: 'components', children: [{ name: 'ui' }, { name: 'magicui' }] },
-];
+function MobileNavFileTree() {
+  return (
+    <div className="relative flex h-[70vh] flex-col overflow-hidden rounded-lg border border-white/10 bg-background">
+      <Tree
+        className="overflow-auto rounded-md bg-background p-2 text-sm"
+        initialSelectedId="f_home"
+        initialExpandedItems={['src', 'app', '(pages)', '(sections)']}
+        aria-label="Site sections explorer"
+      >
+        <Folder element="src" value="src">
+          <Folder element="app" value="app">
+            <Folder element="(pages)" value="(pages)">
+              <File value="f_home">
+                <a href="#hero" className="block px-1 py-0.5">
+                  home.tsx
+                </a>
+              </File>
+              <File value="f_projects">
+                <a href="#projects-links" className="block px-1 py-0.5">
+                  projects.tsx
+                </a>
+              </File>
+              <File value="f_content">
+                <a href="#content" className="block px-1 py-0.5">
+                  content.tsx
+                </a>
+              </File>
+              <File value="f_contact">
+                <a href="#ready" className="block px-1 py-0.5">
+                  contact.tsx
+                </a>
+              </File>
+            </Folder>
+
+            <Folder element="(sections)" value="(sections)">
+              <File value="f_expert">
+                <a href="#expert" className="block px-1 py-0.5">
+                  expert.tsx
+                </a>
+              </File>
+              <File value="f_services">
+                <a href="#services" className="block px-1 py-0.5">
+                  services.tsx
+                </a>
+              </File>
+              <File value="f_testimonials">
+                <a href="#testimonials" className="block px-1 py-0.5">
+                  testimonials.tsx
+                </a>
+              </File>
+              <File value="f_faq">
+                <a href="#faq" className="block px-1 py-0.5">
+                  faq.tsx
+                </a>
+              </File>
+              <File value="f_footer">
+                <a href="#footer" className="block px-1 py-0.5">
+                  footer.tsx
+                </a>
+              </File>
+            </Folder>
+          </Folder>
+        </Folder>
+      </Tree>
+    </div>
+  );
+}
+// Draggable/resizable desktop explorer
+function DraggableExplorer({
+  open,
+  onClose,
+}: {
+  open: boolean;
+  onClose: () => void;
+}) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const dragging = useRef(false);
+  const resizing = useRef<null | 'right' | 'bottom' | 'corner'>(null);
+  const pos = useRef({ x: 24, y: 96, w: 360, h: 480 });
+  const [, force] = useState(0);
+
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      if (!ref.current) return;
+      if (dragging.current) {
+        pos.current.x += e.movementX;
+        pos.current.y += e.movementY;
+        force((n) => n + 1);
+      } else if (resizing.current) {
+        if (resizing.current === 'right' || resizing.current === 'corner') {
+          pos.current.w = Math.max(260, pos.current.w + e.movementX);
+        }
+        if (resizing.current === 'bottom' || resizing.current === 'corner') {
+          pos.current.h = Math.max(240, pos.current.h + e.movementY);
+        }
+        force((n) => n + 1);
+      }
+    };
+    const onUp = () => {
+      dragging.current = false;
+      resizing.current = null;
+    };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+    };
+  }, []);
+
+  if (!open) return null;
+
+  const style: React.CSSProperties = {
+    position: 'fixed',
+    left: pos.current.x,
+    top: pos.current.y,
+    width: pos.current.w,
+    height: pos.current.h,
+  };
+
+  return (
+    <div
+      ref={ref}
+      style={style}
+      className="z-[100] rounded-lg border border-white/10 bg-gray-950/95 backdrop-blur shadow-2xl"
+    >
+      {/* Titlebar */}
+      <div
+        className="flex items-center gap-2 border-b border-white/10 px-2 py-1 cursor-move select-none"
+        onMouseDown={() => (dragging.current = true)}
+      >
+        <div className="flex items-center gap-1">
+          <span className="size-2 rounded-full bg-red-500/80" />
+          <span className="size-2 rounded-full bg-yellow-500/80" />
+          <span className="size-2 rounded-full bg-green-500/80" />
+        </div>
+        <span className="ml-2 text-xs text-white/70">Explorer — src/app</span>
+        <div className="ml-auto">
+          <Button
+            size="sm"
+            variant="ghost"
+            className="h-6 px-2 text-white/80"
+            onClick={onClose}
+          >
+            Close
+          </Button>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="h-[calc(100%-32px)] overflow-hidden">
+        <div className="h-full overflow-auto p-2 text-sm">
+          <MobileNavFileTree />
+        </div>
+      </div>
+
+      {/* Resize handles */}
+      <div
+        className="absolute right-0 top-0 h-full w-1 cursor-e-resize"
+        onMouseDown={() => (resizing.current = 'right')}
+      />
+      <div
+        className="absolute bottom-0 left-0 h-1 w-full cursor-ns-resize"
+        onMouseDown={() => (resizing.current = 'bottom')}
+      />
+      <div
+        title="Resize"
+        className="absolute bottom-0 right-0 h-4 w-4 cursor-nwse-resize"
+        onMouseDown={() => (resizing.current = 'corner')}
+      />
+    </div>
+  );
+}
 
 export default function Home() {
+  const [explorerOpen, setExplorerOpen] = useState(false);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      // Cmd/Ctrl + E toggles Explorer
+      const meta = e.metaKey || e.ctrlKey;
+      if (meta && (e.key === 'e' || e.key === 'E')) {
+        e.preventDefault();
+        setExplorerOpen((v) => !v);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
   return (
     <main className="relative flex flex-col min-h-[100dvh] overflow-hidden bg-gray-950 text-white">
       {/* HERO */}
@@ -101,42 +263,51 @@ export default function Home() {
           {/* Desktop dock nav */}
           <div className="hidden md:block">
             <Dock>
-              {[
-                { title: 'Home', href: '#hero' },
-                { title: 'Services', href: '#services' },
-                { title: 'Projects', href: '#projects-links' },
-                { title: 'Content', href: '#content' },
-                { title: 'Contact', href: '#ready' },
-              ].map((item) => (
-                <DockIcon key={item.title}>
-                  <a href={item.href}>{item.title}</a>
-                </DockIcon>
-              ))}
+              <DockIcon>
+                <button
+                  aria-label="Toggle Explorer"
+                  onClick={() => setExplorerOpen((v) => !v)}
+                  className="px-2 py-1"
+                >
+                  <Menu className="h-4 w-4" />
+                </button>
+              </DockIcon>
             </Dock>
           </div>
-          {/* Mobile hamburger showing folder structure */}
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
-                <Menu className="h-5 w-5" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent
-              side="right"
-              className="bg-gray-950 text-white border-white/10"
-            >
-              <SheetHeader>
-                <SheetTitle className="text-white">Pages</SheetTitle>
-              </SheetHeader>
-              <nav className="mt-4 space-y-2 text-sm">
-                {PAGES.map((entry, i) => (
-                  <Folder key={i} entry={entry} depth={0} />
-                ))}
-              </nav>
-            </SheetContent>
-          </Sheet>
+          {/* Global hamburger: mobile opens Sheet, desktop opens draggable Explorer */}
+          {/* Mobile (Sheet) */}
+          <div className="md:hidden">
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent
+                side="right"
+                className="bg-gray-950 text-white border-white/10 w-[90vw] max-w-sm p-0"
+              >
+                <SheetHeader className="p-4">
+                  <SheetTitle className="text-white">Explorer</SheetTitle>
+                </SheetHeader>
+                <div className="px-2 pb-4">
+                  <MobileNavFileTree />
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
+
+          {/* Desktop (Draggable/Resizable window like WebStorm) */}
+          {/* Removed duplicate explorer toggle button, now in Dock */}
         </div>
       </header>
+
+      {/* Desktop draggable Explorer */}
+
+      <DraggableExplorer
+        open={explorerOpen}
+        onClose={() => setExplorerOpen(false)}
+      />
 
       <section id="hero" className="relative overflow-hidden py-24">
         <div className="absolute inset-0 -z-10">
@@ -455,37 +626,9 @@ export default function Home() {
             >
               GitHub
             </a>
-            <a href={DATA.contact.social.X.url} className="hover:text-white">
-              Twitter
-            </a>
           </div>
         </div>
       </section>
     </main>
-  );
-}
-
-// Simple recursive folder view for the hamburger menu
-function Folder({ entry, depth }: { entry: any; depth: number }) {
-  const isDir = !!entry.children;
-  return (
-    <div className="pl-2">
-      <div className="flex items-center gap-2 py-1">
-        <ChevronRight className="h-3 w-3 opacity-60" />
-        {isDir ? (
-          <FolderIcon className="h-4 w-4" />
-        ) : (
-          <FileText className="h-4 w-4" />
-        )}
-        <span className="opacity-90">{entry.name}</span>
-      </div>
-      {isDir && (
-        <div className="ml-4 border-l border-white/10 pl-3">
-          {entry.children.map((c: any, idx: number) => (
-            <Folder key={idx} entry={c} depth={depth + 1} />
-          ))}
-        </div>
-      )}
-    </div>
   );
 }

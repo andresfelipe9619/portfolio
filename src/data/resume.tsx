@@ -32,30 +32,24 @@ export const DATA = {
     { href: '/blog', icon: NotebookIcon, label: 'Blog' },
   ],
   contact: {
-    email: 'hello@andressuarez.dev',
+    email: 'andresfelipe9619@gmail.com',
     tel: '',
     social: {
       GitHub: {
         name: 'GitHub',
-        url: 'https://github.com/andressuarez',
+        url: 'https://github.com/andresfelipe9619',
         icon: Icons.github,
         navbar: true,
       },
       LinkedIn: {
         name: 'LinkedIn',
-        url: 'https://linkedin.com/in/andres-suarez-dev',
+        url: 'https://linkedin.com/in/suarezdev96',
         icon: Icons.linkedin,
-        navbar: true,
-      },
-      X: {
-        name: 'X',
-        url: 'https://x.com/andressuarezdev',
-        icon: Icons.x,
         navbar: true,
       },
       email: {
         name: 'Send Email',
-        url: 'mailto:hello@andressuarez.dev',
+        url: 'mailto:andresfelipe9619@gmail.com',
         icon: Icons.email,
         navbar: false,
       },
@@ -137,8 +131,7 @@ export const DATA = {
       end: 'Present',
     },
   ],
-
-  projects: [
+  openSource: [
     {
       title: 'Uber-like Open Source App',
       href: '#',
@@ -175,6 +168,9 @@ export const DATA = {
       technologies: ['Next.js', 'TailwindCSS', 'Magic UI', 'Vercel'],
       badges: ['Open Source', 'Portfolio', 'Next.js'],
     },
+  ],
+
+  projects: [
     {
       title: 'Web Scraping SaaS',
       href: '#',
