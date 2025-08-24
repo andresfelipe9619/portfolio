@@ -1,180 +1,104 @@
 export const TIMELINE_DATA = {
-  "summary": "Innovative **Software & Solutions Engineer** with 7+ years of experience delivering cutting-edge solutions across diverse industries, including SaaS, GIS, e-commerce, healthcare and financial. Recognized for blending technical expertise with business insight to craft scalable, impactful software solutions tailored to global client needs.\n\nProficient in full-stack development, cloud infrastructure, and system integrations, I’ve driven 28+ projects across 11 countries, tackling complex challenges and delivering measurable results. Adept at collaborating in multicultural environments, I thrive in bridging the gap between technical and business objectives to create meaningful, high-impact solutions.",
-  "asides": [
-    "💪 **Proven Success:** At the heart of my portfolio lie 28 transformative projects, each marking a milestone of success and excellence. These projects are not just numbers; they are stories of triumph, innovation, and solutions that have made a difference.",
-    "🌎 **Global Reach:** My experience transcends borders, having left its mark in 11 countries. This geographical diversity demonstrates a unique ability to adapt, communicate, and execute projects in a variety of cultural contexts, paving the way for global solutions.",
-    "🐙 **Mastery Across 15 Categories:** I am not limited to a single discipline. I have applied my experience and skills in 15 different categories, demonstrating extraordinary versatility and adaptability. Whatever the field, I will bring innovative solutions to the table.",
-    "🏆 **Expert Validation:** My performance has been the focus of an exclusive interview, where my achievements and skills have been highlighted under the meticulous metrics of Codealike. This recognition underscores my commitment to efficiency and quality in every project.",
-    "🚫 **Challenging the Status Quo:** Despite facing expulsion from Workana for challenging their high commissions, this experience highlights my unwavering commitment to fairness and transparency. Fighting for principles, not profits, my focus is always on value and integrity.",
-    "💡 **Perennial Innovation:** Driven by curiosity, each project has been an opportunity to innovate and apply up-to-date knowledge, keeping my work at the forefront of technology through constant exploration and adaptation."
+  summary:
+    'Innovative **Software & Solutions Engineer** with 8+ years delivering scalable SaaS, cloud, and GIS systems across 11 countries. Recognized for bridging business and technology, leading enterprise engineering, and building open-source projects.',
+  asides: [
+    '💪 **28+ Projects Delivered**: from SaaS to GIS, every project marks innovation and real-world impact.',
+    '🌎 **Global Reach**: successful deliveries in 11 countries prove adaptability in diverse markets.',
+    '🐙 **Versatility Across 15 Categories**: e-commerce, healthcare, finance, mining, education, and more.',
+    '🏆 **Expert Recognition**: featured in a Codealike interview highlighting measurable engineering excellence.',
+    '🚫 **Integrity First**: stood against unfair practices (Workana expulsion) while prioritizing value and transparency.',
+    '💡 **Innovation-Driven**: committed to cutting-edge solutions with SaaS, cloud automation, and open source.',
   ],
-  "countries": [
-    "🇺🇸 United States",
-    "🇪🇸 Spain",
-    "🇨🇱 Chile",
-    "🇧🇷 Brazil",
-    "🇲🇽 Mexico",
-    "🇨🇴 Colombia",
-    "🇪🇨 Ecuador",
-    "🇨🇷 Costa Rica",
-    "🇵🇦 Panama",
-    "🇩🇴 Dominican Republic",
-    "🇬🇧 United Kingdom"
+  countries: [
+    '🇺🇸 US',
+    '🇪🇸 Spain',
+    '🇨🇱 Chile',
+    '🇧🇷 Brazil',
+    '🇲🇽 Mexico',
+    '🇨🇴 Colombia',
+    '🇪🇨 Ecuador',
+    '🇨🇷 Costa Rica',
+    '🇵🇦 Panama',
+    '🇩🇴 Dominican Republic',
+    '🇬🇧 UK',
   ],
-  "categories": [
-    "🌿 Cannabis",
-    "🎓 Education",
-    "💰 Finances",
-    "🎨 Creative Industry",
-    "🛒 e-Commerce",
-    "🩺 Health",
-    "🏗️ Construction",
-    "⛏️ Mining",
-    "🥂 Social Events",
-    "🎬 Cinema",
-    "📈 Digital Marketing",
-    "⚖️ Legal",
-    "💋 Personal Services",
-    "🏄 Surf",
-    "🎙️Interview"
+  categories: [
+    '🌿 Cannabis',
+    '🎓 Education',
+    '💰 Finances',
+    '🎨 Creative Industry',
+    '🛒 e-Commerce',
+    '🩺 Health',
+    '🏗️ Construction',
+    '⛏️ Mining',
+    '🥂 Social Events',
+    '🎬 Cinema',
+    '📈 Digital Marketing',
+    '⚖️ Legal',
+    '💋 Personal Services',
+    '🏄 Surf',
+    '🎙️Interview',
   ],
-  "timeline": {
-    "2015": [
-      {
-        "title": "I start the Information Systems Technology career",
-      }
+  timeline: {
+    '2015': [{ title: 'Started Information Systems Technology career' }],
+    '2017': [
+      { title: 'Semillero Univalle - Web App 🇨🇴' },
+      { title: 'Graduation Dinner Univalle - Web App 🇨🇴' },
     ],
-    "2017": [
-      {
-        "title": "**Semillero Univalle - Web App 🇨🇴**",
-      },
-      {
-        "title": "Graduation Dinner **Univalle - Web App 🇨🇴**",
-      }
+    '2018': [
+      { title: 'Fonvalle - Web App 🇨🇴' },
+      { title: 'Topography Degree Work - GIS' },
+      { title: 'H&R Drywall - WebAPP 🇺🇸' },
     ],
-    "2018": [
-      {
-        "title": "**Fonvalle - Web App 🇨🇴**",
-      },
-      {
-        "title": "Topography Degree Work - GIS",
-      },
-      {
-        "title": "**H&R Drywall - WebAPP 🇺🇸**",
-      }
+    '2019': [
+      { title: 'Todosurf - GIS 🇪🇸' },
+      { title: 'BROOKLYN - CRM & Financial 🇬🇧' },
+      { title: 'COGESTEC - Colombia - WebAPP 🇨🇴' },
     ],
-    "2019": [
-      {
-        "title": "Todosurf - GIS 🇪🇸",
-      },
-      {
-        "title": "**BROOKLYN - CRM & Financial 🇬🇧**",
-      },
-      {
-        "title": "**COGESTEC - Colombia - WebAPP 🇨🇴**",
-      }
+    '2020': [
+      { title: 'David Alonso - E-commerce Integration 🇲🇽' },
+      { title: 'Sentir Creativo - Web App & CMS 🇨🇱' },
+      { title: 'Falconeye - GIS 🇩🇴' },
     ],
-    "2020": [
-      {
-        "title": "David Alonso - Integración Servicios 🇲🇽",
-      },
-      {
-        "title": "Sentir Creativo - Web App & CMS 🇨🇱",
-      },
-      {
-        "title": "Falconeye - GIS 🇩🇴",
-      }
+    '2021': [
+      { title: 'COVID-19 - Personal/Professional Growth' },
+      { title: 'Exited University - Full-time Software Engineering' },
     ],
-    "2021": [
-      {
-        "title": "COVID-19",
-      },
-      {
-        "title": "Left out University",
-      }
+    '2022': [
+      { title: 'Ronald Domingues - AWS Implementation 🇧🇷' },
+      { title: 'Manuel Mendoza - AWS Integration 🇲🇽' },
+      { title: 'Klazia - Strapi Migration & FinOps on AWS 🇨🇴' },
+      { title: 'Lawyers SaaS 🇨🇴' },
+      { title: 'Cinekomuna - Performance Optimization 🇲🇽' },
+      { title: 'John Daza - WebApp 🇨🇴' },
     ],
-    "2022": [
-      {
-        "title": "Ronald Domingues - Implementación AWS 🇧🇷",
-      },
-      {
-        "title": "Manuel Mendoza - Integración AWS 🇲🇽",
-      },
-      {
-        "title": "Klazia - Migración de Strapi & FinOps en AWS 🇨🇴",
-      },
-      {
-        "title": "Lawyers - SaaS 🇨🇴",
-      },
-      {
-        "title": "Cinekomuna - Improve Performance 🇲🇽",
-      },
-      {
-        "title": "**John Daza - WebApp 🇨🇴**",
-      }
+    '2023': [
+      { title: 'GSOFT - End-to-End SaaS 🇲🇽' },
+      { title: 'Javier Garaeta - AWS Optimization 🇪🇸' },
+      { title: 'Ángela Rivero - Google Sheets + Slack Script 🇪🇨' },
+      { title: 'Pevgrow - QA Consulting 🇪🇸' },
+      { title: 'Proaxdata - GIS 🇲🇽' },
+      { title: 'Adlyceum - Node.js & React Performance 🇨🇷' },
+      { title: 'Javeriana - Mobile App 🇨🇴' },
+      { title: 'Kuno Digital - Make & CRM Integrations 🇵🇦' },
+      { title: 'Freelaw - Docker Implementation 🇨🇱' },
+      { title: 'Expelled from Workana for integrity stance' },
     ],
-    "2023": [
-      {
-        "title": "GSOFT - E2E 🇲🇽",
-      },
-      {
-        "title": "Javier Garaeta - Optimización & Asesoría en AWS 🇪🇸",
-      },
-      {
-        "title": "**Ángela Rivero - Custom Script 🇪🇨**",
-      },
-      {
-        "title": "Pevgrow - Asesoria Testing 🇪🇸",
-      },
-      {
-        "title": "Proaxdata - GIS 🇲🇽",
-      },
-      {
-        "title": "Adlyceum - Mejora de Rendimiento & Bug fixes 🇨🇷",
-      },
-      {
-        "title": "Javeriana - App móvil 🇨🇴",
-      },
-      {
-        "title": "Kuno Digital - Integration with Make and ASAP🇵🇦",
-      },
-      {
-        "title": "Kuno Digital - Integration with Make, Whatsapp and Kommo CRM🇵🇦",
-      },
-      {
-        "title": "Freelaw - Implementación Docker 🇨🇱",
-      },
-      {
-        "title": "Expulsion Workana",
-      }
+    '2024': [
+      { title: 'Joseph Cook - AWS Implementation 🇺🇸' },
+      { title: 'Torc - Codealike Interview 🇺🇸' },
+      { title: 'Pizzaamericana - Salesmanago Integration' },
+      { title: 'El Hornero - Salesmanago Consultancy' },
+      { title: 'Caribescorts - Web App 🇩🇴' },
+      { title: 'Bachillerato en Casa - EdTech' },
+      { title: 'Usermuse - SaaS Contributions' },
     ],
-    "2024": [
-      {
-        "title": "Joseph **Cook - Implementación en AWS 🇺🇸**",
-      },
-      {
-        "title": "Torc - Codealike Interview 🇺🇸",
-      },
-      {
-        "title": "Pizzaamericana - Salesmanago Integration",
-      },
-      {
-        "title": "El Hornero - Salesmanago Integration Consutancy",
-      },
-      {
-        "title": "Caribescorts - Web App 🇩🇴",
-      },
-      {
-        "title": "Bachillerato en Casa",
-      },
-      {
-        "title": "Usermuse",
-      }
+    '2025': [
+      { title: 'Freelance SaaS Architect - Active' },
+      { title: 'Open Source: Uber-like Ride App' },
+      { title: 'Open Source: Audiobaked Platform' },
+      { title: 'Open Source: Personal Portfolio' },
+      { title: 'Next one…' },
     ],
-    "2025": [
-      {
-        "title": "Next one…",
-      }
-    ]
-  }
-}
+  },
+};

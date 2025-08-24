@@ -50,7 +50,7 @@ const LoadingScreen = ({
         squaresClassName="hover:fill-green-500"
       />
 
-      <BlurFade duration={0.2} blur={'0px'} yOffset={0}>
+      <BlurFade duration={0.2} blur={'0px'} yOffset={0} inView>
         <div className="relative z-10 w-[60vw] h-[60vh]">
           <Terminal className="text-green-300 font-mono text-sm h-full w-[60vw]">
             <TypingAnimation className="text-zinc-400">
