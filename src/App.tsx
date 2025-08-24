@@ -1,10 +1,10 @@
-import Navbar from '@/components/navbar';
+import Navbar from '@/components/navbar/navbar';
 import { ThemeProvider } from '@/components/theme-provider';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import LoadingScreen from '@/components/loading-screen';
 
 export default function App() {

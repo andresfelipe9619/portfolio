@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import BlurFadeText from '@/components/magicui/blur-fade-text';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -17,9 +17,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'; // icons
 import { ArrowUpRight, Menu, Quote as QuoteIcon } from 'lucide-react';
-import { Tree, Folder, File } from '@/components/magicui/file-tree';
 import { Globe } from '@/components/magicui/globe'; // MagicUI extras
-import { type COBEOptions } from 'cobe';
 import { Terminal } from '@/components/magicui/terminal';
 import { Dock, DockIcon } from '@/components/magicui/dock'; // shadcn sheet for mobile nav
 import {
@@ -29,210 +27,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-
-const GLOBE_CONFIG: COBEOptions = {
-  width: 800,
-  height: 800,
-  onRender: () => {},
-  devicePixelRatio: 2,
-  phi: 0,
-  theta: 0.3,
-  dark: 0,
-  diffuse: 0.4,
-  mapSamples: 16000,
-  mapBrightness: 1.2,
-  baseColor: [1, 1, 1],
-  markerColor: [251 / 255, 100 / 255, 21 / 255],
-  glowColor: [1, 1, 1],
-  markers: [
-    { location: [14.5995, 120.9842], size: 0.03 },
-    { location: [19.076, 72.8777], size: 0.1 },
-    { location: [23.8103, 90.4125], size: 0.05 },
-    { location: [30.0444, 31.2357], size: 0.07 },
-    { location: [39.9042, 116.4074], size: 0.08 },
-    { location: [-23.5505, -46.6333], size: 0.1 },
-    { location: [19.4326, -99.1332], size: 0.1 },
-    { location: [40.7128, -74.006], size: 0.1 },
-    { location: [34.6937, 135.5022], size: 0.05 },
-    { location: [41.0082, 28.9784], size: 0.06 },
-  ],
-};
+import { MobileNavFileTree } from '@/components/navbar/mobilenav-file-tree.tsx';
+import { DraggableExplorer } from '@/components/navbar/draggable-explorer.tsx';
+import { GLOBE_CONFIG } from '@/components/constants.ts';
 
 const BLUR_FADE_DELAY = 0.04;
-
-function MobileNavFileTree() {
-  return (
-    <div className="relative flex h-[70vh] flex-col overflow-hidden rounded-lg border border-white/10 bg-background">
-      <Tree
-        className="overflow-auto rounded-md bg-background p-2 text-sm"
-        initialSelectedId="f_home"
-        initialExpandedItems={['src', 'app', '(pages)', '(sections)']}
-        aria-label="Site sections explorer"
-      >
-        <Folder element="src" value="src">
-          <Folder element="app" value="app">
-            <Folder element="(pages)" value="(pages)">
-              <File value="f_home">
-                <a href="#hero" className="block px-1 py-0.5">
-                  home.tsx
-                </a>
-              </File>
-              <File value="f_projects">
-                <a href="#projects-links" className="block px-1 py-0.5">
-                  projects.tsx
-                </a>
-              </File>
-              <File value="f_content">
-                <a href="#content" className="block px-1 py-0.5">
-                  content.tsx
-                </a>
-              </File>
-              <File value="f_contact">
-                <a href="#ready" className="block px-1 py-0.5">
-                  contact.tsx
-                </a>
-              </File>
-            </Folder>
-
-            <Folder element="(sections)" value="(sections)">
-              <File value="f_expert">
-                <a href="#expert" className="block px-1 py-0.5">
-                  expert.tsx
-                </a>
-              </File>
-              <File value="f_services">
-                <a href="#services" className="block px-1 py-0.5">
-                  services.tsx
-                </a>
-              </File>
-              <File value="f_testimonials">
-                <a href="#testimonials" className="block px-1 py-0.5">
-                  testimonials.tsx
-                </a>
-              </File>
-              <File value="f_faq">
-                <a href="#faq" className="block px-1 py-0.5">
-                  faq.tsx
-                </a>
-              </File>
-              <File value="f_footer">
-                <a href="#footer" className="block px-1 py-0.5">
-                  footer.tsx
-                </a>
-              </File>
-            </Folder>
-          </Folder>
-        </Folder>
-      </Tree>
-    </div>
-  );
-}
-// Draggable/resizable desktop explorer
-function DraggableExplorer({
-  open,
-  onClose,
-}: {
-  open: boolean;
-  onClose: () => void;
-}) {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const dragging = useRef(false);
-  const resizing = useRef<null | 'right' | 'bottom' | 'corner'>(null);
-  const pos = useRef({ x: 24, y: 96, w: 360, h: 480 });
-  const [, force] = useState(0);
-
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      if (!ref.current) return;
-      if (dragging.current) {
-        pos.current.x += e.movementX;
-        pos.current.y += e.movementY;
-        force((n) => n + 1);
-      } else if (resizing.current) {
-        if (resizing.current === 'right' || resizing.current === 'corner') {
-          pos.current.w = Math.max(260, pos.current.w + e.movementX);
-        }
-        if (resizing.current === 'bottom' || resizing.current === 'corner') {
-          pos.current.h = Math.max(240, pos.current.h + e.movementY);
-        }
-        force((n) => n + 1);
-      }
-    };
-    const onUp = () => {
-      dragging.current = false;
-      resizing.current = null;
-    };
-    window.addEventListener('mousemove', onMove);
-    window.addEventListener('mouseup', onUp);
-    return () => {
-      window.removeEventListener('mousemove', onMove);
-      window.removeEventListener('mouseup', onUp);
-    };
-  }, []);
-
-  if (!open) return null;
-
-  const style: React.CSSProperties = {
-    position: 'fixed',
-    left: pos.current.x,
-    top: pos.current.y,
-    width: pos.current.w,
-    height: pos.current.h,
-  };
-
-  return (
-    <div
-      ref={ref}
-      style={style}
-      className="z-[100] rounded-lg border border-white/10 bg-gray-950/95 backdrop-blur shadow-2xl"
-    >
-      {/* Titlebar */}
-      <div
-        className="flex items-center gap-2 border-b border-white/10 px-2 py-1 cursor-move select-none"
-        onMouseDown={() => (dragging.current = true)}
-      >
-        <div className="flex items-center gap-1">
-          <span className="size-2 rounded-full bg-red-500/80" />
-          <span className="size-2 rounded-full bg-yellow-500/80" />
-          <span className="size-2 rounded-full bg-green-500/80" />
-        </div>
-        <span className="ml-2 text-xs text-white/70">Explorer — src/app</span>
-        <div className="ml-auto">
-          <Button
-            size="sm"
-            variant="ghost"
-            className="h-6 px-2 text-white/80"
-            onClick={onClose}
-          >
-            Close
-          </Button>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="h-[calc(100%-32px)] overflow-hidden">
-        <div className="h-full overflow-auto p-2 text-sm">
-          <MobileNavFileTree />
-        </div>
-      </div>
-
-      {/* Resize handles */}
-      <div
-        className="absolute right-0 top-0 h-full w-1 cursor-e-resize"
-        onMouseDown={() => (resizing.current = 'right')}
-      />
-      <div
-        className="absolute bottom-0 left-0 h-1 w-full cursor-ns-resize"
-        onMouseDown={() => (resizing.current = 'bottom')}
-      />
-      <div
-        title="Resize"
-        className="absolute bottom-0 right-0 h-4 w-4 cursor-nwse-resize"
-        onMouseDown={() => (resizing.current = 'corner')}
-      />
-    </div>
-  );
-}
 
 export default function Home() {
   const [explorerOpen, setExplorerOpen] = useState(false);
@@ -303,7 +102,6 @@ export default function Home() {
       </header>
 
       {/* Desktop draggable Explorer */}
-
       <DraggableExplorer
         open={explorerOpen}
         onClose={() => setExplorerOpen(false)}
@@ -343,10 +141,7 @@ export default function Home() {
             <div className="mx-auto">
               <Globe
                 className="h-80 w-80 sm:h-96 sm:w-96"
-                config={{
-                  ...GLOBE_CONFIG,
-                  glowColor: [96 / 255, 165 / 255, 250 / 255],
-                }}
+                config={GLOBE_CONFIG}
               />
             </div>
             <p className="mt-3 text-center text-sm text-white/70">

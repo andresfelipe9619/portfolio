@@ -1,4 +1,5 @@
 import { cva } from 'class-variance-authority';
+import type { COBEOptions } from 'cobe';
 
 const buttonVariants = cva(
   'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
@@ -30,7 +31,6 @@ const buttonVariants = cva(
   },
 );
 
-
 const dockVariants = cva(
   'mx-auto w-max h-full p-2 flex items-end rounded-full border',
 );
@@ -54,4 +54,33 @@ const badgeVariants = cva(
     },
   },
 );
-export { badgeVariants, buttonVariants, dockVariants };
+
+const GLOBE_CONFIG: COBEOptions = {
+  width: 800,
+  height: 800,
+  onRender: () => {},
+  devicePixelRatio: 2,
+  phi: 0,
+  theta: 0.3,
+  dark: 0,
+  diffuse: 0.4,
+  mapSamples: 16000,
+  mapBrightness: 1.2,
+  baseColor: [1, 1, 1],
+  markerColor: [251 / 255, 100 / 255, 21 / 255],
+  glowColor: [96 / 255, 165 / 255, 250 / 255],
+  markers: [
+    { location: [14.5995, 120.9842], size: 0.03 },
+    { location: [19.076, 72.8777], size: 0.1 },
+    { location: [23.8103, 90.4125], size: 0.05 },
+    { location: [30.0444, 31.2357], size: 0.07 },
+    { location: [39.9042, 116.4074], size: 0.08 },
+    { location: [-23.5505, -46.6333], size: 0.1 },
+    { location: [19.4326, -99.1332], size: 0.1 },
+    { location: [40.7128, -74.006], size: 0.1 },
+    { location: [34.6937, 135.5022], size: 0.05 },
+    { location: [41.0082, 28.9784], size: 0.06 },
+  ],
+};
+
+export { badgeVariants, buttonVariants, dockVariants, GLOBE_CONFIG };
