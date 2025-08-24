@@ -11,7 +11,7 @@ export const DATA = {
     'Senior Software Engineer | Cloud & Automation Expert | SaaS Builder',
   summary:
     'Senior Software Engineer with 8+ years of experience delivering backend, full-stack, and cloud-based systems. Specialized in automation, SaaS platforms, and infrastructure on AWS. After leading engineering at Benekiva, I transitioned into freelance and SaaS projects, where I design and implement production-grade solutions — from APIs and web scraping platforms to automation workflows and scalable Strapi deployments.',
-  avatarUrl: '/me.png',
+  avatarUrl: '/me.jpeg',
   skills: [
     'Node.js',
     'TypeScript',
