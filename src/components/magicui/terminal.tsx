@@ -1,5 +1,4 @@
 'use client';
-//eslint-ignore-file @
 
 import { cn } from '@/lib/utils';
 import { motion, type MotionProps, useInView } from 'motion/react';
@@ -56,7 +55,13 @@ export const AnimatedSpan = ({
     if (sequence.activeIndex === itemIndex) {
       setHasStarted(true);
     }
-  }, [sequence?.activeIndex, sequence?.sequenceStarted, hasStarted, itemIndex]);
+  }, [
+    sequence.activeIndex,
+    sequence.sequenceStarted,
+    hasStarted,
+    itemIndex,
+    sequence,
+  ]);
 
   const shouldAnimate = sequence ? hasStarted : startOnView ? isInView : true;
 
@@ -144,9 +149,10 @@ export const TypingAnimation = ({
     startOnView,
     isInView,
     started,
-    sequence?.activeIndex,
-    sequence?.sequenceStarted,
+    sequence.activeIndex,
+    sequence.sequenceStarted,
     itemIndex,
+    sequence,
   ]);
 
   useEffect(() => {

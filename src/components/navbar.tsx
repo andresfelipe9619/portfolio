@@ -9,7 +9,7 @@ import {
 import { DATA } from '@/data/resume';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
-import { buttonVariants } from "@/components/ui/constants.ts";
+import { buttonVariants } from '@/components/constants.ts';
 
 export default function Navbar() {
   return (
@@ -38,7 +38,7 @@ export default function Navbar() {
         ))}
         <Separator orientation="vertical" className="h-full" />
         {Object.entries(DATA.contact.social)
-          .filter(([_, social]) => social.navbar)
+          .filter(([, social]) => social.navbar)
           .map(([name, social]) => (
             <DockIcon key={name}>
               <Tooltip>

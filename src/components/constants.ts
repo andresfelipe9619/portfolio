@@ -30,6 +30,11 @@ const buttonVariants = cva(
   },
 );
 
+
+const dockVariants = cva(
+  'mx-auto w-max h-full p-2 flex items-end rounded-full border',
+);
+
 const badgeVariants = cva(
   'inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
   {
@@ -49,4 +54,4 @@ const badgeVariants = cva(
     },
   },
 );
-export { badgeVariants, buttonVariants };
+export { badgeVariants, buttonVariants, dockVariants };

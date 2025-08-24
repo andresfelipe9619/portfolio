@@ -1,9 +1,10 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { type VariantProps } from 'class-variance-authority';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import React, { type PropsWithChildren, useRef } from 'react';
+import { dockVariants } from '@/components/constants.ts';
 
 export interface DockProps extends VariantProps<typeof dockVariants> {
   className?: string;
@@ -14,10 +15,6 @@ export interface DockProps extends VariantProps<typeof dockVariants> {
 
 const DEFAULT_MAGNIFICATION = 60;
 const DEFAULT_DISTANCE = 140;
-
-const dockVariants = cva(
-  'mx-auto w-max h-full p-2 flex items-end rounded-full border',
-);
 
 const Dock = React.forwardRef<HTMLDivElement, DockProps>(
   (
@@ -72,7 +69,6 @@ export interface DockIconProps {
 }
 
 const DockIcon = ({
-  size,
   magnification = DEFAULT_MAGNIFICATION,
   distance = DEFAULT_DISTANCE,
   mousex,
@@ -116,4 +112,4 @@ const DockIcon = ({
 
 DockIcon.displayName = 'DockIcon';
 
-export { Dock, DockIcon, dockVariants };
+export { Dock, DockIcon };
