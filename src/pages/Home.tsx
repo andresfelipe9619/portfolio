@@ -4,9 +4,7 @@ import BlurFadeText from '@/components/magicui/blur-fade-text';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-
 import { DATA } from '@/data/resume';
-
 import { GridBeams } from '@/components/magicui/grid-beams';
 import { DotPattern } from '@/components/magicui/dot-pattern';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
@@ -15,11 +13,11 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion'; // icons
+} from '@/components/ui/accordion';
 import { ArrowUpRight, Menu, Quote as QuoteIcon } from 'lucide-react';
-import { Globe } from '@/components/magicui/globe'; // MagicUI extras
+import { Globe } from '@/components/magicui/globe';
 import { Terminal } from '@/components/magicui/terminal';
-import { Dock, DockIcon } from '@/components/magicui/dock'; // shadcn sheet for mobile nav
+import { Dock, DockIcon } from '@/components/magicui/dock';
 import {
   Sheet,
   SheetContent,
@@ -27,27 +25,17 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { MobileNavFileTree } from '@/components/navbar/mobilenav-file-tree.tsx';
-import { DraggableExplorer } from '@/components/navbar/draggable-explorer.tsx';
-import { GLOBE_CONFIG } from '@/components/constants.ts';
+import { MobileNavFileTree } from '@/components/navbar/mobilenav-file-tree';
+import { DraggableExplorer } from '@/components/navbar/draggable-explorer';
+import { GLOBE_CONFIG } from '@/components/constants';
+import { Footer } from '@/components/footer';
+import { useKeyListener } from '@/hooks/useKeyListener.tsx';
 
 const BLUR_FADE_DELAY = 0.04;
 
 export default function Home() {
   const [explorerOpen, setExplorerOpen] = useState(false);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      // Cmd/Ctrl + E toggles Explorer
-      const meta = e.metaKey || e.ctrlKey;
-      if (meta && (e.key === 'e' || e.key === 'E')) {
-        e.preventDefault();
-        setExplorerOpen((v) => !v);
-      }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, []);
+  useKeyListener(setExplorerOpen);
 
   return (
     <main className="relative flex flex-col min-h-[100dvh] overflow-hidden bg-gray-950 text-white">
@@ -402,28 +390,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <section id="footer" className="bg-gray-950 text-white">
-        <div className="mx-auto max-w-6xl px-6 py-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div className="text-sm text-white/60">
-            © {new Date().getFullYear()} {DATA.name}. All rights reserved.
-          </div>
-          <div className="flex gap-4 text-sm text-white/70">
-            <a
-              href={DATA.contact.social.LinkedIn.url}
-              className="hover:text-white"
-            >
-              LinkedIn
-            </a>
-            <a
-              href={DATA.contact.social.GitHub.url}
-              className="hover:text-white"
-            >
-              GitHub
-            </a>
-          </div>
-        </div>
-      </section>
+      <Footer />
     </main>
   );
 }
