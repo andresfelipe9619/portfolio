@@ -1,4 +1,3 @@
-import Navbar from '@/components/navbar/navbar';
 import { ThemeProvider } from '@/components/theme-provider';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
@@ -25,7 +24,6 @@ export default function App() {
             <LoadingScreen onSkip={() => setIsLoading(false)} />
           ) : (
             <>
-              <Navbar />
               <Routes>
                 <Route path="/" element={<Home />} />
               </Routes>

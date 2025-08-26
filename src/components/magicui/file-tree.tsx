@@ -44,7 +44,7 @@ const useTree = () => {
   return context;
 };
 
-type TreeViewComponentProps = React.HTMLAttributes<HTMLDivElement>
+type TreeViewComponentProps = React.HTMLAttributes<HTMLDivElement>;
 
 type Direction = 'rtl' | 'ltr' | undefined;
 
@@ -202,7 +202,9 @@ const TreeIndicator = forwardRef<
 
 TreeIndicator.displayName = 'TreeIndicator';
 
-type FolderComponentProps = React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
+type FolderComponentProps = React.ComponentPropsWithoutRef<
+  typeof AccordionPrimitive.Item
+>;
 
 type FolderProps = {
   expandedItems?: string[];
@@ -224,7 +226,9 @@ const Folder = forwardRef<
       isSelect,
       children,
       ...props
-    }
+    },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _ref,
   ) => {
     const {
       direction,
@@ -340,7 +344,7 @@ const CollapseButton = forwardRef<
     elements: TreeViewElement[];
     expandAll?: boolean;
   } & React.HTMLAttributes<HTMLButtonElement>
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 >(({ className, elements, expandAll = false, children, ...props }, ref) => {
   const { expandedItems, setExpandedItems } = useTree();
 
@@ -354,12 +358,12 @@ const CollapseButton = forwardRef<
     };
 
     elements.forEach(expandTree);
-      //eslint-disable-next-line
+    //eslint-disable-next-line
   }, []);
 
   const closeAll = useCallback(() => {
     setExpandedItems?.([]);
-      //eslint-disable-next-line
+    //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -367,7 +371,7 @@ const CollapseButton = forwardRef<
     if (expandAll) {
       expendAllTree(elements);
     }
-      //eslint-disable-next-line
+    //eslint-disable-next-line
   }, [expandAll]);
 
   return (

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import BlurFadeText from '@/components/magicui/blur-fade-text';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -30,6 +30,13 @@ import { DraggableExplorer } from '@/components/navbar/draggable-explorer';
 import { GLOBE_CONFIG } from '@/components/constants';
 import { Footer } from '@/components/footer';
 import { useKeyListener } from '@/hooks/useKeyListener.tsx';
+import {
+  CTATitle,
+  FAQ_ITEMS,
+  faqTitle,
+  mainPhrase,
+  professionalTitle,
+} from '@/data/copy.ts';
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -108,10 +115,10 @@ export default function Home() {
               delay={BLUR_FADE_DELAY}
               className="text-4xl font-extrabold tracking-tight sm:text-6xl md:text-7xl"
               yOffset={8}
-              text={`Strong software solutions\nfor all around the world.`}
+              text={mainPhrase}
             />
             <p className="mx-auto mt-4 max-w-2xl text-balance text-white/70 md:text-lg">
-              Senior Software Engineer — Cloud & Automation — SaaS Builder
+              {professionalTitle}
             </p>
             <div className="mt-8 flex items-center justify-center gap-3">
               <ShimmerButton className="rounded-full px-6 py-3">
@@ -128,6 +135,7 @@ export default function Home() {
           <div className="mt-10 flex w-full max-w-5xl flex-col items-center gap-6">
             <div className="mx-auto">
               <Globe
+                scaled
                 className="h-80 w-80 sm:h-96 sm:w-96"
                 config={GLOBE_CONFIG}
               />
@@ -303,31 +311,18 @@ export default function Home() {
       {/* FAQ */}
       <section id="faq" className="bg-gray-950 text-white py-8">
         <div className="mx-auto max-w-5xl px-6">
-          <h3 className="text-xl font-semibold">No space for doubts.</h3>
+          <h3 className="text-xl font-semibold">{faqTitle}</h3>
+
           <Accordion type="single" collapsible className="mt-4">
-            <AccordionItem value="item-1">
-              <AccordionTrigger>
-                What’s your typical engagement model?
-              </AccordionTrigger>
-              <AccordionContent>
-                Scoped projects or monthly retainer; async‑first, weekly demos,
-                clear SLAs.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-2">
-              <AccordionTrigger>How do you ensure quality?</AccordionTrigger>
-              <AccordionContent>
-                Testing pyramid, CI/CD, preview apps, linting, perf budgets,
-                observability.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-3">
-              <AccordionTrigger>What stacks do you prefer?</AccordionTrigger>
-              <AccordionContent>
-                TypeScript, React/Next.js, Node, Python, AWS, Postgres/Redis,
-                edge functions.
-              </AccordionContent>
-            </AccordionItem>
+            {FAQ_ITEMS.map((item, idx) => (
+              <AccordionItem
+                key={item.id ?? idx}
+                value={item.id ?? `item-${idx + 1}`}
+              >
+                <AccordionTrigger>{item.question}</AccordionTrigger>
+                <AccordionContent>{item.answer}</AccordionContent>
+              </AccordionItem>
+            ))}
           </Accordion>
         </div>
       </section>
@@ -366,9 +361,7 @@ export default function Home() {
       <section id="ready" className="bg-gray-950 text-white py-16">
         <div className="mx-auto max-w-5xl px-6 grid items-center gap-8 md:grid-cols-2">
           <div>
-            <h3 className="text-3xl font-semibold">
-              Ready to level up your next project?
-            </h3>
+            <h3 className="text-3xl font-semibold">{CTATitle}</h3>
             <div className="mt-6 flex gap-3">
               <ShimmerButton className="rounded-full px-6 py-3">
                 Let's talk

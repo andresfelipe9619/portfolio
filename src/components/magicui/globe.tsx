@@ -22,25 +22,39 @@ const GLOBE_CONFIG: COBEOptions = {
   baseColor: [1, 1, 1],
   markerColor: [251 / 255, 100 / 255, 21 / 255],
   glowColor: [1, 1, 1],
-  markers: [
-    { location: [14.5995, 120.9842], size: 0.03 },
-    { location: [19.076, 72.8777], size: 0.1 },
-    { location: [23.8103, 90.4125], size: 0.05 },
-    { location: [30.0444, 31.2357], size: 0.07 },
-    { location: [39.9042, 116.4074], size: 0.08 },
-    { location: [-23.5505, -46.6333], size: 0.1 },
-    { location: [19.4326, -99.1332], size: 0.1 },
-    { location: [40.7128, -74.006], size: 0.1 },
-    { location: [34.6937, 135.5022], size: 0.05 },
-    { location: [41.0082, 28.9784], size: 0.06 },
-  ],
+  markers: [],
 };
+
+const scaledConfig = (config: COBEOptions, width: number): COBEOptions => ({
+  ...config,
+  devicePixelRatio: 2,
+  width: width * 2,
+  height: width * 2 * 0.4,
+  phi: 0,
+  theta: 0.3,
+  dark: 1,
+  diffuse: 3,
+  mapSamples: 16000,
+  mapBrightness: 1.2,
+  baseColor: [1, 1, 1],
+  markerColor: [251 / 255, 100 / 255, 21 / 255],
+  glowColor: [1.2, 1.2, 1.2],
+  markers: [],
+  scale: 2.5,
+  offset: [0, width * 2 * 0.4 * 0.6],
+  onRender: (state) => {
+    state.width = width * 2;
+    state.height = width * 2 * 0.4;
+  },
+});
 
 export function Globe({
   className,
+  scaled = false,
   config = GLOBE_CONFIG,
 }: {
   className?: string;
+  scaled?: boolean;
   config?: COBEOptions;
 }) {
   let phi = 0;
@@ -83,16 +97,20 @@ export function Globe({
     onResize();
 
     const globe = createGlobe(canvasRef.current!, {
-      ...config,
-      width: width * 2,
-      height: width * 2,
-      onRender: (state) => {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        if (!pointerInteracting.current) phi += 0.005;
-        state.phi = phi + rs.get();
-        state.width = width * 2;
-        state.height = width * 2;
-      },
+      ...(scaled
+        ? scaledConfig(config, width)
+        : {
+            ...config,
+            width: width * 2,
+            height: width * 2,
+            onRender: (state) => {
+              // eslint-disable-next-line react-hooks/exhaustive-deps
+              if (!pointerInteracting.current) phi += 0.005;
+              state.phi = phi + rs.get();
+              state.width = width * 2;
+              state.height = width * 2;
+            },
+          }),
     });
 
     setTimeout(() => (canvasRef.current!.style.opacity = '1'), 0);
@@ -103,12 +121,7 @@ export function Globe({
   }, [rs, config]);
 
   return (
-    <div
-      className={cn(
-        'mx-auto aspect-[1/1] w-full max-w-[600px]',
-        className,
-      )}
-    >
+    <div className={cn('mx-auto aspect-[1/1] w-full max-w-[80vw]', className)}>
       <canvas
         className={cn(
           'size-full opacity-0 transition-opacity duration-500 [contain:layout_paint_size]',
