@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button.tsx';
-import { MobileNavFileTree } from '@/components/navbar/mobilenav-file-tree.tsx';
+import { MobileNavFileTree } from '@/components/ui/navbar/mobilenav-file-tree.tsx';
 
 export function DraggableExplorer({
   open,

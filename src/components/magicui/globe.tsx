@@ -25,29 +25,6 @@ const GLOBE_CONFIG: COBEOptions = {
   markers: [],
 };
 
-const scaledConfig = (config: COBEOptions, width: number): COBEOptions => ({
-  ...config,
-  devicePixelRatio: 2,
-  width: width * 2,
-  height: width * 2 * 0.4,
-  phi: 0,
-  theta: 0.3,
-  dark: 1,
-  diffuse: 3,
-  mapSamples: 16000,
-  mapBrightness: 1.2,
-  baseColor: [1, 1, 1],
-  markerColor: [251 / 255, 100 / 255, 21 / 255],
-  glowColor: [1.2, 1.2, 1.2],
-  markers: [],
-  scale: 2.5,
-  offset: [0, width * 2 * 0.4 * 0.6],
-  onRender: (state) => {
-    state.width = width * 2;
-    state.height = width * 2 * 0.4;
-  },
-});
-
 export function Globe({
   className,
   scaled = false,
@@ -98,13 +75,30 @@ export function Globe({
 
     const globe = createGlobe(canvasRef.current!, {
       ...(scaled
-        ? scaledConfig(config, width)
+        ? {
+            ...config,
+            width: width * 3,
+            height: width * 3 * 0.4,
+            dark: 0,
+            diffuse: 3,
+            mapSamples: 16000,
+            mapBrightness: 1.2,
+            scale: 2.5,
+            devicePixelRatio: 2,
+            offset: [0, width * 2 * 0.4 * 0.6],
+            onRender: (state) => {
+              // eslint-disable-next-line react-hooks/exhaustive-deps
+              if (!pointerInteracting.current) phi += 0.005;
+              state.phi = phi + rs.get();
+              state.width = width * 3;
+              state.height = width * 3 * 0.4;
+            },
+          }
         : {
             ...config,
             width: width * 2,
             height: width * 2,
             onRender: (state) => {
-              // eslint-disable-next-line react-hooks/exhaustive-deps
               if (!pointerInteracting.current) phi += 0.005;
               state.phi = phi + rs.get();
               state.width = width * 2;
@@ -121,7 +115,7 @@ export function Globe({
   }, [rs, config]);
 
   return (
-    <div className={cn('mx-auto aspect-[1/1] w-full max-w-[80vw]', className)}>
+    <div className={cn('mx-auto aspect-[1/1]  w-[90vw]', className)}>
       <canvas
         className={cn(
           'size-full opacity-0 transition-opacity duration-500 [contain:layout_paint_size]',
