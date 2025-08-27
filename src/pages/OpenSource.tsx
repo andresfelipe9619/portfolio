@@ -134,7 +134,7 @@ export default function OpenSourcePage() {
 
       {/* Grupos/Capítulos con animación */}
       <div className="relative z-10 space-y-12">
-        {groups.map(({ section, items }, groupIdx) => (
+        {groups.map(({ section, items }) => (
           <section key={section.key} className="space-y-4">
             <div className="space-y-1">
               <h2 className="text-xl font-semibold">{section.title}</h2>
@@ -149,7 +149,7 @@ export default function OpenSourcePage() {
               animate="show"
               className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
             >
-              {items.map((item, i) => (
+              {items.map((item) => (
                 <motion.div key={item.title} variants={itemVariants}>
                   <OssCard {...item} />
                 </motion.div>

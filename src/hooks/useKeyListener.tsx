@@ -12,5 +12,6 @@ export function useKeyListener(setExplorerOpen: (value: (((prevState: boolean) =
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
+    //eslint-disable-next-line
   }, []);
 }
