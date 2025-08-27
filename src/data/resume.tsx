@@ -1,5 +1,15 @@
-import { HomeIcon, NotebookIcon } from 'lucide-react';
+import { GitBranch, HomeIcon } from 'lucide-react';
 import { Icons } from '@/components/icons.tsx';
+
+// types for SEO/cards
+export type HighContentItem = {
+  title: string;
+  href: string;
+  subtitle: string; // short description
+  badges: string[];
+  year: string;
+  active: boolean;
+};
 
 export const DATA = {
   name: 'Andrés Suárez',
@@ -29,7 +39,7 @@ export const DATA = {
   ],
   navbar: [
     { href: '/', icon: HomeIcon, label: 'Home' },
-    { href: '/blog', icon: NotebookIcon, label: 'Blog' },
+    { href: '/open-source', icon: GitBranch, label: 'Open Source' },
   ],
   contact: {
     email: 'andresfelipe9619@gmail.com',
@@ -203,3 +213,14 @@ export const DATA = {
     },
   ],
 } as const;
+
+// derive from DATA.openSource
+//eslint-disable-next-line
+export const OPEN_SOURCE_HIGHLIGHTS: HighContentItem[] = DATA.openSource.map((p) => ({
+  title: p.title,
+  href: p.href,
+  subtitle: p.description,
+  badges: [...p.badges],
+  year: p.dates,
+  active: p.active,
+}));

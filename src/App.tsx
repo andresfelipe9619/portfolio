@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import { useEffect, useState } from 'react';
 import LoadingScreen from '@/components/loading-screen';
+import OpenSourcePage from '@/pages/OpenSource';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,6 +27,7 @@ export default function App() {
             <>
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/open-source" element={<OpenSourcePage />} />
               </Routes>
             </>
           )}

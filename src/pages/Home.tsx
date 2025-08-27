@@ -20,7 +20,7 @@ import { Globe } from '@/components/magicui/globe';
 import { Terminal } from '@/components/magicui/terminal';
 import { DraggableExplorer } from '@/components/ui/navbar/draggable-explorer';
 import { GLOBE_CONFIG } from '@/components/constants';
-import { Footer } from '@/components/footer';
+import { Footer } from '@/sections/footer.tsx';
 import { useKeyListener } from '@/hooks/useKeyListener.tsx';
 import {
   CTATitle,
@@ -29,6 +29,7 @@ import {
   mainPhrase,
   professionalTitle,
 } from '@/data/copy.ts';
+import { OssHighlights } from '@/sections/oss-highlights.tsx';
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -38,11 +39,8 @@ export default function Home() {
 
   return (
     <main className="relative flex flex-col min-h-[100dvh] overflow-hidden bg-gray-950 text-white">
-      {/* HERO */}
-      {/* HEADER */}
       <Header onClick={() => setExplorerOpen((v) => !v)} />
 
-      {/* Desktop draggable Explorer */}
       <DraggableExplorer
         open={explorerOpen}
         onClose={() => setExplorerOpen(false)}
@@ -80,11 +78,7 @@ export default function Home() {
           </div>
           <div className="mt-10 flex w-full max-w-5xl flex-col items-center gap-6">
             <div className="mx-auto">
-              <Globe
-                scaled
-                className="h-80 w-80 sm:h-96 sm:w-96"
-                config={GLOBE_CONFIG}
-              />
+              <Globe scaled className="h-120 w-[60vw]" config={GLOBE_CONFIG} />
             </div>
             <p className="mt-3 text-center text-sm text-white/70">
               Building digital experiences{' '}
@@ -273,35 +267,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CONTENT PILLS */}
-      <section id="content" className="bg-gray-950 text-white py-16">
-        <div className="mx-auto max-w-6xl px-6">
-          <h3 className="text-xl font-semibold">
-            High‑quality content for free
-          </h3>
-          <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
-            {[
-              'React patterns',
-              'Serverless tricks',
-              'DX tooling',
-              'Performance',
-              'Testing',
-              'Career',
-            ].map((t) => (
-              <div
-                key={t}
-                className="rounded-2xl bg-gradient-to-br from-white/5 to-white/10 p-6 ring-1 ring-white/10"
-              >
-                <div className="text-2xl">🟣</div>
-                <div className="mt-2 font-medium">{t}</div>
-                <p className="text-sm text-white/70">
-                  Short, practical posts with code you can reuse.
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
+      <OssHighlights />
 
       {/* FINAL CTA */}
       <section id="ready" className="bg-gray-950 text-white py-16">

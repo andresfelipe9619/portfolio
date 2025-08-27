@@ -2,7 +2,6 @@
 
 import { Terminal, TypingAnimation } from '@/components/magicui/terminal';
 import type { MouseEventHandler } from 'react';
-import { InteractiveGridPattern } from '@/components/magicui/interactive-grid-pattern.tsx';
 import BlurFade from '@/components/magicui/blur-fade.tsx';
 import { ShimmerButton } from '@/components/magicui/shimmer-button.tsx';
 
@@ -43,12 +42,12 @@ const LoadingScreen = ({
 
   return (
     <div className="fixed inset-0 z-50 grid place-items-center bg-black">
-      <InteractiveGridPattern
-        width={20}
-        height={20}
-        squares={[80, 80]}
-        squaresClassName="hover:fill-green-500"
-      />
+      {/*<InteractiveGridPattern*/}
+      {/*  width={20}*/}
+      {/*  height={20}*/}
+      {/*  squares={[80, 80]}*/}
+      {/*  squaresClassName="hover:fill-green-500"*/}
+      {/*/>*/}
 
       <BlurFade duration={0.2} blur={'0px'} yOffset={0} inView>
         <div className="relative z-10 w-[60vw] h-[60vh]">
@@ -86,7 +85,7 @@ const LoadingScreen = ({
         {/* Footer with the skip action */}
         <div className="flex items-center justify-between border-t border-white/10 px-4 py-2 ">
           <ShimmerButton className="text-sm text-white" onClick={onSkip}>
-            	🤖 I’m not here for logs, show me the code →
+            🤖 I’m not here for logs, show me the code →
           </ShimmerButton>
         </div>
       </BlurFade>
