@@ -3,15 +3,6 @@ import { Icons } from '@/components/icons.tsx';
 import openSource from '@/data/open-source.ts';
 import work from '@/data/work.ts';
 
-// types for SEO/cards
-export type HighContentItem = {
-  title: string;
-  href: string;
-  subtitle: string; // short description
-  badges: string[];
-  year: string;
-  active: boolean;
-};
 
 export const DATA = {
   name: 'Andrés Suárez',
@@ -124,15 +115,3 @@ export const DATA = {
   ],
 } as const;
 
-// derive from DATA.openSource
-//eslint-disable-next-line
-export const OPEN_SOURCE_HIGHLIGHTS: HighContentItem[] = DATA.openSource.map(
-  (p) => ({
-    title: p.title,
-    href: p.href,
-    subtitle: p.description,
-    badges: [...p.badges],
-    year: p.dates,
-    active: p.active,
-  }),
-);

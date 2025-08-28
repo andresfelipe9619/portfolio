@@ -3,7 +3,7 @@ import * as React from 'react';
 import { GitBranch } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
 
-import { OPEN_SOURCE_HIGHLIGHTS } from '@/data/resume';
+import { OPEN_SOURCE_HIGHLIGHTS } from '@/data/open-source';
 import { OssCard } from '@/components/oss-card';
 
 import { DotPattern } from '@/components/magicui/dot-pattern';

@@ -1,4 +1,4 @@
-import { OPEN_SOURCE_HIGHLIGHTS } from '@/data/resume';
+import { OPEN_SOURCE_HIGHLIGHTS } from '@/data/open-source';
 import { OssCard } from '@/components/oss-card';
 
 export function OssHighlights() {

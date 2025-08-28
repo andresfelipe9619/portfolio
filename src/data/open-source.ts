@@ -1,3 +1,13 @@
+// types for SEO/cards
+export type HighContentItem = {
+  title: string;
+  href: string;
+  subtitle: string; // short description
+  badges: string[];
+  year: string;
+  active: boolean;
+};
+
 const openSource = [
   {
     title: 'Car Booking App (React Native)',
@@ -66,5 +76,16 @@ const openSource = [
     badges: ['Open Source', 'Portfolio', 'Frontend'],
   },
 ];
+
+export const OPEN_SOURCE_HIGHLIGHTS: HighContentItem[] = openSource.map(
+  (p) => ({
+    title: p.title,
+    href: p.href,
+    subtitle: p.description,
+    badges: [...p.badges],
+    year: p.dates,
+    active: p.active,
+  }),
+);
 
 export default openSource;
