@@ -28,6 +28,7 @@
     "motion": "^12.23.12",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-ga4": "^2.1.0",
     "react-markdown": "^10.1.0",
     "react-router-dom": "^6.23.1",
     "remark-gfm": "^4.0.1",
