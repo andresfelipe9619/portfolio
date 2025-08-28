@@ -1,7 +1,7 @@
 // src/pages/OpenSource.tsx
 import * as React from 'react';
 import { GitBranch } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 
 import { OPEN_SOURCE_HIGHLIGHTS } from '@/data/resume';
 import { OssCard } from '@/components/oss-card';
@@ -62,7 +62,7 @@ const SECTIONS: Section[] = [
 // -------------------------------
 // Helpers de animación
 // -------------------------------
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
@@ -70,9 +70,20 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+// item: usa cubic-bezier (o literal 'easeOut' as const)
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 14 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.28, ease: 'easeOut' } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.28,
+      // Opción 1 (recomendada): cubic-bezier suave
+      ease: [0.16, 1, 0.3, 1], // <- compatible con tipos
+      // Opción 2: literal
+      // ease: 'easeOut' as const,
+    },
+  },
 };
 
 // -------------------------------
@@ -156,13 +167,13 @@ export default function OpenSourcePage() {
               ))}
 
               {/* Si quieres asegurar 6 tarjetas exactas, puedes mostrar placeholders elegantes: */}
-              {/* {Array.from({ length: Math.max(0, 6 - items.length) }).map((_, i) => (
-                <motion.div key={`ghost-${groupIdx}-${i}`} variants={itemVariants}>
+              {Array.from({ length: Math.max(0, 6 - items.length) }).map((_, i) => (
+                <motion.div key={`ghost-${i}-${i}`} variants={itemVariants}>
                   <div className="h-full rounded-2xl border border-dashed border-white/10 p-5 text-sm text-muted-foreground">
                     Coming soon — a new experiment is brewing…
                   </div>
                 </motion.div>
-              ))} */}
+              ))}
             </motion.div>
           </section>
         ))}
