@@ -43,9 +43,7 @@ const SECTIONS: Section[] = [
       'Full-fledged products and polished apps — from mobile booking flows to media tools built for real-world use.',
     belongs: (badges) =>
       badges.some((b) =>
-        ['Maps', 'Audio', 'Media', 'Streaming', 'Portfolio'].includes(
-          b,
-        ),
+        ['Maps', 'Audio', 'Media', 'Streaming', 'Portfolio'].includes(b),
       ),
   },
   {
@@ -64,6 +62,7 @@ const SECTIONS: Section[] = [
     belongs: () => true,
   },
 ];
+
 export default function OpenSourcePage() {
   const groups = React.useMemo(() => {
     const remaining = [...OPEN_SOURCE_HIGHLIGHTS];

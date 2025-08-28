@@ -1,5 +1,7 @@
 import { GitBranch, HomeIcon } from 'lucide-react';
 import { Icons } from '@/components/icons.tsx';
+import openSource from '@/data/open-source.ts';
+import work from '@/data/work.ts';
 
 // types for SEO/cards
 export type HighContentItem = {
@@ -66,62 +68,7 @@ export const DATA = {
     },
   },
 
-  work: [
-    {
-      company: 'Benekiva',
-      href: 'https://benekiva.com',
-      badges: [
-        'Node.js',
-        'TypeScript',
-        'GraphQL',
-        'PostgreSQL',
-        'MongoDB',
-        'AWS',
-        'Docker',
-        'CI/CD',
-      ],
-      location: 'Remote (US)',
-      title: 'Senior Software Engineer',
-      logoUrl: '/benekiva.png',
-      start: '2021',
-      end: '2025',
-      description:
-        'Led backend engineering and AWS infrastructure for an insurance claims automation SaaS. Delivered secure APIs with Node.js/GraphQL, optimized SQL & NoSQL performance, and built fraud detection services. Implemented CI/CD pipelines, observability, and mentoring of junior devs. Reduced system latency and scaled workloads across multiple regions.',
-    },
-    {
-      company: 'Freelance / Independent',
-      href: 'https://andressuarez.dev',
-      badges: [
-        'Strapi',
-        'AWS',
-        'Node.js',
-        'Next.js',
-        'n8n',
-        'Make',
-        'Dapta',
-        'PostgreSQL',
-      ],
-      location: 'Remote',
-      title: 'Full Stack Engineer & Cloud Consultant',
-      logoUrl: '/freelance.png',
-      start: '2025',
-      end: 'Present',
-      description:
-        'Partnering with startups and agencies to ship production-ready SaaS products and automation systems. Delivered Strapi + AWS architectures, WhatsApp commerce apps, and large-scale web scraping SaaS with token-based billing. Specialized in MVP → production lifecycles: API design, cloud infra, migrations, and performance tuning.',
-    },
-    {
-      company: 'Vibe Coding',
-      href: '#',
-      badges: ['Node.js', 'Python', 'AWS', 'Automation', 'MVP Development'],
-      location: 'Cali, Colombia',
-      title: 'Technical Lead',
-      logoUrl: '/vibe.png',
-      start: '2020',
-      end: '2021',
-      description:
-        'Directed technical development for edtech products. Built Node.js/Python services, cloud infra on AWS, and automation pipelines. Designed MVPs to support scale, aligned with stakeholders to deliver resilient, growth-ready systems.',
-    },
-  ],
+  work: work,
 
   education: [
     {
@@ -141,74 +88,7 @@ export const DATA = {
       end: 'Present',
     },
   ],
-  openSource: [
-    {
-      title: 'Car Booking App (React Native)',
-      href: 'https://github.com/andresfelipe9619/car-booking-app',
-      dates: '2018-11',
-      active: true,
-      description:
-        'Uber-like booking flows with maps, routing, and clean state. A battle-tested example of mobile product thinking—logic first, pixels second.',
-      technologies: [
-        'React Native',
-        'React Native Maps',
-        'Google Places',
-        'JavaScript',
-        'iOS/Android',
-      ],
-      badges: ['Most-starred (46★)', 'Mobile', 'Maps', 'Routing'],
-    },
-    {
-      title: 'AudioBaked (CLI)',
-      href: 'https://github.com/andresfelipe9619/AudioBaked',
-      dates: '2025-08',
-      active: true,
-      description:
-        'Transcribe, diarize, subtitle, and summarize audio/video from the command line. WhisperX accuracy + GPT analysis for notes, action items, and budgets.',
-      technologies: ['Python', 'WhisperX', 'ffmpeg', 'OpenAI API'],
-      badges: ['AI/ML', 'Transcription', 'CLI', 'Audio'],
-    },
-    {
-      title: 'Prophet Playground',
-      href: 'https://github.com/andresfelipe9619/prophet-playground',
-      dates: '2024',
-      active: true,
-      description:
-        'Forecasting sandbox with Prophet/ARIMA/XGBoost. Includes cross-validation, metrics (MAE/RMSE), and plotting for quick model selection.',
-      technologies: ['Python', 'Prophet', 'ARIMA', 'XGBoost', 'Matplotlib'],
-      badges: ['Data', 'Forecasting', 'Analytics'],
-    },
-    {
-      title: 'SES Bounce Dynamo',
-      href: 'https://github.com/andresfelipe9619/ses-bounce-dynamo',
-      dates: '2022-06',
-      active: true,
-      description:
-        'AWS Lambda microservice to capture SES bounces/complaints and store structured events in DynamoDB for audit and deliverability ops.',
-      technologies: ['Node.js', 'AWS Lambda', 'AWS SES', 'DynamoDB'],
-      badges: ['Serverless', 'Email', 'DevOps'],
-    },
-    {
-      title: 'Java Battleship',
-      href: 'https://github.com/andresfelipe9619/Java-Battleship',
-      dates: '2017-11',
-      active: false,
-      description:
-        'Classic Battleship built with pure Java + MySQL. A throwback that still demonstrates fundamentals in state, I/O, and simple UIs.',
-      technologies: ['Java', 'MySQL'],
-      badges: ['Classic', 'Game'],
-    },
-    {
-      title: 'Personal Portfolio (Open Source)',
-      href: 'https://github.com/andresfelipe9619/portfolio',
-      dates: '2025-08',
-      active: true,
-      description:
-        'Developer-first portfolio using Vite + React with Magic UI/shadcn. Minimal, fast, and extensible for senior-grade presentation.',
-      technologies: ['React', 'Vite', 'TypeScript', 'Tailwind', 'Vercel'],
-      badges: ['Open Source', 'Portfolio', 'Frontend'],
-    },
-  ],
+  openSource: openSource,
 
   projects: [
     {
