@@ -143,40 +143,70 @@ export const DATA = {
   ],
   openSource: [
     {
-      title: 'Uber-like Open Source App',
-      href: '#',
-      dates: '2025',
+      title: 'Car Booking App (React Native)',
+      href: 'https://github.com/andresfelipe9619/car-booking-app',
+      dates: '2018-11',
       active: true,
       description:
-        'An open-source ride-hailing platform inspired by Uber. Implemented geolocation-based ride matching, real-time driver tracking with WebSockets, and scalable backend APIs. Designed for extensibility and community contribution.',
+        'Uber-like booking flows with maps, routing, and clean state. A battle-tested example of mobile product thinking—logic first, pixels second.',
       technologies: [
-        'Node.js',
         'React Native',
-        'PostgreSQL',
-        'WebSockets',
-        'AWS',
+        'React Native Maps',
+        'Google Places',
+        'JavaScript',
+        'iOS/Android',
       ],
-      badges: ['Open Source', 'Node.js', 'React Native', 'Real-time'],
+      badges: ['Most-starred (46★)', 'Mobile', 'Maps', 'Routing'],
     },
     {
-      title: 'Audiobaked (Open Source)',
-      href: '#',
-      dates: '2025',
+      title: 'AudioBaked (CLI)',
+      href: 'https://github.com/andresfelipe9619/AudioBaked',
+      dates: '2025-08',
       active: true,
       description:
-        'Open-source audio processing and streaming platform. Features include baked-in audio effects, podcast hosting, and API integrations for distribution. Built for scalability and developer extensibility.',
-      technologies: ['Node.js', 'Go', 'FFmpeg', 'AWS S3', 'PostgreSQL'],
-      badges: ['Open Source', 'Node.js', 'Go', 'Audio'],
+        'Transcribe, diarize, subtitle, and summarize audio/video from the command line. WhisperX accuracy + GPT analysis for notes, action items, and budgets.',
+      technologies: ['Python', 'WhisperX', 'ffmpeg', 'OpenAI API'],
+      badges: ['AI/ML', 'Transcription', 'CLI', 'Audio'],
+    },
+    {
+      title: 'Prophet Playground',
+      href: 'https://github.com/andresfelipe9619/prophet-playground',
+      dates: '2024',
+      active: true,
+      description:
+        'Forecasting sandbox with Prophet/ARIMA/XGBoost. Includes cross-validation, metrics (MAE/RMSE), and plotting for quick model selection.',
+      technologies: ['Python', 'Prophet', 'ARIMA', 'XGBoost', 'Matplotlib'],
+      badges: ['Data', 'Forecasting', 'Analytics'],
+    },
+    {
+      title: 'SES Bounce Dynamo',
+      href: 'https://github.com/andresfelipe9619/ses-bounce-dynamo',
+      dates: '2022-06',
+      active: true,
+      description:
+        'AWS Lambda microservice to capture SES bounces/complaints and store structured events in DynamoDB for audit and deliverability ops.',
+      technologies: ['Node.js', 'AWS Lambda', 'AWS SES', 'DynamoDB'],
+      badges: ['Serverless', 'Email', 'DevOps'],
+    },
+    {
+      title: 'Java Battleship',
+      href: 'https://github.com/andresfelipe9619/Java-Battleship',
+      dates: '2017-11',
+      active: false,
+      description:
+        'Classic Battleship built with pure Java + MySQL. A throwback that still demonstrates fundamentals in state, I/O, and simple UIs.',
+      technologies: ['Java', 'MySQL'],
+      badges: ['Classic', 'Game'],
     },
     {
       title: 'Personal Portfolio (Open Source)',
-      href: 'https://andressuarez.dev',
-      dates: '2025',
+      href: 'https://github.com/andresfelipe9619/portfolio',
+      dates: '2025-08',
       active: true,
       description:
-        'Minimalistic, developer-first portfolio using Magic UI, shadcn, and animations. Open-sourced to help devs showcase their work with a hacker-themed aesthetic.',
-      technologies: ['Next.js', 'TailwindCSS', 'Magic UI', 'Vercel'],
-      badges: ['Open Source', 'Portfolio', 'Next.js'],
+        'Developer-first portfolio using Vite + React with Magic UI/shadcn. Minimal, fast, and extensible for senior-grade presentation.',
+      technologies: ['React', 'Vite', 'TypeScript', 'Tailwind', 'Vercel'],
+      badges: ['Open Source', 'Portfolio', 'Frontend'],
     },
   ],
 
@@ -216,11 +246,13 @@ export const DATA = {
 
 // derive from DATA.openSource
 //eslint-disable-next-line
-export const OPEN_SOURCE_HIGHLIGHTS: HighContentItem[] = DATA.openSource.map((p) => ({
-  title: p.title,
-  href: p.href,
-  subtitle: p.description,
-  badges: [...p.badges],
-  year: p.dates,
-  active: p.active,
-}));
+export const OPEN_SOURCE_HIGHLIGHTS: HighContentItem[] = DATA.openSource.map(
+  (p) => ({
+    title: p.title,
+    href: p.href,
+    subtitle: p.description,
+    badges: [...p.badges],
+    year: p.dates,
+    active: p.active,
+  }),
+);
