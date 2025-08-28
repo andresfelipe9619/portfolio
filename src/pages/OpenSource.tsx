@@ -131,7 +131,17 @@ export default function OpenSourcePage() {
             >
               {items.map((item) => (
                 <motion.div key={item.title} variants={itemVariants}>
-                  <OssCard {...item} />
+                  <OssCard
+                    {...item}
+                    enableModal
+                    details={{
+                      longDescription:
+                        'Deep dive into architecture, modules, and how to run locally. Supports plug-ins and community presets.',
+                      repoUrl: 'https://github.com/andresfelipe9619/your-repo',
+                      topics: ['Architecture', 'CLI', 'DX', 'Testing'],
+                      coverUrl: '/images/oss/your-cover.jpg',
+                    }}
+                  />
                 </motion.div>
               ))}
             </motion.div>
