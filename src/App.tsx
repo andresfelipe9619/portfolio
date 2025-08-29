@@ -6,9 +6,15 @@ import Home from './pages/Home';
 import { useEffect, useState } from 'react';
 import LoadingScreen from '@/components/loading-screen';
 import OpenSourcePage from '@/pages/OpenSource';
+import { Header } from '@/components/ui/navbar/header.tsx';
+import { DraggableExplorer } from '@/components/ui/navbar/draggable-explorer.tsx';
+import { useKeyListener } from '@/hooks/useKeyListener.tsx';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [explorerOpen, setExplorerOpen] = useState(false);
+
+  useKeyListener(setExplorerOpen);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -25,6 +31,11 @@ export default function App() {
             <LoadingScreen onSkip={() => setIsLoading(false)} />
           ) : (
             <>
+              <Header onClick={() => setExplorerOpen((v) => !v)} />
+              <DraggableExplorer
+                open={explorerOpen}
+                onClose={() => setExplorerOpen(false)}
+              />
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/open-source" element={<OpenSourcePage />} />

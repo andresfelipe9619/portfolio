@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import BlurFadeText from '@/components/magicui/blur-fade-text';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -14,14 +13,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { Header } from '@/components/ui/navbar/header';
 import { ArrowUpRight, Quote as QuoteIcon } from 'lucide-react';
 import { Globe } from '@/components/magicui/globe';
 import { Terminal } from '@/components/magicui/terminal';
-import { DraggableExplorer } from '@/components/ui/navbar/draggable-explorer';
 import { GLOBE_CONFIG } from '@/components/constants';
 import { Footer } from '@/sections/footer.tsx';
-import { useKeyListener } from '@/hooks/useKeyListener.tsx';
+
 import {
   CTATitle,
   FAQ_ITEMS,
@@ -34,18 +31,8 @@ import { OssHighlights } from '@/sections/oss-highlights.tsx';
 const BLUR_FADE_DELAY = 0.04;
 
 export default function Home() {
-  const [explorerOpen, setExplorerOpen] = useState(false);
-  useKeyListener(setExplorerOpen);
-
   return (
     <main className="relative flex flex-col min-h-[100dvh] overflow-hidden bg-gray-950 text-white">
-      <Header onClick={() => setExplorerOpen((v) => !v)} />
-
-      <DraggableExplorer
-        open={explorerOpen}
-        onClose={() => setExplorerOpen(false)}
-      />
-
       <section id="hero" className="relative overflow-hidden py-24">
         <div className="absolute inset-0 -z-10">
           <GridBeams>
@@ -266,7 +253,6 @@ export default function Home() {
           </Accordion>
         </div>
       </section>
-
 
       <OssHighlights />
 
