@@ -3,7 +3,7 @@ import * as React from 'react';
 import { NeonGradientCard } from '@/components/magicui/neon-gradient-card';
 import { Badge } from '@/components/ui/badge';
 import { Github } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn, projectEmoji } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Dialog,
@@ -15,24 +15,7 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { useGitHubStats } from '@/hooks/github-stats.tsx';
-
-export type OssCardDetails = {
-  longDescription?: string;
-  topics?: string[];
-  repoUrl?: string; // GitHub link
-  coverUrl?: string; // optional image
-};
-
-export type OssCardProps = {
-  title: string;
-  href: string; // GitHub link
-  subtitle: string;
-  badges: ReadonlyArray<string>;
-  year: string;
-  active: boolean;
-  enableModal?: boolean;
-  details?: OssCardDetails;
-};
+import type { OssCardProps } from '@/data/open-source.ts';
 
 export function OssCard({
   title,
@@ -55,27 +38,34 @@ export function OssCard({
 
   return (
     <>
-      <a
+      <motion.a
         href={href}
         target="_blank"
         rel="noreferrer"
         className="group block h-full focus:outline-none"
         onClick={handleClick}
+        whileHover={{ scale: 1.01, y: -2 }}
+        transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
       >
         <NeonGradientCard
           className={cn(
-            'h-full rounded-2xl p-[1px] transition-transform duration-200 group-hover:-translate-y-0.5',
+            'relative h-full rounded-2xl p-[1px]',
             'group-hover:opacity-100 opacity-60 transition',
           )}
           borderClassName="rounded-2xl"
           glowClassName="rounded-2xl opacity-80"
         >
-          <div className="h-full rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent p-5">
+          <div className="relative h-full rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent p-5">
+            {/* Hover CTA (esquina inferior derecha) */}
+            <span className="pointer-events-none absolute bottom-3 right-4 translate-y-1 text-xs opacity-0 transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
+              View →
+            </span>
+
             <div className="mb-2 flex items-center justify-between text-xs opacity-70">
               <span>{year}</span>
 
-              {/* GitHub stats (no arrow icon) */}
-              <div className="flex items-center gap-2 rounded-full border border-white/10 px-2 py-0.5">
+              {/* GitHub stats pill más contrastado */}
+              <div className="flex items-center gap-2 rounded-full border border-white/10 bg-black/60 px-2 py-0.5 backdrop-blur-sm">
                 <Github className="h-3.5 w-3.5 opacity-80" />
                 <span className="tabular-nums">★ {stats?.stars ?? '—'}</span>
                 <span className="opacity-60">·</span>
@@ -83,7 +73,11 @@ export function OssCard({
               </div>
             </div>
 
-            <h3 className="mb-2 text-lg font-medium">{title}</h3>
+            <h3 className="mb-2 flex items-center gap-2 text-lg font-medium">
+              <span className="text-base">{projectEmoji(title)}</span>
+              {title}
+            </h3>
+
             <p className="mb-4 line-clamp-3 text-sm opacity-80">{subtitle}</p>
 
             <div className="flex flex-wrap gap-2">
@@ -95,9 +89,9 @@ export function OssCard({
             </div>
           </div>
         </NeonGradientCard>
-      </a>
+      </motion.a>
 
-      {/* Modal (zoom-in) — professional + crazy dev touch */}
+      {/* Modal (zoom-in) — pro + dev-crazy */}
       <Dialog open={open} onOpenChange={setOpen}>
         <AnimatePresence>
           {open && (
@@ -123,7 +117,7 @@ export function OssCard({
                     <span className="inline-flex h-2.5 w-2.5 rounded-full bg-yellow-500/70" />
                     <span className="inline-flex h-2.5 w-2.5 rounded-full bg-green-500/70" />
                     <span className="ml-2 opacity-70">
-                      ~/oss/{title.toLowerCase().replace(/\\s+/g, '-')}
+                      ~/oss/{title.toLowerCase().replace(/\s+/g, '-')}
                     </span>
                   </div>
 
@@ -141,7 +135,9 @@ export function OssCard({
 
                   <div className="space-y-4 p-6">
                     <DialogHeader>
-                      <DialogTitle className="text-xl">{title}</DialogTitle>
+                      <DialogTitle className="text-xl">
+                        {projectEmoji(title)} {title}
+                      </DialogTitle>
                       <DialogDescription className="flex flex-wrap items-center gap-2 text-xs">
                         <span className="rounded border border-white/10 px-2 py-0.5 text-[11px]">
                           {year}
@@ -154,7 +150,7 @@ export function OssCard({
                             {b}
                           </span>
                         ))}
-                        <span className="ml-auto inline-flex items-center gap-2 rounded-full border border-white/10 px-2 py-0.5">
+                        <span className="ml-auto inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/60 px-2 py-0.5 backdrop-blur-sm">
                           <Github className="h-3.5 w-3.5 opacity-80" />
                           <span className="tabular-nums">
                             ★ {stats?.stars ?? '—'}
@@ -170,7 +166,7 @@ export function OssCard({
                     <div className="space-y-3 text-sm leading-relaxed text-foreground/90">
                       <p className="opacity-90">{details?.longDescription}</p>
 
-                      {/* dev-crazy touch: quickstart block */}
+                      {/* quickstart */}
                       <div className="rounded-md border border-white/10 bg-black/40 p-3 font-mono text-[12.5px] leading-6">
                         <div className="mb-1 opacity-70"># quickstart</div>
                         <pre className="whitespace-pre-wrap">

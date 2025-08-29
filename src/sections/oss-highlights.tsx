@@ -1,8 +1,8 @@
-import { OPEN_SOURCE_HIGHLIGHTS } from '@/data/open-source';
+import openSource from '@/data/open-source';
 import { OssCard } from '@/components/oss-card';
 
 export function OssHighlights() {
-  const featured = OPEN_SOURCE_HIGHLIGHTS.slice(0, 3);
+  const featured = openSource.slice(0, 3);
   return (
     <section className="relative mx-auto mt-10 max-w-6xl px-6 py-8">
       <div className="relative z-10 mb-6 flex items-baseline justify-between">
