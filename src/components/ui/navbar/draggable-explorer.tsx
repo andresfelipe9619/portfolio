@@ -66,7 +66,10 @@ export function DraggableExplorer({
         onMouseDown={() => (dragging.current = true)}
       >
         <div className="flex items-center gap-1">
-          <span className="size-2 rounded-full bg-red-500/80" />
+          <span
+            onClick={onClose}
+            className="size-2 rounded-full bg-red-500/80 cursor-pointer"
+          />
           <span className="size-2 rounded-full bg-yellow-500/80" />
           <span className="size-2 rounded-full bg-green-500/80" />
         </div>
