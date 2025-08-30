@@ -38,7 +38,7 @@ export default function App() {
               />
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/open-source" element={<OpenSourcePage />} />
+                <Route path="/oss" element={<OpenSourcePage />} />
               </Routes>
             </>
           )}

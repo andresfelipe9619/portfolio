@@ -32,7 +32,7 @@ export const DATA = {
   ],
   navbar: [
     { href: '/', icon: HomeIcon, label: 'Home' },
-    { href: '/open-source', icon: GitBranch, label: 'Open Source' },
+    { href: '/oss', icon: GitBranch, label: 'Open Source' },
   ],
   contact: {
     email: 'andresfelipe9619@gmail.com',

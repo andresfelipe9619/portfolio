@@ -11,7 +11,6 @@ import { cn } from '@/lib/utils';
 
 // Anim variants
 
-
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 14 },
   show: {
@@ -27,58 +26,39 @@ type Section = {
   title: string;
   description: string;
   color: string; // tailwind gradient start for subtle aura per section
-  belongs: (badges: ReadonlyArray<string>) => boolean;
 };
 
 const SECTIONS: Section[] = [
   {
     key: 'products',
     title: 'Products & Experiments',
-    description: 'Mobile & media tools I actually used in production.',
+    description:
+      'A collection of production-ready tools and experiments, focusing on mobile and media applications.',
     color: 'from-fuchsia-500/25',
-    belongs: (badges) =>
-      badges.some((b) =>
-        ['Maps', 'Audio', 'Media', 'Streaming', 'Portfolio'].includes(b),
-      ),
   },
   {
     key: 'cloud',
     title: 'Cloud & DevOps Toys',
-    description: 'Infra bits I glued together at 3AM — and decided to share.',
+    description:
+      "A showcase of serverless functions, infrastructure as code, and other DevOps utilities I've built and open-sourced.",
     color: 'from-cyan-400/25',
-    belongs: (badges) =>
-      badges.some((b) => ['AWS', 'Serverless', 'Email', 'DevOps'].includes(b)),
   },
   {
     key: 'playground',
     title: 'Playground & Classics',
-    description: 'Open exploration — from forecasting labs to old-school Java.',
+    description:
+      'A space for exploration, featuring data science experiments, and modern implementations of classic software.',
     color: 'from-violet-400/25',
-    belongs: () => true,
   },
 ];
 
 export default function OpenSourcePage() {
   // Agrupamos por secciones (sin cambiar tamaños)
   const groups = React.useMemo(() => {
-    const remaining = [...openSource];
-    const pick = (predicate: (badges: ReadonlyArray<string>) => boolean) => {
-      const bucket: typeof openSource = [];
-      for (let i = remaining.length - 1; i >= 0; i--) {
-        const item = remaining[i];
-        if (predicate(item.badges)) {
-          bucket.push(item);
-          remaining.splice(i, 1);
-        }
-      }
-      return bucket.reverse();
-    };
-
-    const result = SECTIONS.map((s, idx) => {
-      const items =
-        idx === SECTIONS.length - 1 ? [...remaining] : pick(s.belongs);
-      return { section: s, items };
-    }).filter((g) => g.items.length > 0);
+    const result = SECTIONS.map((section) => ({
+      section,
+      items: openSource.filter((item) => item.section === section.key),
+    })).filter((g) => g.items.length > 0);
 
     return result;
   }, []);
@@ -89,7 +69,7 @@ export default function OpenSourcePage() {
       <DotPattern
         glow
         className={cn(
-          'pointer-events-none absolute inset-0 opacity-[0.4]',
+          'pointer-events-none absolute inset-0 opacity-[0.5]',
           '[mask-image:radial-gradient(50vw_circle_at_center,white,transparent)]',
         )}
       />
@@ -98,17 +78,18 @@ export default function OpenSourcePage() {
       <header className="relative z-10 mb-12 space-y-3 text-center">
         <div className="mx-auto flex w-fit items-center justify-center gap-2 rounded-full border border-white/10 px-3 py-1 text-xs opacity-80">
           <GitBranch className="h-3.5 w-3.5" />
-          <span>Open Source</span>
+          <span>OSS</span>
         </div>
 
-        <h1 className="text-3xl font-bold tracking-tight">
-          Open source as a superpower.
+        <h1 className="text-3xl font-bold tracking-tight font-dev">
+          Open Source as My Supernova.
         </h1>
 
         <p className="mx-auto max-w-2xl text-muted-foreground">
-          I ship code the way I build systems: opinionated, tested in real
-          projects, and open for anyone to fork. These are not demos — they’re
-          living tools.
+          I don’t just ship code — I unleash systems. Brutal, battle-tested, and
+          unapologetically opinionated. Fork it, break it, remix it. These
+          aren’t playground demos. They’re living, breathing weapons for
+          builders who dare.
         </p>
       </header>
 
@@ -126,10 +107,8 @@ export default function OpenSourcePage() {
                 )}
               />
               <div className="relative space-y-1">
-                <h2 className="text-xl font-semibold">{section.title}</h2>
-                <p className="max-w-3xl text-sm text-muted-foreground">
-                  {section.description}
-                </p>
+                <h2 className="text-xl font-bold font-dev">{section.title}</h2>
+                <p className="max-w-3xl text-sm mb-4">{section.description}</p>
               </div>
             </div>
 
