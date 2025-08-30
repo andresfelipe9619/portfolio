@@ -4,9 +4,9 @@ import { LinkIcon } from 'lucide-react';
 
 export function MobileNavFileTree() {
   return (
-    <div className="relative flex h-[70vh] flex-col overflow-hidden rounded-lg border border-white/10">
+    <div className="relative flex h-full flex-col overflow-hidden">
       <Tree
-        className="overflow-auto rounded-md bg-background p-2 text-sm select-none"
+        className="overflow-auto p-2 text-sm select-none"
         initialSelectedId="pages"
         initialExpandedItems={['src', 'pages']}
         aria-label="Site sections explorer"

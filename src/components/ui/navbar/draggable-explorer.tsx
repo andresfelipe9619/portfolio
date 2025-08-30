@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { Button } from '@/components/ui/button.tsx';
 import { MobileNavFileTree } from '@/components/ui/navbar/mobilenav-file-tree.tsx';
+import { Breadcrumb } from './breadcrumb';
 
 export function DraggableExplorer({
   open,
@@ -62,7 +62,7 @@ export function DraggableExplorer({
     >
       {/* Titlebar */}
       <div
-        className="flex items-center gap-2 border-b border-white/10 px-2 py-1 cursor-move select-none"
+        className="flex items-center gap-2 border-b border-white/10 px-2 py-1 cursor-move select-none justify-between"
         onMouseDown={() => (dragging.current = true)}
       >
         <div className="flex items-center gap-1">
@@ -73,17 +73,7 @@ export function DraggableExplorer({
           <span className="size-2 rounded-full bg-yellow-500/80" />
           <span className="size-2 rounded-full bg-green-500/80" />
         </div>
-        <span className="ml-2 text-xs text-white/70">Explorer — src/app</span>
-        <div className="ml-auto">
-          <Button
-            size="sm"
-            variant="ghost"
-            className="h-6 px-2 text-white/80"
-            onClick={onClose}
-          >
-            Close
-          </Button>
-        </div>
+        <Breadcrumb />
       </div>
 
       {/* Content */}

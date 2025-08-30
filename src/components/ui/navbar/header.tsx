@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/sheet.tsx';
 import { Button } from '@/components/ui/button.tsx';
 import { MobileNavFileTree } from './mobilenav-file-tree';
+import { Breadcrumb } from './breadcrumb';
 
 export function Header(props: { onClick: () => void }) {
   return (
@@ -20,6 +21,7 @@ export function Header(props: { onClick: () => void }) {
           <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-blue-500 to-cyan-400" />
           <span className="text-sm font-semibold">{DATA.initials}</span>
         </Link>
+        <Breadcrumb />
         {/* Desktop dock nav */}
         <div className="hidden md:block">
           <Dock>
