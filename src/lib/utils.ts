@@ -13,6 +13,6 @@ export function projectEmoji(title: string) {
   if (t.includes('ses') || t.includes('lambda') || t.includes('aws'))
     return '☁️';
   if (t.includes('battleship') || t.includes('java')) return '🚢';
-  if (t.includes('portfolio')) return '🧰';
+  if (t.includes('portfolio')) return '👨‍💻';
   return '🧩';
 }

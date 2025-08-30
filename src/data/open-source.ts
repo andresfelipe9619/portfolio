@@ -2,7 +2,6 @@
 export type OssCardDetails = {
   longDescription?: string;
   topics?: string[];
-  repoUrl?: string; // GitHub link
   coverUrl?: string; // optional image
 };
 
@@ -19,18 +18,18 @@ export type OssCardProps = {
 
 export type OpenSourceProject = {
   title: string;
-  href: string; // GitHub URL
-  subtitle: string; // <- antes shortDesc
+  href: string;
+  subtitle: string;
   badges: string[];
-  year: string; // <- antes date
+  year: string;
   active: boolean;
-  enableModal?: boolean; // puedes setear true aquí si quieres
-  details?: OssCardDetails; // <- antes longDesc/technologies/etc
+  enableModal?: boolean;
+  details?: OssCardDetails;
 };
 
 const openSource: OpenSourceProject[] = [
   {
-    title: 'Car Booking App (React Native)',
+    title: 'Car Booking App',
     href: 'https://github.com/andresfelipe9619/car-booking-app',
     year: '2018-11',
     active: true,
@@ -46,7 +45,6 @@ const openSource: OpenSourceProject[] = [
         'JavaScript',
         'iOS/Android',
       ],
-      repoUrl: 'https://github.com/andresfelipe9619/car-booking-app',
       // coverUrl: '/images/oss/car-booking.jpg',
     },
   },
@@ -61,7 +59,6 @@ const openSource: OpenSourceProject[] = [
       longDescription:
         'A battle-tested command-line tool for media processing: accurate transcription (WhisperX), speaker diarization, subtitle tracks (SRT/VTT), and automated summaries for notes/action items/budgets. Designed for repeatability and large batches: deterministic flags, resumable runs, and clear logs. Extensible pipeline with FFmpeg preprocessing and optional GPT analysis.',
       topics: ['Python', 'WhisperX', 'ffmpeg', 'OpenAI API'],
-      repoUrl: 'https://github.com/andresfelipe9619/AudioBaked',
       // coverUrl: '/images/oss/audiobaked.jpg',
     },
   },
@@ -76,7 +73,6 @@ const openSource: OpenSourceProject[] = [
       longDescription:
         'Hands-on forecasting lab: load series, compare Prophet/ARIMA/XGBoost, and inspect error metrics (MAE/RMSE). Includes simple cross-validation, quick plots, and baseline heuristics to avoid overfitting. Great for selecting a pragmatic model that balances signal vs. complexity before productionizing.',
       topics: ['Python', 'Prophet', 'ARIMA', 'XGBoost', 'Matplotlib'],
-      repoUrl: 'https://github.com/andresfelipe9619/prophet-playground',
       // coverUrl: '/images/oss/prophet.jpg',
     },
   },
@@ -91,7 +87,6 @@ const openSource: OpenSourceProject[] = [
       longDescription:
         'Serverless microservice for email deliverability ops: consumes SES notifications (bounces/complaints), validates payloads, and persists normalized events in DynamoDB for audit and dashboards. Includes IAM-scoped resources, idempotency guards, and retry/backoff. Ideal for compliance and data pipelines around sender reputation.',
       topics: ['Node.js', 'AWS Lambda', 'AWS SES', 'DynamoDB'],
-      repoUrl: 'https://github.com/andresfelipe9619/ses-bounce-dynamo',
       // coverUrl: '/images/oss/ses-dynamo.jpg',
     },
   },
@@ -106,12 +101,11 @@ const openSource: OpenSourceProject[] = [
       longDescription:
         'A throwback project that still demonstrates fundamentals: state management, simple I/O, and persistence with MySQL. Useful for teaching deterministic game rules, grid modeling, and basic MVC organization without frameworks.',
       topics: ['Java', 'MySQL'],
-      repoUrl: 'https://github.com/andresfelipe9619/Java-Battleship',
       // coverUrl: '/images/oss/battleship.jpg',
     },
   },
   {
-    title: 'Personal Portfolio (Open Source)',
+    title: 'Personal Portfolio',
     href: 'https://github.com/andresfelipe9619/portfolio',
     year: '2025-08',
     active: true,
@@ -121,7 +115,6 @@ const openSource: OpenSourceProject[] = [
       longDescription:
         'Minimal, fast, and elegant portfolio focused on DX and performance. Uses Vite + React, Tailwind, Magic UI (neon/aurora/grid patterns) y shadcn UI. Clean routing, componentized sections, and sensible content data modeling—meant to be forked and personalized by senior devs.',
       topics: ['React', 'Vite', 'TypeScript', 'Tailwind', 'Vercel'],
-      repoUrl: 'https://github.com/andresfelipe9619/portfolio',
       // coverUrl: '/images/oss/portfolio.jpg',
     },
   },

@@ -1,7 +1,7 @@
 // src/pages/OpenSource.tsx
 import * as React from 'react';
 import { GitBranch } from 'lucide-react';
-import { motion, type Variants } from 'framer-motion';
+import { type Variants } from 'framer-motion';
 
 import openSource from '@/data/open-source';
 import { OssCard } from '@/components/oss-card';
@@ -10,13 +10,7 @@ import { DotPattern } from '@/components/magicui/dot-pattern';
 import { cn } from '@/lib/utils';
 
 // Anim variants
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.04 },
-  },
-};
+
 
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 14 },
@@ -95,7 +89,7 @@ export default function OpenSourcePage() {
       <DotPattern
         glow
         className={cn(
-          'pointer-events-none absolute inset-0 opacity-[0.05]',
+          'pointer-events-none absolute inset-0 opacity-[0.4]',
           '[mask-image:radial-gradient(50vw_circle_at_center,white,transparent)]',
         )}
       />
@@ -139,27 +133,22 @@ export default function OpenSourcePage() {
               </div>
             </div>
 
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              animate="show"
-              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-            >
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {items.map((p) => (
-                <motion.div key={p.title} variants={itemVariants}>
-                  <OssCard
-                    title={p.title}
-                    href={p.href}
-                    subtitle={p.subtitle}
-                    badges={p.badges}
-                    year={p.year}
-                    active={p.active}
-                    enableModal
-                    details={p.details}
-                  />
-                </motion.div>
+                <OssCard
+                  key={p.title}
+                  title={p.title}
+                  href={p.href}
+                  subtitle={p.subtitle}
+                  badges={p.badges}
+                  year={p.year}
+                  active={p.active}
+                  enableModal
+                  details={p.details}
+                  variants={itemVariants}
+                />
               ))}
-            </motion.div>
+            </div>
           </section>
         ))}
       </div>
