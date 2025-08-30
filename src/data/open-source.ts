@@ -40,12 +40,7 @@ const openSource: OpenSourceProject[] = [
     details: {
       longDescription:
         'Production-ready booking flows that mirror real ride-hailing UX: map-driven pick-up/drop-off, route cost estimation, and robust state handling. Showcases product thinking for mobile—business logic and UX synchronization first, pixel polish second. The codebase is modular, testable, and demonstrates a practical approach to navigation, permissions, and error boundaries for iOS/Android.',
-      topics: [
-        'Ride Hailing',
-        'Booking UX',
-        'State Management',
-        'Real-time',
-      ],
+      topics: ['Ride Hailing', 'Booking UX', 'State Management', 'Real-time'],
       // coverUrl: '/images/oss/car-booking.jpg',
     },
   },
@@ -92,6 +87,21 @@ const openSource: OpenSourceProject[] = [
         'Serverless microservice for email deliverability ops: consumes SES notifications (bounces/complaints), validates payloads, and persists normalized events in DynamoDB for audit and dashboards. Includes IAM-scoped resources, idempotency guards, and retry/backoff. Ideal for compliance and data pipelines around sender reputation.',
       topics: ['Serverless', 'Email', 'DevOps'],
       // coverUrl: '/images/oss/ses-dynamo.jpg',
+    },
+  },
+  {
+    title: 'Vercel Webhook - Email Sender',
+    href: 'https://github.com/andresfelipe9619/catalog-email-sender',
+    year: '2025-08',
+    active: true,
+    subtitle: 'Flexible, catalog-based email sender built with JavaScript.',
+    badges: ['Node.js', 'Email Automation', 'DynamoDB'],
+    section: 'cloud',
+    details: {
+      longDescription:
+        'A lightweight email sender engine that renders structured catalog content into rich emails. Built in JavaScript for adaptability and ease of use—ideal for automating product or feature announcements without overengineering.',
+      topics: ['Email', 'Catalogs', 'Automation', 'JavaScript'],
+      // coverUrl: '/images/oss/catalog-email-sender.jpg',
     },
   },
   {
