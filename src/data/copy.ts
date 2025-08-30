@@ -132,4 +132,4 @@ export const professionalTitle =
 export const CTATitle =
   'Ready to turn your ambitious idea into software that actually works? Let’s build brilliance (and maybe break the internet—responsibly).';
 
-export const mainPhrase = `Global companies \n trust me to build what others can’t.`;
+export const mainPhrase = [`Global companies trust me`, `to build what others`]

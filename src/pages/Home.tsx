@@ -1,5 +1,3 @@
-import BlurFadeText from '@/components/magicui/blur-fade-text';
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -27,8 +25,8 @@ import {
   professionalTitle,
 } from '@/data/copy.ts';
 import { OssHighlights } from '@/sections/oss-highlights.tsx';
-
-const BLUR_FADE_DELAY = 0.04;
+import { TypingAnimation } from '@/components/magicui/typing-animation';
+import { Highlighter } from '@/components/magicui/highlighter.tsx';
 
 export default function Home() {
   return (
@@ -41,14 +39,33 @@ export default function Home() {
           <DotPattern className="opacity-20" />
         </div>
         <div className="relative z-10 mx-auto flex w-full max-w-none flex-col items-center px-6">
-          <div className="mx-auto max-w-3xl text-center">
-            <BlurFadeText
-              delay={BLUR_FADE_DELAY}
-              className="text-4xl font-extrabold tracking-tight sm:text-6xl md:text-7xl"
-              yOffset={8}
-              text={mainPhrase}
-            />
-            <p className="mx-auto mt-4 max-w-2xl text-balance text-white/70 md:text-lg">
+          <div className="mx-auto max-w-4xl text-center">
+            <TypingAnimation className="text-4xl font-semibold tracking-tight sm:text-6xl md:text-7xl">
+              {mainPhrase[0]}
+            </TypingAnimation>
+
+            <TypingAnimation
+              delay={mainPhrase[0].length * 100}
+              className="text-4xl font-semibold tracking-tight sm:text-6xl md:text-7xl"
+            >
+              {mainPhrase[1]}
+            </TypingAnimation>
+            <Highlighter
+              iterations={3}
+              action={'underline'}
+              isView={true}
+              delay={
+                mainPhrase.reduce((sum, s) => s.length + sum, 0) * 100 + 800
+              }
+            >
+              <TypingAnimation
+                delay={(mainPhrase[0].length + mainPhrase[1].length) * 100}
+                className="text-4xl font-semibold tracking-tight sm:text-6xl md:text-7xl"
+              >
+                Can't
+              </TypingAnimation>
+            </Highlighter>
+            <p className="mx-auto mt-4 max-w-4xl text-balance text-white/70 md:text-lg">
               {professionalTitle}
             </p>
             <div className="mt-8 flex items-center justify-center gap-3">
