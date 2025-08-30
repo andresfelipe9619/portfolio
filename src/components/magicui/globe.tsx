@@ -85,10 +85,10 @@ export function Globe({
             mapBrightness: 1.2,
             scale: 2.5,
             devicePixelRatio: 2,
-            offset: [0, width * 2 * 0.4 * 0.6],
+            offset: [0.5, width * 2 * 0.4 * 0.6],
             onRender: (state) => {
               // eslint-disable-next-line react-hooks/exhaustive-deps
-              if (!pointerInteracting.current) phi += 0.005;
+              if (!pointerInteracting.current) phi += 0.0009;
               state.phi = phi + rs.get();
               state.width = width * 3;
               state.height = width * 3 * 0.4;

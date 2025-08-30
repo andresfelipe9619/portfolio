@@ -80,10 +80,12 @@ export default function Home() {
               </Button>
             </div>
           </div>
-          <div className="mt-10 flex w-full max-w-5xl flex-col items-center gap-6">
-            <div className="mx-auto">
-              <Globe scaled className="h-120 w-[60vw]" config={GLOBE_CONFIG} />
+          <div className="mt-10 flex w-full flex-col items-center gap-6 ">
+            <div className="relative flex items-center justify-center overflow-hidden max-h-[30vh] pt-[40%]">
+              <Globe className={"top-1/3"}  config={GLOBE_CONFIG} />
             </div>
+            <div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_200%,rgba(0,0,0,0.2),rgba(255,255,255,0))]" />
+
             <p className="mt-3 text-center text-sm text-white/70">
               Building digital experiences{' '}
               <span className="text-blue-400">across the globe</span>

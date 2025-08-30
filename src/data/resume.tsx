@@ -3,7 +3,6 @@ import { Icons } from '@/components/icons.tsx';
 import openSource from '@/data/open-source.ts';
 import work from '@/data/work.ts';
 
-
 export const DATA = {
   name: 'Andrés Suárez',
   initials: 'AS',
