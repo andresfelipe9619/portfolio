@@ -9,12 +9,13 @@ export function Breadcrumb() {
       return '~ / src / pages / Home';
     }
     const pageName = path.slice(1);
-    return `~ / src / pages / ${pageName}`;
+    const capitalizedPageName = pageName.charAt(0).toUpperCase() + pageName.slice(1);
+    return `~ / src / pages / ${capitalizedPageName}`;
   };
 
   return (
     <div className="hidden md:flex items-center gap-2 text-sm text-gray-400">
-      <span className="text-cyan-400">➜ </span>
+      <span className="text-cyan-400">➜</span>
       <span>{formatPath(path)}</span>
     </div>
   );
