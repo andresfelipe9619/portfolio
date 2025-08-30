@@ -13,15 +13,26 @@ export function DraggableExplorer({
   const dragging = useRef(false);
   const resizing = useRef<null | 'right' | 'bottom' | 'corner'>(null);
   const pos = useRef({ x: 24, y: 96, w: 360, h: 480 });
-  const [, force] = useState(0);
+  const [style, setStyle] = useState<React.CSSProperties>({});
+  const ticking = useRef(false);
 
   useEffect(() => {
+    const update = () => {
+      setStyle({
+        position: 'fixed',
+        left: pos.current.x,
+        top: pos.current.y,
+        width: pos.current.w,
+        height: pos.current.h,
+      });
+      ticking.current = false;
+    };
+
     const onMove = (e: MouseEvent) => {
       if (!ref.current) return;
       if (dragging.current) {
         pos.current.x += e.movementX;
         pos.current.y += e.movementY;
-        force((n) => n + 1);
       } else if (resizing.current) {
         if (resizing.current === 'right' || resizing.current === 'corner') {
           pos.current.w = Math.max(260, pos.current.w + e.movementX);
@@ -29,15 +40,25 @@ export function DraggableExplorer({
         if (resizing.current === 'bottom' || resizing.current === 'corner') {
           pos.current.h = Math.max(240, pos.current.h + e.movementY);
         }
-        force((n) => n + 1);
+      }
+
+      if (!ticking.current) {
+        window.requestAnimationFrame(update);
+        ticking.current = true;
       }
     };
+
     const onUp = () => {
       dragging.current = false;
       resizing.current = null;
     };
+
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseup', onUp);
+
+    // Set initial style
+    update();
+
     return () => {
       window.removeEventListener('mousemove', onMove);
       window.removeEventListener('mouseup', onUp);
@@ -46,13 +67,7 @@ export function DraggableExplorer({
 
   if (!open) return null;
 
-  const style: React.CSSProperties = {
-    position: 'fixed',
-    left: pos.current.x,
-    top: pos.current.y,
-    width: pos.current.w,
-    height: pos.current.h,
-  };
+  
 
   return (
     <div
