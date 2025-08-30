@@ -1,7 +1,7 @@
 // src/pages/OpenSource.tsx
 import * as React from 'react';
 import { GitBranch } from 'lucide-react';
-import { type Variants } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 
 import openSource from '@/data/open-source';
 import { OssCard } from '@/components/oss-card';
@@ -10,6 +10,16 @@ import { DotPattern } from '@/components/magicui/dot-pattern';
 import { cn } from '@/lib/utils';
 
 // Anim variants
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
 
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 14 },
@@ -94,9 +104,18 @@ export default function OpenSourcePage() {
       </header>
 
       {/* Sections */}
-      <div className="relative z-10 space-y-14">
+      <motion.div
+        initial="hidden"
+        animate="show"
+        variants={containerVariants}
+        className="relative z-10 space-y-14"
+      >
         {groups.map(({ section, items }) => (
-          <section key={section.key} className="space-y-4">
+          <motion.section
+            key={section.key}
+            variants={itemVariants}
+            className="space-y-4"
+          >
             {/* Título con aura de color por sección (muy sutil) */}
             <div className="relative mb-1">
               <div
@@ -128,9 +147,9 @@ export default function OpenSourcePage() {
                 />
               ))}
             </div>
-          </section>
+          </motion.section>
         ))}
-      </div>
+      </motion.div>
 
       {/* Outro */}
       <footer className="relative z-10 mt-16 text-center">

@@ -35,7 +35,7 @@ const openSource: OpenSourceProject[] = [
     year: '2018-11',
     active: true,
     subtitle: 'Uber-like booking flows with maps, routing, and clean state.',
-    badges: ['React Native', 'Firebase', 'Maps', 'Mobile'],
+    badges: ['React Native', 'Redux', 'Google Maps', 'Mobile'],
     section: 'products',
     details: {
       longDescription:
