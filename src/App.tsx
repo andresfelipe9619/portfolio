@@ -11,7 +11,9 @@ import { DraggableExplorer } from '@/components/ui/navbar/draggable-explorer.tsx
 import { useKeyListener } from '@/hooks/useKeyListener.tsx';
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(
+    import.meta.env.VITE_LOADING_SCREEN_ENABLED === 'true',
+  );
   const [explorerOpen, setExplorerOpen] = useState(false);
 
   useKeyListener(setExplorerOpen);
