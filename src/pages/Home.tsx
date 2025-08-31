@@ -33,12 +33,15 @@ import BlurFade from '@/components/magicui/blur-fade.tsx';
 export default function Home() {
   const [completed, setCompleted] = useState(false);
   const typingDelay =
-    mainPhrase.reduce((sum, s) => s.length + sum, 0) * 100 + 800;
+    mainPhrase.reduce((sum, s) => s.length + sum, 0) * 100 + 600;
 
   useEffect(() => {
-    setTimeout(() => {
-      setCompleted(true);
-    }, typingDelay + 600);
+    setTimeout(
+      () => {
+        setCompleted(true);
+      },
+      typingDelay + 1500,
+    );
     return () => {
       setCompleted(false);
     };
@@ -54,7 +57,7 @@ export default function Home() {
           <DotPattern className="opacity-20" />
         </div>
         <div className="relative z-10 mx-auto flex w-full max-w-none flex-col items-center px-6">
-          <div className="mx-auto max-w-4xl text-center">
+          <div className="mx-auto max-w-4xl text-center h-60">
             <TypingAnimation className="text-4xl font-semibold tracking-tight sm:text-6xl md:text-7xl">
               {mainPhrase[0]}
             </TypingAnimation>
@@ -80,9 +83,12 @@ export default function Home() {
             </Highlighter>
             {completed && (
               <>
-                <p className="mx-auto mt-4 max-w-4xl text-balance text-white/70 md:text-lg">
-                  {professionalTitle}
-                </p>
+                <BlurFade delay={0.1} inView>
+                  <p className="mx-auto mt-10 max-w-4xl text-balance text-white/70 md:text-lg">
+                    {professionalTitle}
+                  </p>
+                </BlurFade>
+
                 <div className="mt-8 flex items-center justify-center gap-3">
                   <BlurFade delay={0.25} inView>
                     <ShimmerButton className="rounded-full px-6 py-3">
@@ -102,11 +108,9 @@ export default function Home() {
             )}
           </div>
           <div className="mt-10 flex w-full flex-col items-center gap-6 ">
-            <BlurFade delay={0.5} inView>
-              <div className="relative flex items-center justify-center overflow-hidden max-h-[30vh] pt-[46%]">
-                <Globe className={'top-1/3'} config={GLOBE_CONFIG} />
-              </div>
-            </BlurFade>
+            <div className="relative flex items-center justify-center overflow-hidden max-h-[30vh] pt-[46%]">
+              <Globe className={'top-1/3'} config={GLOBE_CONFIG} />
+            </div>
             <div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_200%,rgba(0,0,0,0.2),rgba(255,255,255,0))]" />
             <BlurFade delay={0.75} inView>
               <p className="mt-3 text-center text-sm text-white/70">
