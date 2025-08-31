@@ -8,6 +8,14 @@ const FunnyVirusScanDialog = ({ open, onOpenChange }) => {
   const [progress, setProgress] = useState(0);
   const [viruses, setViruses] = useState([]);
 
+  const virusNames = [
+    'Over-Engineered_Perfectionism.dll',
+    'ScopeCreep.exe',
+    'Infinite_Refactoring_Loop.sys',
+    'Sleep_Deprivation_Caffeine_Overload.com',
+    'Rubber_Duck_Driven_Development.bat',
+  ];
+
   const handleConfirm = () => {
     setStep('scanning');
   };
@@ -23,7 +31,7 @@ const FunnyVirusScanDialog = ({ open, onOpenChange }) => {
           }
           const newProgress = prev + 10;
           if (newProgress % 20 === 0 && viruses.length < 5) {
-            setViruses(prevViruses => [...prevViruses, `Virus ${prevViruses.length + 1} found`]);
+            setViruses(prevViruses => [...prevViruses, virusNames[prevViruses.length]]);
           }
           return newProgress;
         });
@@ -48,14 +56,14 @@ const FunnyVirusScanDialog = ({ open, onOpenChange }) => {
         {step === 'warning' && (
           <>
             <DialogHeader>
-              <DialogTitle>⚠️ Warning: Highly Potent Content Ahead!</DialogTitle>
+              <DialogTitle>⚠️ Warning: Genius-Level Content Detected</DialogTitle>
             </DialogHeader>
             <DialogDescription>
-              The resume you are about to download is so powerful, your system might mistake it for a virus. Proceed with caution (and a sense of humor).
+              The resume you're about to download contains a dangerously high concentration of skills and experience. Your system might flag it as a 'productivity anomaly.' Proceed with caution.
             </DialogDescription>
             <DialogFooter>
-              <Button onClick={() => onOpenChange(false)} variant="outline">Cancel</Button>
-              <Button onClick={handleConfirm}>I'm Feeling Lucky</Button>
+              <Button onClick={() => onOpenChange(false)} variant="outline" className="cursor-pointer">Cancel</Button>
+              <Button onClick={handleConfirm} className="cursor-pointer">Unleash the Genius</Button>
             </DialogFooter>
           </>
         )}
@@ -75,13 +83,13 @@ const FunnyVirusScanDialog = ({ open, onOpenChange }) => {
         {step === 'finished' && (
           <>
             <DialogHeader>
-              <DialogTitle>Scan Complete!</DialogTitle>
+              <DialogTitle>Scan Complete... Ish.</DialogTitle>
             </DialogHeader>
             <DialogDescription>
-              No threats found. Your system is safe (for now). You may now download the resume.
+              We found a few... 'unconventional files'. We've added them to <code>.gitignore</code> so you don't have to worry about them. Your download is ready.
             </DialogDescription>
             <DialogFooter>
-              <Button onClick={handleDownload}>Download Resume</Button>
+              <Button onClick={handleDownload} className="cursor-pointer">Download Resume</Button>
             </DialogFooter>
           </>
         )}
