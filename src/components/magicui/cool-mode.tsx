@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { ReactNode, useEffect, useRef } from "react";
+import React, { type ReactNode, useEffect, useRef } from 'react';
 
 export interface BaseParticle {
   element: HTMLElement | SVGSVGElement;
@@ -29,18 +29,18 @@ export interface CoolParticleOptions extends BaseParticleOptions {
 }
 
 const getContainer = () => {
-  const id = "_coolMode_effect";
-  let existingContainer = document.getElementById(id);
+  const id = '_coolMode_effect';
+  const existingContainer = document.getElementById(id);
 
   if (existingContainer) {
     return existingContainer;
   }
 
-  const container = document.createElement("div");
-  container.setAttribute("id", id);
+  const container = document.createElement('div');
+  container.setAttribute('id', id);
   container.setAttribute(
-    "style",
-    "overflow:hidden; position:fixed; height:100%; top:0; left:0; right:0; bottom:0; pointer-events:none; z-index:2147483647",
+    'style',
+    'overflow:hidden; position:fixed; height:100%; top:0; left:0; right:0; bottom:0; pointer-events:none; z-index:2147483647',
   );
 
   document.body.appendChild(container);
@@ -56,7 +56,7 @@ const applyParticleEffect = (
 ): (() => void) => {
   instanceCounter++;
 
-  const defaultParticle = "circle";
+  const defaultParticle = 'circle';
   const particleType = options?.particle || defaultParticle;
   const sizes = [15, 20, 25, 35, 45];
   const limit = 45;
@@ -79,29 +79,29 @@ const applyParticleEffect = (
     const left = mouseX - size / 2;
     const direction = Math.random() <= 0.5 ? -1 : 1;
 
-    const particle = document.createElement("div");
+    const particle = document.createElement('div');
 
-    if (particleType === "circle") {
-      const svgNS = "http://www.w3.org/2000/svg";
-      const circleSVG = document.createElementNS(svgNS, "svg");
-      const circle = document.createElementNS(svgNS, "circle");
-      circle.setAttributeNS(null, "cx", (size / 2).toString());
-      circle.setAttributeNS(null, "cy", (size / 2).toString());
-      circle.setAttributeNS(null, "r", (size / 2).toString());
+    if (particleType === 'circle') {
+      const svgNS = 'http://www.w3.org/2000/svg';
+      const circleSVG = document.createElementNS(svgNS, 'svg');
+      const circle = document.createElementNS(svgNS, 'circle');
+      circle.setAttributeNS(null, 'cx', (size / 2).toString());
+      circle.setAttributeNS(null, 'cy', (size / 2).toString());
+      circle.setAttributeNS(null, 'r', (size / 2).toString());
       circle.setAttributeNS(
         null,
-        "fill",
+        'fill',
         `hsl(${Math.random() * 360}, 70%, 50%)`,
       );
 
       circleSVG.appendChild(circle);
-      circleSVG.setAttribute("width", size.toString());
-      circleSVG.setAttribute("height", size.toString());
+      circleSVG.setAttribute('width', size.toString());
+      circleSVG.setAttribute('height', size.toString());
 
       particle.appendChild(circleSVG);
     } else if (
-      particleType.startsWith("http") ||
-      particleType.startsWith("/")
+      particleType.startsWith('http') ||
+      particleType.startsWith('/')
     ) {
       // Handle URL-based images
       particle.innerHTML = `<img src="${particleType}" width="${size}" height="${size}" style="border-radius: 50%">`;
@@ -112,7 +112,7 @@ const applyParticleEffect = (
       particle.innerHTML = `<div style="font-size: ${emojiSize}px; line-height: 1; text-align: center; width: ${size}px; height: ${size}px; display: flex; align-items: center; justify-content: center; transform: scale(${fontSizeMultiplier}); transform-origin: center;">${particleType}</div>`;
     }
 
-    particle.style.position = "absolute";
+    particle.style.position = 'absolute';
     particle.style.transform = `translate3d(${left}px, ${top}px, 0px) rotate(${spinVal}deg)`;
 
     container.appendChild(particle);
@@ -146,14 +146,14 @@ const applyParticleEffect = (
       }
 
       p.element.setAttribute(
-        "style",
+        'style',
         [
-          "position:absolute",
-          "will-change:transform",
+          'position:absolute',
+          'will-change:transform',
           `top:${p.top}px`,
           `left:${p.left}px`,
           `transform:rotate(${p.spinVal}deg)`,
-        ].join(";"),
+        ].join(';'),
       );
     });
   }
@@ -180,14 +180,14 @@ const applyParticleEffect = (
 
   loop();
 
-  const isTouchInteraction = "ontouchstart" in window;
+  const isTouchInteraction = 'ontouchstart' in window;
 
-  const tap = isTouchInteraction ? "touchstart" : "mousedown";
-  const tapEnd = isTouchInteraction ? "touchend" : "mouseup";
-  const move = isTouchInteraction ? "touchmove" : "mousemove";
+  const tap = isTouchInteraction ? 'touchstart' : 'mousedown';
+  const tapEnd = isTouchInteraction ? 'touchend' : 'mouseup';
+  const move = isTouchInteraction ? 'touchmove' : 'mousemove';
 
   const updateMousePosition = (e: MouseEvent | TouchEvent) => {
-    if ("touches" in e) {
+    if ('touches' in e) {
       mouseX = e.touches?.[0].clientX;
       mouseY = e.touches?.[0].clientY;
     } else {
@@ -208,7 +208,7 @@ const applyParticleEffect = (
   element.addEventListener(move, updateMousePosition, { passive: true });
   element.addEventListener(tap, tapHandler, { passive: true });
   element.addEventListener(tapEnd, disableAutoAddParticle, { passive: true });
-  element.addEventListener("mouseleave", disableAutoAddParticle, {
+  element.addEventListener('mouseleave', disableAutoAddParticle, {
     passive: true,
   });
 
@@ -216,7 +216,7 @@ const applyParticleEffect = (
     element.removeEventListener(move, updateMousePosition);
     element.removeEventListener(tap, tapHandler);
     element.removeEventListener(tapEnd, disableAutoAddParticle);
-    element.removeEventListener("mouseleave", disableAutoAddParticle);
+    element.removeEventListener('mouseleave', disableAutoAddParticle);
 
     const interval = setInterval(() => {
       if (animationFrame && particles.length === 0) {
