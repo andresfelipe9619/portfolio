@@ -10,6 +10,7 @@ const MOVEMENT_DAMPING = 1400;
 const BASE_CONFIG: COBEOptions = {
   width: 600, // valor base, se ajusta luego con ResizeObserver
   height: 600,
+  devicePixelRatio: 1,
   phi: 0,
   theta: 0.3,
   dark: 0,
@@ -50,7 +51,7 @@ export function Globe({
   const phiRef = useRef(0);
   const widthRef = useRef(0);
   const heightRef = useRef(0);
-  const rafRotateSpeed = scaled ? 0.0012 : 0.0045; // más bajo que antes
+  const rafRotateSpeed = scaled ? 0.0012 : 0.0012; // más bajo que antes
 
   // Init/Destroy sólo cuando está visible
   useEffect(() => {

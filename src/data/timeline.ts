@@ -21,6 +21,7 @@ export const TIMELINE_DATA = {
     '🇵🇦 Panama',
     '🇩🇴 Dominican Republic',
     '🇬🇧 UK',
+    '🇮🇱 Israel'
   ],
   categories: [
     '🌿 Cannabis',
@@ -47,7 +48,7 @@ export const TIMELINE_DATA = {
     ],
     '2018': [
       { title: 'Fonvalle - Web App 🇨🇴' },
-      { title: 'Topography Degree Work - GIS' },
+      { title: 'Topography Degree Work - GIS 🇨🇴' },
       { title: 'H&R Drywall - WebAPP 🇺🇸' },
     ],
     '2019': [
@@ -90,8 +91,8 @@ export const TIMELINE_DATA = {
       { title: 'Pizzaamericana - Salesmanago Integration' },
       { title: 'El Hornero - Salesmanago Consultancy' },
       { title: 'Caribescorts - Web App 🇩🇴' },
-      { title: 'Bachillerato en Casa - EdTech' },
-      { title: 'Usermuse - SaaS Contributions' },
+      { title: 'Bachillerato en Casa - EdTech 🇨🇴' },
+      { title: 'Usermuse - SaaS Contributions 🇮🇱' },
     ],
     '2025': [
       { title: 'Freelance SaaS Architect - Active' },

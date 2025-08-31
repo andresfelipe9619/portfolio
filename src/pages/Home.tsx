@@ -31,6 +31,7 @@ import FunnyVirusScanDialog from '@/components/virus-scan-dialog.tsx';
 import JokeDialog from '@/components/joke-dialog.tsx';
 import { RainbowButton } from '@/components/magicui/rainbow-button.tsx';
 import { Particles } from '@/components/magicui/particles';
+import ReactGA from 'react-ga4';
 
 export default function Home() {
   const [completed, setCompleted] = useState(false);
@@ -49,6 +50,23 @@ export default function Home() {
     //eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    if (completed) {
+      document.body.classList.remove('no-scroll');
+    } else {
+      document.body.classList.add('no-scroll');
+    }
+  }, [completed]);
+
+  function handleResumeDownloadClick() {
+    ReactGA.event({
+      category: 'Resume',
+      action: 'Pre-Download',
+      label: 'Resume Download Button Click',
+    });
+    setShowVirusScan(true);
+  }
+
   return (
     <main className="relative flex flex-col min-h-[100dvh] overflow-hidden bg-gray-950 text-white">
       <FunnyVirusScanDialog
@@ -61,7 +79,7 @@ export default function Home() {
           className="absolute inset-0 z-0"
           quantity={100}
           ease={80}
-          color={"#fff"}
+          color={'#fff'}
           refresh
         />
         <div className="relative z-10 mx-auto flex w-full max-w-none flex-col items-center px-6">
@@ -109,7 +127,7 @@ export default function Home() {
                   <BlurFade delay={0.25} inView>
                     <RainbowButton
                       className="rounded-full px-6 py-3"
-                      onClick={() => setShowVirusScan(true)}
+                      onClick={handleResumeDownloadClick}
                     >
                       Download Resume
                     </RainbowButton>
@@ -331,17 +349,32 @@ export default function Home() {
             <div className="mx-auto max-w-5xl px-6">
               <h3 className="text-xl font-semibold">{faqTitle}</h3>
 
-              <Accordion type="single" collapsible className="mt-4">
-                {FAQ_ITEMS.map((item, idx) => (
-                  <AccordionItem
-                    key={item.id ?? idx}
-                    value={item.id ?? `item-${idx + 1}`}
-                  >
-                    <AccordionTrigger>{item.question}</AccordionTrigger>
-                    <AccordionContent>{item.answer}</AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
+              <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Accordion type="single" collapsible className="w-full">
+                  {FAQ_ITEMS.slice(0, FAQ_ITEMS.length / 2).map((item, idx) => (
+                    <AccordionItem
+                      key={item.id ?? idx}
+                      value={item.id ?? `item-${idx + 1}`}
+                    >
+                      <AccordionTrigger>{item.question}</AccordionTrigger>
+                      <AccordionContent>{item.answer}</AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+                <Accordion type="single" collapsible className="w-full">
+                  {FAQ_ITEMS.slice(FAQ_ITEMS.length / 2).map((item, idx) => (
+                    <AccordionItem
+                      key={item.id ?? idx}
+                      value={
+                        item.id ?? `item-${idx + 1 + FAQ_ITEMS.length / 2}`
+                      }
+                    >
+                      <AccordionTrigger>{item.question}</AccordionTrigger>
+                      <AccordionContent>{item.answer}</AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </div>
             </div>
           </section>
         </BlurFade>

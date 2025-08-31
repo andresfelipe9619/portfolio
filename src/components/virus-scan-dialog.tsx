@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import ReactGA from 'react-ga4';
 
 const FunnyVirusScanDialog = ({ open, onOpenChange }) => {
   const [step, setStep] = useState('warning');
@@ -52,8 +53,13 @@ const FunnyVirusScanDialog = ({ open, onOpenChange }) => {
   }, [step, viruses.length]);
 
   const handleDownload = () => {
+    ReactGA.event({
+      category: 'Resume',
+      action: 'Downloaded',
+      label: 'Resume Downloaded',
+    });
     const link = document.createElement('a');
-    link.href = '/developer_designer_checklist.pdf';
+    link.href = '/RESUME 3.1.pdf';
     link.download = 'resume.pdf';
     document.body.appendChild(link);
     link.click();
