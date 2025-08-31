@@ -43,6 +43,7 @@ export default function Home() {
     return () => {
       setCompleted(false);
     };
+    //eslint-disable-next-line
   }, []);
 
   const handleExploreClick = () => {

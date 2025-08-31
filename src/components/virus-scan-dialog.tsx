@@ -1,5 +1,12 @@
-import { useState, useEffect } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
+import { useEffect, useState } from 'react';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 
@@ -23,7 +30,7 @@ const FunnyVirusScanDialog = ({ open, onOpenChange }) => {
   useEffect(() => {
     if (step === 'scanning') {
       const interval = setInterval(() => {
-        setProgress(prev => {
+        setProgress((prev) => {
           if (prev >= 100) {
             clearInterval(interval);
             setStep('finished');
@@ -31,13 +38,17 @@ const FunnyVirusScanDialog = ({ open, onOpenChange }) => {
           }
           const newProgress = prev + 10;
           if (newProgress % 20 === 0 && viruses.length < 5) {
-            setViruses(prevViruses => [...prevViruses, virusNames[prevViruses.length]]);
+            setViruses((prevViruses) => [
+              ...prevViruses,
+              virusNames[prevViruses.length],
+            ]);
           }
           return newProgress;
         });
       }, 500);
       return () => clearInterval(interval);
     }
+    //eslint-disable-next-line
   }, [step, viruses.length]);
 
   const handleDownload = () => {
@@ -56,14 +67,26 @@ const FunnyVirusScanDialog = ({ open, onOpenChange }) => {
         {step === 'warning' && (
           <>
             <DialogHeader>
-              <DialogTitle>⚠️ Warning: Genius-Level Content Detected</DialogTitle>
+              <DialogTitle>
+                ⚠️ Warning: Genius-Level Content Detected
+              </DialogTitle>
             </DialogHeader>
             <DialogDescription>
-              The resume you're about to download contains a dangerously high concentration of skills and experience. Your system might flag it as a 'productivity anomaly.' Proceed with caution.
+              The resume you're about to download contains a dangerously high
+              concentration of skills and experience. Your system might flag it
+              as a 'productivity anomaly.' Proceed with caution.
             </DialogDescription>
             <DialogFooter>
-              <Button onClick={() => onOpenChange(false)} variant="outline" className="cursor-pointer">Cancel</Button>
-              <Button onClick={handleConfirm} className="cursor-pointer">Unleash the Genius</Button>
+              <Button
+                onClick={() => onOpenChange(false)}
+                variant="outline"
+                className="cursor-pointer"
+              >
+                Cancel
+              </Button>
+              <Button onClick={handleConfirm} className="cursor-pointer">
+                Unleash the Genius
+              </Button>
             </DialogFooter>
           </>
         )}
@@ -75,7 +98,9 @@ const FunnyVirusScanDialog = ({ open, onOpenChange }) => {
             <Progress value={progress} />
             <div className="text-sm text-muted-foreground mt-2">
               {viruses.map((virus, i) => (
-                <div key={i} className="text-red-500">{virus}</div>
+                <div key={i} className="text-red-500">
+                  {virus}
+                </div>
               ))}
             </div>
           </>
@@ -86,10 +111,14 @@ const FunnyVirusScanDialog = ({ open, onOpenChange }) => {
               <DialogTitle>Scan Complete... Ish.</DialogTitle>
             </DialogHeader>
             <DialogDescription>
-              We found a few... 'unconventional files'. We've added them to <code>.gitignore</code> so you don't have to worry about them. Your download is ready.
+              We found a few... 'unconventional files'. We've added them to{' '}
+              <code>.gitignore</code> so you don't have to worry about them.
+              Your download is ready.
             </DialogDescription>
             <DialogFooter>
-              <Button onClick={handleDownload} className="cursor-pointer">Download Resume</Button>
+              <Button onClick={handleDownload} className="cursor-pointer">
+                Download Resume
+              </Button>
             </DialogFooter>
           </>
         )}
