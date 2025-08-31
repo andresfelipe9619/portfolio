@@ -28,11 +28,14 @@ import { Highlighter } from '@/components/magicui/highlighter.tsx';
 import { useEffect, useState } from 'react';
 import BlurFade from '@/components/magicui/blur-fade.tsx';
 import FunnyVirusScanDialog from '@/components/virus-scan-dialog.tsx';
+import JokeDialog from '@/components/joke-dialog.tsx';
 import { RainbowButton } from '@/components/magicui/rainbow-button.tsx';
+import { Particles } from '@/components/magicui/particles';
 
 export default function Home() {
   const [completed, setCompleted] = useState(false);
   const [showVirusScan, setShowVirusScan] = useState(false);
+  const [showJokeDialog, setShowJokeDialog] = useState(false);
   const typingDelay =
     mainPhrase.reduce((sum, s) => s.length + sum, 0) * 100 + 600;
 
@@ -46,17 +49,21 @@ export default function Home() {
     //eslint-disable-next-line
   }, []);
 
-  const handleExploreClick = () => {
-    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <main className="relative flex flex-col min-h-[100dvh] overflow-hidden bg-gray-950 text-white">
       <FunnyVirusScanDialog
         open={showVirusScan}
         onOpenChange={setShowVirusScan}
       />
+      <JokeDialog open={showJokeDialog} onOpenChange={setShowJokeDialog} />
       <section id="hero" className="relative overflow-hidden py-24">
+        <Particles
+          className="absolute inset-0 z-0"
+          quantity={100}
+          ease={80}
+          color={"#fff"}
+          refresh
+        />
         <div className="relative z-10 mx-auto flex w-full max-w-none flex-col items-center px-6">
           <div className="mx-auto max-w-4xl text-center h-60">
             <TypingAnimation className="text-4xl font-semibold tracking-tight sm:text-6xl md:text-7xl">
@@ -94,7 +101,7 @@ export default function Home() {
                   <BlurFade delay={0.25} inView>
                     <ShimmerButton
                       className="rounded-full px-6 py-3"
-                      onClick={handleExploreClick}
+                      onClick={() => setShowJokeDialog(true)}
                     >
                       Explore My Universe
                     </ShimmerButton>
