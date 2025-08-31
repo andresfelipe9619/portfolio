@@ -23,7 +23,7 @@ interface HighlighterProps {
   iterations?: number;
   padding?: number;
   multiline?: boolean;
-  isView?: boolean;
+  inView?: boolean;
   delay?: number;
 }
 
@@ -36,7 +36,7 @@ export function Highlighter({
   iterations = 2,
   padding = 2,
   multiline = true,
-  isView = false,
+  inView = false,
   delay = 0,
 }: HighlighterProps) {
   const elementRef = useRef<HTMLSpanElement>(null);
@@ -45,8 +45,7 @@ export function Highlighter({
     margin: '-10%',
   });
 
-  // If isView is false, always show. If isView is true, wait for inView
-  const shouldShow = !isView || isInView;
+  const shouldShow = !inView || isInView;
 
   useEffect(() => {
     if (!shouldShow) return;
