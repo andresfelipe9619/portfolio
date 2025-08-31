@@ -112,8 +112,8 @@ export default function Home() {
             )}
           </div>
           <div className="mt-28 flex w-full flex-col items-center gap-6 ">
-            <div className="relative flex items-center justify-center overflow-hidden max-h-[30vh] pt-[46%]">
-              <Globe className={'top-1/3'} config={GLOBE_CONFIG} />
+            <div className="relative flex items-center justify-center overflow-hidden max-h-[30vh] pt-[32%]">
+              <Globe config={GLOBE_CONFIG} />
             </div>
             <div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_200%,rgba(0,0,0,0.2),rgba(255,255,255,0))]" />
             <BlurFade delay={0.75} inView>

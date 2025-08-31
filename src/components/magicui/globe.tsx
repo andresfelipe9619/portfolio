@@ -1,136 +1,172 @@
 'use client';
 
 import createGlobe, { type COBEOptions } from 'cobe';
-import { useMotionValue, useSpring } from 'motion/react';
-import { useEffect, useRef } from 'react';
-
+import { useEffect, useMemo, useRef } from 'react';
+import { useInView } from 'motion/react';
 import { cn } from '@/lib/utils';
 
 const MOVEMENT_DAMPING = 1400;
 
-const GLOBE_CONFIG: COBEOptions = {
-  width: 800,
-  height: 800,
-  onRender: () => {},
-  devicePixelRatio: 2,
+const BASE_CONFIG: COBEOptions = {
+  width: 600, // valor base, se ajusta luego con ResizeObserver
+  height: 600,
   phi: 0,
   theta: 0.3,
   dark: 0,
-  diffuse: 0.4,
-  mapSamples: 16000,
-  mapBrightness: 1.2,
+  diffuse: 1.0, // ↓ menos costoso que 3
+  mapSamples: 900, // 600–1000 es buen sweet spot
+  mapBrightness: 1.1,
   baseColor: [1, 1, 1],
   markerColor: [251 / 255, 100 / 255, 21 / 255],
   glowColor: [1, 1, 1],
   markers: [],
+  onRender: () => {},
 };
 
 export function Globe({
   className,
   scaled = false,
-  config = GLOBE_CONFIG,
+  config = BASE_CONFIG,
 }: {
   className?: string;
   scaled?: boolean;
   config?: COBEOptions;
 }) {
-  let phi = 0;
-  let width = 0;
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const pointerInteracting = useRef<number | null>(null);
-  const pointerInteractionMovement = useRef(0);
+  const globeRef = useRef<ReturnType<typeof createGlobe> | null>(null);
 
-  const r = useMotionValue(0);
-  const rs = useSpring(r, {
-    mass: 1,
-    damping: 30,
-    stiffness: 100,
-  });
+  const isInView = useInView(wrapperRef, { margin: '100px', amount: 0.1 });
 
-  const updatePointerInteraction = (value: number | null) => {
-    pointerInteracting.current = value;
-    if (canvasRef.current) {
-      canvasRef.current.style.cursor = value !== null ? 'grabbing' : 'grab';
-    }
-  };
+  const DPR = useMemo(() => Math.min(window.devicePixelRatio || 1, 1.5), []);
+  const prefersReducedMotion = useMemo(
+    () =>
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false,
+    [],
+  );
 
-  const updateMovement = (clientX: number) => {
-    if (pointerInteracting.current !== null) {
-      const delta = clientX - pointerInteracting.current;
-      pointerInteractionMovement.current = delta;
-      r.set(r.get() + delta / MOVEMENT_DAMPING);
-    }
-  };
+  // track interaction without bloquear scroll
+  const pointerStartX = useRef<number | null>(null);
+  const phiRef = useRef(0);
+  const widthRef = useRef(0);
+  const heightRef = useRef(0);
+  const rafRotateSpeed = scaled ? 0.0012 : 0.0045; // más bajo que antes
 
+  // Init/Destroy sólo cuando está visible
   useEffect(() => {
-    const onResize = () => {
-      if (canvasRef.current) {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        width = canvasRef.current.offsetWidth;
-      }
+    if (!isInView || !canvasRef.current) {
+      // si sale de vista, destruye y libera GPU
+      globeRef.current?.destroy();
+      globeRef.current = null;
+      return;
+    }
+
+    // medir tamaño del contenedor (una vez)
+    const measure = () => {
+      const w = wrapperRef.current?.offsetWidth ?? 600;
+      const h = scaled ? Math.round(w * 0.8) : w; // relación distinta si quieres “panorámico”
+      widthRef.current = w;
+      heightRef.current = h;
     };
+    measure();
 
-    window.addEventListener('resize', onResize);
-    onResize();
-
-    const globe = createGlobe(canvasRef.current!, {
-      ...(scaled
-        ? {
-            ...config,
-            width: width * 3,
-            height: width * 3 * 0.4,
-            dark: 0,
-            diffuse: 3,
-            mapSamples: 16000,
-            mapBrightness: 1.2,
-            scale: 2.5,
-            devicePixelRatio: 2,
-            offset: [0.5, width * 2 * 0.4 * 0.6],
-            onRender: (state) => {
-              // eslint-disable-next-line react-hooks/exhaustive-deps
-              if (!pointerInteracting.current) phi += 0.0009;
-              state.phi = phi + rs.get();
-              state.width = width * 3;
-              state.height = width * 3 * 0.4;
-            },
-          }
-        : {
-            ...config,
-            width: width * 2,
-            height: width * 2,
-            onRender: (state) => {
-              if (!pointerInteracting.current) phi += 0.005;
-              state.phi = phi + rs.get();
-              state.width = width * 2;
-              state.height = width * 2;
-            },
-          }),
+    // crear globo con tamaño fijo (no cambiar en cada frame)
+    globeRef.current = createGlobe(canvasRef.current, {
+      ...config,
+      width: Math.round(widthRef.current),
+      height: Math.round(heightRef.current),
+      devicePixelRatio: DPR,
+      diffuse: config.diffuse ?? 1.0,
+      onRender: (state) => {
+        if (!prefersReducedMotion && pointerStartX.current === null) {
+          phiRef.current += rafRotateSpeed;
+        }
+        state.phi = phiRef.current;
+        // NO tocar width/height aquí (costoso)
+      },
     });
 
-    setTimeout(() => (canvasRef.current!.style.opacity = '1'), 0);
-    return () => {
-      globe.destroy();
-      window.removeEventListener('resize', onResize);
+    // fade-in sin relayouts fuertes
+    canvasRef.current.style.opacity = '1';
+
+    // ResizeObserver: actualizar **sólo** al cambiar tamaño
+    const ro = new ResizeObserver((entries) => {
+      const cr = entries[0].contentRect;
+      const newW = Math.round(cr.width);
+      const newH = Math.round(scaled ? cr.width * 0.8 : cr.width);
+      if (newW !== widthRef.current || newH !== heightRef.current) {
+        widthRef.current = newW;
+        heightRef.current = newH;
+        // recrear con nuevo tamaño (cobe no expone resize oficial)
+        globeRef.current?.destroy();
+        globeRef.current = createGlobe(canvasRef.current!, {
+          ...config,
+          width: newW,
+          height: newH,
+          devicePixelRatio: DPR,
+          diffuse: config.diffuse ?? 1.0,
+          onRender: (state) => {
+            if (!prefersReducedMotion && pointerStartX.current === null) {
+              phiRef.current += rafRotateSpeed;
+            }
+            state.phi = phiRef.current;
+          },
+        });
+      }
+    });
+    if (wrapperRef.current) ro.observe(wrapperRef.current);
+
+    // touchmove pasivo para no bloquear scroll
+    const el = canvasRef.current;
+    const onTouchMove = (e: TouchEvent) => {
+      if (pointerStartX.current !== null && e.touches[0]) {
+        const delta = e.touches[0].clientX - pointerStartX.current;
+        phiRef.current += delta / MOVEMENT_DAMPING;
+        pointerStartX.current = e.touches[0].clientX;
+      }
     };
-  }, [rs, config]);
+    el.addEventListener('touchmove', onTouchMove, { passive: true });
+
+    return () => {
+      el.removeEventListener('touchmove', onTouchMove);
+      ro.disconnect();
+      globeRef.current?.destroy();
+      globeRef.current = null;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isInView, DPR, scaled]);
+
+  // pointer handlers (no preventDefault, no bloqueo de scroll)
+  const onPointerDown = (x: number) => (pointerStartX.current = x);
+  const onPointerUp = () => (pointerStartX.current = null);
+  const onPointerMove = (x: number) => {
+    if (pointerStartX.current !== null) {
+      const delta = x - pointerStartX.current;
+      phiRef.current += delta / MOVEMENT_DAMPING;
+      pointerStartX.current = x;
+    }
+  };
 
   return (
-    <div className={cn('mx-auto aspect-[1/1]  w-[90vw]', className)}>
+    <div
+      ref={wrapperRef}
+      className={cn(
+        // escalar visualmente sin subir resolución de render
+        scaled
+          ? 'mx-auto w-[90vw] md:w-[70vw] [transform:scale(1.05)]'
+          : 'mx-auto w-[90vw] md:w-[70vw]',
+        'aspect-square',
+        className,
+      )}
+    >
       <canvas
-        className={cn(
-          'size-full opacity-0 transition-opacity duration-500 [contain:layout_paint_size]',
-        )}
         ref={canvasRef}
-        onPointerDown={(e) => {
-          pointerInteracting.current = e.clientX;
-          updatePointerInteraction(e.clientX);
-        }}
-        onPointerUp={() => updatePointerInteraction(null)}
-        onPointerOut={() => updatePointerInteraction(null)}
-        onMouseMove={(e) => updateMovement(e.clientX)}
-        onTouchMove={(e) =>
-          e.touches[0] && updateMovement(e.touches[0].clientX)
-        }
+        className="size-full opacity-0 transition-opacity duration-400 [contain:layout_paint_size]"
+        onPointerDown={(e) => onPointerDown(e.clientX)}
+        onPointerUp={onPointerUp}
+        onPointerOut={onPointerUp}
+        onMouseMove={(e) => onPointerMove(e.clientX)}
+        // No usamos onTouchMove de React (agregamos el nativo pasivo)
       />
     </div>
   );
