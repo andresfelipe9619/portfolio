@@ -2,8 +2,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { DATA } from '@/data/resume';
-import { GridBeams } from '@/components/magicui/grid-beams';
-import { DotPattern } from '@/components/magicui/dot-pattern';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import {
   Accordion,
@@ -29,33 +27,35 @@ import { TypingAnimation } from '@/components/magicui/typing-animation';
 import { Highlighter } from '@/components/magicui/highlighter.tsx';
 import { useEffect, useState } from 'react';
 import BlurFade from '@/components/magicui/blur-fade.tsx';
+import FunnyVirusScanDialog from '@/components/virus-scan-dialog.tsx';
+import { RainbowButton } from '@/components/magicui/rainbow-button.tsx';
 
 export default function Home() {
   const [completed, setCompleted] = useState(false);
+  const [showVirusScan, setShowVirusScan] = useState(false);
   const typingDelay =
     mainPhrase.reduce((sum, s) => s.length + sum, 0) * 100 + 600;
 
   useEffect(() => {
-    setTimeout(
-      () => {
-        setCompleted(true);
-      },
-      typingDelay + 1500,
-    );
+    setTimeout(() => {
+      setCompleted(true);
+    }, typingDelay + 1500);
     return () => {
       setCompleted(false);
     };
   }, []);
 
+  const handleExploreClick = () => {
+    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <main className="relative flex flex-col min-h-[100dvh] overflow-hidden bg-gray-950 text-white">
+      <FunnyVirusScanDialog
+        open={showVirusScan}
+        onOpenChange={setShowVirusScan}
+      />
       <section id="hero" className="relative overflow-hidden py-24">
-        <div className="absolute inset-0 -z-10">
-          <GridBeams>
-            <div />
-          </GridBeams>
-          <DotPattern className="opacity-20" />
-        </div>
         <div className="relative z-10 mx-auto flex w-full max-w-none flex-col items-center px-6">
           <div className="mx-auto max-w-4xl text-center h-60">
             <TypingAnimation className="text-4xl font-semibold tracking-tight sm:text-6xl md:text-7xl">
@@ -91,23 +91,26 @@ export default function Home() {
 
                 <div className="mt-8 flex items-center justify-center gap-3">
                   <BlurFade delay={0.25} inView>
-                    <ShimmerButton className="rounded-full px-6 py-3">
+                    <ShimmerButton
+                      className="rounded-full px-6 py-3"
+                      onClick={handleExploreClick}
+                    >
                       Explore My Universe
                     </ShimmerButton>
                   </BlurFade>
                   <BlurFade delay={0.25} inView>
-                    <Button
-                      variant="outline"
-                      className="rounded-full border-white/20 bg-white/5"
+                    <RainbowButton
+                      className="rounded-full px-6 py-3"
+                      onClick={() => setShowVirusScan(true)}
                     >
                       Download Resume
-                    </Button>
+                    </RainbowButton>
                   </BlurFade>
                 </div>
               </>
             )}
           </div>
-          <div className="mt-10 flex w-full flex-col items-center gap-6 ">
+          <div className="mt-28 flex w-full flex-col items-center gap-6 ">
             <div className="relative flex items-center justify-center overflow-hidden max-h-[30vh] pt-[46%]">
               <Globe className={'top-1/3'} config={GLOBE_CONFIG} />
             </div>

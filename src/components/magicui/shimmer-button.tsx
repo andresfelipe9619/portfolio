@@ -10,6 +10,7 @@ export interface ShimmerButtonProps extends ComponentPropsWithoutRef<"button"> {
   background?: string;
   className?: string;
   children?: React.ReactNode;
+  variant?: 'default' | 'outline';
 }
 
 export const ShimmerButton = React.forwardRef<
@@ -25,10 +26,13 @@ export const ShimmerButton = React.forwardRef<
       background = "rgba(0, 0, 0, 1)",
       className,
       children,
+      variant = 'default',
       ...props
     },
     ref,
   ) => {
+    const buttonBackground = variant === 'outline' ? 'transparent' : background;
+
     return (
       <button
         style={
@@ -38,12 +42,13 @@ export const ShimmerButton = React.forwardRef<
             "--radius": borderRadius,
             "--speed": shimmerDuration,
             "--cut": shimmerSize,
-            "--bg": background,
+            "--bg": buttonBackground,
           } as CSSProperties
         }
         className={cn(
           "group relative z-0 flex cursor-pointer items-center justify-center overflow-hidden whitespace-nowrap border border-white/10 px-6 py-3 text-white [background:var(--bg)] [border-radius:var(--radius)]",
           "transform-gpu transition-transform duration-300 ease-in-out active:translate-y-px",
+          variant === 'outline' && "border-white/20 bg-white/5",
           className,
         )}
         ref={ref}
