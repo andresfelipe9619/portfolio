@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
 import { BrowserRouter } from 'react-router-dom';
-import ReactGA from 'react-ga4';
+import { initGA } from './lib/ga';
 import * as Sentry from '@sentry/react';
 
 Sentry.init({
@@ -18,7 +18,7 @@ Sentry.init({
   tracePropagationTargets: ['localhost', 'https://andressuarez.dev/'],
 });
 
-ReactGA.initialize('G-1K72061LE9');
+initGA();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

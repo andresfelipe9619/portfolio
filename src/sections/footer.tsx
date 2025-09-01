@@ -1,4 +1,5 @@
 import { DATA } from '@/data/resume.tsx';
+import { logEvent } from '@/lib/ga';
 
 export function Footer() {
   return (
@@ -11,10 +12,11 @@ export function Footer() {
           <a
             href={DATA.contact.social.LinkedIn.url}
             className="hover:text-white"
+            onClick={() => logEvent('Footer', 'LinkedIn Click', DATA.contact.social.LinkedIn.url)}
           >
             LinkedIn
           </a>
-          <a href={DATA.contact.social.GitHub.url} className="hover:text-white">
+          <a href={DATA.contact.social.GitHub.url} className="hover:text-white"             onClick={() => logEvent('Footer', 'GitHub Click', DATA.contact.social.GitHub.url)}>
             GitHub
           </a>
         </div>

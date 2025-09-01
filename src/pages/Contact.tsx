@@ -17,6 +17,7 @@ import { Badge } from '@/components/ui/badge';
 import { toast, Toaster } from 'sonner';
 import { AuroraText } from '@/components/magicui/aurora-text.tsx';
 import { RetroGrid } from '@/components/magicui/retro-grid.tsx';
+import { logEvent } from '@/lib/ga';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -64,6 +65,7 @@ export default function ContactPage() {
         description:
           "Thanks for reaching out! I'll get back to you faster than you can say 'async/await'.",
       });
+      logEvent('Contact Form', 'Submit', 'Success');
       setFormData({ name: '', email: '', subject: '', message: '' });
       setCharCount(0);
     } catch (error) {

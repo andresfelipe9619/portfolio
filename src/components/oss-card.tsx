@@ -16,6 +16,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { useGitHubStats } from '@/hooks/github-stats.tsx';
 import type { OssCardProps } from '@/data/open-source.ts';
+import { logEvent } from '@/lib/ga';
 
 export function OssCard({
   title,
@@ -34,6 +35,7 @@ export function OssCard({
     if (!enableModal) return;
     if (e.metaKey || e.ctrlKey || e.button === 1) return;
     e.preventDefault();
+    logEvent('OSS Card', 'Open Modal', title);
     setOpen(true);
   };
 
@@ -177,7 +179,7 @@ export function OssCard({
                       Built in public. PRs welcome.
                     </div>
                     <div className="flex items-center gap-2">
-                      <Button asChild className="gap-2">
+                      <Button asChild className="gap-2" onClick={() => logEvent('OSS Card', 'Open on GitHub', title)}>
                         <a href={href} target="_blank" rel="noreferrer">
                           <Github className="h-4 w-4" />
                           Open on GitHub

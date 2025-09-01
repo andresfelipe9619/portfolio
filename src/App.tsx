@@ -1,7 +1,7 @@
 import { ThemeProvider } from '@/components/theme-provider';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import { useEffect, useState } from 'react';
 import LoadingScreen from '@/components/loading-screen';
@@ -9,6 +9,7 @@ import OpenSourcePage from '@/pages/OpenSource';
 import { Header } from '@/components/ui/navbar/header.tsx';
 import { DraggableExplorer } from '@/components/ui/navbar/draggable-explorer.tsx';
 import { useKeyListener } from '@/hooks/useKeyListener.tsx';
+import { logPageView } from './lib/ga';
 import Contact from './pages/Contact';
 
 export default function App() {
@@ -16,8 +17,13 @@ export default function App() {
     import.meta.env.VITE_LOADING_SCREEN_ENABLED === 'true',
   );
   const [explorerOpen, setExplorerOpen] = useState(false);
+  const location = useLocation();
 
   useKeyListener(setExplorerOpen);
+
+  useEffect(() => {
+    logPageView();
+  }, [location]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
