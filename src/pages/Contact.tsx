@@ -1,7 +1,6 @@
 'use client';
 
 import type React from 'react';
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import {
@@ -15,7 +14,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { Toaster, toast } from 'sonner';
+import { toast, Toaster } from 'sonner';
+import { AuroraText } from '@/components/magicui/aurora-text.tsx';
+import { RetroGrid } from '@/components/magicui/retro-grid.tsx';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -42,17 +43,35 @@ export default function ContactPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate API call with some personality
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    const fd = new FormData();
 
-    toast('Message sent! 🚀', {
-      description:
-        "Thanks for reaching out! I'll get back to you faster than you can say 'async/await'.",
-    });
+    try {
+      fd.append('name', formData.name);
+      fd.append('email', formData.email);
+      fd.append('subject', formData.subject);
+      fd.append('message', formData.message);
+      fd.append('access_key', 'ce6a6db2-b865-4b4b-8f6c-c11ccb4481bf');
 
-    setFormData({ name: '', email: '', subject: '', message: '' });
-    setCharCount(0);
-    setIsSubmitting(false);
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: fd,
+      });
+
+      const data = await response.json();
+      console.log(data);
+
+      toast('Message sent! 🚀', {
+        description:
+          "Thanks for reaching out! I'll get back to you faster than you can say 'async/await'.",
+      });
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      setCharCount(0);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast('Something went wrong!');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const getMessagePlaceholder = () => {
@@ -82,18 +101,16 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 p-4">
-      <div className="mx-auto max-w-2xl pt-8 pb-16">
+    <div className="p-4 w-full">
+      <RetroGrid opacity={0.8}/>
+      <div className="mx-auto max-w-2xl py-8 ">
         {/* Header Section */}
         <div className="text-center mb-12">
           <Badge variant="secondary" className="mb-4 text-sm font-mono">
             /contact
           </Badge>
           <h1 className="text-4xl font-bold mb-4 text-balance">
-            Let's Build Something{' '}
-            <span className="bg-gradient-to-r from-primary to-chart-1 bg-clip-text text-transparent">
-              Amazing
-            </span>
+            Let's Build Something <AuroraText>Amazing</AuroraText>
           </h1>
           <p className="text-lg text-muted-foreground text-pretty max-w-lg mx-auto">
             Got a project in mind? A burning question? Or just want to say hi?
@@ -102,7 +119,7 @@ export default function ContactPage() {
         </div>
 
         {/* Contact Form */}
-        <Card className="shadow-lg border-0 bg-card/50 backdrop-blur-sm">
+        <Card className="shadow-lg border-0 bg-card/50 backdrop-blur-sm p-8">
           <CardHeader className="text-center pb-6">
             <CardTitle className="text-2xl">Drop Me a Line</CardTitle>
             <CardDescription className="text-base">
@@ -211,7 +228,7 @@ export default function ContactPage() {
 
         {/* Footer Note */}
         <div className="text-center mt-8">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm">
             Built with ❤️ and probably too much caffeine.{' '}
             <span className="font-mono text-xs bg-muted px-2 py-1 rounded">
               Response time: Usually &lt; 24hrs
@@ -219,7 +236,6 @@ export default function ContactPage() {
           </p>
         </div>
       </div>
-
       <Toaster />
     </div>
   );
