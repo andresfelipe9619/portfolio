@@ -29,7 +29,7 @@ export function Header(props: { onClick: () => void }) {
               <button
                 aria-label="Toggle Explorer"
                 onClick={props.onClick}
-                className="px-2 py-1"
+                className="px-2 py-1 cursor-pointer"
               >
                 <Terminal className="h-4 w-4" />
               </button>

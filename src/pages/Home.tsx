@@ -114,7 +114,6 @@ export default function Home() {
                     {professionalTitle}
                   </p>
                 </BlurFade>
-
                 <div className="mt-8 flex items-center justify-center gap-3">
                   <BlurFade delay={0.25} inView>
                     <ShimmerButton

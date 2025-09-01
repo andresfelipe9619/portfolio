@@ -67,8 +67,6 @@ export function DraggableExplorer({
 
   if (!open) return null;
 
-  
-
   return (
     <div
       ref={ref}
@@ -80,11 +78,11 @@ export function DraggableExplorer({
         className="flex items-center gap-2 border-b border-white/10 px-2 py-1 cursor-move select-none justify-between"
         onMouseDown={() => (dragging.current = true)}
       >
-        <div className="flex items-center gap-1">
-          <span
-            onClick={onClose}
-            className="size-2 rounded-full bg-red-500/80 cursor-pointer"
-          />
+        <div
+          className="flex items-center gap-1 cursor-pointer"
+          onClick={onClose}
+        >
+          <span className="size-2 rounded-full bg-red-500/80 " />
           <span className="size-2 rounded-full bg-yellow-500/80" />
           <span className="size-2 rounded-full bg-green-500/80" />
         </div>
