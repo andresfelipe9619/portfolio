@@ -41,11 +41,7 @@ export default function App() {
             <LoadingScreen onSkip={() => setIsLoading(false)} />
           ) : (
             <ErrorBoundary>
-              <Header
-                onClick={() => {
-                  throw Error('test');
-                }}
-              />
+              <Header onClick={() => setExplorerOpen((v) => !v)} />
               <DraggableExplorer
                 open={explorerOpen}
                 onClose={() => setExplorerOpen(false)}
