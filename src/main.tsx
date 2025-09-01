@@ -8,9 +8,14 @@ import * as Sentry from '@sentry/react';
 
 Sentry.init({
   dsn: 'https://869f2b57b98cbe1f86a16043a6f3fd51@o267366.ingest.us.sentry.io/4509940389707776',
-  // Setting this option to true will send default PII data to Sentry.
-  // For example, automatic IP address collection on events
-  sendDefaultPii: true,
+  integrations: [Sentry.browserTracingIntegration()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1,
+  // Set `tracePropagationTargets` to control for which URLs distributed tracing should be enabled
+  tracePropagationTargets: ['localhost', 'https://andressuarez.dev/'],
 });
 
 ReactGA.initialize('G-1K72061LE9');
