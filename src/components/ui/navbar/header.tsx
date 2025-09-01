@@ -18,8 +18,7 @@ export function Header(props: { onClick: () => void }) {
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-gray-950/80 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
         <Link to="/" className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-blue-500 to-cyan-400" />
-          <span className="text-sm font-semibold">{DATA.initials}</span>
+          <span className="text-sm font-semibold">{DATA.name}</span>
         </Link>
         <Breadcrumb />
         {/* Desktop dock nav */}

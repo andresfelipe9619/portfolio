@@ -1,6 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { DATA } from '@/data/resume';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import {
@@ -32,11 +31,14 @@ import JokeDialog from '@/components/joke-dialog.tsx';
 import { RainbowButton } from '@/components/magicui/rainbow-button.tsx';
 import { Particles } from '@/components/magicui/particles';
 import ReactGA from 'react-ga4';
+import { useNavigate } from 'react-router-dom';
+import confetti from 'canvas-confetti';
 
 export default function Home() {
   const [completed, setCompleted] = useState(false);
   const [showVirusScan, setShowVirusScan] = useState(false);
   const [showJokeDialog, setShowJokeDialog] = useState(false);
+  const navigate = useNavigate();
   const typingDelay =
     mainPhrase.reduce((sum, s) => s.length + sum, 0) * 100 + 600;
 
@@ -65,6 +67,39 @@ export default function Home() {
       label: 'Resume Download Button Click',
     });
     setShowVirusScan(true);
+  }
+
+  function handleLetsTalkClick() {
+    const end = Date.now() + 2 * 1000; // 2 seconds
+    const colors = ['#a786ff', '#fd8bbc', '#eca184', '#f8deb1'];
+
+    const frame = () => {
+      if (Date.now() > end) return;
+
+      confetti({
+        particleCount: 2,
+        angle: 60,
+        spread: 55,
+        startVelocity: 60,
+        origin: { x: 0, y: 0.5 },
+        colors: colors,
+      });
+      confetti({
+        particleCount: 2,
+        angle: 120,
+        spread: 55,
+        startVelocity: 60,
+        origin: { x: 1, y: 0.5 },
+        colors: colors,
+      });
+
+      requestAnimationFrame(frame);
+    };
+
+    frame();
+    setTimeout(() => {
+      navigate('/contact');
+    }, 1000);
   }
 
   return (
@@ -390,17 +425,20 @@ export default function Home() {
           <section id="ready" className="bg-gray-950 text-white py-16">
             <div className="mx-auto max-w-5xl px-6 grid items-center gap-8 md:grid-cols-2">
               <div>
-                <h3 className="text-3xl font-semibold">{CTATitle}</h3>
+                <h3 className="text-2xl sm:text-3xl font-medium text-white">
+                  {CTATitle[0]}
+                  <br />
+                  <span className="text-lg italic text-gray-400">
+                    {CTATitle[1]}
+                  </span>
+                </h3>
                 <div className="mt-6 flex gap-3">
-                  <ShimmerButton className="rounded-full px-6 py-3">
-                    Let's talk
-                  </ShimmerButton>
-                  <Button
-                    variant="outline"
-                    className="rounded-full border-white/20 bg-white/5"
+                  <RainbowButton
+                    className="rounded-full px-6 py-3"
+                    onClick={handleLetsTalkClick}
                   >
-                    View portfolio
-                  </Button>
+                    Let's talk
+                  </RainbowButton>
                 </div>
               </div>
               <div className="justify-self-center">

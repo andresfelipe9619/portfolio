@@ -9,6 +9,7 @@ import OpenSourcePage from '@/pages/OpenSource';
 import { Header } from '@/components/ui/navbar/header.tsx';
 import { DraggableExplorer } from '@/components/ui/navbar/draggable-explorer.tsx';
 import { useKeyListener } from '@/hooks/useKeyListener.tsx';
+import Contact from './pages/Contact';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(
@@ -41,6 +42,7 @@ export default function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/oss" element={<OpenSourcePage />} />
+                <Route path="/contact" element={<Contact />} />
               </Routes>
             </>
           )}
