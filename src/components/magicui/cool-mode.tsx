@@ -104,7 +104,7 @@ const applyParticleEffect = (
       particleType.startsWith('/')
     ) {
       // Handle URL-based images
-      particle.innerHTML = `<img src="${particleType}" width="${size}" height="${size}" style="border-radius: 50%">`;
+      particle.innerHTML = `<img src="${particleType}" width="${size}" height="${size}" style="border-radius: 50%" alt="particle">`;
     } else {
       // Handle emoji or text characters
       const fontSizeMultiplier = 3; // Make emojis 3x bigger
@@ -245,5 +245,7 @@ export const CoolMode: React.FC<CoolModeProps> = ({ children, options }) => {
     }
   }, [options]);
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   return React.cloneElement(children as React.ReactElement, { ref });
 };
