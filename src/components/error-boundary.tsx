@@ -1,6 +1,5 @@
-
-import { Component, ErrorInfo, ReactNode } from "react";
-import * as Sentry from "@sentry/react";
+import { Component, type ErrorInfo, type ReactNode } from 'react';
+import * as Sentry from '@sentry/react';
 
 interface Props {
   children: ReactNode;
@@ -12,7 +11,7 @@ interface State {
 
 class ErrorBoundary extends Component<Props, State> {
   public state: State = {
-    hasError: false
+    hasError: false,
   };
 
   public static getDerivedStateFromError(): State {
@@ -21,8 +20,8 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error("Uncaught error:", error, errorInfo);
-    Sentry.captureException(error, { extra: errorInfo });
+    console.error('Uncaught error:', error, errorInfo);
+    Sentry.captureException(error);
   }
 
   public render() {
@@ -35,7 +34,9 @@ class ErrorBoundary extends Component<Props, State> {
           </p>
           <button
             className="mt-8 px-4 py-2 bg-primary text-primary-foreground rounded-md"
-            onClick={() => Sentry.showReportDialog({ eventId: Sentry.lastEventId() })}
+            onClick={() =>
+              Sentry.showReportDialog({ eventId: Sentry.lastEventId() })
+            }
           >
             Report Feedback
           </button>

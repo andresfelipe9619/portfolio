@@ -5,6 +5,8 @@ export type TimelineItem = {
   kind?: string; // Software class/type (CRM, CMS, GIS, Mobile App, etc.)
   stack?: string[]; // Tech used
   country?: string; // e.g., "Colombia"
+  description?: string;
+  review?: string;
   flag?: string; // e.g., "🇨🇴"
 };
 
@@ -259,6 +261,10 @@ export const TIMELINE_DATA: {
         stack: ['Node.js', 'React', 'Profiling/Tracing'],
         country: 'Costa Rica',
         flag: '🇨🇷',
+        review:
+          'Estamos muy agradecidos con Andrés por su valioso aporte a nuestro proyecto. Gracias a su trabajo, hemos podido ordenar, mejorar y expandir nuestros servicios de nuestra plataforma web. Andrés ha demostrado ser un profesional de primer nivel, con una gran dedicación, conocimiento tecnológico, experiencia y compromiso. Sin duda, es un proveedor de confianza y calidad, que recomendamos ampliamente.',
+        description:
+          'Evaluación y optimización de un proyecto desarrollado en Node.js y React, con integración de Dato CMS, acompañado de un programa de capacitación para el equipo. Este proceso incluye una revisión exhaustiva del código para identificar áreas de mejora, optimizar la performance y asegurar la integración efectiva con Dato CMS. Paralelamente, se implementará un plan de formación personalizado para el personal, centrado en las mejores prácticas de desarrollo, uso avanzado de estas tecnologías y gestión eficiente de contenidos con Dato CMS. El objetivo es elevar la calidad del proyecto, mejorar la eficiencia del equipo y potenciar la entrega de soluciones innovadoras y adaptadas a las necesidades del mercado.',
       },
       {
         title: 'Javeriana - Mobile App',

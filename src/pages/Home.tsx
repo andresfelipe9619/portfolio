@@ -8,7 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { ArrowUpRight, Quote as QuoteIcon } from 'lucide-react';
+import { Quote as QuoteIcon } from 'lucide-react';
 import { Globe } from '@/components/magicui/globe';
 import { Terminal } from '@/components/magicui/terminal';
 import { GLOBE_CONFIG } from '@/components/constants';
@@ -33,6 +33,7 @@ import { Particles } from '@/components/magicui/particles';
 import ReactGA from 'react-ga4';
 import { useNavigate } from 'react-router-dom';
 import confetti from 'canvas-confetti';
+import ExperienceRoulette from '@/sections/experience-roulette.tsx';
 
 export default function Home() {
   const [completed, setCompleted] = useState(false);
@@ -286,26 +287,6 @@ export default function Home() {
         </BlurFade>
       )}
 
-      {/* PROJECT LINKS */}
-      {completed && (
-        <BlurFade delay={0.25} inView>
-          <section id="projects-links" className="bg-white text-gray-900 py-10">
-            <div className="mx-auto max-w-5xl px-6 grid grid-cols-2 gap-x-8 gap-y-3 md:grid-cols-4">
-              {['G-SOFT', 'FalconEye', 'TodoSurf', 'Factoring'].map((p) => (
-                <a
-                  key={p}
-                  href="#projects"
-                  className="group flex items-center gap-2 text-lg font-medium"
-                >
-                  {p}
-                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </a>
-              ))}
-            </div>
-          </section>
-        </BlurFade>
-      )}
-
       {/* SERVICES */}
       {completed && (
         <BlurFade delay={0.25} inView>
@@ -348,6 +329,12 @@ export default function Home() {
               </div>
             </div>
           </section>
+        </BlurFade>
+      )}
+
+      {completed && (
+        <BlurFade delay={0.25} inView>
+          <ExperienceRoulette />
         </BlurFade>
       )}
 
