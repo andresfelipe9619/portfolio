@@ -32,6 +32,7 @@ export default function TimelineGlobe({ className }: Props) {
       theta: 0,
       dark: 0,
       diffuse: 0.4,
+      scale: 1.2,
       mapSamples: 16000,
       glowColor: [0, 0, 0],
       mapBrightness: 1.2,

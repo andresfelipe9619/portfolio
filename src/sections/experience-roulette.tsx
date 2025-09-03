@@ -70,7 +70,7 @@ export default function ExperienceRoulette() {
             ref={listRef}
             className={cn(
               // fixed viewport for the list:
-              'relative w-full rounded-2xl bg-transparent',
+              'relative w-full rounded-2xl bg-transparent select-none',
               // height: slightly taller on desktop
               'h-[480px] sm:h-[520px] md:h-[560px]',
               // inner scroll only on hover (desktop). Mobile always scrolls:
@@ -90,7 +90,7 @@ export default function ExperienceRoulette() {
                 <li
                   key={`${it.year}-${i}-${it.title}`}
                   className={cn(
-                    'snap-center grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-xl px-3 transition-all cursor-pointer',
+                    'snap-center grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-xl px-3 transition-all cursor-pointer select-none',
                     'min-h-[96px] py-2', // row height
                     isActive
                       ? 'bg-white/5 ring-1 ring-white/10 opacity-100 scale-[1.00]'
