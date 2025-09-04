@@ -34,6 +34,8 @@ import ReactGA from 'react-ga4';
 import { useNavigate } from 'react-router-dom';
 import confetti from 'canvas-confetti';
 import ExperienceRoulette from '@/sections/experience-roulette.tsx';
+import { TESTIMONIALS } from '@/data/timeline';
+import { Marquee } from '@/components/magicui/marquee';
 
 export default function Home() {
   const [completed, setCompleted] = useState(false);
@@ -344,20 +346,38 @@ export default function Home() {
           <section id="testimonials" className="bg-gray-950 text-white py-16">
             <div className="mx-auto max-w-6xl px-6">
               <h3 className="text-xl font-semibold">
-                See what my clients say about
+                What folks I've built for say
               </h3>
-              <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {[0, 1, 2].map((i) => (
-                  <Card key={i} className="border-white/10 bg-white/5">
-                    <CardContent className="p-6">
-                      <p className="text-sm text-white/80 italic">
-                        “Andrés delivered beyond expectations. Great
-                        communication, robust code, on time.”
+              <Marquee pauseOnHover className="mt-6">
+                {TESTIMONIALS.map((t, i) => (
+                  <Card
+                    key={i}
+                    className="mx-4 w-80 border-white/10 bg-white/5 hover:bg-white/10 transition-colors"
+                  >
+                    <CardContent className="flex h-full flex-col justify-between p-6">
+                      <QuoteIcon className="h-5 w-5 text-blue-300" />
+                      <p className="mt-4 text-sm leading-relaxed text-white/80">
+                        {t.quote}
                       </p>
+                      <div className="mt-6 flex items-center gap-3">
+                        <Avatar>
+                          <AvatarFallback className="bg-white/10">
+                            {t.flag || t.client.substring(0, 2)}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div className="flex flex-col">
+                          <span className="text-sm font-medium">{t.client}</span>
+                          {t.country && (
+                            <span className="text-xs text-white/60">
+                              {t.country}
+                            </span>
+                          )}
+                        </div>
+                      </div>
                     </CardContent>
                   </Card>
                 ))}
-              </div>
+              </Marquee>
             </div>
           </section>
         </BlurFade>
