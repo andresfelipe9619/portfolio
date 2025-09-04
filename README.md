@@ -15,6 +15,7 @@ Welcome to the code behind a world‑class developer's digital playground. It's 
 npm install
 npm run dev     # start the development server
 npm run lint    # check code quality
+npm test        # keep the jokes bug-free
 npm run build   # create a production build
 npm run preview # preview the build locally
 ```
