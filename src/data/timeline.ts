@@ -1,34 +1,30 @@
 export type TimelineItem = {
   title: string;
-  area?: string; // Industry/sector (Education, Finance, SaaS, etc.)
-  kind?: string;  // Software class/type (CRM, CMS, GIS, Mobile App, etc.)
-  stack?: string[]; // Tech used
-  country?: string; // e.g., "Colombia"
+  area?: string;
+  kind?: string;
+  stack?: string[];
+  country?: string;
   description?: string;
   review?: string;
   flag?: string;
 
-  // --- New (optional) Notion-like structure ---
-  client?: string;             // "Cinekomuna"
-  location?: string;           // "Mexico"
-  role?: string;               // "Lead Backend Developer / DevOps Engineer"
-  date?: string;               // "2022" or "2020-05 – 2020-12"
+  client?: string;
+  location?: string;
+  date?: string;
+  role?: string;
   links?: { label: string; href: string }[];
 
-  // Rich sections (all optional)
-  summary?: string;            // 3–5 lines, sales-ready
-  objectives?: string[];       // bullets
-  scope?: string[];            // if you split scope from objectives
-  achievements?: string[];     // bullets, result-focused
-  challenges?: string[];       // bullets
-  solutions?: string[];        // bullets (if you want to pair with challenges)
-  testimonial?: string;        // quote
+  summary?: string;
+  objectives?: string[];
+  scope?: string[];
+  achievements?: string[];
+  challenges?: string[];
+  solutions?: string[];
+  testimonial?: string;
 
-  // Optional presentation helpers
-  highlight?: boolean;         // surface in UI (badge, accent)
-  tags?: string[];             // free-form labels, e.g., ["FinOps", "Serverless"]
+  highlight?: boolean;
+  tags?: string[];
 };
-
 
 export type TimelineByYear = Record<string, TimelineItem[]>;
 
@@ -70,22 +66,81 @@ export const TIMELINE_DATA: {
       },
       {
         title: 'Graduation Dinner Univalle - Web App',
-        area: 'Education',
-        kind: 'EdTech / Event Management',
-        stack: ['Node.js', 'React', 'PostgreSQL'],
+        area: 'Education / Events',
+        kind: 'Registration & Access System',
+        stack: ['Google Apps Script', 'jQuery', 'Semantic UI'],
         country: 'Colombia',
         flag: '🇨🇴',
+
+        client: 'Universidad del Valle',
+        location: 'Colombia',
+        date: '2017',
+        role: 'Web Application Developer',
+        links: [{ label: 'Project Link', href: 'Univalle Alumni Dinner' }],
+
+        summary:
+          'Web system for registration and access control of the Univalle alumni dinner with QR codes and automation.',
+        objectives: [
+          'Provide secure and simple registration.',
+          'Automate access control and attendance.',
+          'Strengthen the relationship with the alumni community.',
+        ],
+        achievements: [
+          '85% increase in registrations.',
+          '250% reduction in processing time.',
+          'Higher security and reliability in access.',
+        ],
+        challenges: [
+          'Ensure data security and identity validation.',
+          'Smooth integration between registration and access control.',
+        ],
+        solutions: [
+          'Encryption, identity validation, and function-level access control.',
+          'Custom API for communication between systems.',
+        ],
+        description:
+          'Web registration and QR code-based access control system for the alumni dinner.',
+        tags: ['EventTech', 'QR Codes'],
       },
     ],
 
     '2018': [
       {
         title: 'Fonvalle - Web App',
-        area: 'Finance',
-        kind: 'Admin Portal / Website',
-        stack: ['Node.js', 'React', 'PostgreSQL'],
+        area: 'Education / Events',
+        kind: 'Registration & Access System',
+        stack: ['Google Apps Script', 'jQuery', 'Semantic UI'],
         country: 'Colombia',
         flag: '🇨🇴',
+
+        client: 'Universidad del Valle',
+        location: 'Colombia',
+        date: '2018',
+        role: 'Web Application Developer',
+        links: [{ label: 'Project Link', href: 'Fonvalle Dinner' }],
+
+        summary:
+          'Two integrated systems: web registration with QR codes and access control for the Univalle alumni event.',
+        objectives: [
+          'Offer a smooth and secure registration for alumni.',
+          'Facilitate organization and attendance management.',
+        ],
+        achievements: [
+          '85% increase in registrations vs. manual methods.',
+          '250% savings in processing time.',
+          'Increased security and reliability for access control.',
+        ],
+        challenges: [
+          'Ensure secure registration and access control.',
+          'Efficiently integrate both systems.',
+        ],
+        solutions: [
+          'Encryption, identity validation, and secure functions.',
+          'Custom API between registration and access control.',
+        ],
+        description:
+          'Registration and access control system for the Univalle alumni dinner.',
+        tags: ['EventTech', 'QR Codes', 'Automation'],
       },
       {
         title: 'Topography Degree Work - GIS',
@@ -96,12 +151,23 @@ export const TIMELINE_DATA: {
         flag: '🇨🇴',
       },
       {
-        title: 'H&R Drywall - Web App',
+        title: 'H&R Drywall - WebApp',
         area: 'Construction',
         kind: 'CRM / Job Tracking',
         stack: ['Node.js', 'React', 'PostgreSQL'],
         country: 'United States',
         flag: '🇺🇸',
+
+        client: 'H&R Drywall',
+        location: 'United States',
+        date: '2018',
+        role: 'Full-Stack Developer',
+
+        summary:
+          'Web application for client management and job tracking for a construction company in the U.S.',
+        description:
+          'Custom CRM for H&R Drywall with project and client management.',
+        tags: ['CRM', 'Construction'],
       },
       {
         title: 'Open Source: Uber-like Ride App',
@@ -142,60 +208,69 @@ export const TIMELINE_DATA: {
 
     '2020': [
       {
-        title: 'David Alonso - E-commerce Integration',
+        title: 'David Alonso - Service Integration',
         area: 'E-commerce',
-        kind: 'Integrations',
+        kind: 'Integration / Logistics',
         stack: ['Node.js', 'REST APIs', 'Webhook Workers'],
         country: 'Mexico',
         flag: '🇲🇽',
+
+        client: 'David Alonso',
+        location: 'Mexico',
+        date: '2020',
+        role: 'Integration Engineer',
+
+        summary:
+          'E-commerce solution integrating a home delivery management system to optimize logistics and enable real-time tracking.',
+        achievements: [
+          'Optimized online shopping experience.',
+          'Improved operational efficiency in logistics.',
+          'Increased customer satisfaction.',
+        ],
+        testimonial:
+          '“Andrés is a highly recommended professional. He helped me finish my project on time with additional details for customization.”',
+        description:
+          'Complete integration of e-commerce with home delivery and real-time tracking.',
+        tags: ['E-commerce', 'Integrations'],
       },
       {
         title: 'Sentir Creativo - Web App & CMS',
         area: 'Creative Industry',
-        kind: 'CMS / Marketplace',
-        stack: ['React', 'Node.js', 'Strapi'],
+        kind: 'CMS/Website',
+        stack: ['Strapi', 'Next.js', 'PostgreSQL'],
         country: 'Chile',
         flag: '🇨🇱',
 
-        // New, richer fields (all optional but useful)
         client: 'Sentir Creativo',
         location: 'Chile',
         date: '2020',
         role: 'Lead Web Developer',
-        links: [{ label: 'Website', href: 'https://sentircreativo.com' }],
 
         summary:
-          'Plataforma dinámica para la gestión y venta de servicios artísticos: vitrinas de portafolio, e-commerce de obras y agenda de talleres, con CMS en Strapi.',
-
-        // You can show these only in the expanded dialog/card
+          'Platform for managing and selling artistic services: portfolios, e-commerce, and workshops, powered by Strapi CMS.',
         objectives: [
-          'Brindar a artistas una herramienta moderna para gestionar presencia online y servicios.',
-          'Permitir venta directa con pagos seguros y envíos.',
-          'Fomentar interacción con clientes y el crecimiento de la comunidad.'
+          'Provide artists with a modern tool for online presence and services.',
+          'Enable direct sales with secure payments and deliveries.',
+          'Foster community interaction and growth.',
         ],
-
         achievements: [
-          'Lanzamiento con interfaz intuitiva y diseño visual atractivo.',
-          'CMS con Strapi para administrar perfiles, galerías y servicios.',
-          'Formación de comunidad activa de artistas y compradores.'
+          'Launched with intuitive interface and appealing design.',
+          'Strapi CMS for profiles, galleries, and services.',
+          'Initial active community of artists and buyers.',
         ],
-
         challenges: [
-          'Equilibrar estética y funcionalidad para artistas y público.',
-          'Impulsar el crecimiento orgánico de la comunidad.'
+          'Balance aesthetics and functionality.',
+          'Promote organic growth of the community.',
         ],
-
         solutions: [
-          'Diseño minimalista y responsive; pruebas con usuarios para optimizar UX.',
-          'SEO, redes sociales y campañas por correo; eventos online y colaboraciones.'
+          'Minimalist responsive design + user testing.',
+          'SEO, social campaigns, newsletters, and online events.',
         ],
-
         testimonial:
-          '“Excelente experiencia: responsabilidad, empatía y creatividad. Propuso soluciones orientadas a UX, escalabilidad y organización de la información, reduciendo tiempos de implementación.”',
-
+          '“Excellent experience: responsibility, empathy, and creativity. Proposed UX and scalability solutions that reduced implementation time.”',
         description:
-          'Gestión de portafolios, servicios, ventas y comunicación con clientes desde un solo lugar.',
-        tags: ['CMS', 'Marketplace', 'Strapi']
+          'End-to-end platform for managing portfolios, services, sales, and client communication.',
+        tags: ['CMS', 'Marketplace', 'Strapi'],
       },
       {
         title: 'Falconeye - GIS',
@@ -204,6 +279,25 @@ export const TIMELINE_DATA: {
         stack: ['Node.js', 'React', 'Mapbox'],
         country: 'Dominican Republic',
         flag: '🇩🇴',
+
+        client: 'Falconeye',
+        location: 'Dominican Republic',
+        date: '2020',
+        role: 'GIS Developer',
+
+        summary:
+          'Geographic Information System with dashboard for managing and visualizing internal processes in real-time.',
+        objectives: [
+          'Monitor and analyze spatial data in real-time.',
+          'Facilitate decision-making with dashboards and reports.',
+        ],
+        achievements: [
+          'GIS platform with intuitive visualizations and analytics.',
+          'Improved coordination and activity planning.',
+        ],
+        description:
+          'Dashboard GIS for internal processes with spatial analytics tools.',
+        tags: ['GIS', 'Analytics'],
       },
     ],
 
@@ -256,10 +350,16 @@ export const TIMELINE_DATA: {
         flag: '🇨🇴',
       },
       {
-        title: 'Cinekomuna - Performance Optimization',
+        title: 'Cinekomuna - Improve Performance',
         area: 'Media / Streaming',
         kind: 'Performance / FinOps / Security',
-        stack: ['MeteorJS', 'MongoDB', 'AWS (EC2, S3, CloudWatch)', 'Node.js', 'New Relic'],
+        stack: [
+          'MeteorJS',
+          'MongoDB',
+          'AWS (EC2, S3, CloudWatch)',
+          'Node.js',
+          'New Relic',
+        ],
         country: 'Mexico',
         flag: '🇲🇽',
 
@@ -270,49 +370,75 @@ export const TIMELINE_DATA: {
         links: [{ label: 'Website', href: 'https://cinekomuna.com' }],
 
         summary:
-          'Optimización integral de una app MeteorJS en AWS: refactor de código, tuning de consultas MongoDB y mejores prácticas de arquitectura para mejorar rendimiento, escalabilidad y seguridad mientras se reducen costos (FinOps).',
-
+          'Comprehensive MeteorJS optimization on AWS: code refactor, MongoDB tuning, and best practices for performance, scalability, security, and cost reduction (FinOps).',
         achievements: [
-          'Mejora notable en tiempos de respuesta y experiencia de usuario.',
-          'Reducción de costos de infraestructura AWS.',
-          'Endurecimiento de seguridad y aumento de la escalabilidad.'
+          'Notable improvement in response times.',
+          'Reduced infrastructure costs.',
+          'Strengthened security and scalability.',
         ],
-
         challenges: [
-          'Suscripciones complejas de Meteor y pipelines de agregación en MongoDB.',
-          'Necesidad de desacoplar componentes para serverless.',
-          'Observabilidad y trazabilidad insuficientes.'
+          'Complex Meteor subscriptions and MongoDB aggregations.',
+          'Need to decouple components into serverless.',
+          'Insufficient observability.',
         ],
-
         solutions: [
-          'Refactor de publicaciones/subs; índices compuestos y hints en agregaciones.',
-          'Migración selectiva a AWS Lambda; cache/CDN donde aplica.',
-          'Observabilidad con CloudWatch + New Relic; alertas y tableros de monitoreo.'
+          'Refactor of pubs/subs; compound indexes and aggregation hints.',
+          'Selective migration to Lambda; caching/CDN where applicable.',
+          'CloudWatch + New Relic; alerts and dashboards.',
         ],
-
         description:
-          'Revisión de arquitectura, optimización de base de datos y adopción de mejores prácticas AWS para preparar crecimiento sostenido y confiable.',
+          'Architecture review, DB optimization, and AWS practices for sustainable growth.',
         tags: ['Performance', 'FinOps', 'Observability', 'Security'],
-        highlight: true
+        highlight: true,
       },
       {
         title: 'John Daza - WebApp',
         area: 'Business Services',
-        kind: 'CMS/Website',
-        stack: ['Next.js', 'Node.js', 'PostgreSQL'],
+        kind: 'Mini Web App',
+        stack: ['Node.js', 'React', 'PostgreSQL'],
         country: 'Colombia',
         flag: '🇨🇴',
+
+        client: 'John Daza',
+        location: 'Colombia',
+        date: '2022',
+        role: 'Full-Stack Developer',
+
+        summary:
+          'Mini application for data telemonitoring and electronic health record (EHR) management.',
+        description: 'Lightweight web app with EHR functionalities for telemonitoring.',
+        tags: ['EHR', 'Healthcare'],
       },
     ],
 
     '2023': [
       {
         title: 'GSOFT - End-to-End SaaS',
-        area: 'SaaS',
-        kind: 'Multi-tenant Platform',
-        stack: ['Node.js', 'React', 'PostgreSQL', 'AWS'],
+        area: 'SaaS / QA',
+        kind: 'E2E Testing Platform',
+        stack: ['.NET', 'Cypress'],
         country: 'Mexico',
         flag: '🇲🇽',
+
+        client: 'GSOFT',
+        location: 'Mexico',
+        date: '2023',
+        role: 'Software Testing Specialist',
+        links: [{ label: 'Website', href: 'https://geniussoft.com.mx/' }],
+
+        summary:
+          'Automated end-to-end testing with Cypress to ensure software quality and user experience in a SaaS platform.',
+        objectives: [
+          'Implement a full E2E suite before launch.',
+          'Detect and fix bugs early in the lifecycle.',
+        ],
+        achievements: [
+          'Significant improvement in software quality.',
+          'Reduced production bugs.',
+          'Better end-user experience.',
+        ],
+        description: 'Automated E2E testing for GSOFT SaaS platform.',
+        tags: ['E2E', 'Testing', 'Automation'],
       },
       {
         title: 'Javier Garaeta - AWS Optimization',
@@ -321,6 +447,22 @@ export const TIMELINE_DATA: {
         stack: ['AWS (Cost Explorer, Lambda, EC2)', 'Observability'],
         country: 'Spain',
         flag: '🇪🇸',
+
+        client: 'Javier Garaeta',
+        location: 'Spain',
+        date: '2023',
+        role: 'Cloud Consultant',
+
+        summary:
+          'Optimization of AWS infrastructure focusing on cost reduction and performance improvements.',
+        achievements: [
+          'Significant monthly savings.',
+          'Smooth communication and alignment with goals.',
+        ],
+        testimonial:
+          '“Andrés helped me optimize AWS, achieving significant savings. He understood the goal and delivered on time with clear communication. Highly recommended.”',
+        description: 'AWS consulting for FinOps and cost-performance improvements.',
+        tags: ['AWS', 'FinOps'],
       },
       {
         title: 'Ángela Rivero - Google Sheets + Slack Script',
@@ -330,7 +472,7 @@ export const TIMELINE_DATA: {
         country: 'Ecuador',
         flag: '🇪🇨',
         description:
-          'Modificación de script en Google Sheets para enviar notificaciones por Slack',
+          'Modified a Google Sheets script to send Slack notifications.',
       },
       {
         title: 'Pevgrow - QA Consulting',
@@ -355,18 +497,81 @@ export const TIMELINE_DATA: {
         stack: ['Node.js', 'React', 'Profiling/Tracing'],
         country: 'Costa Rica',
         flag: '🇨🇷',
-        testimonial:
-          'Estamos muy agradecidos con Andrés por su valioso aporte a nuestro proyecto. Gracias a su trabajo, hemos podido ordenar, mejorar y expandir nuestros servicios de nuestra plataforma web. Andrés ha demostrado ser un profesional de primer nivel, con una gran dedicación, conocimiento tecnológico, experiencia y compromiso. Sin duda, es un proveedor de confianza y calidad, que recomendamos ampliamente.',
+        review:
+          'We are very grateful to Andrés for his valuable contribution. Thanks to his work, we improved our platform and expanded our services. Highly recommended.',
         description:
-          'Evaluación y optimización de un proyecto desarrollado en Node.js y React, con integración de Dato CMS, acompañado de un programa de capacitación para el equipo. Este proceso incluye una revisión exhaustiva del código para identificar áreas de mejora, optimizar la performance y asegurar la integración efectiva con Dato CMS. Paralelamente, se implementará un plan de formación personalizado para el personal, centrado en las mejores prácticas de desarrollo, uso avanzado de estas tecnologías y gestión eficiente de contenidos con Dato CMS. El objetivo es elevar la calidad del proyecto, mejorar la eficiencia del equipo y potenciar la entrega de soluciones innovadoras y adaptadas a las necesidades del mercado.',
+          'Evaluation and optimization of a Node.js + React + Dato CMS project, including a training plan for the client team.',
+      },
+      {
+        title: 'Freelaw - Docker Implementation',
+        area: 'Legal',
+        kind: 'DevOps / Containerization',
+        stack: ['Docker', 'Python', 'Selenium', 'Firefox'],
+        country: 'Chile',
+        flag: '🇨🇱',
+
+        client: 'Guillermo Piedrabuena',
+        location: 'Chile',
+        date: '2023',
+        role: 'DevOps Engineer / Containerization Engineer',
+        links: [{ label: 'Website', href: 'http://freelaw.cl' }],
+
+        summary:
+          'Containerization of a Python+Selenium scraper using Docker with a custom selenium/standalone-firefox image.',
+        achievements: [
+          'Reproducible execution across environments.',
+          'Solved Selenium ↔ Firefox communication issues in Docker.',
+          'Improved scraper performance and efficiency.',
+          'Simplified deployment and management.',
+        ],
+        challenges: [
+          'Cross-component communication inside Docker.',
+          'Optimizing image size and performance.',
+        ],
+        testimonial:
+          '“Hiring Andrés was a huge help, professional and skilled. Thanks to him, my project reached a more professional level. Highly recommended.”',
+        description: 'Dockerized Python+Selenium scraper with optimized image.',
+        tags: ['Docker', 'Automation'],
       },
       {
         title: 'Javeriana - Mobile App',
         area: 'Education',
         kind: 'Mobile App',
-        stack: ['React Native', 'Node.js'],
+        stack: ['React Native', 'iOS', 'Android', 'Biometric Authentication'],
         country: 'Colombia',
         flag: '🇨🇴',
+
+        client: 'Pontificia Universidad Javeriana Cali',
+        location: 'Colombia',
+        date: '2023',
+        role: 'Mobile App Developer',
+        links: [
+          {
+            label: 'Android',
+            href: 'https://play.google.com/store/apps/details?id=edu.co.javerianacali',
+          },
+          {
+            label: 'iOS',
+            href: 'https://apps.apple.com/co/app/javeriana-cali/id6464329823?l=en-GB',
+          },
+        ],
+
+        summary:
+          'Enhancements to React Native app: biometric authentication, tablet UI optimization, and major bug fixes for stability.',
+        achievements: [
+          'Biometrics integrated on iOS and Android.',
+          'Optimized UI for tablets.',
+          'Notable reduction in crashes and bugs.',
+        ],
+        challenges: [
+          'Cross-platform biometric integration.',
+          'Responsive tablet design.',
+          'Debugging legacy codebase.',
+        ],
+        testimonial:
+          '“Andrés, thank you for your support on the Mobile App development, for your commitment, punctuality, organization, and quality.”',
+        description: 'End-to-end improvements of the Javeriana Cali mobile app.',
+        tags: ['Mobile', 'React Native'],
       },
       {
         title: 'Kuno Digital - Make & CRM Integrations',
@@ -375,14 +580,6 @@ export const TIMELINE_DATA: {
         stack: ['Make (Integromat)', 'REST APIs', 'Webhook Workers'],
         country: 'Panama',
         flag: '🇵🇦',
-      },
-      {
-        title: 'Freelaw - Docker Implementation',
-        area: 'Legal',
-        kind: 'DevOps / Containerization',
-        stack: ['Docker', 'CI/CD'],
-        country: 'Chile',
-        flag: '🇨🇱',
       },
       {
         title: 'Expelled from Workana for integrity stance',
@@ -415,7 +612,7 @@ export const TIMELINE_DATA: {
         kind: 'Marketing Automation',
         stack: ['Salesmanago API', 'Node.js'],
         country: 'Panama',
-        flag: '🇺🇵🇦',
+        flag: '🇵🇦',
       },
       {
         title: 'El Hornero - Salesmanago Consultancy',
@@ -423,7 +620,7 @@ export const TIMELINE_DATA: {
         kind: 'Marketing Automation / Consultancy',
         stack: ['Salesmanago', 'Data Mapping'],
         country: 'Panama',
-        flag: '🇺🇵🇦',
+        flag: '🇵🇦',
       },
       {
         title: 'Caribescorts - Web App',
