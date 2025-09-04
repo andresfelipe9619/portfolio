@@ -8,7 +8,6 @@ Welcome to the code behind a world‑class developer's digital playground. It's 
 - **TypeScript**—because type safety is the best safety
 - **Tailwind CSS** & **shadcn/ui** for styling with flair
 - Animations courtesy of **Framer Motion**, **Magic UI**, `rough-notation`, and even `canvas-confetti`
-- Localization ready via the `locales/` directory
 
 ## Getting Started
 
@@ -28,7 +27,6 @@ src/
 ├─ data/            # copy and resume info
 ├─ hooks/           # reusable hooks
 ├─ lib/             # utilities
-├─ locales/         # translations
 ├─ pages/           # route-level components
 └─ sections/        # big, reusable page sections
 ```
