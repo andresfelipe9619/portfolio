@@ -71,7 +71,7 @@ export function DraggableExplorer({
     <div
       ref={ref}
       style={style}
-      className="z-[100] rounded-lg border border-white/10 bg-gray-950/95 backdrop-blur shadow-2xl"
+      className="z-[100] rounded-lg border border-white/10 bg-gray-950/95 backdrop-blur shadow-2xl font-mono"
     >
       {/* Titlebar */}
       <div
@@ -91,7 +91,7 @@ export function DraggableExplorer({
 
       {/* Content */}
       <div className="h-[calc(100%-32px)] overflow-hidden">
-        <div className="h-full overflow-auto p-2 text-sm">
+        <div className="h-full overflow-auto p-2 text-sm font-mono">
           <MobileNavFileTree />
         </div>
       </div>
