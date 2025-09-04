@@ -1,14 +1,34 @@
-// Types (optional but recommended)
 export type TimelineItem = {
   title: string;
   area?: string; // Industry/sector (Education, Finance, SaaS, etc.)
-  kind?: string; // Software class/type (CRM, CMS, GIS, Mobile App, etc.)
+  kind?: string;  // Software class/type (CRM, CMS, GIS, Mobile App, etc.)
   stack?: string[]; // Tech used
   country?: string; // e.g., "Colombia"
   description?: string;
   review?: string;
-  flag?: string; // e.g., "🇨🇴"
+  flag?: string;
+
+  // --- New (optional) Notion-like structure ---
+  client?: string;             // "Cinekomuna"
+  location?: string;           // "Mexico"
+  role?: string;               // "Lead Backend Developer / DevOps Engineer"
+  date?: string;               // "2022" or "2020-05 – 2020-12"
+  links?: { label: string; href: string }[];
+
+  // Rich sections (all optional)
+  summary?: string;            // 3–5 lines, sales-ready
+  objectives?: string[];       // bullets
+  scope?: string[];            // if you split scope from objectives
+  achievements?: string[];     // bullets, result-focused
+  challenges?: string[];       // bullets
+  solutions?: string[];        // bullets (if you want to pair with challenges)
+  testimonial?: string;        // quote
+
+  // Optional presentation helpers
+  highlight?: boolean;         // surface in UI (badge, accent)
+  tags?: string[];             // free-form labels, e.g., ["FinOps", "Serverless"]
 };
+
 
 export type TimelineByYear = Record<string, TimelineItem[]>;
 
@@ -132,10 +152,50 @@ export const TIMELINE_DATA: {
       {
         title: 'Sentir Creativo - Web App & CMS',
         area: 'Creative Industry',
-        kind: 'CMS/Website',
-        stack: ['Strapi', 'Next.js', 'PostgreSQL'],
+        kind: 'CMS / Marketplace',
+        stack: ['React', 'Node.js', 'Strapi'],
         country: 'Chile',
         flag: '🇨🇱',
+
+        // New, richer fields (all optional but useful)
+        client: 'Sentir Creativo',
+        location: 'Chile',
+        date: '2020',
+        role: 'Lead Web Developer',
+        links: [{ label: 'Website', href: 'https://sentircreativo.com' }],
+
+        summary:
+          'Plataforma dinámica para la gestión y venta de servicios artísticos: vitrinas de portafolio, e-commerce de obras y agenda de talleres, con CMS en Strapi.',
+
+        // You can show these only in the expanded dialog/card
+        objectives: [
+          'Brindar a artistas una herramienta moderna para gestionar presencia online y servicios.',
+          'Permitir venta directa con pagos seguros y envíos.',
+          'Fomentar interacción con clientes y el crecimiento de la comunidad.'
+        ],
+
+        achievements: [
+          'Lanzamiento con interfaz intuitiva y diseño visual atractivo.',
+          'CMS con Strapi para administrar perfiles, galerías y servicios.',
+          'Formación de comunidad activa de artistas y compradores.'
+        ],
+
+        challenges: [
+          'Equilibrar estética y funcionalidad para artistas y público.',
+          'Impulsar el crecimiento orgánico de la comunidad.'
+        ],
+
+        solutions: [
+          'Diseño minimalista y responsive; pruebas con usuarios para optimizar UX.',
+          'SEO, redes sociales y campañas por correo; eventos online y colaboraciones.'
+        ],
+
+        testimonial:
+          '“Excelente experiencia: responsabilidad, empatía y creatividad. Propuso soluciones orientadas a UX, escalabilidad y organización de la información, reduciendo tiempos de implementación.”',
+
+        description:
+          'Gestión de portafolios, servicios, ventas y comunicación con clientes desde un solo lugar.',
+        tags: ['CMS', 'Marketplace', 'Strapi']
       },
       {
         title: 'Falconeye - GIS',
@@ -198,10 +258,42 @@ export const TIMELINE_DATA: {
       {
         title: 'Cinekomuna - Performance Optimization',
         area: 'Media / Streaming',
-        kind: 'Performance Tuning',
-        stack: ['Node.js', 'React', 'CDN / Caching'],
+        kind: 'Performance / FinOps / Security',
+        stack: ['MeteorJS', 'MongoDB', 'AWS (EC2, S3, CloudWatch)', 'Node.js', 'New Relic'],
         country: 'Mexico',
         flag: '🇲🇽',
+
+        client: 'Cinekomuna',
+        location: 'Mexico',
+        date: '2022',
+        role: 'Lead Backend Developer / DevOps Engineer',
+        links: [{ label: 'Website', href: 'https://cinekomuna.com' }],
+
+        summary:
+          'Optimización integral de una app MeteorJS en AWS: refactor de código, tuning de consultas MongoDB y mejores prácticas de arquitectura para mejorar rendimiento, escalabilidad y seguridad mientras se reducen costos (FinOps).',
+
+        achievements: [
+          'Mejora notable en tiempos de respuesta y experiencia de usuario.',
+          'Reducción de costos de infraestructura AWS.',
+          'Endurecimiento de seguridad y aumento de la escalabilidad.'
+        ],
+
+        challenges: [
+          'Suscripciones complejas de Meteor y pipelines de agregación en MongoDB.',
+          'Necesidad de desacoplar componentes para serverless.',
+          'Observabilidad y trazabilidad insuficientes.'
+        ],
+
+        solutions: [
+          'Refactor de publicaciones/subs; índices compuestos y hints en agregaciones.',
+          'Migración selectiva a AWS Lambda; cache/CDN donde aplica.',
+          'Observabilidad con CloudWatch + New Relic; alertas y tableros de monitoreo.'
+        ],
+
+        description:
+          'Revisión de arquitectura, optimización de base de datos y adopción de mejores prácticas AWS para preparar crecimiento sostenido y confiable.',
+        tags: ['Performance', 'FinOps', 'Observability', 'Security'],
+        highlight: true
       },
       {
         title: 'John Daza - WebApp',
@@ -237,6 +329,8 @@ export const TIMELINE_DATA: {
         stack: ['Google Apps Script', 'Slack API'],
         country: 'Ecuador',
         flag: '🇪🇨',
+        description:
+          'Modificación de script en Google Sheets para enviar notificaciones por Slack',
       },
       {
         title: 'Pevgrow - QA Consulting',
@@ -261,7 +355,7 @@ export const TIMELINE_DATA: {
         stack: ['Node.js', 'React', 'Profiling/Tracing'],
         country: 'Costa Rica',
         flag: '🇨🇷',
-        review:
+        testimonial:
           'Estamos muy agradecidos con Andrés por su valioso aporte a nuestro proyecto. Gracias a su trabajo, hemos podido ordenar, mejorar y expandir nuestros servicios de nuestra plataforma web. Andrés ha demostrado ser un profesional de primer nivel, con una gran dedicación, conocimiento tecnológico, experiencia y compromiso. Sin duda, es un proveedor de confianza y calidad, que recomendamos ampliamente.',
         description:
           'Evaluación y optimización de un proyecto desarrollado en Node.js y React, con integración de Dato CMS, acompañado de un programa de capacitación para el equipo. Este proceso incluye una revisión exhaustiva del código para identificar áreas de mejora, optimizar la performance y asegurar la integración efectiva con Dato CMS. Paralelamente, se implementará un plan de formación personalizado para el personal, centrado en las mejores prácticas de desarrollo, uso avanzado de estas tecnologías y gestión eficiente de contenidos con Dato CMS. El objetivo es elevar la calidad del proyecto, mejorar la eficiencia del equipo y potenciar la entrega de soluciones innovadoras y adaptadas a las necesidades del mercado.',
