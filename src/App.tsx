@@ -11,6 +11,7 @@ import { DraggableExplorer } from '@/components/ui/navbar/draggable-explorer.tsx
 import { useKeyListener } from '@/hooks/useKeyListener.tsx';
 import { logPageView } from './lib/ga';
 import Contact from './pages/Contact';
+import Projects from './pages/Projects';
 import ErrorBoundary from '@/components/error-boundary';
 
 export default function App() {
@@ -50,6 +51,7 @@ export default function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/oss" element={<OpenSourcePage />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/projects" element={<Projects />} />
               </Routes>
             </ErrorBoundary>
           )}

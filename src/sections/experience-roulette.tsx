@@ -6,11 +6,14 @@ import { TIMELINE_DATA } from '@/data/timeline';
 import { flattenTimeline, COUNTRY_COORDS, focusGlobe } from '@/lib/timeline';
 import TimelineGlobe from '@/components/timeline-globe';
 import { cn } from '@/lib/utils';
+import ProjectDialog from '@/components/project-dialog';
 
 export default function ExperienceRoulette() {
   const items = useMemo(() => flattenTimeline(TIMELINE_DATA.timeline), []);
   const listRef = useRef<HTMLUListElement>(null);
   const [active, setActive] = useState(0);
+  const [showProjectDialog, setShowProjectDialog] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
 
   // Observe the list’s own scroll to pick the item closest to the vertical center
   useEffect(() => {
@@ -56,8 +59,18 @@ export default function ExperienceRoulette() {
     };
   }, [items, active]);
 
+  const handleProjectClick = (project) => {
+    setSelectedProject(project);
+    setShowProjectDialog(true);
+  };
+
   return (
     <section id="experience" className="bg-gray-950 text-white py-16">
+      <ProjectDialog
+        open={showProjectDialog}
+        onOpenChange={setShowProjectDialog}
+        project={selectedProject}
+      />
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 md:grid-cols-2">
         {/* LEFT: Timeline — fixed height, inner scroll only when hovered */}
         <div>
@@ -98,12 +111,7 @@ export default function ExperienceRoulette() {
                         ? 'opacity-60 scale-[0.985]'
                         : 'opacity-30 scale-[0.975]',
                   )}
-                  onClick={(e) =>
-                    e.currentTarget.scrollIntoView({
-                      block: 'center',
-                      behavior: 'smooth',
-                    })
-                  }
+                  onClick={() => handleProjectClick(it)}
                 >
                   <span className="relative mr-1 block size-2 rounded-full bg-white/70" />
                   <div className="text-left">
@@ -130,6 +138,9 @@ export default function ExperienceRoulette() {
               );
             })}
           </ul>
+          <div class="flex justify-center mt-4">
+            <a href="/projects" class="text-white bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-md">View All Projects</a>
+          </div>
         </div>
 
         {/* RIGHT: Globe — fixed height; ignore wheel so it never captures scroll */}
