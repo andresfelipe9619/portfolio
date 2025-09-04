@@ -473,3 +473,22 @@ export const TIMELINE_DATA: {
     ],
   },
 };
+
+export type Testimonial = {
+  quote: string;
+  client: string;
+  country?: string;
+  flag?: string;
+};
+
+export const TESTIMONIALS: Testimonial[] = Object.values(
+  TIMELINE_DATA.timeline,
+)
+  .flat()
+  .filter((item) => item.testimonial)
+  .map((item) => ({
+    quote: item.testimonial as string,
+    client: item.client ?? item.title,
+    country: item.country,
+    flag: item.flag,
+  }));
