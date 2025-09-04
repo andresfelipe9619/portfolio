@@ -70,7 +70,7 @@ export default function ExperienceRoulette() {
             ref={listRef}
             className={cn(
               // fixed viewport for the list:
-              'relative w-full rounded-2xl bg-transparent',
+              'relative w-full rounded-2xl bg-transparent select-none',
               // height: slightly taller on desktop
               'h-[480px] sm:h-[520px] md:h-[560px]',
               // inner scroll only on hover (desktop). Mobile always scrolls:
@@ -79,6 +79,8 @@ export default function ExperienceRoulette() {
               'overscroll-contain',
               // optional: nice stepping feel
               'scroll-smooth snap-y snap-mandatory',
+              // allow edges to snap into the center
+              'scroll-pt-[240px] scroll-pb-[240px] sm:scroll-pt-[260px] sm:scroll-pb-[260px] md:scroll-pt-[280px] md:scroll-pb-[280px]',
             )}
           >
             {items.map((it, i) => {
@@ -88,14 +90,20 @@ export default function ExperienceRoulette() {
                 <li
                   key={`${it.year}-${i}-${it.title}`}
                   className={cn(
-                    'snap-start grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-xl px-3 transition-all',
-                    'min-h-[84px] py-2', // row height
+                    'snap-center grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-xl px-3 transition-all cursor-pointer select-none',
+                    'min-h-[96px] py-2', // row height
                     isActive
                       ? 'bg-white/5 ring-1 ring-white/10 opacity-100 scale-[1.00]'
                       : near
                         ? 'opacity-60 scale-[0.985]'
                         : 'opacity-30 scale-[0.975]',
                   )}
+                  onClick={(e) =>
+                    e.currentTarget.scrollIntoView({
+                      block: 'center',
+                      behavior: 'smooth',
+                    })
+                  }
                 >
                   <span className="relative mr-1 block size-2 rounded-full bg-white/70" />
                   <div className="text-left">
