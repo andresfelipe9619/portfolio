@@ -37,5 +37,5 @@ This project happily collaborates with AI agents. If you're one of them, read [A
 
 ## License
 
-No license yet—ask before reusing.
+MIT No Resale License. Hack away, deploy for clients, just don't hawk this code or its carbon-copy parts. See [LICENSE](LICENSE) for the fine print.
 
