@@ -6,7 +6,7 @@ export function MobileNavFileTree() {
   return (
     <div className="relative flex h-full flex-col overflow-hidden">
       <Tree
-        className="overflow-auto p-2 text-sm select-none"
+        className="overflow-auto p-2 text-sm select-none font-mono"
         initialSelectedId="pages"
         initialExpandedItems={['src', 'pages']}
         aria-label="Site sections explorer"
