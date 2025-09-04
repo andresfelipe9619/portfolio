@@ -49,6 +49,12 @@ export const DATA = {
         icon: Icons.linkedin,
         navbar: true,
       },
+      Instagram: {
+        name: 'Instagram',
+        url: 'https://instagram.com/suarezdev96',
+        icon: Icons.instagram,
+        navbar: false,
+      },
       email: {
         name: 'Send Email',
         url: 'mailto:andresfelipe9619@gmail.com',
