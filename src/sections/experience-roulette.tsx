@@ -3,7 +3,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { TIMELINE_DATA } from '@/data/timeline';
-import { flattenTimeline, COUNTRY_COORDS, focusGlobe } from '@/lib/timeline';
+import { COUNTRY_COORDS, flattenTimeline, focusGlobe } from '@/lib/timeline';
 import TimelineGlobe from '@/components/timeline-globe';
 import { cn } from '@/lib/utils';
 import ProjectDialog from '@/components/project-dialog';
@@ -138,8 +138,13 @@ export default function ExperienceRoulette() {
               );
             })}
           </ul>
-          <div class="flex justify-center mt-4">
-            <a href="/projects" class="text-white bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-md">View All Projects</a>
+          <div className="flex justify-center mt-4">
+            <a
+              href="/projects"
+              className="text-white bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-md"
+            >
+              View All Projects
+            </a>
           </div>
         </div>
 

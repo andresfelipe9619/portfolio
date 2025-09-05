@@ -406,7 +406,8 @@ export const TIMELINE_DATA: {
 
         summary:
           'Mini application for data telemonitoring and electronic health record (EHR) management.',
-        description: 'Lightweight web app with EHR functionalities for telemonitoring.',
+        description:
+          'Lightweight web app with EHR functionalities for telemonitoring.',
         tags: ['EHR', 'Healthcare'],
       },
     ],
@@ -461,7 +462,8 @@ export const TIMELINE_DATA: {
         ],
         testimonial:
           '“Andrés helped me optimize AWS, achieving significant savings. He understood the goal and delivered on time with clear communication. Highly recommended.”',
-        description: 'AWS consulting for FinOps and cost-performance improvements.',
+        description:
+          'AWS consulting for FinOps and cost-performance improvements.',
         tags: ['AWS', 'FinOps'],
       },
       {
@@ -570,7 +572,8 @@ export const TIMELINE_DATA: {
         ],
         testimonial:
           '“Andrés, thank you for your support on the Mobile App development, for your commitment, punctuality, organization, and quality.”',
-        description: 'End-to-end improvements of the Javeriana Cali mobile app.',
+        description:
+          'End-to-end improvements of the Javeriana Cali mobile app.',
         tags: ['Mobile', 'React Native'],
       },
       {
@@ -678,9 +681,7 @@ export type Testimonial = {
   flag?: string;
 };
 
-export const TESTIMONIALS: Testimonial[] = Object.values(
-  TIMELINE_DATA.timeline,
-)
+export const TESTIMONIALS: Testimonial[] = Object.values(TIMELINE_DATA.timeline)
   .flat()
   .filter((item) => item.testimonial)
   .map((item) => ({
