@@ -26,7 +26,7 @@ const ProjectDialog = ({ open, onOpenChange, project }: ProjectDialogProps) => {
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-xl">
             {project.flag && <span>{project.flag}</span>}
-            <Highlighter>{project.title}</Highlighter>
+            <Highlighter delay={200} iterations={2} action={"underline"}>{project.title}</Highlighter>
           </DialogTitle>
           <DialogDescription className="text-sm text-white/60">
             {project.year}
