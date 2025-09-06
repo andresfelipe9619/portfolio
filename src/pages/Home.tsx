@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/accordion';
 import { Quote as QuoteIcon } from 'lucide-react';
 import { Globe } from '@/components/magicui/globe';
-import { Terminal } from '@/components/magicui/terminal';
 import { GLOBE_CONFIG } from '@/components/constants';
 import { Footer } from '@/sections/footer.tsx';
 
@@ -209,12 +208,11 @@ export default function Home() {
                 <span className="text-blue-400">across the globe</span>
               </p>
             </BlurFade>
-            {/* Quote + Terminal */}
             {completed && (
               <BlurFade delay={1} inView>
-                <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2">
-                  <Card className="border-white/10 bg-white/5">
-                    <CardContent className="relative p-6">
+                <div className="flex w-full justify-center">
+                  <Card className="border-white/10 bg-white/5 max-w-md">
+                    <CardContent className="p-6">
                       <div className="mb-3 flex items-center gap-2 text-blue-300">
                         <QuoteIcon className="h-4 w-4" />
                         <span className="text-sm font-medium">
@@ -222,45 +220,18 @@ export default function Home() {
                         </span>
                       </div>
                       <blockquote className="text-lg italic leading-relaxed">
-                        "One man's crappy software is another man's full‑time
-                        job."
+                        "One man's crappy software is another man's full‑time job."
                       </blockquote>
                       <div className="mt-2 text-sm text-white/60">
                         — Jessica Gaston
                       </div>
                     </CardContent>
                   </Card>
-
-                  <div className="rounded-2xl ring-1 ring-white/10">
-                    <Terminal>
-                      <p style={{ color: 'green' }}>
-                        {`>`} npx create-saas-app
-                      </p>
-                      <p style={{ color: 'cyan' }}>
-                        {`✔`} Scaffolding Next.js + tRPC + shadcn/ui
-                      </p>
-                      <p style={{ color: 'green' }}>{`>`} pnpm run dev</p>
-                      <p style={{ color: 'yellow' }}>
-                        {`ℹ`} Ready on http://localhost:5173
-                      </p>
-                    </Terminal>
-                  </div>
                 </div>
               </BlurFade>
             )}
           </div>
 
-          <svg
-            className="pointer-events-none mt-16 w-full"
-            viewBox="0 0 1440 120"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M0,64 C240,160 480,0 720,64 C960,128 1200,96 1440,48 L1440,120 L0,120 Z"
-              fill="currentColor"
-              className="text-white"
-            />
-          </svg>
         </div>
       </section>
 
