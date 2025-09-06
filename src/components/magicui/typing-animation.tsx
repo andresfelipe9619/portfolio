@@ -11,6 +11,7 @@ interface TypingAnimationProps extends MotionProps {
   delay?: number;
   as?: React.ElementType;
   startOnView?: boolean;
+  disabled?: boolean;
 }
 
 export function TypingAnimation({
@@ -20,13 +21,16 @@ export function TypingAnimation({
   delay = 0,
   as: Component = 'div',
   startOnView = false,
+  disabled = false,
   ...props
 }: TypingAnimationProps) {
   const MotionComponent = motion.create(Component, {
     forwardMotionProps: true,
   });
 
-  const [displayedText, setDisplayedText] = useState<string>('');
+  const [displayedText, setDisplayedText] = useState<string>(
+    disabled ? children : '',
+  );
   const [started, setStarted] = useState(false);
   const elementRef = useRef<HTMLElement | null>(null);
   const isInView = useInView(elementRef as React.RefObject<Element>, {
@@ -35,6 +39,12 @@ export function TypingAnimation({
   });
 
   useEffect(() => {
+    if (disabled) setDisplayedText(children);
+  }, [children, disabled]);
+
+  useEffect(() => {
+    if (disabled) return;
+
     if (!startOnView) {
       const startTimeout = setTimeout(() => {
         setStarted(true);
@@ -49,10 +59,10 @@ export function TypingAnimation({
     }, delay);
 
     return () => clearTimeout(startTimeout);
-  }, [delay, startOnView, isInView]);
+  }, [delay, startOnView, isInView, disabled]);
 
   useEffect(() => {
-    if (!started) return;
+    if (disabled || !started) return;
 
     const graphemes = Array.from(children);
     let i = 0;
@@ -68,7 +78,7 @@ export function TypingAnimation({
     return () => {
       clearInterval(typingEffect);
     };
-  }, [children, duration, started]);
+  }, [children, duration, started, disabled]);
 
   return (
     <MotionComponent
