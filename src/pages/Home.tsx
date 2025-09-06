@@ -24,7 +24,7 @@ import {
 import { OssHighlights } from '@/sections/oss-highlights.tsx';
 import { TypingAnimation } from '@/components/magicui/typing-animation';
 import { Highlighter } from '@/components/magicui/highlighter.tsx';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import BlurFade from '@/components/magicui/blur-fade.tsx';
 import FunnyVirusScanDialog from '@/components/virus-scan-dialog.tsx';
 import JokeDialog from '@/components/joke-dialog.tsx';
@@ -35,6 +35,7 @@ import { useNavigate } from 'react-router-dom';
 import confetti from 'canvas-confetti';
 import ExperienceRoulette from '@/sections/experience-roulette.tsx';
 import { TESTIMONIALS, TIMELINE_DATA } from '@/data/timeline';
+import { flattenTimeline, type FlattenedItem } from '@/lib/timeline';
 import { Marquee } from '@/components/magicui/marquee';
 import ProjectDialog from '@/components/project-dialog';
 
@@ -43,7 +44,13 @@ export default function Home() {
   const [showVirusScan, setShowVirusScan] = useState(false);
   const [showJokeDialog, setShowJokeDialog] = useState(false);
   const [showProjectDialog, setShowProjectDialog] = useState(false);
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState<FlattenedItem | null>(
+    null,
+  );
+  const items = useMemo<FlattenedItem[]>(
+    () => flattenTimeline(TIMELINE_DATA.timeline),
+    [],
+  );
   const navigate = useNavigate();
   const typingDelay =
     mainPhrase.reduce((sum, s) => s.length + sum, 0) * 100 + 600;
@@ -109,10 +116,9 @@ export default function Home() {
   }
 
   const handleTestimonialClick = (testimonial) => {
-    const project = Object.values(TIMELINE_DATA.timeline)
-      .flat()
-      .find((item) => item.testimonial === testimonial.quote);
-
+    const project = items.find(
+      (item) => item.testimonial === testimonial.quote,
+    );
     if (project) {
       setSelectedProject(project);
       setShowProjectDialog(true);
