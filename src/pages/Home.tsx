@@ -36,19 +36,27 @@ import confetti from 'canvas-confetti';
 import ExperienceRoulette from '@/sections/experience-roulette.tsx';
 
 export default function Home() {
-  const [completed, setCompleted] = useState(false);
+  const hasSeenHero =
+    typeof window !== 'undefined' &&
+    sessionStorage.getItem('hasSeenHero') === 'true';
+
+  const [completed, setCompleted] = useState(hasSeenHero);
   const [showVirusScan, setShowVirusScan] = useState(false);
   const [showJokeDialog, setShowJokeDialog] = useState(false);
   const navigate = useNavigate();
   const typingDelay =
     mainPhrase.reduce((sum, s) => s.length + sum, 0) * 100 + 600;
+  const skipAnimation = hasSeenHero;
 
   useEffect(() => {
-    setTimeout(() => {
+    if (skipAnimation) return;
+    const timer = setTimeout(() => {
       setCompleted(true);
+      sessionStorage.setItem('hasSeenHero', 'true');
     }, typingDelay + 1500);
     return () => {
-      setCompleted(false);
+      clearTimeout(timer);
+      setCompleted(skipAnimation);
     };
     //eslint-disable-next-line
   }, []);
@@ -120,12 +128,16 @@ export default function Home() {
         />
         <div className="relative z-10 mx-auto flex w-full max-w-none flex-col items-center px-6">
           <div className="mx-auto max-w-4xl text-center h-60">
-            <TypingAnimation className="text-4xl font-semibold tracking-tight sm:text-6xl md:text-7xl">
+            <TypingAnimation
+              disabled={skipAnimation}
+              className="text-4xl font-semibold tracking-tight sm:text-6xl md:text-7xl"
+            >
               {mainPhrase[0]}
             </TypingAnimation>
 
             <TypingAnimation
-              delay={mainPhrase[0].length * 100}
+              disabled={skipAnimation}
+              delay={skipAnimation ? 0 : mainPhrase[0].length * 100}
               className="text-4xl font-semibold tracking-tight sm:text-6xl md:text-7xl"
             >
               {mainPhrase[1]}
@@ -134,10 +146,15 @@ export default function Home() {
               iterations={3}
               action={'underline'}
               inView={true}
-              delay={typingDelay}
+              delay={skipAnimation ? 0 : typingDelay}
             >
               <TypingAnimation
-                delay={(mainPhrase[0].length + mainPhrase[1].length) * 100}
+                disabled={skipAnimation}
+                delay={
+                  skipAnimation
+                    ? 0
+                    : (mainPhrase[0].length + mainPhrase[1].length) * 100
+                }
                 className="text-4xl font-semibold tracking-tight sm:text-6xl md:text-7xl"
               >
                 Can't
