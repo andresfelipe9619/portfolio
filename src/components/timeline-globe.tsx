@@ -14,12 +14,14 @@ export default function TimelineGlobe({ className }: Props) {
 
   useEffect(() => {
     const canvas = canvasRef.current!;
-    const ro = new ResizeObserver(() => {
+    const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const { width, height } = canvas.getBoundingClientRect();
       canvas.width = Math.max(1, Math.floor(width * dpr));
       canvas.height = Math.max(1, Math.floor(height * dpr));
-    });
+    };
+    resize();
+    const ro = new ResizeObserver(resize);
     ro.observe(canvas);
 
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
