@@ -6,11 +6,11 @@ export function Breadcrumb() {
 
   const formatPath = (path: string) => {
     if (path === '/') {
-      return '~ / src / pages / Home';
+      return '~/src/pages/Home';
     }
     const pageName = path.slice(1);
     const capitalizedPageName = pageName.charAt(0).toUpperCase() + pageName.slice(1);
-    return `~ / src / pages / ${capitalizedPageName}`;
+    return `~/src/pages/${capitalizedPageName}`;
   };
 
   return (

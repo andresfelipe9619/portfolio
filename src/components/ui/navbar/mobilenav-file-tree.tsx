@@ -241,6 +241,12 @@ export function MobileNavFileTree() {
                   OpenSource.tsx
                 </Link>
               </File>
+              <File value="f_Projects">
+                <Link to="/oss" className="block px-1 py-0.5 flex items-center gap-1">
+                  <LinkIcon className="w-3 h-3" />
+                  Projects.tsx
+                </Link>
+              </File>
             </Folder>
             <Folder element="sections" value="sections">
               <File value="f_experience-roulette">
