@@ -14,7 +14,7 @@ export function Breadcrumb() {
   };
 
   return (
-    <div className="hidden md:flex items-center gap-2 text-sm text-gray-400">
+    <div className="flex items-center gap-2 text-sm text-gray-400 font-mono">
       <span className="text-cyan-400">➜</span>
       <span>{formatPath(path)}</span>
     </div>

@@ -15,6 +15,7 @@ Welcome to the code behind a world‑class developer's digital playground. It's 
 npm install
 npm run dev     # start the development server
 npm run lint    # check code quality
+npm test        # keep the jokes bug-free
 npm run build   # create a production build
 npm run preview # preview the build locally
 ```
@@ -37,5 +38,5 @@ This project happily collaborates with AI agents. If you're one of them, read [A
 
 ## License
 
-No license yet—ask before reusing.
+MIT No Resale License. Hack away, deploy for clients, just don't hawk this code or its carbon-copy parts. See [LICENSE](LICENSE) for the fine print.
 

@@ -6,6 +6,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { QuoteIcon } from 'lucide-react';
 
 const ProjectDialog = ({ open, onOpenChange, project }) => {
   if (!project) return null;
@@ -34,6 +35,14 @@ const ProjectDialog = ({ open, onOpenChange, project }) => {
               </ul>
             </div>
           ) : null}
+          {project.testimonial && (
+            <div className="mt-4">
+              <QuoteIcon className="h-5 w-5 text-blue-300" />
+              <blockquote className="mt-2 text-sm italic leading-relaxed text-white/80">
+                {project.testimonial}
+              </blockquote>
+            </div>
+          )}
         </DialogDescription>
       </DialogContent>
     </Dialog>

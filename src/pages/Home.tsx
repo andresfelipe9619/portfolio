@@ -34,13 +34,16 @@ import ReactGA from 'react-ga4';
 import { useNavigate } from 'react-router-dom';
 import confetti from 'canvas-confetti';
 import ExperienceRoulette from '@/sections/experience-roulette.tsx';
-import { TESTIMONIALS } from '@/data/timeline';
+import { TESTIMONIALS, TIMELINE_DATA } from '@/data/timeline';
 import { Marquee } from '@/components/magicui/marquee';
+import ProjectDialog from '@/components/project-dialog';
 
 export default function Home() {
   const [completed, setCompleted] = useState(false);
   const [showVirusScan, setShowVirusScan] = useState(false);
   const [showJokeDialog, setShowJokeDialog] = useState(false);
+  const [showProjectDialog, setShowProjectDialog] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
   const navigate = useNavigate();
   const typingDelay =
     mainPhrase.reduce((sum, s) => s.length + sum, 0) * 100 + 600;
@@ -105,6 +108,17 @@ export default function Home() {
     }, 1000);
   }
 
+  const handleTestimonialClick = (testimonial) => {
+    const project = Object.values(TIMELINE_DATA.timeline)
+      .flat()
+      .find((item) => item.testimonial === testimonial.quote);
+
+    if (project) {
+      setSelectedProject(project);
+      setShowProjectDialog(true);
+    }
+  };
+
   return (
     <main className="relative flex flex-col min-h-[100dvh] overflow-hidden bg-gray-950 text-white">
       <FunnyVirusScanDialog
@@ -112,6 +126,11 @@ export default function Home() {
         onOpenChange={setShowVirusScan}
       />
       <JokeDialog open={showJokeDialog} onOpenChange={setShowJokeDialog} />
+      <ProjectDialog
+        open={showProjectDialog}
+        onOpenChange={setShowProjectDialog}
+        project={selectedProject}
+      />
       <section id="hero" className="relative overflow-hidden py-24">
         <Particles
           className="absolute inset-0 z-0"
@@ -257,7 +276,8 @@ export default function Home() {
                 {TESTIMONIALS.map((t, i) => (
                   <Card
                     key={i}
-                    className="mx-4 w-80 border-white/10 bg-white/5 hover:bg-white/10 transition-colors"
+                    className="mx-4 w-80 border-white/10 bg-white/5 hover:bg-white/10 transition-colors cursor-pointer"
+                    onClick={() => handleTestimonialClick(t)}
                   >
                     <CardContent className="flex h-full flex-col justify-between p-6">
                       <QuoteIcon className="h-5 w-5 text-blue-300" />
