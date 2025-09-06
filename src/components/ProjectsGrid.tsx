@@ -1,17 +1,24 @@
 
 import { useMemo, useState } from 'react';
 import { TIMELINE_DATA } from '@/data/timeline';
-import { flattenTimeline } from '@/lib/timeline';
-import { Card, CardContent } from '@/components/ui/card';
+import { flattenTimeline, type FlattenedItem } from '@/lib/timeline';
+import { Badge } from '@/components/ui/badge';
+import { NeonGradientCard } from '@/components/magicui/neon-gradient-card';
+import { Ripple } from '@/components/magicui/ripple';
 import { cn } from '@/lib/utils';
 import ProjectDialog from '@/components/project-dialog';
 
 export default function ProjectsGrid() {
-  const items = useMemo(() => flattenTimeline(TIMELINE_DATA.timeline), []);
+  const items = useMemo<FlattenedItem[]>(
+    () => flattenTimeline(TIMELINE_DATA.timeline),
+    [],
+  );
   const [showProjectDialog, setShowProjectDialog] = useState(false);
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState<FlattenedItem | null>(
+    null,
+  );
 
-  const handleProjectClick = (project) => {
+  const handleProjectClick = (project: FlattenedItem) => {
     setSelectedProject(project);
     setShowProjectDialog(true);
   };
@@ -25,33 +32,36 @@ export default function ProjectsGrid() {
       />
       <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {items.map((it, i) => (
-          <Card
+          <NeonGradientCard
             key={`${it.year}-${i}-${it.title}`}
             className={cn(
-              'transform-gpu cursor-pointer select-none rounded-xl p-3 ring-1 ring-white/10 transition-all hover:bg-white/5',
+              'relative cursor-pointer select-none rounded-xl p-5 transition-transform hover:scale-[1.02]',
             )}
             onClick={() => handleProjectClick(it)}
           >
-            <CardContent className="p-0">
-              <div className="text-left">
-                <div className="text-xs text-white/50">{it.year}</div>
-                <div className="font-medium">{it.title}</div>
-                <div className="text-xs text-white/60">
-                  {it.area && <span>{it.area}</span>}
-                  {it.kind && it.area && <span> · </span>}
-                  {it.kind && <span>{it.kind}</span>}
-                  {it.stack?.length ? (
-                    <>
-                      <span> · </span>
-                      <span className="text-white/50">
-                        {it.stack.slice(0, 3).join(', ')}
-                      </span>
-                    </>
-                  ) : null}
-                </div>
+            <Ripple className="opacity-40" />
+            <div className="relative z-10 flex flex-col gap-2 text-left">
+              <div className="flex items-center justify-between text-xs text-white/60">
+                <span>{it.year}</span>
+                {it.flag && <span className="text-lg leading-none">{it.flag}</span>}
               </div>
-            </CardContent>
-          </Card>
+              <div className="font-medium">{it.title}</div>
+              <div className="text-xs text-white/60">
+                {it.area && <span>{it.area}</span>}
+                {it.kind && it.area && <span> · </span>}
+                {it.kind && <span>{it.kind}</span>}
+              </div>
+              {it.stack?.length ? (
+                <div className="mt-1 flex flex-wrap gap-1">
+                  {it.stack.slice(0, 3).map((tech) => (
+                    <Badge key={tech} variant="outline">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          </NeonGradientCard>
         ))}
       </div>
     </>

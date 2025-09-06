@@ -3,17 +3,27 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { TIMELINE_DATA } from '@/data/timeline';
-import { COUNTRY_COORDS, flattenTimeline, focusGlobe } from '@/lib/timeline';
+import {
+  COUNTRY_COORDS,
+  flattenTimeline,
+  focusGlobe,
+  type FlattenedItem,
+} from '@/lib/timeline';
 import TimelineGlobe from '@/components/timeline-globe';
 import { cn } from '@/lib/utils';
 import ProjectDialog from '@/components/project-dialog';
 
 export default function ExperienceRoulette() {
-  const items = useMemo(() => flattenTimeline(TIMELINE_DATA.timeline), []);
+  const items = useMemo<FlattenedItem[]>(
+    () => flattenTimeline(TIMELINE_DATA.timeline),
+    [],
+  );
   const listRef = useRef<HTMLUListElement>(null);
   const [active, setActive] = useState(0);
   const [showProjectDialog, setShowProjectDialog] = useState(false);
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState<FlattenedItem | null>(
+    null,
+  );
 
   // Observe the list’s own scroll to pick the item closest to the vertical center
   useEffect(() => {
@@ -59,7 +69,7 @@ export default function ExperienceRoulette() {
     };
   }, [items, active]);
 
-  const handleProjectClick = (project) => {
+  const handleProjectClick = (project: FlattenedItem) => {
     setSelectedProject(project);
     setShowProjectDialog(true);
   };
