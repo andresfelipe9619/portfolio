@@ -14,7 +14,7 @@ import {
   DialogFooter,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { useGitHubStats } from '@/hooks/github-stats.tsx';
+import { useGitHubStats } from '@/hooks/useGitHubStats.tsx';
 import type { OssCardProps } from '@/data/open-source.ts';
 import { logEvent } from '@/lib/ga';
 
