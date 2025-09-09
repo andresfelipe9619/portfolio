@@ -214,11 +214,11 @@ export default function Home() {
               </>
             )}
           </div>
-          <div className="mt-28 flex w-full flex-col items-center gap-6 ">
-            <div className="relative flex items-center justify-center overflow-hidden max-h-[30vh] pt-[32%]">
+          <div className="mt-28 flex w-full flex-col items-center gap-6">
+            <div className="relative flex items-center justify-center">
               <Globe config={GLOBE_CONFIG} />
+              <div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_200%,rgba(0,0,0,0.2),rgba(255,255,255,0))]" />
             </div>
-            <div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_200%,rgba(0,0,0,0.2),rgba(255,255,255,0))]" />
             <BlurFade delay={0.75} inView>
               <p className="mt-3 text-center text-sm text-white/70">
                 Building digital experiences{' '}
