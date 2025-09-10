@@ -7,6 +7,9 @@ import { Breadcrumb } from './breadcrumb';
 export function Header(props: { onClick: () => void }) {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-gray-950/80 backdrop-blur font-mono">
+      <div className="bg-yellow-500/10 py-1 text-center text-xs text-yellow-200">
+        🚧 This site is still under construction—thanks for the patience!
+      </div>
       <div className="mx-auto grid max-w-7xl grid-cols-3 items-center px-6 py-3">
         <Link to="/" className="flex items-center gap-2 text-sm font-semibold">
           <Terminal className="h-4 w-4 text-green-400" />
