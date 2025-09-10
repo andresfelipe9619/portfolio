@@ -9,7 +9,7 @@ type FaqItem = {
 export const FAQ_ITEMS: FaqItem[] = [
   {
     id: 'engagement',
-    question: 'What’s your engagement model?',
+    question: "What’s your engagement model?",
     answer:
       'Scoped projects or retainers. Async-first, demos weekly. No surprises (except pleasant ones).',
   },
@@ -37,38 +37,10 @@ export const FAQ_ITEMS: FaqItem[] = [
     answer: 'Yes. Like Indiana Jones, but instead of whips, I use git rebase.',
   },
   {
-    id: 'deadlines',
-    question: 'How do you handle deadlines?',
-    answer: 'With respect, caffeine, and ruthless prioritization.',
-  },
-  {
     id: 'industries',
     question: 'What industries have you worked in?',
     answer:
       'Fintech, SaaS, e-commerce, healthcare, logistics—you name it, I’ve probably scaled it.',
-  },
-  {
-    id: 'architecture',
-    question: 'Do you do architecture or just coding?',
-    answer: 'Both. Think architect who also isn’t afraid to grab a hammer.',
-  },
-  {
-    id: 'communication',
-    question: 'How do you communicate?',
-    answer:
-      'Async by default, but always clear. Slack, email, Notion, carrier pigeon if required.',
-  },
-  {
-    id: 'difference',
-    question: 'What makes you different from other devs?',
-    answer:
-      'Global experience, obsession with scalability, and humor sharp enough to cut through legacy spaghetti code.',
-  },
-  {
-    id: 'clients',
-    question: 'Do you work with startups or enterprises?',
-    answer:
-      'Both. From scrappy MVPs to Fortune 500 migrations, I’ve seen—and fixed—it all.',
   },
   {
     id: 'cloud',
@@ -82,39 +54,10 @@ export const FAQ_ITEMS: FaqItem[] = [
       'Build for humans, optimize for scale, keep future developers from hating you.',
   },
   {
-    id: 'automation',
-    question: 'Do you do automation?',
-    answer:
-      'Yes. If it can be automated, I’ll automate it. If it can’t, I’ll try anyway.',
-  },
-  {
-    id: 'skills',
-    question: 'How do you keep skills sharp?',
-    answer:
-      'OSS contributions, side projects, conferences, reading RFCs for fun (don’t judge).',
-  },
-  {
     id: 'mentorship',
     question: 'Can you mentor or lead teams?',
     answer:
       'Yes. I’ve led teams across continents. Think Jedi master, but with code reviews.',
-  },
-  {
-    id: 'bugs',
-    question: 'What’s your attitude toward bugs?',
-    answer:
-      'They’re just misunderstood features… until I squash them mercilessly.',
-  },
-  {
-    id: 'async',
-    question: 'Do you work async with global teams?',
-    answer: 'Yes. My calendar is as timezone-friendly as my commits.',
-  },
-  {
-    id: 'delivery',
-    question: 'What’s your delivery style?',
-    answer:
-      'Iterative, transparent, demo-driven. You’ll never wonder “what’s happening?”',
   },
   {
     id: 'whyhire',
@@ -129,7 +72,15 @@ export const faqTitle = 'No question too small, no doubt left hanging.';
 export const professionalTitle =
   'Senior Software Engineer — Cloud, Automation & SaaS Architect';
 
-export const CTATitle =
-  ['Ready to turn ideas into software that actually works?', 'Let’s build brilliance—responsibly (ish).']
+export const CTATitle = [
+  'Ready to turn ideas into software that actually works?',
+  'Let’s build brilliance—responsibly (ish) and ship in weeks, not quarters.',
+];
 
-export const mainPhrase = [`Global companies trust me`, `to build what others`]
+export const originStory =
+  'From tinkering in Cali to architecting clouds for Fortune 500s—28 projects, 11 countries, zero boring deployments.';
+
+export const mainPhrase = [
+  'Global companies trust me to build what others',
+  "can't, won't, or haven't imagined yet.",
+];

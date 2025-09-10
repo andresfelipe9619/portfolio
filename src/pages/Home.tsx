@@ -18,6 +18,7 @@ import {
   FAQ_ITEMS,
   faqTitle,
   mainPhrase,
+  originStory,
   professionalTitle,
 } from '@/data/copy.ts';
 import { OssHighlights } from '@/sections/oss-highlights.tsx';
@@ -161,13 +162,6 @@ export default function Home() {
               {mainPhrase[0]}
             </TypingAnimation>
 
-            <TypingAnimation
-              disabled={skipAnimation}
-              delay={skipAnimation ? 0 : mainPhrase[0].length * 100}
-              className="text-4xl font-semibold tracking-tight sm:text-6xl md:text-7xl"
-            >
-              {mainPhrase[1]}
-            </TypingAnimation>
             <Highlighter
               iterations={3}
               action={'underline'}
@@ -176,14 +170,10 @@ export default function Home() {
             >
               <TypingAnimation
                 disabled={skipAnimation}
-                delay={
-                  skipAnimation
-                    ? 0
-                    : (mainPhrase[0].length + mainPhrase[1].length) * 100
-                }
+                delay={skipAnimation ? 0 : mainPhrase[0].length * 100}
                 className="text-4xl font-semibold tracking-tight sm:text-6xl md:text-7xl"
               >
-                Can't
+                {mainPhrase[1]}
               </TypingAnimation>
             </Highlighter>
             {completed && (
@@ -191,6 +181,11 @@ export default function Home() {
                 <BlurFade delay={0.1} inView>
                   <p className="mx-auto mt-10 max-w-4xl text-balance text-white/70 md:text-lg">
                     {professionalTitle}
+                  </p>
+                </BlurFade>
+                <BlurFade delay={0.15} inView>
+                  <p className="mx-auto mt-6 max-w-3xl text-balance text-white/70 md:text-lg">
+                    {originStory}
                   </p>
                 </BlurFade>
                 <div className="mt-8 flex items-center justify-center gap-3">
@@ -225,38 +220,11 @@ export default function Home() {
                 <span className="text-blue-400">across the globe</span>
               </p>
             </BlurFade>
-            {completed && (
-              <BlurFade delay={1} inView>
-                <div className="flex w-full justify-center">
-                  <Card className="border-white/10 bg-white/5 max-w-md">
-                    <CardContent className="p-6">
-                      <div className="mb-3 flex items-center gap-2 text-blue-300">
-                        <QuoteIcon className="h-4 w-4" />
-                        <span className="text-sm font-medium">
-                          Favorite Quote
-                        </span>
-                      </div>
-                      <blockquote className="text-lg italic leading-relaxed">
-                        "One man's crappy software is another man's full‑time job."
-                      </blockquote>
-                      <div className="mt-2 text-sm text-white/60">
-                        — Jessica Gaston
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </BlurFade>
-            )}
+            {/* Quote moved to FAQ section */}
           </div>
 
         </div>
       </section>
-
-      {completed && (
-        <BlurFade delay={0.25} inView>
-          <ExperienceRoulette />
-        </BlurFade>
-      )}
 
       {/* TESTIMONIALS */}
       {completed && (
@@ -302,7 +270,18 @@ export default function Home() {
         </BlurFade>
       )}
 
-      {/* FAQ */}
+      {completed && (
+        <BlurFade delay={0.25} inView>
+          <ExperienceRoulette />
+        </BlurFade>
+      )}
+
+      {completed && (
+        <BlurFade delay={0.25} inView>
+          <OssHighlights />
+        </BlurFade>
+      )}
+
       {completed && (
         <BlurFade delay={0.25} inView>
           <section id="faq" className="bg-gray-950 text-white py-8">
@@ -335,13 +314,30 @@ export default function Home() {
                   ))}
                 </Accordion>
               </div>
+              <div className="mt-10 flex w-full justify-center">
+                <Card className="border-white/10 bg-white/5 max-w-md">
+                  <CardContent className="p-6">
+                    <div className="mb-3 flex items-center gap-2 text-blue-300">
+                      <QuoteIcon className="h-4 w-4" />
+                      <span className="text-sm font-medium">Favorite Quote</span>
+                    </div>
+                    <blockquote className="text-lg italic leading-relaxed">
+                      "One man's crappy software is another man's full‑time job."
+                    </blockquote>
+                    <div className="mt-2 text-sm text-white/60">
+                      — Jessica Gaston
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+              <p className="mt-6 text-center text-sm text-white/60">
+                More questions?{' '}
+                <a href="/contact" className="underline">
+                  Let's talk.
+                </a>
+              </p>
             </div>
           </section>
-        </BlurFade>
-      )}
-      {completed && (
-        <BlurFade delay={0.25} inView>
-          <OssHighlights />
         </BlurFade>
       )}
 
