@@ -50,8 +50,8 @@ const LoadingScreen = ({
       {/*/>*/}
 
       <BlurFade duration={0.2} blur={'0px'} yOffset={0} inView>
-        <div className="relative z-10 w-[60vw] h-[60vh]">
-          <Terminal className="text-green-300 font-mono text-sm h-full w-[60vw]">
+        <div className="relative z-10 w-[90vw] h-[80vh] md:w-[60vw] md:h-[60vh]">
+          <Terminal className="text-green-300 font-mono text-sm h-full w-full">
             <TypingAnimation className="text-zinc-400">
               {`$ boot renderer --target=${site} --secure --${useH3 ? 'h3' : 'h2'} --gpu --measure`}
             </TypingAnimation>
@@ -83,7 +83,7 @@ const LoadingScreen = ({
           </Terminal>
         </div>
         {/* Footer with the skip action */}
-        <div className="flex items-center justify-between border-t border-white/10 px-4 py-2 ">
+        <div className="flex w-[90vw] md:w-[60vw] items-center justify-between border-t border-white/10 px-4 py-2">
           <ShimmerButton className="text-sm text-white" onClick={onSkip}>
             🤖 I’m not here for logs, show me the code →
           </ShimmerButton>
