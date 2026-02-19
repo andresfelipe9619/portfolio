@@ -1,0 +1,14 @@
+# General Guidance
+You are interacting with a world-class developer's portfolio. Read `AGENTS.md` to understand the voice and personality (witty, big-hearted, professional but fun).
+
+# Architecture & Codebase
+Before making structural changes, read `ARCHITECTURE.md`.
+- Always use `src/data/` for text and content updates. Do not hardcode strings in components.
+- Use Tailwind CSS v4 for all styling. Use the `cn` utility for class merging.
+- Prefer `framer-motion` and `magicui` for animations.
+- Keep the code clean, strictly typed (TypeScript 5.8), and well-documented.
+
+# Tech Stack
+- React 19, Vite, TypeScript
+- Tailwind CSS, shadcn/ui
+- Framer Motion, Magic UI

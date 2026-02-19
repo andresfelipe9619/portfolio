@@ -1,42 +1,72 @@
-# Developer Portfolio
+# 🚀 Developer Portfolio
 
-Welcome to the code behind a world‑class developer's digital playground. It's fast, minimal, and just cheeky enough to be memorable.
+> Welcome to the code behind a world‑class developer's digital playground. It's fast, minimal, and just cheeky enough to be memorable.
 
-## Tech Stack
+[![React](https://img.shields.io/badge/React-19-blue.svg)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue.svg)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-7-purple.svg)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC.svg)](https://tailwindcss.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-- **React 19** and **Vite** for a snappy developer experience
-- **TypeScript**—because type safety is the best safety
-- **Tailwind CSS** & **shadcn/ui** for styling with flair
-- Animations courtesy of **Framer Motion**, **Magic UI**, `rough-notation`, and even `canvas-confetti`
+A modern, performant, and highly interactive web application built with a curated stack. This portfolio balances professional engineering with a playful, big-hearted personality.
 
-## Getting Started
+---
+
+## ✨ Features & Architecture
+
+- **Lightning Fast**: Powered by **React 19** and **Vite** for instantaneous builds and blazing fast performance.
+- **Type-Safe**: Extensively typed with **TypeScript 5.8**.
+- **Stunning UI**: Utility-first styling with **Tailwind CSS 4** and accessible, beautifully crafted components from **shadcn/ui**.
+- **Magical Animations**: Physics-based animations via **Framer Motion**, dazzling interactive components from **Magic UI** (like Terminal, Globe, Particles), hand-drawn aesthetics with `rough-notation`, and celebratory `canvas-confetti`.
+- **Robust Telemetry**: Integrated with **Sentry** for error tracking and **Google Analytics 4** / **Vercel Analytics** for insights.
+
+For a deep dive into the underlying systems, check out [ARCHITECTURE.md](ARCHITECTURE.md).
+
+## 🤖 For AI Agents
+
+This project embraces AI collaboration! If you are an AI assistant (Cursor, Windsurf, Copilot, etc.), please read:
+- [AGENTS.md](AGENTS.md) - For our tone of voice, personality guidelines, and how to contribute without sounding like a robot.
+- [ARCHITECTURE.md](ARCHITECTURE.md) - For the technical layout, routing, and data flow.
+
+## 🚀 Getting Started
+
+Clone the repository and jump right in:
 
 ```bash
+# Install dependencies
 npm install
-npm run dev     # start the development server
-npm run lint    # check code quality
-npm test        # keep the jokes bug-free
-npm run build   # create a production build
-npm run preview # preview the build locally
+
+# Start the development server
+npm run dev
+
+# Check code quality & formatting
+npm run lint
+
+# Run tests (keep the jokes bug-free)
+npm test
+
+# Create a production build
+npm run build
+
+# Preview the build locally
+npm run preview
 ```
 
-## Project Structure
+## 📁 Project Structure
 
-```
+```text
 src/
-├─ components/      # ui/ for basics, magicui/ for the wow factor
-├─ data/            # copy and resume info
-├─ hooks/           # reusable hooks
-├─ lib/             # utilities
-├─ pages/           # route-level components
-└─ sections/        # big, reusable page sections
+├─ assets/          # Static assets, images, and logos
+├─ components/      # UI building blocks
+│  ├─ magicui/      # The "wow" factor (animations, interactive parts)
+│  └─ ui/           # Standard, accessible shadcn/ui components
+├─ data/            # The "brain": copy, resume info, project details
+├─ hooks/           # Reusable custom React hooks
+├─ lib/             # Utility functions
+├─ pages/           # Route-level components (Home, etc.)
+└─ sections/        # Large, reusable page sections (Hero, About, etc.)
 ```
 
-## Agents & Humans
+## 📝 License
 
-This project happily collaborates with AI agents. If you're one of them, read [AGENTS.md](AGENTS.md) before contributing. Keep the voice witty, run `npm run lint`, and be kind to your future self.
-
-## License
-
-MIT No Resale License. Hack away, deploy for clients, just don't hawk this code or its carbon-copy parts. See [LICENSE](LICENSE) for the fine print.
-
+MIT No Resale License. Hack away, deploy for clients, just don't hawk this code or its carbon-copy parts for direct resale. See [LICENSE](LICENSE) for the fine print.
