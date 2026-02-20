@@ -64,7 +64,7 @@ export default function Home() {
     const timer = setTimeout(() => {
       setCompleted(true);
       sessionStorage.setItem('hasSeenHero', 'true');
-    }, typingDelay + 1500);
+    }, typingDelay + 1300);
     return () => {
       clearTimeout(timer);
       setCompleted(skipAnimation);
@@ -218,13 +218,8 @@ export default function Home() {
             <div className="relative flex items-center justify-center overflow-hidden max-h-[30vh] pt-[32%]">
               <Globe config={GLOBE_CONFIG} />
             </div>
-            <div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_200%,rgba(0,0,0,0.2),rgba(255,255,255,0))]" />
-            <BlurFade delay={0.75} inView>
-              <p className="mt-3 text-center text-sm text-white/70">
-                Building digital experiences{' '}
-                <span className="text-blue-400">across the globe</span>
-              </p>
-            </BlurFade>
+            Ï<div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_200%,rgba(0,0,0,0.2),rgba(255,255,255,0))]" />
+
             {completed && (
               <BlurFade delay={1} inView>
                 <div className="flex w-full justify-center">

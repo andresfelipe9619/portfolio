@@ -96,8 +96,8 @@ export default function ExperienceRoulette() {
               'relative w-full rounded-2xl bg-transparent select-none',
               // height: slightly taller on desktop
               'h-[480px] sm:h-[520px] md:h-[560px]',
-              // inner scroll only on hover (desktop). Mobile always scrolls:
-              'overflow-hidden md:hover:overflow-auto',
+              // inner scroll always on, but hidden scrollbar visual:
+              'overflow-y-auto [&::-webkit-scrollbar]:hidden',
               // make the wheel stay inside the list while hovered:
               'overscroll-contain',
               // optional: nice stepping feel
