@@ -29,9 +29,18 @@ export const DATA = {
     'Strapi',
     'Automation (n8n, Make, Dapta)',
   ],
+  categorizedSkills: {
+    'Backend & APIs': ['Node.js', 'TypeScript', 'Go', 'Python', 'GraphQL', 'REST'],
+    'Frontend': ['React', 'Next.js', 'Tailwind CSS', 'Vite', 'Framer Motion'],
+    'Cloud & DevOps': ['AWS', 'Docker', 'Linux', 'Vercel', 'Sentry'],
+    'Database & Storage': ['PostgreSQL', 'MongoDB', 'DynamoDB', 'S3'],
+    'Architecture & CMS': ['Strapi', 'Serverless', 'Microservices'],
+    'Automation & Scraping': ['n8n', 'Make', 'Dapta', 'Puppeteer', 'Playwright'],
+  },
   navbar: [
     { href: '/', icon: HomeIcon, label: 'Home' },
     { href: '/oss', icon: GitBranch, label: 'Open Source' },
+    { href: '/blog', icon: Icons.notion, label: 'Blog' },
   ],
   contact: {
     email: 'andresfelipe9619@gmail.com',

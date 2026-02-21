@@ -15,6 +15,7 @@ import { Highlighter } from '@/components/magicui/highlighter.tsx';
 import { useEffect, useState, useMemo, Suspense, lazy } from 'react';
 import BlurFade from '@/components/magicui/blur-fade.tsx';
 import { RainbowButton } from '@/components/magicui/rainbow-button.tsx';
+import { AuroraText } from '@/components/magicui/aurora-text';
 import ReactGA from 'react-ga4';
 import { useNavigate } from 'react-router-dom';
 import { TESTIMONIALS, TIMELINE_DATA } from '@/data/timeline';
@@ -28,6 +29,8 @@ const OssHighlights = lazy(() => import('@/sections/oss-highlights.tsx').then(m 
 const FunnyVirusScanDialog = lazy(() => import('@/components/virus-scan-dialog.tsx'));
 const JokeDialog = lazy(() => import('@/components/joke-dialog.tsx'));
 const Particles = lazy(() => import('@/components/magicui/particles').then(m => ({ default: m.Particles })));
+const ClientMarqueeSection = lazy(() => import('@/sections/ClientMarqueeSection').then(m => ({ default: m.ClientMarqueeSection })));
+const SkillsSection = lazy(() => import('@/sections/SkillsSection').then(m => ({ default: m.SkillsSection })));
 const ExperienceRoulette = lazy(() => import('@/sections/experience-roulette.tsx'));
 const ProjectDialog = lazy(() => import('@/components/project-dialog'));
 
@@ -235,35 +238,24 @@ export default function Home() {
                 <Globe config={GLOBE_CONFIG} />
               </Suspense>
             </div>
-            Ï<div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_200%,rgba(0,0,0,0.2),rgba(255,255,255,0))]" />
+            <div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_200%,rgba(0,0,0,0.2),rgba(255,255,255,0))]" />
 
-            {completed && (
-              <BlurFade delay={1} inView>
-                <div className="flex w-full justify-center">
-                  <Card className="border-white/10 bg-white/5 max-w-md">
-                    <CardContent className="p-6">
-                      <div className="mb-3 flex items-center gap-2 text-blue-300">
-                        <QuoteIcon className="h-4 w-4" />
-                        <span className="text-sm font-medium">
-                          Favorite Quote
-                        </span>
-                      </div>
-                      <blockquote className="text-lg italic leading-relaxed">
-                        "One man's crappy software is another man's full‑time job."
-                      </blockquote>
-                      <div className="mt-2 text-sm text-white/60">
-                        — Jessica Gaston
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </BlurFade>
-            )}
+
           </div>
 
         </div>
       </section>
 
+      {/* 2. Instant Authority (Client Marquee) */}
+      {completed && (
+        <BlurFade delay={0.25} inView>
+          <Suspense fallback={<div className="h-[200px]" />}>
+            <ClientMarqueeSection />
+          </Suspense>
+        </BlurFade>
+      )}
+
+      {/* 3. The Journey (Experience Roulette) */}
       {completed && (
         <BlurFade delay={0.25} inView>
           <Suspense fallback={<div className="h-[400px]" />}>
@@ -272,7 +264,52 @@ export default function Home() {
         </BlurFade>
       )}
 
-      {/* TESTIMONIALS */}
+      {/* 4. The Proof (OSS Highlights) */}
+      {completed && (
+        <BlurFade delay={0.25} inView>
+          <Suspense fallback={<div className="h-[400px]" />}>
+            <OssHighlights />
+          </Suspense>
+        </BlurFade>
+      )}
+
+      {/* 5. The Toolbox (Skills Section) */}
+      {completed && (
+        <BlurFade delay={0.25} inView>
+          <Suspense fallback={<div className="h-[400px]" />}>
+            <SkillsSection />
+          </Suspense>
+        </BlurFade>
+      )}
+
+      {/* 6. The Validation (Testimonials & Quote) */}
+      {completed && (
+        <BlurFade delay={0.25} inView>
+          <div className="flex w-full flex-col items-center justify-center px-6 py-24 bg-gray-950">
+            <div className="relative max-w-4xl text-center">
+              <QuoteIcon className="absolute -top-12 -left-8 md:-left-16 h-24 w-24 text-white/5 -rotate-12 z-0" />
+              <QuoteIcon className="absolute -bottom-12 -right-8 md:-right-16 h-24 w-24 text-white/5 rotate-12 z-0" />
+
+              <div className="relative z-10 mb-8 flex items-center justify-center gap-4 text-blue-400/80 uppercase tracking-[0.3em] text-xs font-semibold">
+                <span className="h-[1px] w-12 bg-blue-400/30"></span>
+                Favorite Quote
+                <span className="h-[1px] w-12 bg-blue-400/30"></span>
+              </div>
+
+              <blockquote className="relative z-10 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.3] text-white/90">
+                "One man's <AuroraText>crappy software</AuroraText> is another man's <AuroraText>full‑time job</AuroraText>."
+              </blockquote>
+
+              <div className="relative z-10 mt-10">
+                <div className="inline-block rounded-full border border-white/10 bg-white/5 px-6 py-2 text-sm sm:text-base font-medium tracking-[0.2em] text-white/60 uppercase backdrop-blur-sm shadow-2xl">
+                  Jessica Gaston
+                </div>
+              </div>
+            </div>
+          </div>
+        </BlurFade>
+      )}
+
       {completed && (
         <BlurFade delay={0.25} inView>
           <section id="testimonials" className="bg-gray-950 text-white py-16">
@@ -316,7 +353,40 @@ export default function Home() {
         </BlurFade>
       )}
 
-      {/* FAQ */}
+      {/* 7. The Climax (CTA) */}
+      {completed && (
+        <BlurFade delay={0.25} inView>
+          <section id="ready" className="bg-gray-950 text-white py-16">
+            <div className="mx-auto max-w-5xl px-6 grid items-center gap-8 md:grid-cols-2">
+              <div>
+                <h3 className="text-2xl sm:text-3xl font-medium text-white">
+                  {t('ctaTitle1')}
+                  <br />
+                  <span className="text-lg italic text-gray-400">
+                    {t('ctaTitle2')}
+                  </span>
+                </h3>
+                <div className="mt-6 flex gap-3">
+                  <RainbowButton
+                    className="rounded-full px-6 py-3"
+                    onClick={handleLetsTalkClick}
+                  >
+                    {t('letsTalk')}
+                  </RainbowButton>
+                </div>
+              </div>
+              <div className="justify-self-center">
+                <Avatar className="size-28 border shadow-xl">
+                  <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
+                  <AvatarFallback>{DATA.initials}</AvatarFallback>
+                </Avatar>
+              </div>
+            </div>
+          </section>
+        </BlurFade>
+      )}
+
+      {/* 8. The Post-Credits (FAQ) */}
       {completed && (
         <BlurFade delay={0.25} inView>
           <section id="faq" className="bg-gray-950 text-white py-8">
@@ -348,46 +418,6 @@ export default function Home() {
                     </AccordionItem>
                   ))}
                 </Accordion>
-              </div>
-            </div>
-          </section>
-        </BlurFade>
-      )}
-      {completed && (
-        <BlurFade delay={0.25} inView>
-          <Suspense fallback={<div className="h-[400px]" />}>
-            <OssHighlights />
-          </Suspense>
-        </BlurFade>
-      )}
-
-      {/* FINAL CTA */}
-      {completed && (
-        <BlurFade delay={0.25} inView>
-          <section id="ready" className="bg-gray-950 text-white py-16">
-            <div className="mx-auto max-w-5xl px-6 grid items-center gap-8 md:grid-cols-2">
-              <div>
-                <h3 className="text-2xl sm:text-3xl font-medium text-white">
-                  {t('ctaTitle1')}
-                  <br />
-                  <span className="text-lg italic text-gray-400">
-                    {t('ctaTitle2')}
-                  </span>
-                </h3>
-                <div className="mt-6 flex gap-3">
-                  <RainbowButton
-                    className="rounded-full px-6 py-3"
-                    onClick={handleLetsTalkClick}
-                  >
-                    {t('letsTalk')}
-                  </RainbowButton>
-                </div>
-              </div>
-              <div className="justify-self-center">
-                <Avatar className="size-28 border shadow-xl">
-                  <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
-                  <AvatarFallback>{DATA.initials}</AvatarFallback>
-                </Avatar>
               </div>
             </div>
           </section>

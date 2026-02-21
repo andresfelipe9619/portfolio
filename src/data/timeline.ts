@@ -24,6 +24,8 @@ export type TimelineItem = {
 
   highlight?: boolean;
   tags?: string[];
+  caseStudyId?: string;
+  caseStudyImages?: string[];
 };
 
 export type TimelineByYear = Record<string, TimelineItem[]>;
@@ -271,6 +273,7 @@ export const TIMELINE_DATA: {
         description:
           'End-to-end platform for managing portfolios, services, sales, and client communication.',
         tags: ['CMS', 'Marketplace', 'Strapi'],
+        caseStudyId: 'sentir-creativo',
       },
       {
         title: 'Falconeye - GIS',
@@ -491,6 +494,7 @@ export const TIMELINE_DATA: {
         stack: ['Mapbox', 'Node.js', 'React'],
         country: 'Mexico',
         flag: '🇲🇽',
+        caseStudyId: 'proaxdata',
       },
       {
         title: 'Adlyceum - Node.js & React Performance',

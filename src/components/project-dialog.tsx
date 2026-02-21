@@ -9,7 +9,9 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Highlighter } from '@/components/magicui/highlighter';
 import { type FlattenedItem } from '@/lib/timeline';
-import { ExternalLink, QuoteIcon } from 'lucide-react';
+import { ExternalLink, QuoteIcon, BookOpen } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { ShimmerButton } from '@/components/magicui/shimmer-button';
 
 interface ProjectDialogProps {
   open: boolean;
@@ -18,6 +20,8 @@ interface ProjectDialogProps {
 }
 
 const ProjectDialog = ({ open, onOpenChange, project }: ProjectDialogProps) => {
+  const navigate = useNavigate();
+
   if (!project) return null;
 
   return (
@@ -98,6 +102,25 @@ const ProjectDialog = ({ open, onOpenChange, project }: ProjectDialogProps) => {
             <div className="border-l-2 border-white/20 pl-4 italic">
               <QuoteIcon className="mb-1 h-4 w-4 text-blue-300" />
               {project.testimonial}
+            </div>
+          )}
+
+          {project.caseStudyId && (
+            <div className="pt-4 flex justify-center border-t border-white/10 mt-6">
+              <ShimmerButton
+                shimmerColor="#3b82f6"
+                shimmerSize="0.1em"
+                className="w-full sm:w-auto px-8"
+                onClick={() => {
+                  onOpenChange(false);
+                  navigate(`/case-studies/${project.caseStudyId}`);
+                }}
+              >
+                <span className="flex items-center gap-2 whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-lg">
+                  <BookOpen className="h-5 w-5" />
+                  Read Full Deep Dive
+                </span>
+              </ShimmerButton>
             </div>
           )}
         </div>

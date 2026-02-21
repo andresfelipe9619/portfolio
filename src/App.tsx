@@ -12,6 +12,8 @@ import { useKeyListener } from '@/hooks/useKeyListener.tsx';
 import { logPageView } from './lib/ga';
 import Contact from './pages/Contact';
 import Projects from './pages/Projects';
+import Blog from './pages/Blog';
+import CaseStudy from './pages/CaseStudy';
 import ErrorBoundary from '@/components/error-boundary';
 
 export default function App() {
@@ -52,6 +54,8 @@ export default function App() {
                 <Route path="/oss" element={<OpenSourcePage />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/projects" element={<Projects />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/case-studies/:id" element={<CaseStudy />} />
               </Routes>
             </ErrorBoundary>
           )}
