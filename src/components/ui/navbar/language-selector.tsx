@@ -30,8 +30,8 @@ export function LanguageSelector() {
                             initial={{ scale: 0.5, opacity: 0, rotate: -45 }}
                             animate={{ scale: 1, opacity: 1, rotate: 0 }}
                             exit={{ scale: 0.5, opacity: 0, rotate: 45 }}
-                            whileHover={{ 
-                                scale: 1.2, 
+                            whileHover={{
+                                scale: 1.2,
                                 rotate: [0, -10, 10, -10, 10, 0],
                                 transition: { duration: 0.5 }
                             }}
@@ -48,10 +48,14 @@ export function LanguageSelector() {
                 {languages.map((lang) => (
                     <DropdownMenuItem
                         key={lang.code}
-                        onClick={() => i18n.changeLanguage(lang.code)}
-                        className={`flex items-center gap-2 cursor-pointer ${
-                            i18n.language.startsWith(lang.code) ? 'bg-accent font-medium' : ''
-                        }`}
+                        onClick={() => {
+                            import('@/lib/ga').then(({ logEvent }) => {
+                                logEvent('Language', 'Change', lang.code);
+                            });
+                            i18n.changeLanguage(lang.code);
+                        }}
+                        className={`flex items-center gap-2 cursor-pointer ${i18n.language.startsWith(lang.code) ? 'bg-accent font-medium' : ''
+                            }`}
                     >
                         <motion.span
                             whileHover={{ scale: 1.2, rotate: [0, -10, 10, 0] }}

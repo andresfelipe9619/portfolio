@@ -33,6 +33,9 @@ export default function ProjectsGrid() {
   );
 
   const handleProjectClick = (project: FlattenedItem) => {
+    import('@/lib/ga').then(({ logEvent }) => {
+      logEvent('Projects', 'View Detail', project.title);
+    });
     setSelectedProject(project);
     setShowProjectDialog(true);
   };
