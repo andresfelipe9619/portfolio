@@ -6,7 +6,7 @@ import { LinkIcon } from 'lucide-react';
 // Pull the repo tree straight from GitHub because hardcoding is so last commit.
 const OWNER = 'andresfelipe9619';
 const REPO = 'portfolio';
-const BRANCH = 'main';
+const BRANCH = 'master';
 
 interface GitHubTreeItem {
   path: string;
@@ -37,7 +37,17 @@ export function MobileNavFileTree() {
         const res = await fetch(
           `https://api.github.com/repos/${OWNER}/${REPO}/git/trees/${BRANCH}?recursive=1`,
         );
+
+        if (!res.ok) {
+          throw new Error(`GitHub API responded with status: ${res.status}`);
+        }
+
         const data: { tree: GitHubTreeItem[] } = await res.json();
+
+        if (!data.tree) {
+          throw new Error('GitHub API response missing tree datastructure');
+        }
+
         const root: Record<string, Node> = {};
 
         for (const item of data.tree) {
@@ -75,8 +85,43 @@ export function MobileNavFileTree() {
         setTree(toArray(root));
         setLoading(false);
       } catch (err) {
-        // If the API call fails, the tree stays empty—mysterious, like a ninja folder.
-        console.error(err);
+        // If the API call fails or rate limited, gracefully fallback to a hardcoded tree for the essential pages
+        console.error('Failed to fetch tree from GitHub:', err);
+        const fallbackTree: Node[] = [
+          {
+            name: 'src',
+            path: 'src',
+            type: 'dir',
+            children: {
+              pages: {
+                name: 'pages',
+                path: 'src/pages',
+                type: 'dir',
+                children: Object.keys(PAGE_ROUTES).reduce((acc, key) => {
+                  const fileName = `${key}.tsx`;
+                  acc[fileName] = {
+                    name: fileName,
+                    path: `src/pages/${fileName}`,
+                    type: 'file',
+                  };
+                  return acc;
+                }, {} as Record<string, Node>)
+              }
+            }
+          }
+        ];
+
+        // We set the fallback tree similar to the toArray(root) format used above
+        const formattedFallback: Node[] = [
+          {
+            name: 'src',
+            path: 'src',
+            type: 'dir',
+            children: fallbackTree[0].children
+          }
+        ];
+
+        setTree(formattedFallback);
         setLoading(false);
       }
     };
@@ -93,7 +138,7 @@ export function MobileNavFileTree() {
       ) : (
         <File key={node.path} value={node.path}>
           {node.path.startsWith('src/pages/') &&
-          PAGE_ROUTES[node.name.replace(/\.tsx$/, '')] ? (
+            PAGE_ROUTES[node.name.replace(/\.tsx$/, '')] ? (
             <Link
               to={PAGE_ROUTES[node.name.replace(/\.tsx$/, '')]}
               className="block px-1 py-0.5 flex items-center gap-1"
