@@ -9,27 +9,27 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Quote as QuoteIcon } from 'lucide-react';
-import { Globe } from '@/components/magicui/globe';
 import { GLOBE_CONFIG } from '@/components/constants';
-import { Footer } from '@/sections/footer.tsx';
-import { OssHighlights } from '@/sections/oss-highlights.tsx';
 import { TypingAnimation } from '@/components/magicui/typing-animation';
 import { Highlighter } from '@/components/magicui/highlighter.tsx';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, Suspense, lazy } from 'react';
 import BlurFade from '@/components/magicui/blur-fade.tsx';
-import FunnyVirusScanDialog from '@/components/virus-scan-dialog.tsx';
-import JokeDialog from '@/components/joke-dialog.tsx';
 import { RainbowButton } from '@/components/magicui/rainbow-button.tsx';
-import { Particles } from '@/components/magicui/particles';
 import ReactGA from 'react-ga4';
 import { useNavigate } from 'react-router-dom';
-import confetti from 'canvas-confetti';
-import ExperienceRoulette from '@/sections/experience-roulette.tsx';
 import { TESTIMONIALS, TIMELINE_DATA } from '@/data/timeline';
 import { flattenTimeline, type FlattenedItem } from '@/lib/timeline';
 import { Marquee } from '@/components/magicui/marquee';
-import ProjectDialog from '@/components/project-dialog';
 import { useTranslation } from 'react-i18next';
+
+const Globe = lazy(() => import('@/components/magicui/globe').then(m => ({ default: m.Globe })));
+const Footer = lazy(() => import('@/sections/footer.tsx').then(m => ({ default: m.Footer })));
+const OssHighlights = lazy(() => import('@/sections/oss-highlights.tsx').then(m => ({ default: m.OssHighlights })));
+const FunnyVirusScanDialog = lazy(() => import('@/components/virus-scan-dialog.tsx'));
+const JokeDialog = lazy(() => import('@/components/joke-dialog.tsx'));
+const Particles = lazy(() => import('@/components/magicui/particles').then(m => ({ default: m.Particles })));
+const ExperienceRoulette = lazy(() => import('@/sections/experience-roulette.tsx'));
+const ProjectDialog = lazy(() => import('@/components/project-dialog'));
 
 export default function Home() {
   const { t } = useTranslation();
@@ -91,36 +91,39 @@ export default function Home() {
   }
 
   function handleLetsTalkClick() {
-    const end = Date.now() + 2 * 1000; // 2 seconds
-    const colors = ['#a786ff', '#fd8bbc', '#eca184', '#f8deb1'];
+    import('canvas-confetti').then((module) => {
+      const confetti = module.default;
+      const end = Date.now() + 2 * 1000; // 2 seconds
+      const colors = ['#a786ff', '#fd8bbc', '#eca184', '#f8deb1'];
 
-    const frame = () => {
-      if (Date.now() > end) return;
+      const frame = () => {
+        if (Date.now() > end) return;
 
-      confetti({
-        particleCount: 2,
-        angle: 60,
-        spread: 55,
-        startVelocity: 60,
-        origin: { x: 0, y: 0.5 },
-        colors: colors,
-      });
-      confetti({
-        particleCount: 2,
-        angle: 120,
-        spread: 55,
-        startVelocity: 60,
-        origin: { x: 1, y: 0.5 },
-        colors: colors,
-      });
+        confetti({
+          particleCount: 2,
+          angle: 60,
+          spread: 55,
+          startVelocity: 60,
+          origin: { x: 0, y: 0.5 },
+          colors: colors,
+        });
+        confetti({
+          particleCount: 2,
+          angle: 120,
+          spread: 55,
+          startVelocity: 60,
+          origin: { x: 1, y: 0.5 },
+          colors: colors,
+        });
 
-      requestAnimationFrame(frame);
-    };
+        requestAnimationFrame(frame);
+      };
 
-    frame();
-    setTimeout(() => {
-      navigate('/contact');
-    }, 1000);
+      frame();
+      setTimeout(() => {
+        navigate('/contact');
+      }, 1000);
+    });
   }
 
   const handleTestimonialClick = (testimonial) => {
@@ -135,24 +138,32 @@ export default function Home() {
 
   return (
     <main className="relative flex flex-col min-h-[100dvh] overflow-hidden bg-gray-950 text-white">
-      <FunnyVirusScanDialog
-        open={showVirusScan}
-        onOpenChange={setShowVirusScan}
-      />
-      <JokeDialog open={showJokeDialog} onOpenChange={setShowJokeDialog} />
-      <ProjectDialog
-        open={showProjectDialog}
-        onOpenChange={setShowProjectDialog}
-        project={selectedProject}
-      />
-      <section id="hero" className="relative overflow-hidden py-24">
-        <Particles
-          className="absolute inset-0 z-0"
-          quantity={100}
-          ease={80}
-          color={'#fff'}
-          refresh
+      <Suspense fallback={null}>
+        <FunnyVirusScanDialog
+          open={showVirusScan}
+          onOpenChange={setShowVirusScan}
         />
+      </Suspense>
+      <Suspense fallback={null}>
+        <JokeDialog open={showJokeDialog} onOpenChange={setShowJokeDialog} />
+      </Suspense>
+      <Suspense fallback={null}>
+        <ProjectDialog
+          open={showProjectDialog}
+          onOpenChange={setShowProjectDialog}
+          project={selectedProject}
+        />
+      </Suspense>
+      <section id="hero" className="relative overflow-hidden py-24">
+        <Suspense fallback={null}>
+          <Particles
+            className="absolute inset-0 z-0"
+            quantity={100}
+            ease={80}
+            color={'#fff'}
+            refresh
+          />
+        </Suspense>
         <div className="relative z-10 mx-auto flex w-full max-w-none flex-col items-center px-6">
           <div className="mx-auto max-w-4xl text-center h-60">
             <TypingAnimation
@@ -217,7 +228,9 @@ export default function Home() {
           </div>
           <div className="mt-28 flex w-full flex-col items-center gap-6 ">
             <div className="relative flex items-center justify-center overflow-hidden max-h-[30vh] pt-[32%]">
-              <Globe config={GLOBE_CONFIG} />
+              <Suspense fallback={<div className="h-[400px]" />}>
+                <Globe config={GLOBE_CONFIG} />
+              </Suspense>
             </div>
             Ï<div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_200%,rgba(0,0,0,0.2),rgba(255,255,255,0))]" />
 
@@ -250,7 +263,9 @@ export default function Home() {
 
       {completed && (
         <BlurFade delay={0.25} inView>
-          <ExperienceRoulette />
+          <Suspense fallback={<div className="h-[400px]" />}>
+            <ExperienceRoulette />
+          </Suspense>
         </BlurFade>
       )}
 
@@ -337,7 +352,9 @@ export default function Home() {
       )}
       {completed && (
         <BlurFade delay={0.25} inView>
-          <OssHighlights />
+          <Suspense fallback={<div className="h-[400px]" />}>
+            <OssHighlights />
+          </Suspense>
         </BlurFade>
       )}
 
@@ -374,7 +391,9 @@ export default function Home() {
         </BlurFade>
       )}
 
-      <Footer />
+      <Suspense fallback={<div className="h-[200px]" />}>
+        <Footer />
+      </Suspense>
     </main>
   );
 }
