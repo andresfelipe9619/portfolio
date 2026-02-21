@@ -12,8 +12,10 @@ import {
 import TimelineGlobe from '@/components/timeline-globe';
 import { cn } from '@/lib/utils';
 import ProjectDialog from '@/components/project-dialog';
+import { useTranslation } from 'react-i18next';
 
 export default function ExperienceRoulette() {
+  const { t } = useTranslation();
   const items = useMemo<FlattenedItem[]>(
     () => flattenTimeline(TIMELINE_DATA.timeline),
     [],
@@ -84,9 +86,9 @@ export default function ExperienceRoulette() {
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 md:grid-cols-2">
         {/* LEFT: Timeline — fixed height, inner scroll only when hovered */}
         <div>
-          <h2 className="mb-2 text-2xl md:text-4xl font-semibold">Timeline</h2>
+          <h2 className="mb-2 text-2xl md:text-4xl font-semibold">{t('timelineTitle')}</h2>
           <p className="mb-4 max-w-prose text-white/70">
-            Hover left column to scroll it — the globe on the right follows.
+            {t('timelineSubtitle')}
           </p>
 
           <ul
@@ -153,7 +155,7 @@ export default function ExperienceRoulette() {
               href="/projects"
               className="text-white bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-md"
             >
-              View All Projects
+              {t('viewAllProjects')}
             </a>
           </div>
         </div>
@@ -166,7 +168,7 @@ export default function ExperienceRoulette() {
             <TimelineGlobe className="h-full w-full" />
           </div>
           <p className="mt-3 text-center text-sm text-white/60">
-            11 countries (and counting)
+            {t('timelineCountries')}
           </p>
         </div>
       </div>

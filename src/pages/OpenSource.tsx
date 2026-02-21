@@ -8,6 +8,7 @@ import { OssCard } from '@/components/oss-card';
 
 import { DotPattern } from '@/components/magicui/dot-pattern';
 import { cn } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 
 // Anim variants
 
@@ -38,40 +39,39 @@ type Section = {
   color: string; // tailwind gradient start for subtle aura per section
 };
 
-const SECTIONS: Section[] = [
-  {
-    key: 'products',
-    title: 'Products & Experiments',
-    description:
-      'A collection of production-ready tools and experiments, focusing on mobile and media applications.',
-    color: 'from-fuchsia-500/25',
-  },
-  {
-    key: 'cloud',
-    title: 'Cloud & DevOps Toys',
-    description:
-      "A showcase of serverless functions, infrastructure as code, and other DevOps utilities I've built and open-sourced.",
-    color: 'from-cyan-400/25',
-  },
-  {
-    key: 'playground',
-    title: 'Playground & Classics',
-    description:
-      'A space for exploration, featuring data science experiments, and modern implementations of classic software.',
-    color: 'from-violet-400/25',
-  },
-];
-
 export default function OpenSourcePage() {
+  const { t } = useTranslation();
+
   // Agrupamos por secciones (sin cambiar tamaños)
   const groups = React.useMemo(() => {
+    const SECTIONS: Section[] = [
+      {
+        key: 'products',
+        title: t('ossPage.productsTitle'),
+        description: t('ossPage.productsDesc'),
+        color: 'from-fuchsia-500/25',
+      },
+      {
+        key: 'cloud',
+        title: t('ossPage.cloudTitle'),
+        description: t('ossPage.cloudDesc'),
+        color: 'from-cyan-400/25',
+      },
+      {
+        key: 'playground',
+        title: t('ossPage.playgroundTitle'),
+        description: t('ossPage.playgroundDesc'),
+        color: 'from-violet-400/25',
+      },
+    ];
+
     const result = SECTIONS.map((section) => ({
       section,
       items: openSource.filter((item) => item.section === section.key),
     })).filter((g) => g.items.length > 0);
 
     return result;
-  }, []);
+  }, [t]);
 
   return (
     <main className="relative px-6 py-16 sm:px-8 lg:px-10">
@@ -92,14 +92,11 @@ export default function OpenSourcePage() {
         </div>
 
         <h1 className="text-3xl font-bold tracking-tight font-dev">
-          Open Source as My Supernova.
+          {t('ossPage.title')}
         </h1>
 
         <p className="mx-auto max-w-2xl text-muted-foreground">
-          I don’t just ship code — I unleash systems. Brutal, battle-tested, and
-          unapologetically opinionated. Fork it, break it, remix it. These
-          aren’t playground demos. They’re living, breathing weapons for
-          builders who dare.
+          {t('ossPage.subtitle')}
         </p>
       </header>
 
@@ -154,8 +151,7 @@ export default function OpenSourcePage() {
       {/* Outro */}
       <footer className="relative z-10 mt-16 text-center">
         <p className="text-muted-foreground">
-          Want to contribute, fork, or just peek under the hood? Every star ⭐
-          and pull request means a lot.
+          {t('ossPage.outro')}
         </p>
         <div className="mt-4 text-sm">
           <a

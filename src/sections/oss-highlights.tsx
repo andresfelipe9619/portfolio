@@ -1,18 +1,20 @@
 import { Link } from 'react-router-dom';
 import openSource from '@/data/open-source';
 import { OssCard } from '@/components/oss-card';
+import { useTranslation } from 'react-i18next';
 
 export function OssHighlights() {
+  const { t } = useTranslation();
   const featured = openSource.slice(0, 3);
   return (
     <section className="relative mx-auto mt-10 max-w-6xl px-6 py-8">
       <div className="relative z-10 mb-6 flex items-baseline justify-between">
-        <h2 className="text-xl font-semibold">Open Source Highlights</h2>
+        <h2 className="text-xl font-semibold">{t('ossTitle')}</h2>
         <Link
           to="/oss"
           className="text-sm opacity-80 underline-offset-4 hover:underline hover:opacity-100"
         >
-          View all →
+          {t('ossViewAll')}
         </Link>
       </div>
 

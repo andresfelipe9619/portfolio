@@ -12,14 +12,6 @@ import { Quote as QuoteIcon } from 'lucide-react';
 import { Globe } from '@/components/magicui/globe';
 import { GLOBE_CONFIG } from '@/components/constants';
 import { Footer } from '@/sections/footer.tsx';
-
-import {
-  CTATitle,
-  FAQ_ITEMS,
-  faqTitle,
-  mainPhrase,
-  professionalTitle,
-} from '@/data/copy.ts';
 import { OssHighlights } from '@/sections/oss-highlights.tsx';
 import { TypingAnimation } from '@/components/magicui/typing-animation';
 import { Highlighter } from '@/components/magicui/highlighter.tsx';
@@ -37,8 +29,11 @@ import { TESTIMONIALS, TIMELINE_DATA } from '@/data/timeline';
 import { flattenTimeline, type FlattenedItem } from '@/lib/timeline';
 import { Marquee } from '@/components/magicui/marquee';
 import ProjectDialog from '@/components/project-dialog';
+import { useTranslation } from 'react-i18next';
 
 export default function Home() {
+  const { t } = useTranslation();
+
   const hasSeenHero =
     typeof window !== 'undefined' &&
     sessionStorage.getItem('hasSeenHero') === 'true';
@@ -55,9 +50,15 @@ export default function Home() {
     [],
   );
   const navigate = useNavigate();
+  const globalCompanies = t('globalCompanies');
+  const toBuildWhatOthers = t('toBuildWhatOthers');
+
   const typingDelay =
-    mainPhrase.reduce((sum, s) => s.length + sum, 0) * 100 + 600;
+    (globalCompanies.length + toBuildWhatOthers.length) * 100 + 600;
   const skipAnimation = hasSeenHero;
+
+  const FAQ_ITEMS = t('faq', { returnObjects: true }) as Array<{ id?: string, question: string, answer: string }> | string;
+  const typedFaqItems = Array.isArray(FAQ_ITEMS) ? FAQ_ITEMS : [];
 
   useEffect(() => {
     if (skipAnimation) return;
@@ -158,15 +159,15 @@ export default function Home() {
               disabled={skipAnimation}
               className="text-4xl font-semibold tracking-tight sm:text-6xl md:text-7xl"
             >
-              {mainPhrase[0]}
+              {globalCompanies}
             </TypingAnimation>
 
             <TypingAnimation
               disabled={skipAnimation}
-              delay={skipAnimation ? 0 : mainPhrase[0].length * 100}
+              delay={skipAnimation ? 0 : globalCompanies.length * 100}
               className="text-4xl font-semibold tracking-tight sm:text-6xl md:text-7xl"
             >
-              {mainPhrase[1]}
+              {toBuildWhatOthers}
             </TypingAnimation>
             <Highlighter
               iterations={3}
@@ -179,18 +180,18 @@ export default function Home() {
                 delay={
                   skipAnimation
                     ? 0
-                    : (mainPhrase[0].length + mainPhrase[1].length) * 100
+                    : (globalCompanies.length + toBuildWhatOthers.length) * 100
                 }
                 className="text-4xl font-semibold tracking-tight sm:text-6xl md:text-7xl"
               >
-                Can't
+                {t('cant')}
               </TypingAnimation>
             </Highlighter>
             {completed && (
               <>
                 <BlurFade delay={0.1} inView>
                   <p className="mx-auto mt-10 max-w-4xl text-balance text-white/70 md:text-lg">
-                    {professionalTitle}
+                    {t('professionalTitle')}
                   </p>
                 </BlurFade>
                 <div className="mt-8 flex items-center justify-center gap-3">
@@ -199,7 +200,7 @@ export default function Home() {
                       className="rounded-full px-6 py-3"
                       onClick={() => setShowJokeDialog(true)}
                     >
-                      Explore My Universe
+                      {t('exploreUniverse')}
                     </ShimmerButton>
                   </BlurFade>
                   <BlurFade delay={0.25} inView>
@@ -207,7 +208,7 @@ export default function Home() {
                       className="rounded-full px-6 py-3"
                       onClick={handleResumeDownloadClick}
                     >
-                      Download Resume
+                      {t('downloadResume')}
                     </RainbowButton>
                   </BlurFade>
                 </div>
@@ -259,7 +260,7 @@ export default function Home() {
           <section id="testimonials" className="bg-gray-950 text-white py-16">
             <div className="mx-auto max-w-6xl px-6">
               <h3 className="text-xl font-semibold">
-                What folks I've built for say
+                {t('testimonialTitle')}
               </h3>
               <Marquee pauseOnHover className="mt-6">
                 {TESTIMONIALS.map((t, i) => (
@@ -302,11 +303,11 @@ export default function Home() {
         <BlurFade delay={0.25} inView>
           <section id="faq" className="bg-gray-950 text-white py-8">
             <div className="mx-auto max-w-5xl px-6">
-              <h3 className="text-xl font-semibold">{faqTitle}</h3>
+              <h3 className="text-xl font-semibold">{t('faqTitle')}</h3>
 
               <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Accordion type="single" collapsible className="w-full">
-                  {FAQ_ITEMS.slice(0, FAQ_ITEMS.length / 2).map((item, idx) => (
+                  {typedFaqItems.slice(0, typedFaqItems.length / 2).map((item, idx) => (
                     <AccordionItem
                       key={item.id ?? idx}
                       value={item.id ?? `item-${idx + 1}`}
@@ -317,11 +318,11 @@ export default function Home() {
                   ))}
                 </Accordion>
                 <Accordion type="single" collapsible className="w-full">
-                  {FAQ_ITEMS.slice(FAQ_ITEMS.length / 2).map((item, idx) => (
+                  {typedFaqItems.slice(typedFaqItems.length / 2).map((item, idx) => (
                     <AccordionItem
                       key={item.id ?? idx}
                       value={
-                        item.id ?? `item-${idx + 1 + FAQ_ITEMS.length / 2}`
+                        item.id ?? `item-${idx + 1 + typedFaqItems.length / 2}`
                       }
                     >
                       <AccordionTrigger>{item.question}</AccordionTrigger>
@@ -347,10 +348,10 @@ export default function Home() {
             <div className="mx-auto max-w-5xl px-6 grid items-center gap-8 md:grid-cols-2">
               <div>
                 <h3 className="text-2xl sm:text-3xl font-medium text-white">
-                  {CTATitle[0]}
+                  {t('ctaTitle1')}
                   <br />
                   <span className="text-lg italic text-gray-400">
-                    {CTATitle[1]}
+                    {t('ctaTitle2')}
                   </span>
                 </h3>
                 <div className="mt-6 flex gap-3">
@@ -358,7 +359,7 @@ export default function Home() {
                     className="rounded-full px-6 py-3"
                     onClick={handleLetsTalkClick}
                   >
-                    Let's talk
+                    {t('letsTalk')}
                   </RainbowButton>
                 </div>
               </div>

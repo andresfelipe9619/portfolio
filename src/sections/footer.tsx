@@ -3,13 +3,15 @@ import { logEvent } from '@/lib/ga';
 import { Dock, DockIcon } from '@/components/magicui/dock.tsx';
 import { Icons } from '@/components/icons.tsx';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 export function Footer() {
+  const { t } = useTranslation();
   return (
     <section id="footer" className="bg-gray-950 text-white">
       <div className="mx-auto max-w-6xl px-6 py-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div className="text-sm text-white/60">
-          © {new Date().getFullYear()} {DATA.name}. All rights reserved.
+          © {new Date().getFullYear()} {DATA.name}. {t('footerRights')}
         </div>
         <Dock className="border-white/10 bg-white/5">
           <motion.a

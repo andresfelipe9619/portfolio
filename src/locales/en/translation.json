@@ -1,0 +1,158 @@
+{
+  "hello": "Hello",
+  "underConstruction": "This site is still under construction—thanks for the patience!",
+  "exploreUniverse": "Explore My Universe",
+  "downloadResume": "Download Resume",
+  "globalCompanies": "Global companies trust me to",
+  "toBuildWhatOthers": "build what others",
+  "cant": "Can't",
+  "professionalTitle": "Senior Software Engineer — Cloud, Automation & SaaS Architect",
+  "testimonialTitle": "What folks I've built for say",
+  "faqTitle": "No question too small, no doubt left hanging.",
+  "faq": [
+    {
+      "id": "engagement",
+      "question": "What’s your engagement model?",
+      "answer": "Scoped projects or retainers. Async-first, demos weekly. No surprises (except pleasant ones)."
+    },
+    {
+      "id": "quality",
+      "question": "How do you ensure quality?",
+      "answer": "CI/CD pipelines, automated tests, linting, perf budgets, observability. Basically, quality with receipts."
+    },
+    {
+      "id": "stacks",
+      "question": "What stacks do you prefer?",
+      "answer": "TypeScript, React/Next.js, Node, Python, AWS, Postgres, Redis, edge functions. Not married to stacks, just committed to excellence."
+    },
+    {
+      "id": "teams",
+      "question": "Do you work solo or with teams?",
+      "answer": "Both. I play well with others but also know how to score when I’m the striker."
+    },
+    {
+      "id": "legacy",
+      "question": "Can you rescue legacy codebases?",
+      "answer": "Yes. Like Indiana Jones, but instead of whips, I use git rebase."
+    },
+    {
+      "id": "deadlines",
+      "question": "How do you handle deadlines?",
+      "answer": "With respect, caffeine, and ruthless prioritization."
+    },
+    {
+      "id": "industries",
+      "question": "What industries have you worked in?",
+      "answer": "Fintech, SaaS, e-commerce, healthcare, logistics—you name it, I’ve probably scaled it."
+    },
+    {
+      "id": "architecture",
+      "question": "Do you do architecture or just coding?",
+      "answer": "Both. Think architect who also isn’t afraid to grab a hammer."
+    },
+    {
+      "id": "communication",
+      "question": "How do you communicate?",
+      "answer": "Async by default, but always clear. Slack, email, Notion, carrier pigeon if required."
+    },
+    {
+      "id": "difference",
+      "question": "What makes you different from other devs?",
+      "answer": "Global experience, obsession with scalability, and humor sharp enough to cut through legacy spaghetti code."
+    },
+    {
+      "id": "clients",
+      "question": "Do you work with startups or enterprises?",
+      "answer": "Both. From scrappy MVPs to Fortune 500 migrations, I’ve seen—and fixed—it all."
+    },
+    {
+      "id": "cloud",
+      "question": "Can you handle cloud infrastructure?",
+      "answer": "Absolutely. AWS native. I eat IAM policies for breakfast."
+    },
+    {
+      "id": "philosophy",
+      "question": "What’s your philosophy on software design?",
+      "answer": "Build for humans, optimize for scale, keep future developers from hating you."
+    },
+    {
+      "id": "automation",
+      "question": "Do you do automation?",
+      "answer": "Yes. If it can be automated, I’ll automate it. If it can’t, I’ll try anyway."
+    },
+    {
+      "id": "skills",
+      "question": "How do you keep skills sharp?",
+      "answer": "OSS contributions, side projects, conferences, reading RFCs for fun (don’t judge)."
+    },
+    {
+      "id": "mentorship",
+      "question": "Can you mentor or lead teams?",
+      "answer": "Yes. I’ve led teams across continents. Think Jedi master, but with code reviews."
+    },
+    {
+      "id": "bugs",
+      "question": "What’s your attitude toward bugs?",
+      "answer": "They’re just misunderstood features… until I squash them mercilessly."
+    },
+    {
+      "id": "async",
+      "question": "Do you work async with global teams?",
+      "answer": "Yes. My calendar is as timezone-friendly as my commits."
+    },
+    {
+      "id": "delivery",
+      "question": "What’s your delivery style?",
+      "answer": "Iterative, transparent, demo-driven. You’ll never wonder “what’s happening?”"
+    },
+    {
+      "id": "whyhire",
+      "question": "Why should we hire you?",
+      "answer": "Because I don’t just write code—I build leverage. And I make it fun along the way."
+    }
+  ],
+  "ctaTitle1": "Ready to turn ideas into software that actually works?",
+  "ctaTitle2": "Let’s build brilliance—responsibly (ish).",
+  "letsTalk": "Let's talk",
+  "timelineTitle": "Timeline",
+  "timelineSubtitle": "Hover left column to scroll it — the globe on the right follows.",
+  "viewAllProjects": "View All Projects",
+  "timelineCountries": "11 countries (and counting)",
+  "ossTitle": "Open Source Highlights",
+  "ossViewAll": "View all →",
+  "projectsTitle": "Projects",
+  "projectsSubtitle": "Here are some of the projects I've worked on.",
+  "contact": {
+    "title0": "Let's Build Something",
+    "title1": "Amazing",
+    "subtitle": "Got a project in mind? A burning question? Or just want to say hi? I'm always up for a good conversation and terrible programming puns.",
+    "cardTitle": "Drop Me a Line",
+    "cardDesc": "No spam, no sales pitches, just genuine human connection. Promise!",
+    "nameLabel": "What should I call you?",
+    "namePlaceholder": "Your awesome name",
+    "emailLabel": "Your email address",
+    "subjectLabel": "What's this about?",
+    "subjectPlaceholder": "Project collaboration, life advice, or your favorite debugging story",
+    "messageLabel": "Your message",
+    "messagePlaceholder": "Tell me about your wildest coding dreams...",
+    "chars": "chars",
+    "sendBtn": "Send Message 🚀",
+    "sendingBtn": "Sending your awesome message...",
+    "footerNote": "Built with ❤️ and probably too much caffeine. Response time: Usually < 24hrs",
+    "successTitle": "Message sent! 🚀",
+    "successDesc": "Thanks for reaching out! I'll get back to you faster than you can say 'async/await'.",
+    "errorMsg": "Something went wrong!"
+  },
+  "ossPage": {
+    "title": "Open Source as My Supernova.",
+    "subtitle": "I don’t just ship code — I unleash systems. Brutal, battle-tested, and unapologetically opinionated. Fork it, break it, remix it. These aren’t playground demos. They’re living, breathing weapons for builders who dare.",
+    "outro": "Want to contribute, fork, or just peek under the hood? Every star ⭐ and pull request means a lot.",
+    "productsTitle": "Products & Experiments",
+    "productsDesc": "A collection of production-ready tools and experiments, focusing on mobile and media applications.",
+    "cloudTitle": "Cloud & DevOps Toys",
+    "cloudDesc": "A showcase of serverless functions, infrastructure as code, and other DevOps utilities I've built and open-sourced.",
+    "playgroundTitle": "Playground & Classics",
+    "playgroundDesc": "A space for exploration, featuring data science experiments, and modern implementations of classic software."
+  },
+  "footerRights": "All rights reserved."
+}

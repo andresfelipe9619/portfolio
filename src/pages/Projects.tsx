@@ -2,8 +2,10 @@
 import { Footer } from '@/sections/footer';
 import ProjectsGrid from '@/components/ProjectsGrid';
 import { Badge } from '@/components/ui/badge';
+import { useTranslation } from 'react-i18next';
 
 export default function Projects() {
+  const { t } = useTranslation();
   return (
     <main className="relative flex flex-col min-h-[100dvh] overflow-hidden bg-gray-950 text-white">
       <section id="projects" className="relative py-24">
@@ -13,10 +15,10 @@ export default function Projects() {
               /projects
             </Badge>
             <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl md:text-7xl">
-              Projects
+              {t('projectsTitle')}
             </h1>
             <p className="mx-auto mt-10 max-w-4xl text-balance text-white/70 md:text-lg">
-              Here are some of the projects I've worked on.
+              {t('projectsSubtitle')}
             </p>
           </div>
           <ProjectsGrid />

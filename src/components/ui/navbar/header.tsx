@@ -3,12 +3,16 @@ import { DATA } from '@/data/resume.tsx';
 import { Dock, DockIcon } from '@/components/magicui/dock.tsx';
 import { Folder, Terminal } from 'lucide-react';
 import { Breadcrumb } from './breadcrumb';
+import { LanguageSelector } from './language-selector';
+import { useTranslation } from 'react-i18next';
 
 export function Header(props: { onClick: () => void }) {
+  const { t } = useTranslation();
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-gray-950/80 backdrop-blur font-mono">
       <div className="bg-yellow-500/10 py-1 text-center text-xs text-yellow-200">
-        🚧 This site is still under construction—thanks for the patience!
+        🚧 {t('underConstruction')}
       </div>
       <div className="mx-auto grid max-w-7xl grid-cols-3 items-center px-6 py-3">
         <Link to="/" className="flex items-center gap-2 text-sm font-semibold">
@@ -18,7 +22,8 @@ export function Header(props: { onClick: () => void }) {
         <div className="justify-self-center">
           <Breadcrumb />
         </div>
-        <div className="justify-self-end">
+        <div className="flex items-center gap-4 justify-self-end">
+          <LanguageSelector />
           <Dock>
             <DockIcon>
               <button
