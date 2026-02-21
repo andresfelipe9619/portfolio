@@ -6,23 +6,41 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Globe } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 
 const languages = [
-    { code: 'en', label: 'English' },
-    { code: 'es', label: 'Español' },
-    { code: 'fr', label: 'Français' },
-    { code: 'de', label: 'Deutsch' },
+    { code: 'en', label: 'English', icon: '🦅' },
+    { code: 'es', label: 'Español', icon: '💃' },
+    { code: 'fr', label: 'Français', icon: '🥐' },
+    { code: 'de', label: 'Deutsch', icon: '🍺' },
 ];
 
 export function LanguageSelector() {
     const { i18n } = useTranslation();
 
+    const currentLang = languages.find((l) => i18n.language.startsWith(l.code)) || languages[0];
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground">
-                    <Globe className="h-4 w-4" />
+                <Button variant="ghost" size="icon" className="h-9 w-9 text-muted-foreground hover:text-foreground">
+                    <AnimatePresence mode="popLayout" initial={false}>
+                        <motion.span
+                            key={currentLang.code}
+                            initial={{ scale: 0.5, opacity: 0, rotate: -45 }}
+                            animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                            exit={{ scale: 0.5, opacity: 0, rotate: 45 }}
+                            whileHover={{ 
+                                scale: 1.2, 
+                                rotate: [0, -10, 10, -10, 10, 0],
+                                transition: { duration: 0.5 }
+                            }}
+                            whileTap={{ scale: 0.9 }}
+                            className="inline-block text-lg origin-center cursor-pointer"
+                        >
+                            {currentLang.icon}
+                        </motion.span>
+                    </AnimatePresence>
                     <span className="sr-only">Toggle language</span>
                 </Button>
             </DropdownMenuTrigger>
@@ -31,9 +49,17 @@ export function LanguageSelector() {
                     <DropdownMenuItem
                         key={lang.code}
                         onClick={() => i18n.changeLanguage(lang.code)}
-                        className={i18n.language.startsWith(lang.code) ? 'bg-accent font-medium' : ''}
+                        className={`flex items-center gap-2 cursor-pointer ${
+                            i18n.language.startsWith(lang.code) ? 'bg-accent font-medium' : ''
+                        }`}
                     >
-                        {lang.label}
+                        <motion.span
+                            whileHover={{ scale: 1.2, rotate: [0, -10, 10, 0] }}
+                            className="text-base cursor-pointer"
+                        >
+                            {lang.icon}
+                        </motion.span>
+                        <span>{lang.label}</span>
                     </DropdownMenuItem>
                 ))}
             </DropdownMenuContent>
