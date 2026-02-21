@@ -4,6 +4,7 @@ import { Terminal, TypingAnimation } from '@/components/magicui/terminal';
 import type { MouseEventHandler } from 'react';
 import BlurFade from '@/components/magicui/blur-fade.tsx';
 import { ShimmerButton } from '@/components/magicui/shimmer-button.tsx';
+import { useTranslation } from 'react-i18next';
 
 type LoadingScreenProps = {
   site?: string; // dominio simulado
@@ -18,11 +19,25 @@ const LoadingScreen = ({
   useH3 = false,
   onSkip,
 }: LoadingScreenProps) => {
+  const { i18n } = useTranslation();
+  const detectedLangCode = i18n.language?.substring(0, 2) || 'en';
+
+  const langs: Record<string, { label: string, location: string }> = {
+    en: { label: 'English', location: '[US/UK/GLOBAL]' },
+    es: { label: 'Español', location: '[LATAM/ES]' },
+    fr: { label: 'Français', location: '[FR/CA]' },
+    de: { label: 'Deutsch', location: '[DE/AT/CH]' },
+  };
+
+  const langMatch = langs[detectedLangCode] || langs['en'];
+
   // tiempos pseudo-reales
   const t = {
     dns: r(12, 28),
     tcp: r(15, 42),
     tls: r(18, 60),
+    i18n: r(30, 90),
+    geo: r(120, 240),
     ttfb: r(80, 160),
     fcp: r(240, 520),
     lcp: r(520, 1200),
@@ -60,8 +75,11 @@ const LoadingScreen = ({
             {/* === 2. NETWORK RESOLUTION === */}
             <TypingAnimation>{`🔎 DNS lookup ${site} → 93.184.216.34 (${t.dns}ms) [faster than your ex texting back]`}</TypingAnimation>
             <TypingAnimation>{`⇄ TCP handshake (${t.tcp}ms): [SYN → SYN-ACK → ACK] [world’s most awkward handshake, completed]`}</TypingAnimation>
-            {/* === 3. SECURITY LAYER === */}
+            {/* === 3. SECURITY & I18N HACK === */}
             <TypingAnimation>{`🔐 TLS 1.3 (ALPN=${alpn}, cipher=TLS_AES_128_GCM_SHA256) (${t.tls}ms) [basically Fort Knox with emojis]`}</TypingAnimation>
+            <TypingAnimation className="text-yellow-400">{`> executing locate_user.sh --stealth (${t.geo}ms)`}</TypingAnimation>
+            <TypingAnimation className="text-yellow-400">{`> tracing IP... location heuristic: ${langMatch.location}`}</TypingAnimation>
+            <TypingAnimation className="text-yellow-400">{`> injecting locale overrides: ${langMatch.label} [${detectedLangCode}] (${t.i18n}ms)`}</TypingAnimation>
             <TypingAnimation>{`${proto} CONNECTED | SETTINGS: max_streams=∞ | window=legendary`}</TypingAnimation>
             {/* === 4. REQUEST / RESPONSE === */}
             <TypingAnimation>{`GET / → 200 OK  content-type:text/html; charset=utf-8  TTFB=${t.ttfb}ms [Google envies this speed]`}</TypingAnimation>

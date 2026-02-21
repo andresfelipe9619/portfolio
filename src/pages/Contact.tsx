@@ -18,8 +18,10 @@ import { toast, Toaster } from 'sonner';
 import { AuroraText } from '@/components/magicui/aurora-text.tsx';
 import { RetroGrid } from '@/components/magicui/retro-grid.tsx';
 import { logEvent } from '@/lib/ga';
+import { useTranslation } from 'react-i18next';
 
 export default function ContactPage() {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -61,31 +63,20 @@ export default function ContactPage() {
       const data = await response.json();
       console.log(data);
 
-      toast('Message sent! 🚀', {
-        description:
-          "Thanks for reaching out! I'll get back to you faster than you can say 'async/await'.",
+      toast(t('contact.successTitle'), {
+        description: t('contact.successDesc'),
       });
       logEvent('Contact Form', 'Submit', 'Success');
       setFormData({ name: '', email: '', subject: '', message: '' });
       setCharCount(0);
     } catch (error) {
       console.error('Error submitting form:', error);
-      toast('Something went wrong!');
+      toast(t('contact.errorMsg'));
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const getMessagePlaceholder = () => {
-    const placeholders = [
-      'Tell me about your wildest coding dreams...',
-      "What's keeping you up at night? (Besides debugging, obviously)",
-      "Spill the tea ☕ What's on your mind?",
-      "Got a project idea? A random thought? A good joke? I'm all ears!",
-      "Whether it's work, life, or why JavaScript is the way it is...",
-    ];
-    return placeholders[Math.floor(Math.random() * placeholders.length)];
-  };
 
   const getCharCountColor = () => {
     if (charCount > 500) return 'text-green-500';
@@ -104,7 +95,7 @@ export default function ContactPage() {
 
   return (
     <div className="p-4 w-full">
-      <RetroGrid opacity={0.8}/>
+      <RetroGrid opacity={0.8} />
       <div className="mx-auto max-w-2xl py-8 ">
         {/* Header Section */}
         <div className="text-center mb-12">
@@ -112,21 +103,19 @@ export default function ContactPage() {
             /contact
           </Badge>
           <h1 className="text-4xl font-bold mb-4 text-balance">
-            Let's Build Something <AuroraText>Amazing</AuroraText>
+            {t('contact.title0')} <AuroraText>{t('contact.title1')}</AuroraText>
           </h1>
           <p className="text-lg text-muted-foreground text-pretty max-w-lg mx-auto">
-            Got a project in mind? A burning question? Or just want to say hi?
-            I'm always up for a good conversation and terrible programming puns.
+            {t('contact.subtitle')}
           </p>
         </div>
 
         {/* Contact Form */}
         <Card className="shadow-lg border-0 bg-card/50 backdrop-blur-sm p-8">
           <CardHeader className="text-center pb-6">
-            <CardTitle className="text-2xl">Drop Me a Line</CardTitle>
+            <CardTitle className="text-2xl">{t('contact.cardTitle')}</CardTitle>
             <CardDescription className="text-base">
-              No spam, no sales pitches, just genuine human connection.{' '}
-              <span className="text-primary font-medium">Promise!</span>
+              {t('contact.cardDesc')}
             </CardDescription>
           </CardHeader>
 
@@ -136,14 +125,14 @@ export default function ContactPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="name" className="text-sm font-medium">
-                    What should I call you?{' '}
+                    {t('contact.nameLabel')}
                     <span className="text-destructive">*</span>
                   </Label>
                   <Input
                     id="name"
                     name="name"
                     type="text"
-                    placeholder="Your awesome name"
+                    placeholder={t('contact.namePlaceholder')}
                     value={formData.name}
                     onChange={handleInputChange}
                     required
@@ -153,7 +142,7 @@ export default function ContactPage() {
 
                 <div className="space-y-2">
                   <Label htmlFor="email" className="text-sm font-medium">
-                    Your email address{' '}
+                    {t('contact.emailLabel')}
                     <span className="text-destructive">*</span>
                   </Label>
                   <Input
@@ -172,13 +161,13 @@ export default function ContactPage() {
               {/* Subject */}
               <div className="space-y-2">
                 <Label htmlFor="subject" className="text-sm font-medium">
-                  What's this about?
+                  {t('contact.subjectLabel')}
                 </Label>
                 <Input
                   id="subject"
                   name="subject"
                   type="text"
-                  placeholder="Project collaboration, life advice, or your favorite debugging story"
+                  placeholder={t('contact.subjectPlaceholder')}
                   value={formData.subject}
                   onChange={handleInputChange}
                   className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
@@ -189,16 +178,16 @@ export default function ContactPage() {
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <Label htmlFor="message" className="text-sm font-medium">
-                    Your message <span className="text-destructive">*</span>
+                    {t('contact.messageLabel')} <span className="text-destructive">*</span>
                   </Label>
                   <span className={`text-xs ${getCharCountColor()}`}>
-                    {getCharCountMessage()} ({charCount} chars)
+                    {getCharCountMessage()} ({charCount} {t('contact.chars')})
                   </span>
                 </div>
                 <Textarea
                   id="message"
                   name="message"
-                  placeholder={getMessagePlaceholder()}
+                  placeholder={t('contact.messagePlaceholder')}
                   value={formData.message}
                   onChange={handleInputChange}
                   required
@@ -217,10 +206,10 @@ export default function ContactPage() {
                   {isSubmitting ? (
                     <span className="flex items-center gap-2">
                       <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-                      Sending your awesome message...
+                      {t('contact.sendingBtn')}
                     </span>
                   ) : (
-                    'Send Message 🚀'
+                    t('contact.sendBtn')
                   )}
                 </Button>
               </div>
@@ -231,10 +220,7 @@ export default function ContactPage() {
         {/* Footer Note */}
         <div className="text-center mt-8">
           <p className="text-sm">
-            Built with ❤️ and probably too much caffeine.{' '}
-            <span className="font-mono text-xs bg-muted px-2 py-1 rounded">
-              Response time: Usually &lt; 24hrs
-            </span>
+            {t('contact.footerNote')}
           </p>
         </div>
       </div>

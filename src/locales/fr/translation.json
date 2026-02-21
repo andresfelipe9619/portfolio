@@ -1,0 +1,158 @@
+{
+  "hello": "Bonjour",
+  "underConstruction": "Ce site est encore en construction — merci pour votre patience !",
+  "exploreUniverse": "Explorer Mon Univers",
+  "downloadResume": "Télécharger le CV",
+  "globalCompanies": "Des entreprises mondiales me font confiance pour",
+  "toBuildWhatOthers": "construir ce que d'autres",
+  "cant": "Ne peuvent pas",
+  "professionalTitle": "Ingénieur Logiciel Senior — Architecte Cloud, Automatisation & SaaS",
+  "testimonialTitle": "Ce que disent ceux pour qui j'ai construit",
+  "faqTitle": "Aucune question n'est trop petite, aucun doute ne reste en suspens.",
+  "faq": [
+    {
+      "id": "engagement",
+      "question": "Quel est votre modèle de collaboration ?",
+      "answer": "Projets définis ou acomptes. Priorité asynchrone, démos hebdomadaires. Pas de surprises (sauf les bonnes)."
+    },
+    {
+      "id": "quality",
+      "question": "Comment garantissez-vous la qualité ?",
+      "answer": "Pipelines CI/CD, tests automatisés, linting, budgets de performance, observabilité. Grosso modo, la qualité avec des preuves."
+    },
+    {
+      "id": "stacks",
+      "question": "Quelles technologies préférez-vous ?",
+      "answer": "TypeScript, React/Next.js, Node, Python, AWS, Postgres, Redis, edge functions. Je ne suis pas marié aux technos, juste engagé vers l'excellence."
+    },
+    {
+      "id": "teams",
+      "question": "Travaillez-vous seul ou en équipe ?",
+      "answer": "Les deux. Je m'entends bien avec les autres, mais je sais aussi marquer quand je suis attaquant."
+    },
+    {
+      "id": "legacy",
+      "question": "Pouvez-vous sauver du vieux code (legacy) ?",
+      "answer": "Oui. Comme Indiana Jones, mais au lieu d'un fouet, j'utilise git rebase."
+    },
+    {
+      "id": "deadlines",
+      "question": "Comment gérez-vous les délais ?",
+      "answer": "Avec respect, caféine, et une priorisation impitoyable."
+    },
+    {
+      "id": "industries",
+      "question": "Dans quelles industries avez-vous travaillé ?",
+      "answer": "Fintech, SaaS, e-commerce, santé, logistique—nommez-les, je les ai probablement mises à l'échelle."
+    },
+    {
+      "id": "architecture",
+      "question": "Faites-vous de l'architecture ou seulement du code ?",
+      "answer": "Les deux. Pensez à un architecte qui n'a pas peur de prendre un marteau."
+    },
+    {
+      "id": "communication",
+      "question": "Comment communiquez-vous ?",
+      "answer": "Asynchrone par défaut, mais toujours clair. Slack, e-mail, Notion, ou pigeon voyageur si nécessaire."
+    },
+    {
+      "id": "difference",
+      "question": "Qu'est-ce qui vous différencie des autres devs ?",
+      "answer": "L'expérience mondiale, l'obsession de la scalabilité, et un humour assez pointu pour couper le code spaghetti (legacy)."
+    },
+    {
+      "id": "clients",
+      "question": "Travaillez-vous avec des startups ou des grandes entreprises ?",
+      "answer": "Les deux. Des MVPs rudimentaires aux migrations du Fortune 500, j'ai tout vu—et tout réparé."
+    },
+    {
+      "id": "cloud",
+      "question": "Pouvez-vous gérer l'infrastructure Cloud ?",
+      "answer": "Absolument. Natif d'AWS. Je mange des politiques IAM au petit-déjeuner."
+    },
+    {
+      "id": "philosophy",
+      "question": "Quelle est votre philosophie sur la conception de logiciels ?",
+      "answer": "Construire pour les humains, optimiser pour la charge (scale), et éviter que les futurs développeurs ne vous détestent."
+    },
+    {
+      "id": "automation",
+      "question": "Faites-vous de l'automatisation ?",
+      "answer": "Oui. Si ça peut être automatisé, je l'automatiserai. Si ça ne peut pas, j'essaierai quand même."
+    },
+    {
+      "id": "skills",
+      "question": "Comment maintenez-vous vos compétences à jour ?",
+      "answer": "Contributions Open Source (OSS), projets annexes, conférences, lire des RFCs pour s'amuser (ne jugez pas)."
+    },
+    {
+      "id": "mentorship",
+      "question": "Pouvez-vous encadrer ou diriger des équipes ?",
+      "answer": "Oui. J'ai dirigé des équipes sur plusieurs continents. Pensez à un maître Jedi, mais avec des revues de code."
+    },
+    {
+      "id": "bugs",
+      "question": "Quelle est votre attitude face aux bugs ?",
+      "answer": "Ce ne sont que des fonctionnalités mal comprises... jusqu'à ce que je les écrase sans pitié."
+    },
+    {
+      "id": "async",
+      "question": "Travaillez-vous de façon asynchrone avec des équipes mondiales ?",
+      "answer": "Oui. Mon calendrier est aussi favorable aux fuseaux horaires que mes commits."
+    },
+    {
+      "id": "delivery",
+      "question": "Quel est votre style de livraison ?",
+      "answer": "Itératif, transparent, axé sur les démos. Vous ne vous demanderez jamais \"que se passe-t-il ?\""
+    },
+    {
+      "id": "whyhire",
+      "question": "Pourquoi devrions-nous vous recruter ?",
+      "answer": "Parce que je n'écris pas seulement du code—je construis un avantage stratégique. Et je rends ça amusant tout au long."
+    }
+  ],
+  "ctaTitle1": "Prêt à transformer des idées en logiciels qui fonctionnent vraiment ?",
+  "ctaTitle2": "Construisons l'excellence—de façon responsable (à peu près).",
+  "letsTalk": "Parlons-en",
+  "timelineTitle": "Chronologie",
+  "timelineSubtitle": "Survolez la colonne de gauche pour la faire défiler — le globe à droite suit.",
+  "viewAllProjects": "Voir tous les projets",
+  "timelineCountries": "11 pays (et ça continue)",
+  "ossTitle": "Projets Open Source Remarquables",
+  "ossViewAll": "Voir tout →",
+  "projectsTitle": "Projets",
+  "projectsSubtitle": "Voici quelques-uns des projets sur lesquels j'ai travaillé.",
+  "contact": {
+    "title0": "Construisons Quelque Chose",
+    "title1": "D'Incroyable",
+    "subtitle": "Un projet en tête ? Une question brûlante ? Ou juste pour dire bonjour ? Je suis toujours prêt pour une bonne conversation et des jeux de mots affreux sur la programmation.",
+    "cardTitle": "Écrivez-moi",
+    "cardDesc": "Pas de spam, pas d'argumentaire de vente, juste une véritable connexion humaine. Promis !",
+    "nameLabel": "Comment dois-je vous appeler ?",
+    "namePlaceholder": "Votre nom génial",
+    "emailLabel": "Votre adresse e-mail",
+    "subjectLabel": "De quoi s'agit-il ?",
+    "subjectPlaceholder": "Collaboration, conseils de vie, ou votre histoire de débogage préférée",
+    "messageLabel": "Votre message",
+    "messagePlaceholder": "Parlez-moi de vos rêves de codage les plus fous...",
+    "chars": "caractères",
+    "sendBtn": "Envoyer le message 🚀",
+    "sendingBtn": "Envoi de votre super message...",
+    "footerNote": "Construit avec ❤️ et probablement trop de caféine. Temps de réponse: Habituellement < 24h",
+    "successTitle": "Message envoyé ! 🚀",
+    "successDesc": "Merci d'avoir tendu la main! Je vous recontacterai plus vite que vous ne pouvez dire 'async/await'.",
+    "errorMsg": "Quelque chose a mal tourné !"
+  },
+  "ossPage": {
+    "title": "L'Open Source comme Ma Supernova.",
+    "subtitle": "Je ne me contente pas de livrer du code — je libère des systèmes. Brutaux, éprouvés et sans complexe. Forkez, cassez, remixez. Ce ne sont pas des démos. Ce sont des armes vivantes pour les constructeurs audacieux.",
+    "outro": "Envie de contribuer, de fork ou simplement de jeter un œil sous le capot ? Chaque étoile ⭐ signie beaucoup.",
+    "productsTitle": "Produits & Expérimentations",
+    "productsDesc": "Une collection d'outils et d'expériences prêts pour la production, axée sur les applications mobiles et multimédias.",
+    "cloudTitle": "Cloud & Jouets DevOps",
+    "cloudDesc": "Une vitrine de fonctions sans serveur, de l'infrastructure en tant que code, et d'autres utilitaires DevOps que j'ai ouverts.",
+    "playgroundTitle": "Terrain de Jeu et Classiques",
+    "playgroundDesc": "Un espace d'exploration, avec des expériences de science des données et des implémentations modernes."
+  },
+  "footerRights": "Tous droits réservés."
+}

@@ -1,0 +1,158 @@
+{
+  "hello": "Hallo",
+  "underConstruction": "Diese Seite befindet sich noch im Aufbau – danke für Ihre Geduld!",
+  "exploreUniverse": "Mein Universum Entdecken",
+  "downloadResume": "Lebenslauf Herunterladen",
+  "globalCompanies": "Globale Unternehmen vertrauen mir, um",
+  "toBuildWhatOthers": "zu bauen, was andere",
+  "cant": "Nicht können",
+  "professionalTitle": "Senior Software Engineer — Cloud, Automation & SaaS-Architekt",
+  "testimonialTitle": "Was Leute sagen, für die ich gebaut habe",
+  "faqTitle": "Keine Frage ist zu klein, kein Zweifel bleibt offen.",
+  "faq": [
+    {
+      "id": "engagement",
+      "question": "Was ist Ihr Zusammenarbeitsmodell?",
+      "answer": "Fest definierte Projekte oder Retainer. Asynchron-first, wöchentliche Demos. Keine Überraschungen (außer positiven)."
+    },
+    {
+      "id": "quality",
+      "question": "Wie stellen Sie Qualität sicher?",
+      "answer": "CI/CD-Pipelines, automatisierte Tests, Linting, Performance-Budgets, Observability. Im Grunde: Qualität mit Belegen."
+    },
+    {
+      "id": "stacks",
+      "question": "Welche Tech-Stacks bevorzugen Sie?",
+      "answer": "TypeScript, React/Next.js, Node, Python, AWS, Postgres, Redis, Edge Functions. Nicht an Stacks gebunden, nur der Exzellenz verpflichtet."
+    },
+    {
+      "id": "teams",
+      "question": "Arbeiten Sie alleine oder in Teams?",
+      "answer": "Beides. Ich spiele gut mit anderen zusammen, weiß aber auch, wie man punktet, wenn ich der Stürmer bin."
+    },
+    {
+      "id": "legacy",
+      "question": "Können Sie Legacy-Codebasen retten?",
+      "answer": "Ja. Wie Indiana Jones, aber statt einer Peitsche benutze ich git rebase."
+    },
+    {
+      "id": "deadlines",
+      "question": "Wie gehen Sie mit Deadlines um?",
+      "answer": "Mit Respekt, Koffein und gnadenloser Priorisierung."
+    },
+    {
+      "id": "industries",
+      "question": "In welchen Branchen haben Sie gearbeitet?",
+      "answer": "Fintech, SaaS, E-Commerce, Gesundheitswesen, Logistik – nennen Sie es, ich habe es wahrscheinlich skaliert."
+    },
+    {
+      "id": "architecture",
+      "question": "Machen Sie Architektur oder nur Code?",
+      "answer": "Beides. Denken Sie an einen Architekten, der auch keine Angst hat, zum Hammer zu greifen."
+    },
+    {
+      "id": "communication",
+      "question": "Wie kommunizieren Sie?",
+      "answer": "Standardmäßig asynchron, aber immer klar. Slack, E-Mail, Notion, Brieftaube falls nötig."
+    },
+    {
+      "id": "difference",
+      "question": "Was unterscheidet Sie von anderen Entwicklern?",
+      "answer": "Globale Erfahrung, Obsession für Skalierbarkeit und ein Humor, der scharf genug ist, um Legacy-Spaghetti-Code zu durchschneiden."
+    },
+    {
+      "id": "clients",
+      "question": "Arbeiten Sie mit Startups oder Unternehmen?",
+      "answer": "Beides. Von scrappy MVPs bis zu Fortune 500-Migrationen habe ich alles gesehen – und repariert."
+    },
+    {
+      "id": "cloud",
+      "question": "Können Sie Cloud-Infrastruktur verwalten?",
+      "answer": "Absolut. AWS-nativ. Ich esse IAM-Richtlinien zum Frühstück."
+    },
+    {
+      "id": "philosophy",
+      "question": "Was ist Ihre Philosophie beim Software-Design?",
+      "answer": "Für Menschen bauen, für Skalierbarkeit optimieren, verhindern, dass zukünftige Entwickler Sie hassen."
+    },
+    {
+      "id": "automation",
+      "question": "Machen Sie Automatisierung?",
+      "answer": "Ja. Wenn es automatisiert werden kann, automatisiere ich es. Wenn nicht, versuche ich es trotzdem."
+    },
+    {
+      "id": "skills",
+      "question": "Wie halten Sie Ihre Fähigkeiten scharf?",
+      "answer": "OSS-Beiträge, Nebenprojekte, Konferenzen, RFCs zum Spaß lesen (urteilen Sie nicht)."
+    },
+    {
+      "id": "mentorship",
+      "question": "Können Sie Teams betreuen oder leiten?",
+      "answer": "Ja. Ich habe Teams auf verschiedenen Kontinenten geleitet. Denken Sie an einen Jedi-Meister, aber mit Code-Reviews."
+    },
+    {
+      "id": "bugs",
+      "question": "Wie stehen Sie zu Bugs?",
+      "answer": "Das sind nur missverstandene Funktionen... bis ich sie gnadenlos zerquetsche."
+    },
+    {
+      "id": "async",
+      "question": "Arbeiten Sie asynchron mit globalen Teams?",
+      "answer": "Ja. Mein Kalender ist genauso zeitzonenfreundlich wie meine Commits."
+    },
+    {
+      "id": "delivery",
+      "question": "Was ist Ihr Lieferstil?",
+      "answer": "Iterativ, transparent, demo-gesteuert. Sie werden sich nie fragen: 'Was passiert gerade?'"
+    },
+    {
+      "id": "whyhire",
+      "question": "Warum sollten wir Sie einstellen?",
+      "answer": "Weil ich nicht nur Code schreibe – ich baue Hebelwirkung auf. Und dabei mache ich es spaßig."
+    }
+  ],
+  "ctaTitle1": "Bereit, Ideen in Software zu verwandeln, die wirklich funktioniert?",
+  "ctaTitle2": "Lassen Sie uns Brillanz bauen – verantwortungsvoll (ungefähr).",
+  "letsTalk": "Lass uns reden",
+  "timelineTitle": "Zeitachse",
+  "timelineSubtitle": "Fahren Sie über die linke Spalte, um zu scrollen — der Globus rechts folgt.",
+  "viewAllProjects": "Alle Projekte anzeigen",
+  "timelineCountries": "11 Länder (und es werden mehr)",
+  "ossTitle": "Open-Source-Highlights",
+  "ossViewAll": "Alle ansehen →",
+  "projectsTitle": "Projekte",
+  "projectsSubtitle": "Hier sind einige der Projekte, an denen ich gearbeitet habe.",
+  "contact": {
+    "title0": "Lasst uns etwas",
+    "title1": "Erstaunliches Bauen",
+    "subtitle": "Haben Sie ein Projekt im Sinn? Eine brennende Frage? Oder wollen Sie einfach nur Hallo sagen? Ich bin immer offen für ein gutes Gespräch und schreckliche Programmierwitze.",
+    "cardTitle": "Schreiben Sie mir",
+    "cardDesc": "Kein Spam, keine Verkaufsgespräche, nur echte menschliche Verbindung. Versprochen!",
+    "nameLabel": "Wie soll ich Sie nennen?",
+    "namePlaceholder": "Ihr wunderbarer Name",
+    "emailLabel": "Ihre E-Mail-Adresse",
+    "subjectLabel": "Worum geht es?",
+    "subjectPlaceholder": "Projektzusammenarbeit, Lebensratschläge oder Ihre Lieblings-Debugging-Geschichte",
+    "messageLabel": "Ihre Nachricht",
+    "messagePlaceholder": "Erzählen Sie mir von Ihren wildesten Programmierträumen...",
+    "chars": "Zeichen",
+    "sendBtn": "Nachricht Senden 🚀",
+    "sendingBtn": "Sende deine tolle Nachricht...",
+    "footerNote": "Gebaut mit ❤️ und wahrscheinlich zu viel Koffein. Antwortzeit: Normalerweise < 24 Std.",
+    "successTitle": "Nachricht gesendet! 🚀",
+    "successDesc": "Danke für die Kontaktaufnahme! Ich melde mich schneller zurück als Sie 'async/await' sagen können.",
+    "errorMsg": "Etwas ist schief gelaufen!"
+  },
+  "ossPage": {
+    "title": "Open Source als Meine Supernova.",
+    "subtitle": "Ich liefere nicht nur Code — ich entfessle Systeme. Brutal, kampferprobt und kompromisslos. Fork es, brich es, mixe es. Das sind keine Spielplatz-Demos. Sie sind lebende Waffen für Entwickler, die sich trauen.",
+    "outro": "Möchten Sie beitragen, forken oder einfach nur einen Blick unter die Haube werfen? Jeder Stern ⭐ bedeutet viel.",
+    "productsTitle": "Produkte & Experimente",
+    "productsDesc": "Eine Sammlung von produktionsreifen Werkzeugen und Experimenten, fokussiert auf mobile und Medienanwendungen.",
+    "cloudTitle": "Cloud & DevOps-Spielzeuge",
+    "cloudDesc": "Eine Showcase von Serverless-Funktionen, Infrastructure as Code und anderen DevOps-Dienstprogrammen.",
+    "playgroundTitle": "Spielplatz & Klassiker",
+    "playgroundDesc": "Ein Raum für Erkundungen, mit Data Science-Experimenten und modernen Implementierungen klassischer Software."
+  },
+  "footerRights": "Alle Rechte vorbehalten."
+}
