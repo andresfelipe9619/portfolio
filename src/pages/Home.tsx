@@ -121,6 +121,9 @@ export default function Home() {
 
       frame();
       setTimeout(() => {
+        import('@/lib/ga').then(({ logEvent }) => {
+          logEvent('Contact', 'Intent', 'Let\'s Talk Button');
+        });
         navigate('/contact');
       }, 1000);
     });

@@ -28,7 +28,12 @@ export function Header(props: { onClick: () => void }) {
             <DockIcon>
               <button
                 aria-label="Toggle Explorer"
-                onClick={props.onClick}
+                onClick={() => {
+                  import('@/lib/ga').then(({ logEvent }) => {
+                    logEvent('Navigation', 'Toggle File Explorer');
+                  });
+                  props.onClick();
+                }}
                 className="px-2 py-1 cursor-pointer"
               >
                 <Folder className="h-4 w-4" />

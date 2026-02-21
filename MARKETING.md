@@ -34,9 +34,14 @@ To view these in Google Analytics, look under *Reports > Engagement > Events*.
 | :--- | :--- | :--- | :--- |
 | **Pageview** | `pageview` | Any Path | General traffic monitoring. |
 | **Projects** | `View Detail` | Project Title | Identify which portfolio pieces generate the most interest. |
+| **Projects** | `External Link Click` | External URL | Track intent to view live project sites. |
+| **Timeline** | `Link Click` | Career Title | Track exploration of professional history. |
+| **Navigation** | `Toggle File Explorer` | N/A | Understand how technical stakeholders explore the site. |
+| **Contact** | `Intent` | 'Let's Talk Button' | Track lead generation and interest. |
 | **OSS Card** | `Open Modal` | OSS Project Title | Track engagement with Open Source highlights. |
 | **OSS Card** | `Open on GitHub` | OSS Project Title | Conversion metric: Users navigating to GitHub repositories. |
 | **Language** | `Change` | Language Code (en, es, etc.) | Understand geographic and linguistic preferences of the audience. |
+| **Footer** | `[Social] Click` | LinkedIn, GitHub, etc. | Track external profile visits. |
 
 ### Microsoft Clarity
 In addition to GA4, **Microsoft Clarity** is configured. This provides:

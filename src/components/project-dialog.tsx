@@ -80,6 +80,11 @@ const ProjectDialog = ({ open, onOpenChange, project }: ProjectDialogProps) => {
                       target="_blank"
                       rel="noreferrer"
                       className="inline-flex items-center gap-1 text-blue-400 hover:underline"
+                      onClick={() => {
+                        import('@/lib/ga').then(({ logEvent }) => {
+                          logEvent('Projects', 'External Link Click', link.href);
+                        });
+                      }}
                     >
                       {link.label}
                       <ExternalLink className="h-3 w-3" />
