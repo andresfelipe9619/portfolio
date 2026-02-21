@@ -16,6 +16,7 @@ A modern, performant, and highly interactive web application built with a curate
 
 - **Lightning Fast**: Powered by **React 19** and **Vite** for instantaneous builds and blazing fast performance.
 - **Type-Safe**: Extensively typed with **TypeScript 5.8**.
+- **Global & Localized**: Fully integrated **i18next** internationalization supporting English, Spanish, French, and German out of the box with browser persistence.
 - **Stunning UI**: Utility-first styling with **Tailwind CSS 4** and accessible, beautifully crafted components from **shadcn/ui**.
 - **Magical Animations**: Physics-based animations via **Framer Motion**, dazzling interactive components from **Magic UI** (like Terminal, Globe, Particles), hand-drawn aesthetics with `rough-notation`, and celebratory `canvas-confetti`.
 - **Robust Telemetry**: Integrated with **Sentry** for error tracking and **Google Analytics 4** / **Vercel Analytics** for insights.
@@ -60,9 +61,10 @@ src/
 ├─ components/      # UI building blocks
 │  ├─ magicui/      # The "wow" factor (animations, interactive parts)
 │  └─ ui/           # Standard, accessible shadcn/ui components
-├─ data/            # The "brain": copy, resume info, project details
+├─ data/            # The "brain": resume info, large project details, configs
 ├─ hooks/           # Reusable custom React hooks
-├─ lib/             # Utility functions
+├─ lib/             # Utility functions and library wrappers
+├─ locales/         # i18n JSON translation dictionaries (en, es, fr, de)
 ├─ pages/           # Route-level components (Home, etc.)
 └─ sections/        # Large, reusable page sections (Hero, About, etc.)
 ```

@@ -56,7 +56,11 @@ You are here to help, not to replace. Here’s how you can be a good collaborato
   1.  If it's a simple, reusable UI element, add it to `src/components/ui/`.
   2.  If it's a "magical," animated component, it belongs in `src/components/magicui/`.
   3.  Follow existing naming conventions (e.g., `kebab-case` for files, `PascalCase` for components).
-- **Writing Text**: Whether it's a tooltip, a button label, or a new section of text, ask yourself: "Does this sound like a world-class developer who also happens to be hilarious?"
+- **Writing Text & Translations**: 
+  1.  **Never hardcode strings!** This portfolio is fully internationalized (i18n).
+  2.  Use the `useTranslation` hook from `react-i18next` and fetch text via `t('jsonKey')`. Do not pass inline fallback strings into the `t()` hook.
+  3.  Instead, define new text in the JSON dictionaries located inside `src/locales/` (e.g., `en/translation.json`, `es/translation.json`, etc.). Keep the dictionaries as the single source of truth.
+  4.  Whether it's a tooltip, a button label, or a new section of text, ask yourself: "Does this sound like a world-class developer who also happens to be hilarious?"
 
 ---
 
@@ -67,8 +71,9 @@ You are here to help, not to replace. Here’s how you can be a good collaborato
   - **`magicui/`**: The fun stuff. This is where the portfolio's personality shines. Look at `Terminal.tsx`, `Globe.tsx`, and `Particles.tsx` for inspiration.
   - **`joke-dialog.tsx` & `virus-scan-dialog.tsx`**: Prime examples of the portfolio's humor.
 - **`/src/data/`**: The single source of truth for content.
-  - **`copy.ts`**: Contains all the witty UI copy.
-  - **`resume.tsx`**: Defines the developer's professional experience.
+  - **`resume.tsx`**: Defines the developer's professional experience and configuration details.
+  - **`timeline.ts`**: Contains elaborate CV history blocks. Keep big lists here.
+- **`/src/locales/`**: The single source of truth for UI copy (`en`, `es`, `fr`, `de`). When editing text on pages, update the JSON files here.
 - **`/src/assets/`**: Static assets like images and logos.
 - **`/src/sections/`**: Large, reusable page sections.
 
