@@ -85,6 +85,8 @@ You are here to help, not to replace. Here’s how you can be a good collaborato
   - `npm run dev`: Starts the development server.
   - `npm run build`: Builds the production-ready application.
   - `npm run lint`: Lints the codebase with ESLint.
+- **Commits & Version Control**: We *strictly* use **Gitmoji**.
+  - Always prefix your commits with the appropriate emoji (e.g., `✨ feat:`, `🐛 fix:`, `📝 docs:`). This is Andrés's signature style. If you don't use Gitmoji, you're not doing it right.
 - **Animations**: Animations are a core part of the experience.
   - **`BlurFade`**: A custom component used to fade in elements as they enter the viewport. Use it for new sections.
   - **`TypingAnimation`**: Creates the "typing" effect for text. It's used heavily in the hero section.

@@ -53,6 +53,14 @@ npm run build
 npm run preview
 ```
 
+## 📝 Committing Code (The Andrés Way)
+
+This project strictly enforces **[Gitmoji](https://gitmoji.dev/)** for all commit messages. This is a signature style choice.
+
+- Always prefix commits with the appropriate emoji + type.
+- Example: `✨ feat: Add new magical component` or `🐛 fix: Resolve responsive layout issue`.
+- If a commit lacks a Gitmoji, it lacks soul.
+
 ## 📁 Project Structure
 
 ```text
