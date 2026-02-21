@@ -11,7 +11,7 @@
 <!-- Repository Stats -->
 [![GitHub stars](https://img.shields.io/github/stars/andresfelipe9619/portfolio?style=flat&color=yellow)](https://github.com/andresfelipe9619/portfolio/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/andresfelipe9619/portfolio?style=flat&color=orange)](https://github.com/andresfelipe9619/portfolio/network/members)
-[![Views](https://komarev.com/ghpvc/?username=andresfelipe9619.portfolio&label=views&color=blue&style=flat)](https://github.com/andresfelipe9619/portfolio)
+[![Views](https://komarev.com/ghpvc/?username=andresfelipe9619-portfolio&label=views&color=blue&style=flat)](https://github.com/andresfelipe9619/portfolio)
 
 A modern, performant, and highly interactive web application built with a curated stack. This portfolio balances professional engineering with a playful, big-hearted personality.
 
