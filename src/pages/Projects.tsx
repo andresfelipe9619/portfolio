@@ -1,4 +1,3 @@
-
 import { Footer } from '@/sections/footer';
 import ProjectsGrid from '@/components/ProjectsGrid';
 import { Badge } from '@/components/ui/badge';

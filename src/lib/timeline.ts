@@ -36,4 +36,3 @@ export function focusGlobe(lat: number, lon: number) {
     new CustomEvent('globe:focus', { detail: { lat, lon } }),
   );
 }
-

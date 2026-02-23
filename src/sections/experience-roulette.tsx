@@ -86,7 +86,9 @@ export default function ExperienceRoulette() {
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 md:grid-cols-2">
         {/* LEFT: Timeline — fixed height, inner scroll only when hovered */}
         <div>
-          <h2 className="mb-2 text-2xl md:text-4xl font-semibold">{t('timelineTitle')}</h2>
+          <h2 className="mb-2 text-2xl md:text-4xl font-semibold">
+            {t('timelineTitle')}
+          </h2>
           <p className="mb-4 max-w-prose text-white/70">
             {t('timelineSubtitle')}
           </p>

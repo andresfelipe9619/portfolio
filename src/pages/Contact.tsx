@@ -77,7 +77,6 @@ export default function ContactPage() {
     }
   };
 
-
   const getCharCountColor = () => {
     if (charCount > 500) return 'text-green-500';
     if (charCount > 200) return 'text-yellow-500';
@@ -178,7 +177,8 @@ export default function ContactPage() {
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <Label htmlFor="message" className="text-sm font-medium">
-                    {t('contact.messageLabel')} <span className="text-destructive">*</span>
+                    {t('contact.messageLabel')}{' '}
+                    <span className="text-destructive">*</span>
                   </Label>
                   <span className={`text-xs ${getCharCountColor()}`}>
                     {getCharCountMessage()} ({charCount} {t('contact.chars')})
@@ -219,9 +219,7 @@ export default function ContactPage() {
 
         {/* Footer Note */}
         <div className="text-center mt-8">
-          <p className="text-sm">
-            {t('contact.footerNote')}
-          </p>
+          <p className="text-sm">{t('contact.footerNote')}</p>
         </div>
       </div>
       <Toaster />

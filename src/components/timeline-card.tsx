@@ -1,5 +1,3 @@
-
-
 interface TimelineCardProps {
   year: string;
   items: {

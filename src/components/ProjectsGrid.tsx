@@ -25,10 +25,7 @@ export default function ProjectsGrid() {
   }, [items]);
 
   const filteredItems = useMemo(
-    () =>
-      filter === 'All'
-        ? items
-        : items.filter((it) => it.area === filter),
+    () => (filter === 'All' ? items : items.filter((it) => it.area === filter)),
     [items, filter],
   );
 

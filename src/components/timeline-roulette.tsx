@@ -33,7 +33,7 @@ export default function TimelineRoulette({ data, onChangeIndex }: Props) {
       }
       onChangeIndex?.(i, item);
     },
-    //eslint-disable-next-line
+    // eslint-disable-next-line
     [items, onChangeIndex],
   );
 

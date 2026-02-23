@@ -59,7 +59,6 @@ export function OssCard({
           glowClassName="rounded-2xl opacity-80"
         >
           <div className="relative h-full rounded-2xl p-2">
-
             <div className="mb-2 flex items-center justify-between text-xs opacity-70">
               <span>{year}</span>
 
@@ -96,7 +95,10 @@ export function OssCard({
           <>
             <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur" />
 
-            <DialogContent showCloseButton={false} className="z-50 w-[90vw] max-w-2xl overflow-hidden border-white/10 bg-background/90 p-0 shadow-2xl">
+            <DialogContent
+              showCloseButton={false}
+              className="z-50 w-[90vw] max-w-2xl overflow-hidden border-white/10 bg-background/90 p-0 shadow-2xl"
+            >
               <div className="overflow-hidden rounded-xl">
                 {/* Terminal-ish header strip */}
                 <div className="flex items-center justify-between gap-2 border-b border-white/10 bg-gradient-to-r from-white/5 to-transparent px-4 py-2 text-xs">
@@ -179,7 +181,13 @@ export function OssCard({
                       Built in public. PRs welcome.
                     </div>
                     <div className="flex items-center gap-2">
-                      <Button asChild className="gap-2" onClick={() => logEvent('OSS Card', 'Open on GitHub', title)}>
+                      <Button
+                        asChild
+                        className="gap-2"
+                        onClick={() =>
+                          logEvent('OSS Card', 'Open on GitHub', title)
+                        }
+                      >
                         <a href={href} target="_blank" rel="noreferrer">
                           <Github className="h-4 w-4" />
                           Open on GitHub

@@ -26,7 +26,7 @@ export default function TimelineGlobe({ className }: Props) {
     const locationToAngles = (lat: number, lon: number) => {
       return [
         Math.PI - ((lon * Math.PI) / 180 - Math.PI / 2),
-        (lat * Math.PI) / 180
+        (lat * Math.PI) / 180,
       ];
     };
 

@@ -22,7 +22,11 @@ export function Footer() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onClick={() =>
-              logEvent('Footer', 'LinkedIn Click', DATA.contact.social.LinkedIn.url)
+              logEvent(
+                'Footer',
+                'LinkedIn Click',
+                DATA.contact.social.LinkedIn.url,
+              )
             }
           >
             <DockIcon className="p-2 text-white/70 hover:text-white">
@@ -52,7 +56,11 @@ export function Footer() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onClick={() =>
-              logEvent('Footer', 'Instagram Click', DATA.contact.social.Instagram.url)
+              logEvent(
+                'Footer',
+                'Instagram Click',
+                DATA.contact.social.Instagram.url,
+              )
             }
           >
             <DockIcon className="p-2 text-white/70 hover:text-white">

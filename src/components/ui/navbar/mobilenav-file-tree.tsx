@@ -97,18 +97,21 @@ export function MobileNavFileTree() {
                 name: 'pages',
                 path: 'src/pages',
                 type: 'dir',
-                children: Object.keys(PAGE_ROUTES).reduce((acc, key) => {
-                  const fileName = `${key}.tsx`;
-                  acc[fileName] = {
-                    name: fileName,
-                    path: `src/pages/${fileName}`,
-                    type: 'file',
-                  };
-                  return acc;
-                }, {} as Record<string, Node>)
-              }
-            }
-          }
+                children: Object.keys(PAGE_ROUTES).reduce(
+                  (acc, key) => {
+                    const fileName = `${key}.tsx`;
+                    acc[fileName] = {
+                      name: fileName,
+                      path: `src/pages/${fileName}`,
+                      type: 'file',
+                    };
+                    return acc;
+                  },
+                  {} as Record<string, Node>,
+                ),
+              },
+            },
+          },
         ];
 
         // We set the fallback tree similar to the toArray(root) format used above
@@ -117,8 +120,8 @@ export function MobileNavFileTree() {
             name: 'src',
             path: 'src',
             type: 'dir',
-            children: fallbackTree[0].children
-          }
+            children: fallbackTree[0].children,
+          },
         ];
 
         setTree(formattedFallback);
@@ -138,7 +141,7 @@ export function MobileNavFileTree() {
       ) : (
         <File key={node.path} value={node.path}>
           {node.path.startsWith('src/pages/') &&
-            PAGE_ROUTES[node.name.replace(/\.tsx$/, '')] ? (
+          PAGE_ROUTES[node.name.replace(/\.tsx$/, '')] ? (
             <Link
               to={PAGE_ROUTES[node.name.replace(/\.tsx$/, '')]}
               className="block px-1 py-0.5 flex items-center gap-1"
@@ -173,4 +176,3 @@ export function MobileNavFileTree() {
     </div>
   );
 }
-

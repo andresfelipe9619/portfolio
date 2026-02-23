@@ -14,7 +14,11 @@ export interface DockProps extends VariantProps<typeof dockVariants> {
 const Dock = React.forwardRef<HTMLDivElement, DockProps>(
   ({ className, children, ...props }, ref) => {
     return (
-      <motion.div ref={ref} {...props} className={cn(dockVariants({ className }))}>
+      <motion.div
+        ref={ref}
+        {...props}
+        className={cn(dockVariants({ className }))}
+      >
         {children}
       </motion.div>
     );
@@ -29,11 +33,7 @@ export interface DockIconProps {
   props?: PropsWithChildren;
 }
 
-const DockIcon = ({
-  className,
-  children,
-  ...props
-}: DockIconProps) => {
+const DockIcon = ({ className, children, ...props }: DockIconProps) => {
   return (
     <div
       className={cn(

@@ -88,7 +88,7 @@ export const ScratchToReveal: React.FC<ScratchToRevealProps> = ({
       document.removeEventListener('touchend', handleDocumentTouchEnd);
       document.removeEventListener('touchcancel', handleDocumentTouchEnd);
     };
-    //eslint-disable-next-line
+    // eslint-disable-next-line
   }, [isScratching]);
 
   const handleMouseDown = () => setIsScratching(true);

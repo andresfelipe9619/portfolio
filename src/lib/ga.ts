@@ -17,7 +17,7 @@ export const logEvent = (
   category: string,
   action: string,
   label?: string,
-  value?: number
+  value?: number,
 ) => {
   ReactGA.event({
     category,

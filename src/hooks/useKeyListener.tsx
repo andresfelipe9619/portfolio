@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 
-export function useKeyListener(setExplorerOpen: (value: (((prevState: boolean) => boolean) | boolean)) => void) {
+export function useKeyListener(
+  setExplorerOpen: (value: ((prevState: boolean) => boolean) | boolean) => void,
+) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       // Cmd/Ctrl + E toggles Explorer
@@ -12,6 +14,6 @@ export function useKeyListener(setExplorerOpen: (value: (((prevState: boolean) =
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-    //eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 }

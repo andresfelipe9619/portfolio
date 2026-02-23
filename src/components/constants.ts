@@ -78,12 +78,12 @@ const GLOBE_CONFIG: COBEOptions = {
     { location: [-15.7942, -47.9297], size: 0.1 }, // Brazil
     { location: [19.4326, -99.1332], size: 0.1 }, // Mexico
     { location: [4.6097, -74.0818], size: 0.1 }, // Colombia
-    { location: [-0.2299, -78.5250], size: 0.1 }, // Ecuador
+    { location: [-0.2299, -78.525], size: 0.1 }, // Ecuador
     { location: [9.9347, -84.0875], size: 0.1 }, // Costa Rica
     { location: [8.9936, -79.5197], size: 0.1 }, // Panama
     { location: [18.5001, -69.9886], size: 0.1 }, // Dominican Republic
     { location: [51.5085, -0.1257], size: 0.1 }, // UK
-    { location: [31.7720, 35.2170], size: 0.1 }, // Israel
+    { location: [31.772, 35.217], size: 0.1 }, // Israel
   ],
 };
 

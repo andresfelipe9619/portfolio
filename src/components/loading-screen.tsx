@@ -22,7 +22,7 @@ const LoadingScreen = ({
   const { i18n } = useTranslation();
   const detectedLangCode = i18n.language?.substring(0, 2) || 'en';
 
-  const langs: Record<string, { label: string, location: string }> = {
+  const langs: Record<string, { label: string; location: string }> = {
     en: { label: 'English', location: '[US/UK/GLOBAL]' },
     es: { label: 'Español', location: '[LATAM/ES]' },
     fr: { label: 'Français', location: '[FR/CA]' },
@@ -57,12 +57,12 @@ const LoadingScreen = ({
 
   return (
     <div className="fixed inset-0 z-50 grid place-items-center bg-black">
-      {/*<InteractiveGridPattern*/}
+      {/* <InteractiveGridPattern*/}
       {/*  width={20}*/}
       {/*  height={20}*/}
       {/*  squares={[80, 80]}*/}
       {/*  squaresClassName="hover:fill-green-500"*/}
-      {/*/>*/}
+      {/* />*/}
 
       <BlurFade duration={0.2} blur={'0px'} yOffset={0} inView>
         <div className="relative z-10 w-[90vw] h-[80vh] md:w-[60vw] md:h-[60vh]">

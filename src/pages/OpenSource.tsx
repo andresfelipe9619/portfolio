@@ -150,9 +150,7 @@ export default function OpenSourcePage() {
 
       {/* Outro */}
       <footer className="relative z-10 mt-16 text-center">
-        <p className="text-muted-foreground">
-          {t('ossPage.outro')}
-        </p>
+        <p className="text-muted-foreground">{t('ossPage.outro')}</p>
         <div className="mt-4 text-sm">
           <a
             href="https://github.com/andresfelipe9619"

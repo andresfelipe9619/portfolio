@@ -13,9 +13,7 @@ const JokeDialog = ({ open, onOpenChange }) => {
         <DialogHeader>
           <DialogTitle>Bro...</DialogTitle>
         </DialogHeader>
-        <DialogDescription>
-          Just scroll down.
-        </DialogDescription>
+        <DialogDescription>Just scroll down.</DialogDescription>
       </DialogContent>
     </Dialog>
   );

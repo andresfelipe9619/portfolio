@@ -49,7 +49,7 @@ const FunnyVirusScanDialog = ({ open, onOpenChange }) => {
       }, 500);
       return () => clearInterval(interval);
     }
-    //eslint-disable-next-line
+    // eslint-disable-next-line
   }, [step, viruses.length]);
 
   const handleDownload = () => {

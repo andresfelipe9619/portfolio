@@ -30,12 +30,25 @@ export const DATA = {
     'Automation (n8n, Make, Dapta)',
   ],
   categorizedSkills: {
-    'Backend & APIs': ['Node.js', 'TypeScript', 'Go', 'Python', 'GraphQL', 'REST'],
-    'Frontend': ['React', 'Next.js', 'Tailwind CSS', 'Vite', 'Framer Motion'],
+    'Backend & APIs': [
+      'Node.js',
+      'TypeScript',
+      'Go',
+      'Python',
+      'GraphQL',
+      'REST',
+    ],
+    Frontend: ['React', 'Next.js', 'Tailwind CSS', 'Vite', 'Framer Motion'],
     'Cloud & DevOps': ['AWS', 'Docker', 'Linux', 'Vercel', 'Sentry'],
     'Database & Storage': ['PostgreSQL', 'MongoDB', 'DynamoDB', 'S3'],
     'Architecture & CMS': ['Strapi', 'Serverless', 'Microservices'],
-    'Automation & Scraping': ['n8n', 'Make', 'Dapta', 'Puppeteer', 'Playwright'],
+    'Automation & Scraping': [
+      'n8n',
+      'Make',
+      'Dapta',
+      'Puppeteer',
+      'Playwright',
+    ],
   },
   navbar: [
     { href: '/', icon: HomeIcon, label: 'Home' },
@@ -128,4 +141,3 @@ export const DATA = {
     },
   ],
 } as const;
-

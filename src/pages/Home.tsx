@@ -23,15 +23,39 @@ import { flattenTimeline, type FlattenedItem } from '@/lib/timeline';
 import { Marquee } from '@/components/magicui/marquee';
 import { useTranslation } from 'react-i18next';
 
-const Globe = lazy(() => import('@/components/magicui/globe').then(m => ({ default: m.Globe })));
-const Footer = lazy(() => import('@/sections/footer.tsx').then(m => ({ default: m.Footer })));
-const OssHighlights = lazy(() => import('@/sections/oss-highlights.tsx').then(m => ({ default: m.OssHighlights })));
-const FunnyVirusScanDialog = lazy(() => import('@/components/virus-scan-dialog.tsx'));
+const Globe = lazy(() =>
+  import('@/components/magicui/globe').then((m) => ({ default: m.Globe })),
+);
+const Footer = lazy(() =>
+  import('@/sections/footer.tsx').then((m) => ({ default: m.Footer })),
+);
+const OssHighlights = lazy(() =>
+  import('@/sections/oss-highlights.tsx').then((m) => ({
+    default: m.OssHighlights,
+  })),
+);
+const FunnyVirusScanDialog = lazy(
+  () => import('@/components/virus-scan-dialog.tsx'),
+);
 const JokeDialog = lazy(() => import('@/components/joke-dialog.tsx'));
-const Particles = lazy(() => import('@/components/magicui/particles').then(m => ({ default: m.Particles })));
-const ClientMarqueeSection = lazy(() => import('@/sections/ClientMarqueeSection').then(m => ({ default: m.ClientMarqueeSection })));
-const SkillsSection = lazy(() => import('@/sections/SkillsSection').then(m => ({ default: m.SkillsSection })));
-const ExperienceRoulette = lazy(() => import('@/sections/experience-roulette.tsx'));
+const Particles = lazy(() =>
+  import('@/components/magicui/particles').then((m) => ({
+    default: m.Particles,
+  })),
+);
+const ClientMarqueeSection = lazy(() =>
+  import('@/sections/ClientMarqueeSection').then((m) => ({
+    default: m.ClientMarqueeSection,
+  })),
+);
+const SkillsSection = lazy(() =>
+  import('@/sections/SkillsSection').then((m) => ({
+    default: m.SkillsSection,
+  })),
+);
+const ExperienceRoulette = lazy(
+  () => import('@/sections/experience-roulette.tsx'),
+);
 const ProjectDialog = lazy(() => import('@/components/project-dialog'));
 
 export default function Home() {
@@ -60,7 +84,9 @@ export default function Home() {
     (globalCompanies.length + toBuildWhatOthers.length) * 100 + 600;
   const skipAnimation = hasSeenHero;
 
-  const FAQ_ITEMS = t('faq', { returnObjects: true }) as Array<{ id?: string, question: string, answer: string }> | string;
+  const FAQ_ITEMS = t('faq', { returnObjects: true }) as
+    | Array<{ id?: string; question: string; answer: string }>
+    | string;
   const typedFaqItems = Array.isArray(FAQ_ITEMS) ? FAQ_ITEMS : [];
 
   useEffect(() => {
@@ -73,7 +99,7 @@ export default function Home() {
       clearTimeout(timer);
       setCompleted(skipAnimation);
     };
-    //eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -125,7 +151,7 @@ export default function Home() {
       frame();
       setTimeout(() => {
         import('@/lib/ga').then(({ logEvent }) => {
-          logEvent('Contact', 'Intent', 'Let\'s Talk Button');
+          logEvent('Contact', 'Intent', "Let's Talk Button");
         });
         navigate('/contact');
       }, 1000);
@@ -239,10 +265,7 @@ export default function Home() {
               </Suspense>
             </div>
             <div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_200%,rgba(0,0,0,0.2),rgba(255,255,255,0))]" />
-
-
           </div>
-
         </div>
       </section>
 
@@ -297,7 +320,8 @@ export default function Home() {
               </div>
 
               <blockquote className="relative z-10 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.3] text-white/90">
-                "One man's <AuroraText>crappy software</AuroraText> is another man's <AuroraText>full‑time job</AuroraText>."
+                "One man's <AuroraText>crappy software</AuroraText> is another
+                man's <AuroraText>full‑time job</AuroraText>."
               </blockquote>
 
               <div className="relative z-10 mt-10">
@@ -314,9 +338,7 @@ export default function Home() {
         <BlurFade delay={0.25} inView>
           <section id="testimonials" className="bg-gray-950 text-white py-16">
             <div className="mx-auto max-w-6xl px-6">
-              <h3 className="text-xl font-semibold">
-                {t('testimonialTitle')}
-              </h3>
+              <h3 className="text-xl font-semibold">{t('testimonialTitle')}</h3>
               <Marquee pauseOnHover className="mt-6">
                 {TESTIMONIALS.map((t, i) => (
                   <Card
@@ -336,7 +358,9 @@ export default function Home() {
                           </AvatarFallback>
                         </Avatar>
                         <div className="flex flex-col">
-                          <span className="text-sm font-medium">{t.client}</span>
+                          <span className="text-sm font-medium">
+                            {t.client}
+                          </span>
                           {t.country && (
                             <span className="text-xs text-white/60">
                               {t.country}
@@ -395,28 +419,33 @@ export default function Home() {
 
               <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Accordion type="single" collapsible className="w-full">
-                  {typedFaqItems.slice(0, typedFaqItems.length / 2).map((item, idx) => (
-                    <AccordionItem
-                      key={item.id ?? idx}
-                      value={item.id ?? `item-${idx + 1}`}
-                    >
-                      <AccordionTrigger>{item.question}</AccordionTrigger>
-                      <AccordionContent>{item.answer}</AccordionContent>
-                    </AccordionItem>
-                  ))}
+                  {typedFaqItems
+                    .slice(0, typedFaqItems.length / 2)
+                    .map((item, idx) => (
+                      <AccordionItem
+                        key={item.id ?? idx}
+                        value={item.id ?? `item-${idx + 1}`}
+                      >
+                        <AccordionTrigger>{item.question}</AccordionTrigger>
+                        <AccordionContent>{item.answer}</AccordionContent>
+                      </AccordionItem>
+                    ))}
                 </Accordion>
                 <Accordion type="single" collapsible className="w-full">
-                  {typedFaqItems.slice(typedFaqItems.length / 2).map((item, idx) => (
-                    <AccordionItem
-                      key={item.id ?? idx}
-                      value={
-                        item.id ?? `item-${idx + 1 + typedFaqItems.length / 2}`
-                      }
-                    >
-                      <AccordionTrigger>{item.question}</AccordionTrigger>
-                      <AccordionContent>{item.answer}</AccordionContent>
-                    </AccordionItem>
-                  ))}
+                  {typedFaqItems
+                    .slice(typedFaqItems.length / 2)
+                    .map((item, idx) => (
+                      <AccordionItem
+                        key={item.id ?? idx}
+                        value={
+                          item.id ??
+                          `item-${idx + 1 + typedFaqItems.length / 2}`
+                        }
+                      >
+                        <AccordionTrigger>{item.question}</AccordionTrigger>
+                        <AccordionContent>{item.answer}</AccordionContent>
+                      </AccordionItem>
+                    ))}
                 </Accordion>
               </div>
             </div>
