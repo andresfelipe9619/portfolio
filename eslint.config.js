@@ -5,9 +5,25 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import { globalIgnores } from 'eslint/config';
 import prettier from 'eslint-config-prettier';
+import { FlatCompat } from '@eslint/eslintrc';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-export default tseslint.config([
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const compat = new FlatCompat({ baseDirectory: __dirname });
+
+const googleConfig = compat.extends('eslint-config-google').map((config) => {
+  if (config.rules) {
+    delete config.rules['valid-jsdoc'];
+    delete config.rules['require-jsdoc'];
+  }
+  return config;
+});
+
+export default tseslint.config(
   globalIgnores(['dist']),
+  ...googleConfig,
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
@@ -15,7 +31,6 @@ export default tseslint.config([
       tseslint.configs.recommended,
       reactHooks.configs['recommended-latest'],
       reactRefresh.configs.vite,
-      prettier,
     ],
     languageOptions: {
       ecmaVersion: 2020,
@@ -23,6 +38,10 @@ export default tseslint.config([
     },
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
+      'valid-jsdoc': 'off',
+      'require-jsdoc': 'off',
+      'spaced-comment': ['error', 'always', { markers: ['/'] }],
     },
   },
-]);
+  prettier,
+);
