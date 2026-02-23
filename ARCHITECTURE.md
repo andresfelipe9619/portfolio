@@ -7,6 +7,7 @@ This document provides a technical overview of the Portfolio application. It is 
 This is a Single Page Application (SPA) built with React 19, bundled by Vite, and relying heavily on static client-side rendering with dynamic animations. There is no traditional backend; all data is strictly contained within TypeScript files in `src/data/`.
 
 **Core Technologies:**
+
 - **Core**: React 19, TypeScript
 - **Build Tool**: Vite
 - **Styling**: Tailwind CSS v4, shadcn/ui, `tailwind-merge`, `clsx`
@@ -39,7 +40,7 @@ src/
 The application completely abstracts content from components.
 
 - **Content as Code**: All text, project data, and resume information reside in `src/data/`.
-  - *Why?* This separation allows components to remain purely presentational. If you need to fix a typo or add a new job experience, you never need to touch a React component.
+  - _Why?_ This separation allows components to remain purely presentational. If you need to fix a typo or add a new job experience, you never need to touch a React component.
 - **State**: The app is generally stateless beyond UI-level state (e.g., is a dialog open, has an animation finished, is the loading screen active). Global state is extremely minimal.
 
 ## 4. Component Hierarchy & Rendering
@@ -52,6 +53,7 @@ The application completely abstracts content from components.
 ## 5. Styling Paradigm
 
 We use **Tailwind CSS**.
+
 - **Consistency**: All styling mutations or overrides should be done via Tailwind utility classes.
 - **Class Merging**: We use the `cn` utility (from `clsx` + `tailwind-merge`) found in `src/lib/utils.ts` to merge external classes safely.
   ```ts
@@ -65,6 +67,7 @@ We use **Tailwind CSS**.
 ## 6. Animations
 
 Animations define the personality of this app.
+
 - **Micro-interactions**: Handled primarily via Tailwind pseudo-classes (`hover:`, `focus:`) and simple Framer Motion configurations (`whileHover`, `whileTap`).
 - **Scroll & Reveal**: Handled by components like `BlurFade` (fades in when scrolled into view).
 - **Complex UI**: Handled by Magic UI components. If you are modifying complex components like the interactive terminal, rely on the Magic UI abstraction rather than writing custom animation frames.
@@ -72,6 +75,7 @@ Animations define the personality of this app.
 ## 7. Adding New Features (Agent Guide)
 
 When instructed to add a new feature:
+
 1. **Model the Data**: Does this feature require new text? Add it to `src/data/`.
 2. **Build the UI**: Create a new component in `src/components/ui/` (if it's a building block) or `src/sections/` (if it's a major page area).
 3. **Assemble**: Import your section into `src/pages/Home.tsx` and wrap it in `BlurFade` for consistent loading animations.

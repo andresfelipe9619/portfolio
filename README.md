@@ -9,6 +9,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 <!-- Repository Stats -->
+
 [![GitHub stars](https://img.shields.io/github/stars/andresfelipe9619/portfolio?style=flat&color=yellow)](https://github.com/andresfelipe9619/portfolio/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/andresfelipe9619/portfolio?style=flat&color=orange)](https://github.com/andresfelipe9619/portfolio/network/members)
 [![Views](https://komarev.com/ghpvc/?username=andresfelipe9619-portfolio&label=views&color=blue&style=flat)](https://github.com/andresfelipe9619/portfolio)
@@ -31,6 +32,7 @@ For a deep dive into the underlying systems, check out [ARCHITECTURE.md](ARCHITE
 ## 🤖 For AI Agents
 
 This project embraces AI collaboration! If you are an AI assistant (Cursor, Windsurf, Copilot, etc.), please read:
+
 - [AGENTS.md](AGENTS.md) - For our tone of voice, personality guidelines, and how to contribute without sounding like a robot.
 - [ARCHITECTURE.md](ARCHITECTURE.md) - For the technical layout, routing, and data flow.
 

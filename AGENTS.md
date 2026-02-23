@@ -56,7 +56,7 @@ You are here to help, not to replace. Here’s how you can be a good collaborato
   1.  If it's a simple, reusable UI element, add it to `src/components/ui/`.
   2.  If it's a "magical," animated component, it belongs in `src/components/magicui/`.
   3.  Follow existing naming conventions (e.g., `kebab-case` for files, `PascalCase` for components).
-- **Writing Text & Translations**: 
+- **Writing Text & Translations**:
   1.  **Never hardcode strings!** This portfolio is fully internationalized (i18n).
   2.  Use the `useTranslation` hook from `react-i18next` and fetch text via `t('jsonKey')`. Do not pass inline fallback strings into the `t()` hook.
   3.  Instead, define new text in the JSON dictionaries located inside `src/locales/` (e.g., `en/translation.json`, `es/translation.json`, etc.). Keep the dictionaries as the single source of truth.
@@ -85,7 +85,7 @@ You are here to help, not to replace. Here’s how you can be a good collaborato
   - `npm run dev`: Starts the development server.
   - `npm run build`: Builds the production-ready application.
   - `npm run lint`: Lints the codebase with ESLint.
-- **Commits & Version Control**: We *strictly* use **Gitmoji**.
+- **Commits & Version Control**: We _strictly_ use **Gitmoji**.
   - Always prefix your commits with the appropriate emoji (e.g., `✨ feat:`, `🐛 fix:`, `📝 docs:`). This is Andrés's signature style. If you don't use Gitmoji, you're not doing it right.
 - **Animations**: Animations are a core part of the experience.
   - **`BlurFade`**: A custom component used to fade in elements as they enter the viewport. Use it for new sections.
@@ -97,10 +97,10 @@ You are here to help, not to replace. Here’s how you can be a good collaborato
 ## 6. Usage Guidelines for Agents
 
 - **Be a Markdown Master**: Structure your responses and documentation in clear, readable Markdown.
-- **Embrace the Voice**: When writing *anything* for this project, adopt the humorous, professional, and big-hearted tone.
+- **Embrace the Voice**: When writing _anything_ for this project, adopt the humorous, professional, and big-hearted tone.
 - **Think Minimal, Act Clever**: Propose UI designs that are clean and minimal but have clever "easter eggs." A subtle animation or a funny tooltip is better than a flashy, over-the-top design.
 - **Stay Human**: Your primary goal is to assist a human developer. Sound like one. Avoid sounding like a corporate drone or a robot.
- 
+
 ---
 
 ## 7. Documentation & README

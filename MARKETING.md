@@ -7,6 +7,7 @@ This document outlines the marketing, targeting, and SEO strategies employed in 
 **Tagline:** "Global companies trust me to build what others can’t. Creative Developer · Systems Thinker · Open Source Builder."
 
 **Target Audience:**
+
 - **Engineering Managers & CTOs:** Looking for someone who understands systems engineering and is not just a UI developer.
 - **Creative Agencies:** Seeking highly interactive, polished, and dynamic interfaces (Creative Developers).
 - **Recruiters from Top-Tier Companies:** Searching for unique profiles that blend backend logic with frontend magic.
@@ -16,7 +17,7 @@ This document outlines the marketing, targeting, and SEO strategies employed in 
 To rank globally and reach the desired audience, the portfolio implements several technical SEO strategies:
 
 - **Meta Tags:** Defined in `index.html` to clearly articulate the value proposition.
-  - *Keywords:* Creative Developer, Open Source, Portfolio, React, TypeScript, Software Engineer, Web Development, Frontend Developer, Backend Developer, Systems Engineering.
+  - _Keywords:_ Creative Developer, Open Source, Portfolio, React, TypeScript, Software Engineer, Web Development, Frontend Developer, Backend Developer, Systems Engineering.
 - **Open Graph (OG) & Twitter Cards:** Ensures that when the portfolio is shared on LinkedIn, Twitter, or Discord, it displays a highly professional preview image (`preview.jpg`), title, and description.
 - **JSON-LD Structured Data:** Provides search engines (Google, Bing) with structured context that the entity is a "Person" (Andrés Suárez), linking directly to GitHub and LinkedIn profiles to consolidate domain authority.
 - **Canonical URLs:** Prevents duplicate content issues by pointing back to `https://andressuarez.dev/`.
@@ -28,23 +29,25 @@ The portfolio uses **Google Analytics 4 (GA4)** to monitor traffic, user engagem
 
 ### Tracked Events (KPIs)
 
-To view these in Google Analytics, look under *Reports > Engagement > Events*.
+To view these in Google Analytics, look under _Reports > Engagement > Events_.
 
-| Category | Action | Context (Label/Target) | Purpose |
-| :--- | :--- | :--- | :--- |
-| **Pageview** | `pageview` | Any Path | General traffic monitoring. |
-| **Projects** | `View Detail` | Project Title | Identify which portfolio pieces generate the most interest. |
-| **Projects** | `External Link Click` | External URL | Track intent to view live project sites. |
-| **Timeline** | `Link Click` | Career Title | Track exploration of professional history. |
-| **Navigation** | `Toggle File Explorer` | N/A | Understand how technical stakeholders explore the site. |
-| **Contact** | `Intent` | 'Let's Talk Button' | Track lead generation and interest. |
-| **OSS Card** | `Open Modal` | OSS Project Title | Track engagement with Open Source highlights. |
-| **OSS Card** | `Open on GitHub` | OSS Project Title | Conversion metric: Users navigating to GitHub repositories. |
-| **Language** | `Change` | Language Code (en, es, etc.) | Understand geographic and linguistic preferences of the audience. |
-| **Footer** | `[Social] Click` | LinkedIn, GitHub, etc. | Track external profile visits. |
+| Category       | Action                 | Context (Label/Target)       | Purpose                                                           |
+| :------------- | :--------------------- | :--------------------------- | :---------------------------------------------------------------- |
+| **Pageview**   | `pageview`             | Any Path                     | General traffic monitoring.                                       |
+| **Projects**   | `View Detail`          | Project Title                | Identify which portfolio pieces generate the most interest.       |
+| **Projects**   | `External Link Click`  | External URL                 | Track intent to view live project sites.                          |
+| **Timeline**   | `Link Click`           | Career Title                 | Track exploration of professional history.                        |
+| **Navigation** | `Toggle File Explorer` | N/A                          | Understand how technical stakeholders explore the site.           |
+| **Contact**    | `Intent`               | 'Let's Talk Button'          | Track lead generation and interest.                               |
+| **OSS Card**   | `Open Modal`           | OSS Project Title            | Track engagement with Open Source highlights.                     |
+| **OSS Card**   | `Open on GitHub`       | OSS Project Title            | Conversion metric: Users navigating to GitHub repositories.       |
+| **Language**   | `Change`               | Language Code (en, es, etc.) | Understand geographic and linguistic preferences of the audience. |
+| **Footer**     | `[Social] Click`       | LinkedIn, GitHub, etc.       | Track external profile visits.                                    |
 
 ### Microsoft Clarity
+
 In addition to GA4, **Microsoft Clarity** is configured. This provides:
+
 - **Heatmaps:** See where users click and how far they scroll on the landing page.
 - **Session Recordings:** Watch how visitors navigate the timeline and projects.
 
