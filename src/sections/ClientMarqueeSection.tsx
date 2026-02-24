@@ -1,6 +1,12 @@
 import { Marquee } from '@/components/magicui/marquee';
 import BlurFade from '@/components/magicui/blur-fade';
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 const clients = [
   { name: 'Benekiva', src: '/benekiva.jpeg' },
@@ -8,7 +14,38 @@ const clients = [
   { name: 'Evermuse', src: '/evermuse.jpeg' },
   { name: 'Kuno Digital', src: '/kunodigital.jpeg' },
   { name: 'Waterloo', src: '/waterloo.png' },
+  { name: 'Universidad del Valle', src: 'https://logo.clearbit.com/univalle.edu.co' },
+  { name: 'Klazia', src: 'https://logo.clearbit.com/klazia.com' },
+  { name: 'Factoring Abogados', src: 'https://logo.clearbit.com/factoringabogados.com' },
 ];
+
+function ClientLogoItem({ client }: { client: typeof clients[0] }) {
+  const [error, setError] = useState(false);
+
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <div className="mx-4 flex h-20 w-32 items-center justify-center grayscale transition-all duration-300 hover:grayscale-0 cursor-default">
+          {!error ? (
+            <img
+              src={client.src}
+              alt={client.name}
+              className="max-h-12 w-auto object-contain"
+              onError={() => setError(true)}
+            />
+          ) : (
+            <span className="text-xs font-semibold px-2 text-center break-words w-full text-muted-foreground">
+              {client.name}
+            </span>
+          )}
+        </div>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>{client.name}</p>
+      </TooltipContent>
+    </Tooltip>
+  );
+}
 
 export function ClientMarqueeSection() {
   const { t } = useTranslation();
@@ -22,18 +59,9 @@ export function ClientMarqueeSection() {
           </p>
         </div>
         <div className="relative flex w-full flex-col items-center justify-center overflow-hidden bg-background">
-          <Marquee pauseOnHover className="[--duration:20s]">
+          <Marquee pauseOnHover className="[--duration:30s]">
             {clients.map((client) => (
-              <div
-                key={client.name}
-                className="mx-4 flex h-20 w-32 items-center justify-center grayscale transition-all duration-300 hover:grayscale-0"
-              >
-                <img
-                  src={client.src}
-                  alt={client.name}
-                  className="max-h-12 w-auto object-contain"
-                />
-              </div>
+              <ClientLogoItem key={client.name} client={client} />
             ))}
           </Marquee>
 
