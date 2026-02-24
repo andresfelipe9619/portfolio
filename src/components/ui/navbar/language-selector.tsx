@@ -9,11 +9,30 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 
 const languages = [
-  { code: 'en', label: 'English', icon: '🦅' },
-  { code: 'es', label: 'Español', icon: '💃' },
-  { code: 'fr', label: 'Français', icon: '🥐' },
-  { code: 'de', label: 'Deutsch', icon: '🍺' },
+  { code: 'en', label: 'English', icon: '🦅', soundFile: '/sounds/en.m4a' },
+  { code: 'es', label: 'Español', icon: '💃', soundFile: '/sounds/es.m4a' },
+  { code: 'fr', label: 'Français', icon: '🥐', soundFile: '/sounds/fr.m4a' },
+  { code: 'de', label: 'Deutsch', icon: '🍺', soundFile: '/sounds/de.m4a' },
 ];
+
+const playMemeSound = (soundFile: string) => {
+  try {
+    const w = typeof window !== 'undefined' ? (window as any) : null;
+    if (w && w.__currentMemeAudio) {
+      w.__currentMemeAudio.pause();
+      w.__currentMemeAudio.currentTime = 0;
+    }
+    if (w) {
+      w.__currentMemeAudio = new Audio(soundFile);
+      w.__currentMemeAudio.volume = 0.5;
+      w.__currentMemeAudio.play().catch((e: any) => {
+        console.warn('Audio playback was blocked or file not found:', e);
+      });
+    }
+  } catch (e) {
+    // Ignore audio errors
+  }
+};
 
 export function LanguageSelector() {
   const { i18n } = useTranslation();
@@ -58,10 +77,10 @@ export function LanguageSelector() {
                 logEvent('Language', 'Change', lang.code);
               });
               i18n.changeLanguage(lang.code);
+              playMemeSound(lang.soundFile);
             }}
-            className={`flex items-center gap-2 cursor-pointer ${
-              i18n.language.startsWith(lang.code) ? 'bg-accent font-medium' : ''
-            }`}
+            className={`flex items-center gap-2 cursor-pointer ${i18n.language.startsWith(lang.code) ? 'bg-accent font-medium' : ''
+              }`}
           >
             <motion.span
               whileHover={{ scale: 1.2, rotate: [0, -10, 10, 0] }}
