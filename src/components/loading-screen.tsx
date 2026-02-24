@@ -2,6 +2,7 @@
 
 import { Terminal, TypingAnimation } from '@/components/magicui/terminal';
 import type { MouseEventHandler } from 'react';
+import { useEffect, useState } from 'react';
 import BlurFade from '@/components/magicui/blur-fade.tsx';
 import { ShimmerButton } from '@/components/magicui/shimmer-button.tsx';
 import { useTranslation } from 'react-i18next';
@@ -21,6 +22,31 @@ const LoadingScreen = ({
 }: LoadingScreenProps) => {
   const { i18n } = useTranslation();
   const detectedLangCode = i18n.language?.substring(0, 2) || 'en';
+
+  const [ipData, setIpData] = useState<{ ip: string; location: string }>({
+    ip: '127.0.0.1',
+    location: 'locating...',
+  });
+
+  useEffect(() => {
+    fetch('https://ipapi.co/json/')
+      .then((res) => res.json())
+      .then((data) => {
+        setIpData({
+          ip: data.ip || '192.168.1.1',
+          location: data.city && data.country_name
+            ? `${data.city}, ${data.country_name}`
+            : 'Unknown Location',
+        });
+      })
+      .catch(() => {
+        // Fallback silently
+        setIpData({
+          ip: '192.168.1.24',
+          location: 'Proxy / VPN Detected',
+        });
+      });
+  }, []);
 
   const langs: Record<string, { label: string; location: string }> = {
     en: { label: 'English', location: '[US/UK/GLOBAL]' },
@@ -52,7 +78,6 @@ const LoadingScreen = ({
     ws: r(14, 32),
   };
 
-  const proto = useH3 ? 'HTTP/3' : 'HTTP/2';
   const alpn = useH3 ? 'h3' : 'h2';
 
   return (
@@ -71,33 +96,31 @@ const LoadingScreen = ({
               {`$ boot renderer --target=${site} --secure --${useH3 ? 'h3' : 'h2'} --gpu --measure`}
             </TypingAnimation>
             {/* === 1. BROWSER ID === */}
-            <TypingAnimation>{`🌐 UA: Mozilla/5.0 (Win64; x64)… [the classic "totally not a bot" disguise]`}</TypingAnimation>
+            <TypingAnimation className="text-blue-400">{`🕵️‍♂️ [INFO] UA: Mozilla/5.0 (Win64; x64)… [the classic "totally not a bot" disguise]`}</TypingAnimation>
             {/* === 2. NETWORK RESOLUTION === */}
-            <TypingAnimation>{`🔎 DNS lookup ${site} → 93.184.216.34 (${t.dns}ms) [faster than your ex texting back]`}</TypingAnimation>
-            <TypingAnimation>{`⇄ TCP handshake (${t.tcp}ms): [SYN → SYN-ACK → ACK] [world’s most awkward handshake, completed]`}</TypingAnimation>
+            <TypingAnimation className="text-cyan-400">{`📡 [NET] DNS lookup ${site} → 93.184.216.34 (${t.dns}ms) [faster than your ex texting back]`}</TypingAnimation>
+            <TypingAnimation className="text-cyan-500">{`🤝 [NET] TCP handshake (${t.tcp}ms): [SYN → SYN-ACK → ACK] [world’s most awkward handshake, completed]`}</TypingAnimation>
             {/* === 3. SECURITY & I18N HACK === */}
-            <TypingAnimation>{`🔐 TLS 1.3 (ALPN=${alpn}, cipher=TLS_AES_128_GCM_SHA256) (${t.tls}ms) [basically Fort Knox with emojis]`}</TypingAnimation>
-            <TypingAnimation className="text-yellow-400">{`> executing locate_user.sh --stealth (${t.geo}ms)`}</TypingAnimation>
-            <TypingAnimation className="text-yellow-400">{`> tracing IP... location heuristic: ${langMatch.location}`}</TypingAnimation>
-            <TypingAnimation className="text-yellow-400">{`> injecting locale overrides: ${langMatch.label} [${detectedLangCode}] (${t.i18n}ms)`}</TypingAnimation>
-            <TypingAnimation>{`${proto} CONNECTED | SETTINGS: max_streams=∞ | window=legendary`}</TypingAnimation>
+            <TypingAnimation className="text-purple-400">{`🔐 [SEC] TLS 1.3 (ALPN=${alpn}, cipher=TLS_AES_128_GCM_SHA256) (${t.tls}ms) [basically Fort Knox with emojis]`}</TypingAnimation>
+            <TypingAnimation className="text-yellow-400">{`⚡ [EXEC] > executing locate_user.sh --stealth (${t.geo}ms)`}</TypingAnimation>
+            <TypingAnimation className="text-yellow-500">{`📍 [GEO] > tracing IP... target acquired: ${ipData.ip} [${ipData.location}]`}</TypingAnimation>
+            <TypingAnimation className="text-orange-400">{`🌍 [I18N] > injecting locale overrides: ${langMatch.label} [${detectedLangCode}] (${t.i18n}ms)`}</TypingAnimation>
             {/* === 4. REQUEST / RESPONSE === */}
-            <TypingAnimation>{`GET / → 200 OK  content-type:text/html; charset=utf-8  TTFB=${t.ttfb}ms [Google envies this speed]`}</TypingAnimation>
-            <TypingAnimation>{`Cache: MISS | HSTS: enabled | CSP: "trust me bro"`}</TypingAnimation>
-            <TypingAnimation>{`Preload: fonts.css, app.bundle.js, hero.jpg [priority hints applied like VIP passes]`}</TypingAnimation>
+            <TypingAnimation className="text-green-400">{`📥 [REQ] GET / → 200 OK | content-type: text/html | TTFB=${t.ttfb}ms [Google envies this speed]`}</TypingAnimation>
+            <TypingAnimation className="text-zinc-500">{`🛡️ [SEC] Cache: MISS | HSTS: enabled | CSP: "trust me bro"`}</TypingAnimation>
             {/* === 5. RENDERING STAGE === */}
-            <TypingAnimation>{`HTML parse=${t.parse}ms  CSSOM=${t.css}ms  JS compile=${t.jsCompile}ms [done while sipping ☕️]`}</TypingAnimation>
-            <TypingAnimation>{`🎨 Layout=${t.layout}ms  Paint=${t.paint}ms [pixels aligned with OCD precision]`}</TypingAnimation>
-            <TypingAnimation>{`FCP=${t.fcp}ms  LCP=${t.lcp}ms  CLS=0.01 [smoother than your favorite playlist]`}</TypingAnimation>
+            <TypingAnimation className="text-pink-400">{`⚙️ [DOM] HTML parse=${t.parse}ms | CSSOM=${t.css}ms | JS compile=${t.jsCompile}ms [done while sipping ☕️]`}</TypingAnimation>
+            <TypingAnimation className="text-indigo-400">{`🎨 [RENDER] Layout=${t.layout}ms | Paint=${t.paint}ms [pixels aligned with OCD precision]`}</TypingAnimation>
+            <TypingAnimation className="text-teal-400">{`📊 [METRICS] FCP=${t.fcp}ms | LCP=${t.lcp}ms | CLS=0.01 [smoother than your favorite playlist]`}</TypingAnimation>
             {/* === 6. BACKGROUND GOODIES === */}
-            <TypingAnimation>{`IndexedDB: opened in ${t.idb}ms → settings, cache, secrets [don’t tell the NSA]`}</TypingAnimation>
-            <TypingAnimation>{`ServiceWorker registered in ${t.sw}ms [silent ninja engaged]`}</TypingAnimation>
-            <TypingAnimation>{`WebSocket alive (${t.ws}ms) [heartbeat steady, not a Tamagotchi]`}</TypingAnimation>
+            <TypingAnimation className="text-orange-500">{`🗄️ [STOR] IndexedDB: opened in ${t.idb}ms → settings, cache, secrets [don’t tell the NSA]`}</TypingAnimation>
+            <TypingAnimation className="text-red-400">{`🥷 [WORKER] ServiceWorker registered in ${t.sw}ms [silent ninja engaged]`}</TypingAnimation>
+            <TypingAnimation className="text-fuchsia-400">{`🔌 [WSS] WebSocket alive (${t.ws}ms) [heartbeat steady, not a Tamagotchi]`}</TypingAnimation>
             {/* === 7. FINAL READY === */}
-            <TypingAnimation className="text-blue-400">{`🚀 READY: ${site} is live. Respect the drip.`}</TypingAnimation>
+            <TypingAnimation className="text-emerald-400 font-bold">{`✨ [SUCCESS] 🚀 READY: ${site} is live. Respect the drip.`}</TypingAnimation>
             {/* === EXTRA PUNCHLINES === */}
-            <TypingAnimation>{`👾 Fun fact: This portfolio loads faster than microwave popcorn.`}</TypingAnimation>
-            <TypingAnimation>{`🥷 Pro tip: Hire this dev before Netflix makes a docuseries.`}</TypingAnimation>{' '}
+            <TypingAnimation className="text-slate-300">{`👾 Fun fact: This portfolio loads faster than microwave popcorn.`}</TypingAnimation>
+            <TypingAnimation className="text-slate-300">{`💼 Pro tip: Hire this dev before Netflix makes a docuseries.`}</TypingAnimation>{' '}
           </Terminal>
         </div>
         {/* Footer with the skip action */}
