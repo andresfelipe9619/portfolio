@@ -154,5 +154,41 @@
     "playgroundTitle": "Terrain de Jeu et Classiques",
     "playgroundDesc": "Un espace d'exploration, avec des expériences de science des données et des implémentations modernes."
   },
-  "footerRights": "Tous droits réservés."
+  "footerRights": "Tous droits réservés.",
+  "footer": {
+    "linkedinTooltip": "🤝 Approuvé pour \"Savoir vraiment ce que je fais\"",
+    "githubTooltip": "🍷 Ah, un homme de bon goût",
+    "instagramTooltip": "📸 J'essaie d'avoir l'air cool quand je ne code pas"
+  },
+  "loading": {
+    "skipBtn": "🤖 Je ne suis pas là pour les logs, montre-moi le code →",
+    "ua": "🕵️‍♂️ [INFO] UA: Mozilla/5.0 (Win64; x64)… [le déguisement classique \"totalement pas un bot\"]",
+    "dns": "📡 [NET] Recherche DNS {{site}} → 93.184.216.34 ({{dns}}ms) [plus rapide que ton ex pour répondre]",
+    "tcp": "🤝 [NET] Handshake TCP ({{tcp}}ms): [SYN → SYN-ACK → ACK] [la poignée de main la plus gênante au monde, terminée]",
+    "tls": "🔐 [SEC] TLS 1.3 (ALPN={{alpn}}, cipher=TLS_AES_128_GCM_SHA256) ({{tls}}ms) [basiquement Fort Knox avec des emojis]",
+    "exec": "⚡ [EXEC] > exécution de locate_user.sh --stealth ({{geo}}ms)",
+    "geo": "📍 [GEO] > traçage IP... cible acquise: {{ip}} [{{location}}]",
+    "i18n": "🌍 [I18N] > injection des paramètres régionaux: {{langLabel}} [{{langCode}}] ({{i18n}}ms)",
+    "req": "📥 [REQ] GET / → 200 OK | content-type: text/html | TTFB={{ttfb}}ms [Google envie cette vitesse]",
+    "sec": "🛡️ [SEC] Cache: MISS | HSTS: activé | CSP: \"fais-moi confiance mon frère\"",
+    "dom": "⚙️ [DOM] HTML parse={{parse}}ms | CSSOM={{css}}ms | JS compile={{jsCompile}}ms [fait en buvant du ☕️]",
+    "render": "🎨 [RENDER] Layout={{layout}}ms | Paint={{paint}}ms [pixels alignés avec une précision maniaque]",
+    "metrics": "📊 [METRICS] FCP={{fcp}}ms | LCP={{lcp}}ms | CLS=0.01 [plus fluide que ta playlist préférée]",
+    "stor": "🗄️ [STOR] IndexedDB: ouvert en {{idb}}ms → settings, cache, secrets [ne le dis pas à la NSA]",
+    "worker": "🥷 [WORKER] ServiceWorker enregistré en {{sw}}ms [ninja silencieux activé]",
+    "wss": "🔌 [WSS] WebSocket en vie ({{ws}}ms) [rythme cardiaque stable, pas un Tamagotchi]",
+    "fact1": "👾 Fait amusant: Ce portfolio charge plus vite que du pop-corn au micro-ondes.",
+    "fact2": "💼 Conseil de pro: Embauche ce dev avant que Netflix ne fasse une docu-série."
+  },
+  "clientsLabel": "Faites confiance à des équipes innovantes dans le monde entier",
+  "skillsTitle": "Arsenal Technique",
+  "skillsSubtitle": "Une vue catégorisée des technologies que j'utilise pour créer des systèmes évolutifs et de belles interfaces.",
+  "skillsCategories": {
+    "Backend & APIs": "Backend & APIs",
+    "Frontend": "Frontend",
+    "Cloud & DevOps": "Cloud & DevOps",
+    "Database & Storage": "Bases de Données & Stockage",
+    "Architecture & CMS": "Architecture & CMS",
+    "Automation & Scraping": "Automatisation & Scraping"
+  }
 }

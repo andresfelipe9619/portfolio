@@ -154,5 +154,41 @@
     "playgroundTitle": "Playground & Classics",
     "playgroundDesc": "A space for exploration, featuring data science experiments, and modern implementations of classic software."
   },
-  "footerRights": "All rights reserved."
+  "footerRights": "All rights reserved.",
+  "footer": {
+    "linkedinTooltip": "🤝 Endorsed for \"Actually knowing what I'm doing\"",
+    "githubTooltip": "🍷 Ah, a man of good taste",
+    "instagramTooltip": "📸 Trying to look cool when I'm not coding"
+  },
+  "loading": {
+    "skipBtn": "🤖 I'm not here for logs, show me the code →",
+    "ua": "🕵️‍♂️ [INFO] UA: Mozilla/5.0 (Win64; x64)… [the classic \"totally not a bot\" disguise]",
+    "dns": "📡 [NET] DNS lookup {{site}} → 93.184.216.34 ({{dns}}ms) [faster than your ex texting back]",
+    "tcp": "🤝 [NET] TCP handshake ({{tcp}}ms): [SYN → SYN-ACK → ACK] [world’s most awkward handshake, completed]",
+    "tls": "🔐 [SEC] TLS 1.3 (ALPN={{alpn}}, cipher=TLS_AES_128_GCM_SHA256) ({{tls}}ms) [basically Fort Knox with emojis]",
+    "exec": "⚡ [EXEC] > executing locate_user.sh --stealth ({{geo}}ms)",
+    "geo": "📍 [GEO] > tracing IP... target acquired: {{ip}} [{{location}}]",
+    "i18n": "🌍 [I18N] > injecting locale overrides: {{langLabel}} [{{langCode}}] ({{i18n}}ms)",
+    "req": "📥 [REQ] GET / → 200 OK | content-type: text/html | TTFB={{ttfb}}ms [Google envies this speed]",
+    "sec": "🛡️ [SEC] Cache: MISS | HSTS: enabled | CSP: \"trust me bro\"",
+    "dom": "⚙️ [DOM] HTML parse={{parse}}ms | CSSOM={{css}}ms | JS compile={{jsCompile}}ms [done while sipping ☕️]",
+    "render": "🎨 [RENDER] Layout={{layout}}ms | Paint={{paint}}ms [pixels aligned with OCD precision]",
+    "metrics": "📊 [METRICS] FCP={{fcp}}ms | LCP={{lcp}}ms | CLS=0.01 [smoother than your favorite playlist]",
+    "stor": "🗄️ [STOR] IndexedDB: opened in {{idb}}ms → settings, cache, secrets [don’t tell the NSA]",
+    "worker": "🥷 [WORKER] ServiceWorker registered in {{sw}}ms [silent ninja engaged]",
+    "wss": "🔌 [WSS] WebSocket alive ({{ws}}ms) [heartbeat steady, not a Tamagotchi]",
+    "fact1": "👾 Fun fact: This portfolio loads faster than microwave popcorn.",
+    "fact2": "💼 Pro tip: Hire this dev before Netflix makes a docuseries."
+  },
+  "clientsLabel": "Trusted by innovative teams worldwide",
+  "skillsTitle": "Technical Arsenal",
+  "skillsSubtitle": "A categorized view of the technologies I use to build scalable systems and beautiful interfaces.",
+  "skillsCategories": {
+    "Backend & APIs": "Backend & APIs",
+    "Frontend": "Frontend",
+    "Cloud & DevOps": "Cloud & DevOps",
+    "Database & Storage": "Database & Storage",
+    "Architecture & CMS": "Architecture & CMS",
+    "Automation & Scraping": "Automation & Scraping"
+  }
 }

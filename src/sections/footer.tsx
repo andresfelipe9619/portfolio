@@ -42,7 +42,7 @@ export function Footer() {
               </motion.a>
             </TooltipTrigger>
             <TooltipContent>
-              <p>🤝 Endorsed for "Actually knowing what I'm doing"</p>
+              <p>{t('footer.linkedinTooltip')}</p>
             </TooltipContent>
           </Tooltip>
 
@@ -65,7 +65,7 @@ export function Footer() {
               </motion.a>
             </TooltipTrigger>
             <TooltipContent>
-              <p>🍷 Ah, a man of good taste</p>
+              <p>{t('footer.githubTooltip')}</p>
             </TooltipContent>
           </Tooltip>
 
@@ -92,7 +92,7 @@ export function Footer() {
               </motion.a>
             </TooltipTrigger>
             <TooltipContent>
-              <p>📸 Trying to look cool when I'm not coding</p>
+              <p>{t('footer.instagramTooltip')}</p>
             </TooltipContent>
           </Tooltip>
         </Dock>

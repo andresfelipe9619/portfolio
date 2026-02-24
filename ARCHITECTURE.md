@@ -29,6 +29,7 @@ src/
 │   └── resume.ts   # Employment history, education, and skills data
 ├── hooks/          # Custom React hooks containing shared logic
 ├── lib/            # Utility functions (e.g., `cn` for className merging)
+├── locales/        # i18next translation JSON files (en, es, fr, de)
 ├── pages/          # Top-level route components (e.g., Home.tsx)
 ├── sections/       # Distinct sections composing a page (e.g., Hero, About, Projects)
 ├── App.tsx         # Main application wrapper and global layout
@@ -76,9 +77,19 @@ Animations define the personality of this app.
 
 When instructed to add a new feature:
 
-1. **Model the Data**: Does this feature require new text? Add it to `src/data/`.
+1. **Model the Data**: Does this feature require new text? Add it to `src/data/`. If it's UI layout text, add it to `src/locales/`.
 2. **Build the UI**: Create a new component in `src/components/ui/` (if it's a building block) or `src/sections/` (if it's a major page area).
 3. **Assemble**: Import your section into `src/pages/Home.tsx` and wrap it in `BlurFade` for consistent loading animations.
 4. **Style**: Use Tailwind CSS strictly. Do not add raw CSS files unless an extremely specific animation cannot be handled by Framer Motion or Tailwind.
+
+## 8. Main Dependencies
+
+Why are they awesome for this portfolio?
+
+- **Tailwind CSS v4 & shadcn/ui**: Tailwind provides a highly flexible and fast utility-first styling system, completely eliminating the mental overhead of naming CSS classes. `shadcn/ui` builds on this, providing beautiful, accessible, and customizable components that we own entirely in the codebase.
+- **Framer Motion & Magic UI**: These bring the portfolio to life. They allow complex, highly performant micro-interactions and stunning visual effects (like the globe, marquee, or terminal loading screen) with relatively little code, creating a premium feel.
+- **Sentry**: Critical for observability. It captures edge-case errors silently in the background, ensuring that user experiences aren't completely broken without us knowing. It allows for professional-grade error handling and session replays.
+- **i18next / react-i18next**: We use this to smoothly handle multiple languages (English, Spanish, French, German). Coupled with language detectors, it instantly adjusts the portfolio to the user's preferred language, offering a far more personalized experience on a global scale.
+- **React Router v6**: Provides seamless, entirely client-side navigation between different parts of the portfolio (like the Blog and Case Studies) without requiring slow page reloads, maintaining the fast SPA experience.
 
 By adhering to this structure, the portfolio remains maintainable, scalable, and true to its technical vision.

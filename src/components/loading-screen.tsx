@@ -20,7 +20,7 @@ const LoadingScreen = ({
   useH3 = false,
   onSkip,
 }: LoadingScreenProps) => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const detectedLangCode = i18n.language?.substring(0, 2) || 'en';
 
   const [ipData, setIpData] = useState<{ ip: string; location: string }>({
@@ -58,7 +58,7 @@ const LoadingScreen = ({
   const langMatch = langs[detectedLangCode] || langs['en'];
 
   // tiempos pseudo-reales
-  const t = {
+  const timeMap = {
     dns: r(12, 28),
     tcp: r(15, 42),
     tls: r(18, 60),
@@ -96,37 +96,37 @@ const LoadingScreen = ({
               {`$ boot renderer --target=${site} --secure --${useH3 ? 'h3' : 'h2'} --gpu --measure`}
             </TypingAnimation>
             {/* === 1. BROWSER ID === */}
-            <TypingAnimation className="text-blue-400">{`🕵️‍♂️ [INFO] UA: Mozilla/5.0 (Win64; x64)… [the classic "totally not a bot" disguise]`}</TypingAnimation>
+            <TypingAnimation className="text-blue-400">{t('loading.ua')}</TypingAnimation>
             {/* === 2. NETWORK RESOLUTION === */}
-            <TypingAnimation className="text-cyan-400">{`📡 [NET] DNS lookup ${site} → 93.184.216.34 (${t.dns}ms) [faster than your ex texting back]`}</TypingAnimation>
-            <TypingAnimation className="text-cyan-500">{`🤝 [NET] TCP handshake (${t.tcp}ms): [SYN → SYN-ACK → ACK] [world’s most awkward handshake, completed]`}</TypingAnimation>
+            <TypingAnimation className="text-cyan-400">{t('loading.dns', { site, dns: timeMap.dns })}</TypingAnimation>
+            <TypingAnimation className="text-cyan-500">{t('loading.tcp', { tcp: timeMap.tcp })}</TypingAnimation>
             {/* === 3. SECURITY & I18N HACK === */}
-            <TypingAnimation className="text-purple-400">{`🔐 [SEC] TLS 1.3 (ALPN=${alpn}, cipher=TLS_AES_128_GCM_SHA256) (${t.tls}ms) [basically Fort Knox with emojis]`}</TypingAnimation>
-            <TypingAnimation className="text-yellow-400">{`⚡ [EXEC] > executing locate_user.sh --stealth (${t.geo}ms)`}</TypingAnimation>
-            <TypingAnimation className="text-yellow-500">{`📍 [GEO] > tracing IP... target acquired: ${ipData.ip} [${ipData.location}]`}</TypingAnimation>
-            <TypingAnimation className="text-orange-400">{`🌍 [I18N] > injecting locale overrides: ${langMatch.label} [${detectedLangCode}] (${t.i18n}ms)`}</TypingAnimation>
+            <TypingAnimation className="text-purple-400">{t('loading.tls', { alpn, tls: timeMap.tls })}</TypingAnimation>
+            <TypingAnimation className="text-yellow-400">{t('loading.exec', { geo: timeMap.geo })}</TypingAnimation>
+            <TypingAnimation className="text-yellow-500">{t('loading.geo', { ip: ipData.ip, location: ipData.location })}</TypingAnimation>
+            <TypingAnimation className="text-orange-400">{t('loading.i18n', { langLabel: langMatch.label, langCode: detectedLangCode, i18n: timeMap.i18n })}</TypingAnimation>
             {/* === 4. REQUEST / RESPONSE === */}
-            <TypingAnimation className="text-green-400">{`📥 [REQ] GET / → 200 OK | content-type: text/html | TTFB=${t.ttfb}ms [Google envies this speed]`}</TypingAnimation>
-            <TypingAnimation className="text-zinc-500">{`🛡️ [SEC] Cache: MISS | HSTS: enabled | CSP: "trust me bro"`}</TypingAnimation>
+            <TypingAnimation className="text-green-400">{t('loading.req', { ttfb: timeMap.ttfb })}</TypingAnimation>
+            <TypingAnimation className="text-zinc-500">{t('loading.sec')}</TypingAnimation>
             {/* === 5. RENDERING STAGE === */}
-            <TypingAnimation className="text-pink-400">{`⚙️ [DOM] HTML parse=${t.parse}ms | CSSOM=${t.css}ms | JS compile=${t.jsCompile}ms [done while sipping ☕️]`}</TypingAnimation>
-            <TypingAnimation className="text-indigo-400">{`🎨 [RENDER] Layout=${t.layout}ms | Paint=${t.paint}ms [pixels aligned with OCD precision]`}</TypingAnimation>
-            <TypingAnimation className="text-teal-400">{`📊 [METRICS] FCP=${t.fcp}ms | LCP=${t.lcp}ms | CLS=0.01 [smoother than your favorite playlist]`}</TypingAnimation>
+            <TypingAnimation className="text-pink-400">{t('loading.dom', { parse: timeMap.parse, css: timeMap.css, jsCompile: timeMap.jsCompile })}</TypingAnimation>
+            <TypingAnimation className="text-indigo-400">{t('loading.render', { layout: timeMap.layout, paint: timeMap.paint })}</TypingAnimation>
+            <TypingAnimation className="text-teal-400">{t('loading.metrics', { fcp: timeMap.fcp, lcp: timeMap.lcp })}</TypingAnimation>
             {/* === 6. BACKGROUND GOODIES === */}
-            <TypingAnimation className="text-orange-500">{`🗄️ [STOR] IndexedDB: opened in ${t.idb}ms → settings, cache, secrets [don’t tell the NSA]`}</TypingAnimation>
-            <TypingAnimation className="text-red-400">{`🥷 [WORKER] ServiceWorker registered in ${t.sw}ms [silent ninja engaged]`}</TypingAnimation>
-            <TypingAnimation className="text-fuchsia-400">{`🔌 [WSS] WebSocket alive (${t.ws}ms) [heartbeat steady, not a Tamagotchi]`}</TypingAnimation>
+            <TypingAnimation className="text-orange-500">{t('loading.stor', { idb: timeMap.idb })}</TypingAnimation>
+            <TypingAnimation className="text-red-400">{t('loading.worker', { sw: timeMap.sw })}</TypingAnimation>
+            <TypingAnimation className="text-fuchsia-400">{t('loading.wss', { ws: timeMap.ws })}</TypingAnimation>
             {/* === 7. FINAL READY === */}
-            <TypingAnimation className="text-emerald-400 font-bold">{`✨ [SUCCESS] 🚀 READY: ${site} is live. Respect the drip.`}</TypingAnimation>
+            <TypingAnimation className="text-emerald-400 font-bold">{t('loading.ready', { site })}</TypingAnimation>
             {/* === EXTRA PUNCHLINES === */}
-            <TypingAnimation className="text-slate-300">{`👾 Fun fact: This portfolio loads faster than microwave popcorn.`}</TypingAnimation>
-            <TypingAnimation className="text-slate-300">{`💼 Pro tip: Hire this dev before Netflix makes a docuseries.`}</TypingAnimation>{' '}
+            <TypingAnimation className="text-slate-300">{t('loading.fact1')}</TypingAnimation>
+            <TypingAnimation className="text-slate-300">{t('loading.fact2')}</TypingAnimation>{' '}
           </Terminal>
         </div>
         {/* Footer with the skip action */}
         <div className="flex w-[90vw] md:w-[60vw] items-center justify-between border-t border-white/10 px-4 py-2">
           <ShimmerButton className="text-sm text-white" onClick={onSkip}>
-            🤖 I’m not here for logs, show me the code →
+            {t('loading.skipBtn')}
           </ShimmerButton>
         </div>
       </BlurFade>

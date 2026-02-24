@@ -154,5 +154,41 @@
     "playgroundTitle": "Spielplatz & Klassiker",
     "playgroundDesc": "Ein Raum für Erkundungen, mit Data Science-Experimenten und modernen Implementierungen klassischer Software."
   },
-  "footerRights": "Alle Rechte vorbehalten."
+  "footerRights": "Alle Rechte vorbehalten.",
+  "footer": {
+    "linkedinTooltip": "🤝 Bestätigt für \"Weiß tatsächlich, was er tut\"",
+    "githubTooltip": "🍷 Ah, ein Mann von gutem Geschmack",
+    "instagramTooltip": "📸 Versuche cool auszusehen, wenn ich nicht programmiere"
+  },
+  "loading": {
+    "skipBtn": "🤖 Ich bin nicht wegen der Logs hier, zeig mir den Code →",
+    "ua": "🕵️‍♂️ [INFO] UA: Mozilla/5.0 (Win64; x64)… [die klassische \"absolut kein Bot\" Tarnung]",
+    "dns": "📡 [NET] DNS-Suche {{site}} → 93.184.216.34 ({{dns}}ms) [schneller als dein Ex antwortet]",
+    "tcp": "🤝 [NET] TCP Handshake ({{tcp}}ms): [SYN → SYN-ACK → ACK] [der unangenehmste Handschlag der Welt, abgeschlossen]",
+    "tls": "🔐 [SEC] TLS 1.3 (ALPN={{alpn}}, cipher=TLS_AES_128_GCM_SHA256) ({{tls}}ms) [im Grunde Fort Knox mit Emojis]",
+    "exec": "⚡ [EXEC] > führe locate_user.sh --stealth aus ({{geo}}ms)",
+    "geo": "📍 [GEO] > verfolge IP... Ziel erfasst: {{ip}} [{{location}}]",
+    "i18n": "🌍 [I18N] > injiziere Gebietsschema-Überschreibungen: {{langLabel}} [{{langCode}}] ({{i18n}}ms)",
+    "req": "📥 [REQ] GET / → 200 OK | content-type: text/html | TTFB={{ttfb}}ms [Google beneidet diese Geschwindigkeit]",
+    "sec": "🛡️ [SEC] Cache: MISS | HSTS: aktiviert | CSP: \"vertrau mir Bruder\"",
+    "dom": "⚙️ [DOM] HTML parse={{parse}}ms | CSSOM={{css}}ms | JS compile={{jsCompile}}ms [erledigt beim ☕️ trinken]",
+    "render": "🎨 [RENDER] Layout={{layout}}ms | Paint={{paint}}ms [Pixel mit OCD-Präzision ausgerichtet]",
+    "metrics": "📊 [METRICS] FCP={{fcp}}ms | LCP={{lcp}}ms | CLS=0.01 [flüssiger als deine Lieblings-Playlist]",
+    "stor": "🗄️ [STOR] IndexedDB: geöffnet in {{idb}}ms → Einstellungen, Cache, Geheimnisse [sag es nicht der NSA]",
+    "worker": "🥷 [WORKER] ServiceWorker registriert in {{sw}}ms [stiller Ninja ist aktiviert]",
+    "wss": "🔌 [WSS] WebSocket lebt ({{ws}}ms) [Herzschlag stetig, kein Tamagotchi]",
+    "fact1": "👾 Fun Fact: Dieses Portfolio lädt schneller als Mikrowellen-Popcorn.",
+    "fact2": "💼 Pro-Tipp: Stell diesen Entwickler ein, bevor Netflix eine Doku-Serie dreht."
+  },
+  "clientsLabel": "Vertraut von innovativen Teams weltweit",
+  "skillsTitle": "Technisches Arsenal",
+  "skillsSubtitle": "Eine kategorisierte Ansicht der Technologien, die ich verwende, um skalierbare Systeme und schöne Schnittstellen zu erstellen.",
+  "skillsCategories": {
+    "Backend & APIs": "Backend & APIs",
+    "Frontend": "Frontend",
+    "Cloud & DevOps": "Cloud & DevOps",
+    "Database & Storage": "Datenbanken & Speicher",
+    "Architecture & CMS": "Architektur & CMS",
+    "Automation & Scraping": "Automatisierung & Scraping"
+  }
 }
