@@ -188,7 +188,12 @@
     "Frontend": "Frontend",
     "Cloud & DevOps": "Cloud & DevOps",
     "Database & Storage": "Database & Storage",
-    "Architecture & CMS": "Architecture & CMS",
     "Automation & Scraping": "Automation & Scraping"
+  },
+  "easterEggs": {
+    "allLanguagesTitle": "You really just clicked every flag to hear the memes, didn't you? Respect. 🎧",
+    "projectsTimeTitle": "You've been staring at these projects for a while. Don't worry, they're not going anywhere. (Except maybe to production) 🚀",
+    "ossTimeTitle": "Deep diving into the open source, huh? Careful, you might accidentally merge a PR while you're down there. 🤿",
+    "watcherDesc": "We are proud, but remember... we are watchers. I created, I own every piece of this code hahaha. 👁️ [faster than your ex texting back]"
   }
 }

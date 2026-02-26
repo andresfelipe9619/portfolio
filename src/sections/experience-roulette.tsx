@@ -13,6 +13,7 @@ import TimelineGlobe from '@/components/timeline-globe';
 import { cn } from '@/lib/utils';
 import ProjectDialog from '@/components/project-dialog';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 export default function ExperienceRoulette() {
   const { t } = useTranslation();
@@ -153,13 +154,14 @@ export default function ExperienceRoulette() {
             })}
           </ul>
           <div className="flex justify-center mt-4">
-            <a
-              href="/projects"
+            <Link
+              to="/projects"
               className="text-white bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-md"
             >
               {t('viewAllProjects')}
-            </a>
+            </Link>
           </div>
+
         </div>
 
         {/* RIGHT: Globe — fixed height; ignore wheel so it never captures scroll */}

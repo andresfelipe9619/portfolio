@@ -1,4 +1,6 @@
 import { useTranslation } from 'react-i18next';
+import { useRef } from 'react';
+import { showEasterEggToast } from '@/hooks/use-easter-egg';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -35,7 +37,8 @@ const playMemeSound = (soundFile: string) => {
 };
 
 export function LanguageSelector() {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const clickedLanguages = useRef<Set<string>>(new Set());
 
   const currentLang =
     languages.find((l) => i18n.language.startsWith(l.code)) || languages[0];
@@ -73,6 +76,10 @@ export function LanguageSelector() {
           <DropdownMenuItem
             key={lang.code}
             onClick={() => {
+              clickedLanguages.current.add(lang.code);
+              if (clickedLanguages.current.size === languages.length) {
+                showEasterEggToast('all-languages', t('easterEggs.allLanguagesTitle'), t('easterEggs.watcherDesc'));
+              }
               import('@/lib/ga').then(({ logEvent }) => {
                 logEvent('Language', 'Change', lang.code);
               });
