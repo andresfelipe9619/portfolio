@@ -9,6 +9,7 @@ import { OssCard } from '@/components/oss-card';
 import { DotPattern } from '@/components/magicui/dot-pattern';
 import { cn } from '@/lib/utils';
 import { useTranslation } from 'react-i18next';
+import { useTimeEasterEgg } from '@/hooks/use-easter-egg';
 
 // Anim variants
 
@@ -41,6 +42,7 @@ type Section = {
 
 export default function OpenSourcePage() {
   const { t } = useTranslation();
+  useTimeEasterEgg('oss-time', t('easterEggs.ossTimeTitle'), t('easterEggs.watcherDesc'));
 
   // Agrupamos por secciones (sin cambiar tamaños)
   const groups = React.useMemo(() => {

@@ -1,5 +1,6 @@
 import { ThemeProvider } from '@/components/theme-provider';
 import { TooltipProvider } from '@/components/ui/tooltip';
+import { Toaster } from 'sonner';
 import { cn } from '@/lib/utils';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
@@ -38,6 +39,7 @@ export default function App() {
 
   return (
     <ThemeProvider defaultTheme="dark">
+      <Toaster position="bottom-right" richColors />
       <TooltipProvider delayDuration={0}>
         <div className={cn('min-h-screen bg-background font-sans antialiased')}>
           {isLoading ? (
