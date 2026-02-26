@@ -39,7 +39,7 @@ export default function App() {
 
   return (
     <ThemeProvider defaultTheme="dark">
-      <Toaster position="bottom-right" richColors />
+      <Toaster position="top-center" richColors theme="dark" closeButton />
       <TooltipProvider delayDuration={0}>
         <div className={cn('min-h-screen bg-background font-sans antialiased')}>
           {isLoading ? (

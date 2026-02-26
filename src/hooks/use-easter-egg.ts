@@ -10,7 +10,12 @@ export const showEasterEggToast = (id: string, title: string, description: strin
     shownEasterEggs.add(id);
     toast(title, {
         description,
-        duration: 8000,
+        duration: Number.POSITIVE_INFINITY,
+        icon: '🚀',
+        action: {
+            label: 'Close',
+            onClick: () => console.log('Easter egg acknowledged!'),
+        },
     });
 };
 
