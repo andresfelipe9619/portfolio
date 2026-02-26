@@ -44,12 +44,12 @@ const Particles = lazy(() =>
   })),
 );
 const ClientMarqueeSection = lazy(() =>
-  import('@/sections/ClientMarqueeSection').then((m) => ({
+  import('@/sections/client-marquee').then((m) => ({
     default: m.ClientMarqueeSection,
   })),
 );
 const SkillsSection = lazy(() =>
-  import('@/sections/SkillsSection').then((m) => ({
+  import('@/sections/skills').then((m) => ({
     default: m.SkillsSection,
   })),
 );

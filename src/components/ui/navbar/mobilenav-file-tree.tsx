@@ -25,6 +25,7 @@ const PAGE_ROUTES: Record<string, string> = {
   Home: '/',
   OpenSource: '/oss',
   Projects: '/projects',
+  Blog: '/blog',
 };
 
 export function MobileNavFileTree() {
@@ -141,7 +142,7 @@ export function MobileNavFileTree() {
       ) : (
         <File key={node.path} value={node.path}>
           {node.path.startsWith('src/pages/') &&
-          PAGE_ROUTES[node.name.replace(/\.tsx$/, '')] ? (
+            PAGE_ROUTES[node.name.replace(/\.tsx$/, '')] ? (
             <Link
               to={PAGE_ROUTES[node.name.replace(/\.tsx$/, '')]}
               className="block px-1 py-0.5 flex items-center gap-1"
