@@ -3,6 +3,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import { Toaster } from 'sonner';
 import { cn } from '@/lib/utils';
 import { Route, Routes, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Home from './pages/Home';
 import { useEffect, useState } from 'react';
 import LoadingScreen from '@/components/loading-screen';
@@ -10,6 +11,7 @@ import OpenSourcePage from '@/pages/OpenSource';
 import { Header } from '@/components/ui/navbar/header.tsx';
 import { DraggableExplorer } from '@/components/ui/navbar/draggable-explorer.tsx';
 import { useKeyListener } from '@/hooks/useKeyListener.tsx';
+import { useHackAttemptEasterEgg } from '@/hooks/use-easter-egg';
 import { logPageView } from './lib/ga';
 import Contact from './pages/Contact';
 import Projects from './pages/Projects';
@@ -23,8 +25,15 @@ export default function App() {
   );
   const [explorerOpen, setExplorerOpen] = useState(false);
   const location = useLocation();
+  const { t } = useTranslation();
 
   useKeyListener(setExplorerOpen);
+  useHackAttemptEasterEgg(
+    location.pathname,
+    t('easterEggs.hackPathTitle'),
+    t('easterEggs.hackDesc'),
+    t('easterEggs.hackShortcutTitle'),
+  );
 
   useEffect(() => {
     logPageView();

@@ -33,3 +33,37 @@ export function useTimeEasterEgg(id: string, title: string, description: string,
         return () => clearTimeout(timer);
     }, [id, title, description, triggerSeconds]);
 }
+
+const SUSPICIOUS_PATHS = ['/admin', '/wp-admin', '/backdoor', '/.env'];
+
+export function useHackAttemptEasterEgg(
+    pathname: string,
+    title: string,
+    description: string,
+    shortcutTitle: string,
+) {
+    useEffect(() => {
+        const looksLikeBackdoorAttempt = SUSPICIOUS_PATHS.some((path) =>
+            pathname.toLowerCase().includes(path),
+        );
+
+        if (looksLikeBackdoorAttempt) {
+            showEasterEggToast('hack-path-attempt', title, description);
+        }
+    }, [pathname, title, description]);
+
+    useEffect(() => {
+        const onKeyDown = (event: KeyboardEvent) => {
+            const isDevToolsShortcut =
+                event.key === 'F12' ||
+                ((event.metaKey || event.ctrlKey) && event.shiftKey && ['I', 'J', 'C'].includes(event.key.toUpperCase()));
+
+            if (!isDevToolsShortcut) return;
+
+            showEasterEggToast('hack-shortcut-attempt', shortcutTitle, description);
+        };
+
+        window.addEventListener('keydown', onKeyDown);
+        return () => window.removeEventListener('keydown', onKeyDown);
+    }, [description, shortcutTitle]);
+}

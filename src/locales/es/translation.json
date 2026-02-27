@@ -194,6 +194,9 @@
     "allLanguagesTitle": "¿Realmente tocaste todas las banderas solo por los memes? Mis respetos. 🎧",
     "projectsTimeTitle": "Llevas rato mirando estos proyectos. No te preocupes, no se van a ir a ningún lado. (Excepto tal vez a producción) 🚀",
     "ossTimeTitle": "Profundizando en el código abierto, ¿eh? Cuidado, podrías apuntar un PR por accidente allá abajo. 🤿",
-    "watcherDesc": "Estamos orgullosos, pero recuerda... somos observadores. Yo lo creé, soy dueño de cada pieza de este código jajaja. 👁️ [más rápido que tu ex respondiendo]"
+    "watcherDesc": "Estamos orgullosos, pero recuerda... somos observadores. Yo lo creé, soy dueño de cada pieza de este código jajaja. 👁️ [más rápido que tu ex respondiendo]",
+    "hackPathTitle": "🚨 Intento de puerta trasera detectado. Buen intento, Agente 00-HoyNo.",
+    "hackShortcutTitle": "🕵️ ¿DevTools? Jugada valiente. Bienvenido a la carta trampa más nerd.",
+    "hackDesc": "Aquí no hay panel secreto de admin; solo código limpio, manchas de café y daño emocional por deploys en producción."
   }
 }
