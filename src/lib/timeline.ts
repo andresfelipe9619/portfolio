@@ -18,6 +18,8 @@ export function flattenTimeline(timeline: TimelineByYear): FlattenedItem[] {
 // Country centroids (rough but great for camera focus)
 export const COUNTRY_COORDS: Record<string, { lat: number; lon: number }> = {
   'United States': { lat: 39.0, lon: -98.0 },
+  'San Francisco, USA': { lat: 37.77, lon: -122.41 },
+  'North Carolina, USA': { lat: 35.75, lon: -79.01 },
   Spain: { lat: 40.4, lon: -3.7 },
   Chile: { lat: -35.7, lon: -71.5 },
   Brazil: { lat: -14.2, lon: -51.9 },

@@ -184,12 +184,12 @@
   "skillsTitle": "Arsenal Technique",
   "skillsSubtitle": "Une vue catégorisée des technologies que j'utilise pour créer des systèmes évolutifs et de belles interfaces.",
   "skillsCategories": {
-    "Backend & APIs": "Backend & APIs",
-    "Frontend": "Frontend",
-    "Cloud & DevOps": "Cloud & DevOps",
-    "Database & Storage": "Bases de Données & Stockage",
-    "Architecture & CMS": "Architecture & CMS",
-    "Automation & Scraping": "Automatisation & Scraping"
+    "Backend Engineering": "Ingénierie Backend",
+    "Cloud & Infrastructure": "Cloud & Infrastructure",
+    "AI & Automation": "IA & Automatisation",
+    "Frontend Engineering": "Ingénierie Frontend",
+    "Data & Architecture": "Données & Architecture",
+    "Security & Governance": "Sécurité & Gouvernance"
   },
   "easterEggs": {
     "hackPathTitle": "🚨 Tentative de porte dérobée détectée. Bien essayé, Agent 00-Pas-Aujourd’hui.",

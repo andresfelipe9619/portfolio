@@ -3,15 +3,15 @@ import BlurFade from '@/components/magicui/blur-fade';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTranslation } from 'react-i18next';
-import { Server, Monitor, Cloud, Database, Layers, Bot } from 'lucide-react';
+import { Server, Monitor, Cloud, Database, Layers, Bot, ShieldCheck } from 'lucide-react';
 
 const categoryIcons: Record<string, React.ReactNode> = {
-  'Backend & APIs': <Server className="w-5 h-5 text-blue-400" />,
-  Frontend: <Monitor className="w-5 h-5 text-purple-400" />,
-  'Cloud & DevOps': <Cloud className="w-5 h-5 text-sky-400" />,
-  'Database & Storage': <Database className="w-5 h-5 text-emerald-400" />,
-  'Architecture & CMS': <Layers className="w-5 h-5 text-amber-400" />,
-  'Automation & Scraping': <Bot className="w-5 h-5 text-rose-400" />,
+  'Backend Engineering': <Server className="w-5 h-5 text-blue-400" />,
+  'Frontend Engineering': <Monitor className="w-5 h-5 text-purple-400" />,
+  'Cloud & Infrastructure': <Cloud className="w-5 h-5 text-sky-400" />,
+  'Data & Architecture': <Database className="w-5 h-5 text-emerald-400" />,
+  'Security & Governance': <ShieldCheck className="w-5 h-5 text-amber-400" />,
+  'AI & Automation': <Bot className="w-5 h-5 text-rose-400" />,
 };
 
 export function SkillsSection() {

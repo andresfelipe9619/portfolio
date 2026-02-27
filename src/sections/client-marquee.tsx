@@ -9,36 +9,85 @@ import {
 } from '@/components/ui/tooltip';
 
 const clients = [
-  { name: 'Benekiva', src: '/benekiva.jpeg' },
-  { name: 'Brooklyn', src: '/brooklyn.jpeg' },
-  { name: 'Evermuse', src: '/evermuse.jpeg' },
-  { name: 'Kuno Digital', src: '/kunodigital.jpeg' },
-  { name: 'Waterloo', src: '/waterloo.png' },
-  { name: 'Universidad del Valle', src: 'https://logo.clearbit.com/univalle.edu.co' },
-  { name: 'Klazia', src: 'https://logo.clearbit.com/klazia.com' },
-  { name: 'Factoring Abogados', src: 'https://logo.clearbit.com/factoringabogados.com' },
+  { name: 'Benekiva', src: '/benekiva.jpeg', url: 'https://benekiva.com/' },
+  {
+    name: 'Brooklyn',
+    src: '/brooklyn.jpeg',
+    url: 'https://www.brooklynsolutions.ai',
+  },
+  { name: 'Evermuse', src: '/evermuse.jpeg', url: 'https://evermuse.com/' },
+  { name: 'Turnstile', src: '/turnstile.png', url: 'https://turnstile.ai' },
+  {
+    name: 'Kuno Digital',
+    src: '/kuno-digital.png',
+    url: 'https://kunodigital.com/',
+  },
+  { name: 'Klazia', src: '/klazia.jpg', url: 'https://klazia.com/' },
+  {
+    name: 'Atentamente',
+    src: '/atentamente.png',
+    url: 'https://atentamente.mx/',
+  },
+  {
+    name: 'Factoring Abogados',
+    src: '/factoring-abogados.svg',
+    url: 'https://factoringabogados.com/',
+  },
+  {
+    name: 'Universidad del Valle',
+    src: '/univalle.jpg',
+    url: 'https://www.univalle.edu.co/',
+  },
+  {
+    name: 'Universidad Javeriana de Cali',
+    src: '/javeriana.png',
+    url: 'https://www.javerianacali.edu.co/',
+  },
+  {
+    name: 'Cinekomuna',
+    src: '/cinekomuna.jpg',
+    url: 'https://cinekomuna.com',
+  },
+  {
+    name: 'TODOSURF',
+    src: '/todosurf.png',
+    url: 'https://todosurf.com',
+  },
 ];
 
-function ClientLogoItem({ client }: { client: typeof clients[0] }) {
+function ClientLogoItem({ client }: { client: (typeof clients)[0] }) {
   const [error, setError] = useState(false);
+
+  const imageContent = !error ? (
+    <img
+      src={client.src}
+      alt={client.name}
+      className="max-h-12 w-auto object-contain"
+      onError={() => setError(true)}
+    />
+  ) : (
+    <span className="text-xs font-semibold px-2 text-center break-words w-full text-muted-foreground">
+      {client.name}
+    </span>
+  );
 
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <div className="mx-4 flex h-20 w-32 items-center justify-center grayscale transition-all duration-300 hover:grayscale-0 cursor-default">
-          {!error ? (
-            <img
-              src={client.src}
-              alt={client.name}
-              className="max-h-12 w-auto object-contain"
-              onError={() => setError(true)}
-            />
-          ) : (
-            <span className="text-xs font-semibold px-2 text-center break-words w-full text-muted-foreground">
-              {client.name}
-            </span>
-          )}
-        </div>
+        {client.url ? (
+          <a
+            href={client.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mx-4 flex h-20 w-32 items-center justify-center grayscale transition-all duration-300 hover:grayscale-0 cursor-pointer"
+          >
+            {imageContent}
+          </a>
+        ) : (
+          <div className="mx-4 flex h-20 w-32 items-center justify-center grayscale transition-all duration-300 hover:grayscale-0 cursor-default">
+            {imageContent}
+          </div>
+        )}
       </TooltipTrigger>
       <TooltipContent>
         <p>{client.name}</p>

@@ -184,12 +184,12 @@
   "skillsTitle": "Technisches Arsenal",
   "skillsSubtitle": "Eine kategorisierte Ansicht der Technologien, die ich verwende, um skalierbare Systeme und schöne Schnittstellen zu erstellen.",
   "skillsCategories": {
-    "Backend & APIs": "Backend & APIs",
-    "Frontend": "Frontend",
-    "Cloud & DevOps": "Cloud & DevOps",
-    "Database & Storage": "Datenbanken & Speicher",
-    "Architecture & CMS": "Architektur & CMS",
-    "Automation & Scraping": "Automatisierung & Scraping"
+    "Backend Engineering": "Backend-Entwicklung",
+    "Cloud & Infrastructure": "Cloud & Infrastruktur",
+    "AI & Automation": "KI & Automatisierung",
+    "Frontend Engineering": "Frontend-Entwicklung",
+    "Data & Architecture": "Daten & Architektur",
+    "Security & Governance": "Sicherheit & Compliance"
   },
   "easterEggs": {
     "hackPathTitle": "🚨 Backdoor-Versuch erkannt. Netter Versuch, Agent 00-Nicht-Heute.",
