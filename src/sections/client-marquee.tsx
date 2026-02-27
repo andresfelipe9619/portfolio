@@ -43,6 +43,16 @@ const clients = [
     src: '/javeriana.png',
     url: 'https://www.javerianacali.edu.co/',
   },
+  {
+    name: 'Cinekomuna',
+    src: '/cinekomuna.jpg',
+    url: 'https://cinekomuna.com',
+  },
+  {
+    name: 'TODOSURF',
+    src: '/todosurf.png',
+    url: 'https://todosurf.com',
+  },
 ];
 
 function ClientLogoItem({ client }: { client: (typeof clients)[0] }) {

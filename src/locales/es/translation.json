@@ -184,11 +184,12 @@
   "skillsTitle": "Arsenal Técnico",
   "skillsSubtitle": "Una vista categorizada de las tecnologías que utilizo para construir sistemas escalables e interfaces hermosas.",
   "skillsCategories": {
-    "Backend & APIs": "Backend y APIs",
-    "Frontend": "Frontend",
-    "Cloud & DevOps": "Cloud y DevOps",
-    "Database & Storage": "Bases de Datos y Almacenamiento",
-    "Automation & Scraping": "Automatización y Scraping"
+    "Backend Engineering": "Ingeniería Backend",
+    "Cloud & Infrastructure": "Nube e Infraestructura",
+    "AI & Automation": "IA y Automatización",
+    "Frontend Engineering": "Ingeniería Frontend",
+    "Data & Architecture": "Datos y Arquitectura",
+    "Security & Governance": "Seguridad y Gobernanza"
   },
   "easterEggs": {
     "allLanguagesTitle": "¿Realmente tocaste todas las banderas solo por los memes? Mis respetos. 🎧",

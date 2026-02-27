@@ -59,8 +59,8 @@ const FunnyVirusScanDialog = ({ open, onOpenChange }) => {
       label: 'Resume Downloaded',
     });
     const link = document.createElement('a');
-    link.href = '/RESUME 3.1.pdf';
-    link.download = 'resume.pdf';
+    link.href = '/RESUME 3.3.pdf';
+    link.download = 'andres-suarez-resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
