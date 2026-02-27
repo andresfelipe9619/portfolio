@@ -21,7 +21,7 @@ export default function ExperienceRoulette() {
     () => flattenTimeline(TIMELINE_DATA.timeline),
     [],
   );
-  const listRef = useRef<HTMLUListElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const [showProjectDialog, setShowProjectDialog] = useState(false);
   const [selectedProject, setSelectedProject] = useState<FlattenedItem | null>(
@@ -98,7 +98,7 @@ export default function ExperienceRoulette() {
             {t('timelineSubtitle')}
           </p>
 
-          <ul
+          <div
             ref={listRef}
             className={cn(
               // fixed viewport for the list:
@@ -118,45 +118,61 @@ export default function ExperienceRoulette() {
             {items.map((it, i) => {
               const isActive = i === active;
               const near = Math.abs(i - active) === 1;
+              const isFirstOfYear = i === 0 || it.year !== items[i - 1].year;
+
               return (
-                <li
-                  key={`${it.year}-${i}-${it.title}`}
-                  className={cn(
-                    'snap-center grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-xl px-3 transition-all cursor-pointer select-none',
-                    'min-h-[96px] py-2', // row height
-                    isActive
-                      ? 'bg-white/5 ring-1 ring-white/10 opacity-100 scale-[1.00]'
-                      : near
-                        ? 'opacity-60 scale-[0.985]'
-                        : 'opacity-30 scale-[0.975]',
+                <div key={`${it.year}-${i}-${it.title}`}>
+                  {isFirstOfYear && (
+                    <div
+                      className={cn(
+                        'relative z-10 font-bold tracking-tight text-white/90 transition-opacity duration-300',
+                        'text-2xl sm:text-3xl lg:text-4xl pl-4',
+                        i === 0 ? 'mb-4 mt-2' : 'mb-4 mt-12',
+                        isActive || near ? 'opacity-100' : 'opacity-40'
+                      )}
+                    >
+                      <span className="bg-clip-text text-transparent bg-gradient-to-br from-white to-white/40">
+                        {it.year}
+                      </span>
+                    </div>
                   )}
-                  onClick={() => handleProjectClick(it)}
-                >
-                  <span className="relative mr-1 block size-2 rounded-full bg-white/70" />
-                  <div className="text-left">
-                    <div className="text-xs text-white/50">{it.year}</div>
-                    <div className="font-medium">{it.title}</div>
-                    <div className="text-xs text-white/60">
-                      {it.area && <span>{it.area}</span>}
-                      {it.kind && it.area && <span> · </span>}
-                      {it.kind && <span>{it.kind}</span>}
-                      {it.stack?.length ? (
-                        <>
-                          <span> · </span>
-                          <span className="text-white/50">
-                            {it.stack.slice(0, 3).join(', ')}
-                          </span>
-                        </>
-                      ) : null}
+                  <div
+                    className={cn(
+                      'snap-center grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-xl px-3 transition-all cursor-pointer select-none',
+                      'min-h-[96px] py-2', // row height
+                      isActive
+                        ? 'bg-white/5 ring-1 ring-white/10 opacity-100 scale-[1.00]'
+                        : near
+                          ? 'opacity-60 scale-[0.985]'
+                          : 'opacity-30 scale-[0.975]',
+                    )}
+                    onClick={() => handleProjectClick(it)}
+                  >
+                    <span className="relative mr-1 block size-2 rounded-full bg-white/70 shadow-[0_0_10px_rgba(255,255,255,0.5)]" />
+                    <div className="text-left">
+                      <div className="font-semibold text-base tracking-wide text-white/95">{it.title}</div>
+                      <div className="text-xs text-white/60 mt-1">
+                        {it.area && <span className="text-blue-200/80 uppercase tracking-wider text-[10px]">{it.area}</span>}
+                        {it.kind && it.area && <span className="opacity-50 mx-1">·</span>}
+                        {it.kind && <span>{it.kind}</span>}
+                        {it.stack?.length ? (
+                          <>
+                            <span className="opacity-50 mx-1">·</span>
+                            <span className="text-white/50">
+                              {it.stack.slice(0, 3).join(', ')}
+                            </span>
+                          </>
+                        ) : null}
+                      </div>
+                    </div>
+                    <div className="text-right text-sm text-white/70 font-medium">
+                      {it.flag ?? ''} {it.location || it.country || ''}
                     </div>
                   </div>
-                  <div className="text-right text-sm text-white/70">
-                    {it.flag ?? ''} {it.location || it.country || ''}
-                  </div>
-                </li>
+                </div>
               );
             })}
-          </ul>
+          </div>
           <div className="flex justify-center mt-4">
             <Link
               to="/projects"

@@ -310,27 +310,16 @@ export const TIMELINE_DATA: {
         area: 'Career',
         kind: 'Milestone',
         stack: [],
+        country: 'Colombia',
+        flag: '🇨🇴',
       },
       {
         title: 'Exited University due to personal difficulties',
         area: 'Career',
         kind: 'Milestone',
         stack: [],
-      },
-      {
-        title: 'Benekiva - Senior Software Engineer',
-        area: 'Insurtech',
-        kind: 'SaaS / Engineering',
-        stack: ['Node.js', 'TypeScript', 'AWS', 'GraphQL', 'PostgreSQL'],
-        country: 'United States',
-        flag: '🇺🇸',
-        client: 'Benekiva',
-        location: 'North Carolina, USA',
-        date: '2021',
-        role: 'Senior Software Engineer',
-        summary: 'Backend engineering and AWS infrastructure for an insurance claims automation SaaS.',
-        description: 'Delivered secure APIs with Node.js/GraphQL, optimized SQL & NoSQL performance, and built fraud detection services.',
-        tags: ['Insurtech', 'SaaS', 'AWS']
+        country: 'Colombia',
+        flag: '🇨🇴',
       },
     ],
 
@@ -672,14 +661,6 @@ export const TIMELINE_DATA: {
 
     '2025': [
       {
-        title: 'Open Source: Audiobaked Platform',
-        area: 'Media',
-        kind: 'Audio Processing / CMS',
-        stack: ['Next.js', 'Node.js', 'PostgreSQL', 'FFmpeg'],
-        country: 'Colombia',
-        flag: '🇨🇴',
-      },
-      {
         title: 'Benekiva - Senior Software Engineer',
         area: 'Insurtech',
         kind: 'SaaS / Engineering',
@@ -693,6 +674,14 @@ export const TIMELINE_DATA: {
         summary: 'Backend engineering and AWS infrastructure for an insurance claims automation SaaS.',
         description: 'Delivered secure APIs with Node.js/GraphQL, optimized SQL & NoSQL performance, and built fraud detection services.',
         tags: ['Insurtech', 'SaaS', 'AWS']
+      },
+      {
+        title: 'Open Source: Audiobaked Platform',
+        area: 'Media',
+        kind: 'Audio Processing / CMS',
+        stack: ['Next.js', 'Node.js', 'PostgreSQL', 'FFmpeg'],
+        country: 'Colombia',
+        flag: '🇨🇴',
       },
       {
         title: 'Turnstile - Product Engineer',
@@ -709,6 +698,9 @@ export const TIMELINE_DATA: {
         description: 'Translating complex business logic into a scalable React/Node.js stack and engineering mission-critical integrations.',
         tags: ['Fintech', 'SaaS']
       },
+
+    ],
+    '2026': [
       {
         title: 'Open Source: Personal Portfolio',
         area: 'Portfolio',
@@ -723,7 +715,7 @@ export const TIMELINE_DATA: {
         kind: 'Milestone',
         stack: [],
       },
-    ],
+    ]
   },
 };
 

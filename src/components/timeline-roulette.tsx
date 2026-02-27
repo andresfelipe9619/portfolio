@@ -72,18 +72,20 @@ export default function TimelineRoulette({ data, onChangeIndex }: Props) {
       {/* thin vertical line */}
       <div className="pointer-events-none absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-white/10" />
 
-      <ul className="relative flex h-full flex-col items-stretch justify-center gap-5">
+      <div className="relative flex h-full flex-col items-stretch justify-center gap-5">
         {items.map((it, i) => {
           const dist = Math.abs(i - idx);
           const active = i === idx;
+          const isFirstOfYear = i === 0 || it.year !== items[i - 1].year;
           const op = active
             ? 'opacity-100'
             : dist === 1
               ? 'opacity-60'
               : 'opacity-25';
           const scale = active ? 'scale-100' : 'scale-95';
+
           return (
-            <li
+            <div
               key={`${it.year}-${i}-${it.title}`}
               className={cn(
                 'transition-all duration-300 ease-out',
@@ -92,26 +94,40 @@ export default function TimelineRoulette({ data, onChangeIndex }: Props) {
                 scale,
               )}
             >
+              {isFirstOfYear && (
+                <div
+                  className={cn(
+                    'relative z-10 font-bold tracking-tight text-white/90 transition-opacity duration-300',
+                    'text-2xl sm:text-3xl lg:text-4xl pl-4',
+                    i === 0 ? 'mb-4 mt-2' : 'mb-4 mt-8',
+                    dist <= 1 ? 'opacity-100' : 'opacity-40'
+                  )}
+                >
+                  <span className="bg-clip-text text-transparent bg-gradient-to-br from-white to-white/40">
+                    {it.year}
+                  </span>
+                </div>
+              )}
               <button
                 onClick={() => go(i)}
                 className={cn(
                   'group grid w-full grid-cols-[auto_1fr_auto] items-center gap-3 rounded-xl px-3 py-2 hover:bg-white/5',
-                  active && 'bg-white/5 ring-1 ring-white/10',
+                  active && 'bg-white/5 ring-1 ring-white/10 shadow-[inset_0_0_20px_rgba(255,255,255,0.05)] text-left',
+                  !active && 'text-left'
                 )}
               >
                 {/* dot */}
-                <span className="relative mr-1 block size-2 rounded-full bg-white/70" />
+                <span className="relative mr-1 block size-2 rounded-full bg-white/70 shadow-[0_0_10px_rgba(255,255,255,0.5)]" />
                 {/* main */}
-                <div className="text-left">
-                  <div className="text-sm text-white/60">{it.year}</div>
-                  <div className="font-medium">{it.title}</div>
-                  <div className="text-xs text-white/60">
-                    {it.area && <span>{it.area}</span>}
-                    {it.kind && it.area && <span> · </span>}
+                <div className="text-left w-full">
+                  <div className="font-semibold text-base tracking-wide text-white/95">{it.title}</div>
+                  <div className="text-xs text-white/60 mt-1">
+                    {it.area && <span className="text-blue-200/80 uppercase tracking-wider text-[10px]">{it.area}</span>}
+                    {it.kind && it.area && <span className="opacity-50 mx-1">·</span>}
                     {it.kind && <span>{it.kind}</span>}
                     {it.stack?.length ? (
                       <>
-                        <span> · </span>
+                        <span className="opacity-50 mx-1">·</span>
                         <span className="text-white/50">
                           {it.stack.slice(0, 3).join(', ')}
                         </span>
@@ -119,15 +135,15 @@ export default function TimelineRoulette({ data, onChangeIndex }: Props) {
                     ) : null}
                   </div>
                 </div>
-                {/* country */}
-                <div className="text-right text-sm text-white/70">
+                {/* loc */}
+                <div className="text-right text-sm text-white/70 font-medium">
                   {it.flag ?? ''} {it.location || it.country || ''}
                 </div>
               </button>
-            </li>
+            </div>
           );
         })}
-      </ul>
+      </div>
     </div>
   );
 }
