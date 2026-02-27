@@ -190,5 +190,10 @@
     "Database & Storage": "Bases de Données & Stockage",
     "Architecture & CMS": "Architecture & CMS",
     "Automation & Scraping": "Automatisation & Scraping"
+  },
+  "easterEggs": {
+    "hackPathTitle": "🚨 Tentative de porte dérobée détectée. Bien essayé, Agent 00-Pas-Aujourd’hui.",
+    "hackShortcutTitle": "🕵️ DevTools ? Audacieux. Bienvenue dans la carte piège la plus geek.",
+    "hackDesc": "Aucun panneau admin caché ici : juste du code propre, des taches de café et des cicatrices émotionnelles de déploiements en prod."
   }
 }
