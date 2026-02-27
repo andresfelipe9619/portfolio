@@ -1,6 +1,7 @@
 'use client';
 
 import { Terminal, TypingAnimation } from '@/components/magicui/terminal';
+import { GridPattern } from '@/components/magicui/grid-pattern';
 import type { MouseEventHandler } from 'react';
 import { useEffect, useState } from 'react';
 import BlurFade from '@/components/magicui/blur-fade.tsx';
@@ -82,12 +83,15 @@ const LoadingScreen = ({
 
   return (
     <div className="fixed inset-0 z-50 grid place-items-center bg-black">
-      {/* <InteractiveGridPattern*/}
-      {/*  width={20}*/}
-      {/*  height={20}*/}
-      {/*  squares={[80, 80]}*/}
-      {/*  squaresClassName="hover:fill-green-500"*/}
-      {/* />*/}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <GridPattern
+          width={36}
+          height={36}
+          className="opacity-[0.08] [mask-image:radial-gradient(circle_at_center,white,transparent_75%)]"
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(16,185,129,0.16),transparent_45%),radial-gradient(circle_at_80%_80%,rgba(6,182,212,0.16),transparent_42%)]" />
+        <div className="absolute inset-0 animate-pulse bg-[repeating-linear-gradient(180deg,rgba(255,255,255,0.04)_0,rgba(255,255,255,0.04)_1px,transparent_1px,transparent_5px)] [animation-duration:5s]" />
+      </div>
 
       <BlurFade duration={0.2} blur={'0px'} yOffset={0} inView>
         <div className="relative z-10 w-[90vw] h-[80vh] md:w-[60vw] md:h-[60vh]">

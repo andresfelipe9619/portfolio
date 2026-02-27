@@ -184,11 +184,12 @@
   "skillsTitle": "Technical Arsenal",
   "skillsSubtitle": "A categorized view of the technologies I use to build scalable systems and beautiful interfaces.",
   "skillsCategories": {
-    "Backend & APIs": "Backend & APIs",
-    "Frontend": "Frontend",
-    "Cloud & DevOps": "Cloud & DevOps",
-    "Database & Storage": "Database & Storage",
-    "Automation & Scraping": "Automation & Scraping"
+    "Backend Engineering": "Backend Engineering",
+    "Cloud & Infrastructure": "Cloud & Infrastructure",
+    "AI & Automation": "AI & Automation",
+    "Frontend Engineering": "Frontend Engineering",
+    "Data & Architecture": "Data & Architecture",
+    "Security & Governance": "Security & Governance"
   },
   "easterEggs": {
     "allLanguagesTitle": "You really just clicked every flag to hear the memes, didn't you? Respect. 🎧",

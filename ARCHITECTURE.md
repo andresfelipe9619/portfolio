@@ -36,6 +36,42 @@ src/
 └── main.tsx        # Application entry point, Router setup, Analytics init
 ```
 
+## 2.1 Visual Site Map (Routes)
+
+```mermaid
+flowchart TD
+  A[andressuarez.dev/] --> B[/]
+  A --> C[/projects]
+  A --> D[/oss]
+  A --> E[/contact]
+  A --> F[/case-studies/:id]
+  F --> G[/case-studies/sentir-creativo]
+  F --> H[/case-studies/proaxdata]
+  A -. noindex .-> I[/blog]
+```
+
+> SEO note: `/blog` is intentionally marked as `noindex` in the page metadata while it's in “coming soon” mode.
+
+## 2.2 Visual Runtime Architecture
+
+```mermaid
+flowchart LR
+  U[User Browser]
+  V[Vite Build Output]
+  M[src/main.tsx]
+  APP[src/App.tsx]
+  R[React Router]
+  P[Pages + Sections]
+  D[src/data/* + src/locales/*]
+  UI[UI + Magic UI Components]
+  OBS[Sentry + GA4 + Vercel Analytics]
+
+  U --> V --> M --> APP --> R --> P
+  P --> UI
+  P --> D
+  M --> OBS
+```
+
 ## 3. Data Flow & State Management
 
 The application completely abstracts content from components.

@@ -31,7 +31,7 @@ const playMemeSound = (soundFile: string) => {
         console.warn('Audio playback was blocked or file not found:', e);
       });
     }
-  } catch (e) {
+  } catch {
     // Ignore audio errors
   }
 };

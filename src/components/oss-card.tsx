@@ -27,6 +27,7 @@ export function OssCard({
   enableModal = true,
   details,
   variants,
+  location,
 }: OssCardProps & { variants?: Variants }) {
   const [open, setOpen] = React.useState(false);
   const stats = useGitHubStats(href);
@@ -60,7 +61,15 @@ export function OssCard({
         >
           <div className="relative h-full rounded-2xl p-2">
             <div className="mb-2 flex items-center justify-between text-xs opacity-70">
-              <span>{year}</span>
+              <div className="flex items-center gap-1.5">
+                <span>{year}</span>
+                {location && (
+                  <>
+                    <span className="opacity-60">·</span>
+                    <span className="truncate max-w-[100px]">{location}</span>
+                  </>
+                )}
+              </div>
 
               {/* GitHub stats pill más contrastado */}
               <div className="flex items-center gap-2 rounded-full border border-white/10 bg-black/60 px-2 py-0.5 backdrop-blur-sm">
@@ -113,9 +122,16 @@ export function OssCard({
                       ~/oss/{title.toLowerCase().replace(/\s+/g, '-')}
                     </span>
                   </div>
-                  <span className="rounded border border-white/10 px-2 py-0.5 text-[11px]">
-                    {year}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    {location && (
+                      <span className="rounded border border-white/10 px-2 py-0.5 text-[11px]">
+                        {location}
+                      </span>
+                    )}
+                    <span className="rounded border border-white/10 px-2 py-0.5 text-[11px]">
+                      {year}
+                    </span>
+                  </div>
                 </div>
 
                 {/* Optional cover */}
