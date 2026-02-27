@@ -55,7 +55,11 @@ export default function ExperienceRoulette() {
         if (best !== active) {
           setActive(best);
           const it = items[best];
-          if (it.country && COUNTRY_COORDS[it.country]) {
+          const locKey = it.location || it.country;
+          if (locKey && COUNTRY_COORDS[locKey]) {
+            const { lat, lon } = COUNTRY_COORDS[locKey];
+            focusGlobe(lat, lon);
+          } else if (it.country && COUNTRY_COORDS[it.country]) {
             const { lat, lon } = COUNTRY_COORDS[it.country];
             focusGlobe(lat, lon);
           }
@@ -147,7 +151,7 @@ export default function ExperienceRoulette() {
                     </div>
                   </div>
                   <div className="text-right text-sm text-white/70">
-                    {it.flag ?? ''} {it.country ?? ''}
+                    {it.flag ?? ''} {it.location || it.country || ''}
                   </div>
                 </li>
               );

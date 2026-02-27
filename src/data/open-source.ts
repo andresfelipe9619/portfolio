@@ -14,6 +14,7 @@ export type OssCardProps = {
   active: boolean;
   enableModal?: boolean;
   details?: OssCardDetails;
+  location?: string;
 };
 
 export type OpenSourceProject = {
@@ -26,6 +27,7 @@ export type OpenSourceProject = {
   section: string;
   enableModal?: boolean;
   details?: OssCardDetails;
+  location?: string;
 };
 
 const openSource: OpenSourceProject[] = [
@@ -37,6 +39,7 @@ const openSource: OpenSourceProject[] = [
     subtitle: 'Uber-like booking flows with maps, routing, and clean state.',
     badges: ['React Native', 'Redux', 'Google Maps', 'Mobile'],
     section: 'products',
+    location: 'Cali, Colombia',
     details: {
       longDescription:
         'Production-ready booking flows that mirror real ride-hailing UX: map-driven pick-up/drop-off, route cost estimation, and robust state handling. Showcases product thinking for mobile—business logic and UX synchronization first, pixel polish second. The codebase is modular, testable, and demonstrates a practical approach to navigation, permissions, and error boundaries for iOS/Android.',
@@ -52,6 +55,7 @@ const openSource: OpenSourceProject[] = [
     subtitle: 'Transcribe, diarize, subtitle, and summarize from the CLI.',
     badges: ['Python', 'WhisperX', 'ffmpeg', 'OpenAI API'],
     section: 'products',
+    location: 'Cali, Colombia',
     details: {
       longDescription:
         'A battle-tested command-line tool for media processing: accurate transcription (WhisperX), speaker diarization, subtitle tracks (SRT/VTT), and automated summaries for notes/action items/budgets. Designed for repeatability and large batches: deterministic flags, resumable runs, and clear logs. Extensible pipeline with FFmpeg preprocessing and optional GPT analysis.',
@@ -67,6 +71,7 @@ const openSource: OpenSourceProject[] = [
     subtitle: 'Forecasting sandbox with Prophet/ARIMA/XGBoost + metrics.',
     badges: ['Python', 'Prophet', 'ARIMA', 'XGBoost', 'Matplotlib'],
     section: 'playground',
+    location: 'Cali, Colombia',
     details: {
       longDescription:
         'Hands-on forecasting lab: load series, compare Prophet/ARIMA/XGBoost, and inspect error metrics (MAE/RMSE). Includes simple cross-validation, quick plots, and baseline heuristics to avoid overfitting. Great for selecting a pragmatic model that balances signal vs. complexity before productionizing.',
@@ -82,6 +87,7 @@ const openSource: OpenSourceProject[] = [
     subtitle: 'Lambda to capture SES bounces/complaints → DynamoDB events.',
     badges: ['Node.js', 'AWS Lambda', 'AWS SES', 'DynamoDB'],
     section: 'cloud',
+    location: 'Cali, Colombia',
     details: {
       longDescription:
         'Serverless microservice for email deliverability ops: consumes SES notifications (bounces/complaints), validates payloads, and persists normalized events in DynamoDB for audit and dashboards. Includes IAM-scoped resources, idempotency guards, and retry/backoff. Ideal for compliance and data pipelines around sender reputation.',
@@ -97,6 +103,7 @@ const openSource: OpenSourceProject[] = [
     subtitle: 'Flexible, catalog-based email sender built with JavaScript.',
     badges: ['Node.js', 'Email Automation', 'DynamoDB'],
     section: 'cloud',
+    location: 'Cali, Colombia',
     details: {
       longDescription:
         'A lightweight email sender engine that renders structured catalog content into rich emails. Built in JavaScript for adaptability and ease of use—ideal for automating product or feature announcements without overengineering.',
@@ -112,6 +119,7 @@ const openSource: OpenSourceProject[] = [
     subtitle: 'Classic Battleship in pure Java + MySQL.',
     badges: ['Java', 'MySQL'],
     section: 'playground',
+    location: 'Cali, Colombia',
     details: {
       longDescription:
         'A throwback project that still demonstrates fundamentals: state management, simple I/O, and persistence with MySQL. Useful for teaching deterministic game rules, grid modeling, and basic MVC organization without frameworks.',
@@ -127,6 +135,7 @@ const openSource: OpenSourceProject[] = [
     subtitle: 'Developer-first portfolio (Vite + React) with Magic UI/shadcn.',
     badges: ['React', 'Vite', 'TypeScript', 'Tailwind', 'Vercel'],
     section: 'products',
+    location: 'Cali, Colombia',
     details: {
       longDescription:
         'Minimal, fast, and elegant portfolio focused on DX and performance. Uses Vite + React, Tailwind, Magic UI (neon/aurora/grid patterns) y shadcn UI. Clean routing, componentized sections, and sensible content data modeling—meant to be forked and personalized by senior devs.',

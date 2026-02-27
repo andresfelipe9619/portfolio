@@ -27,7 +27,11 @@ export default function TimelineRoulette({ data, onChangeIndex }: Props) {
       const i = clamp(next);
       setIdx(i);
       const item = items[i];
-      if (item.country && COUNTRY_COORDS[item.country]) {
+      const locKey = item.location || item.country;
+      if (locKey && COUNTRY_COORDS[locKey]) {
+        const { lat, lon } = COUNTRY_COORDS[locKey];
+        focusGlobe(lat, lon);
+      } else if (item.country && COUNTRY_COORDS[item.country]) {
         const { lat, lon } = COUNTRY_COORDS[item.country];
         focusGlobe(lat, lon);
       }
@@ -117,7 +121,7 @@ export default function TimelineRoulette({ data, onChangeIndex }: Props) {
                 </div>
                 {/* country */}
                 <div className="text-right text-sm text-white/70">
-                  {it.flag ?? ''} {it.country ?? ''}
+                  {it.flag ?? ''} {it.location || it.country || ''}
                 </div>
               </button>
             </li>
