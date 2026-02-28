@@ -53,6 +53,9 @@ npm run lint
 # Run tests (keep the jokes bug-free)
 npm test
 
+# Run tests with coverage report
+npm run test:coverage
+
 # Create a production build
 npm run build
 
