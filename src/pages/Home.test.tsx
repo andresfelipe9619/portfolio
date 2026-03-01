@@ -1,6 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Home from './Home';
+import { vi } from 'vitest';
+import { TooltipProvider } from '@/components/ui/tooltip';
 
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({
@@ -14,80 +16,30 @@ vi.mock('react-i18next', () => ({
 }));
 
 vi.mock('@/data/timeline', () => ({
-  TESTIMONIALS: [],
+  TESTIMONIALS: [
+    { quote: 'Test quote', client: 'Test Client', country: 'Test Country', flag: '🇺🇸' }
+  ],
   TIMELINE_DATA: { timeline: { featured: [] } },
-}));
-
-vi.mock('@/lib/timeline', () => ({
-  flattenTimeline: () => [],
 }));
 
 vi.mock('react-ga4', () => ({
   default: { event: vi.fn() },
 }));
 
-vi.mock('@/components/magicui/typing-animation', () => ({
-  TypingAnimation: ({ children }: { children: any }) => <h1>{children}</h1>,
-}));
+// Mock ResizeObserver for some magicui components
+global.ResizeObserver = class ResizeObserver {
+  observe() { }
+  unobserve() { }
+  disconnect() { }
+};
 
-vi.mock('@/components/magicui/highlighter.tsx', () => ({
-  Highlighter: ({ children }: { children: any }) => <>{children}</>,
-}));
-
-vi.mock('@/components/magicui/blur-fade.tsx', () => ({
-  default: ({ children }: { children: any }) => <>{children}</>,
-}));
-
-vi.mock('@/components/magicui/shimmer-button', () => ({
-  ShimmerButton: ({ children, onClick }: { children: any; onClick?: () => void }) => (
-    <button onClick={onClick}>{children}</button>
-  ),
-}));
-
-vi.mock('@/components/magicui/rainbow-button.tsx', () => ({
-  RainbowButton: ({ children, onClick }: { children: any; onClick?: () => void }) => (
-    <button onClick={onClick}>{children}</button>
-  ),
-}));
-
-vi.mock('@/components/virus-scan-dialog.tsx', () => ({
-  default: ({ open }: { open: boolean }) => (open ? <div>virus-open</div> : null),
-}));
-
-vi.mock('@/components/joke-dialog.tsx', () => ({
-  default: ({ open }: { open: boolean }) => (open ? <div>joke-open</div> : null),
-}));
-
-vi.mock('@/components/project-dialog', () => ({
-  default: () => null,
-}));
-
+// Keep WebGL / Canvas / heavy DOM component mocks
 vi.mock('@/components/magicui/particles', () => ({
-  Particles: () => null,
+  Particles: () => <div data-testid="particles" />,
 }));
 
 vi.mock('@/components/magicui/globe', () => ({
-  Globe: () => null,
-}));
-
-vi.mock('@/sections/footer.tsx', () => ({
-  Footer: () => null,
-}));
-
-vi.mock('@/sections/oss-highlights.tsx', () => ({
-  OssHighlights: () => null,
-}));
-
-vi.mock('@/sections/client-marquee', () => ({
-  ClientMarqueeSection: () => null,
-}));
-
-vi.mock('@/sections/skills', () => ({
-  SkillsSection: () => null,
-}));
-
-vi.mock('@/sections/experience-roulette.tsx', () => ({
-  default: () => null,
+  Globe: () => <div data-testid="globe" />,
 }));
 
 vi.mock('canvas-confetti', () => ({
@@ -95,19 +47,35 @@ vi.mock('canvas-confetti', () => ({
 }));
 
 describe('Home page', () => {
-  it('renders hero actions and opens dialogs', () => {
+  beforeEach(() => {
+    // Reset any storage state to ensure predictable tests
+    sessionStorage.clear();
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('renders hero content immediately if hasSeenHero is true', async () => {
     sessionStorage.setItem('hasSeenHero', 'true');
 
     render(
       <MemoryRouter>
-        <Home />
+        <TooltipProvider>
+          <Home />
+        </TooltipProvider>
       </MemoryRouter>,
     );
 
+    // Using real UI components we should see the text
     expect(screen.getByText('globalCompanies')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'exploreUniverse' })).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole('button', { name: 'downloadResume' }));
-    fireEvent.click(screen.getByRole('button', { name: 'exploreUniverse' }));
+    // Test dialogs
+    const exploreBtn = await screen.findByRole('button', { name: 'exploreUniverse' });
+    expect(exploreBtn).toBeInTheDocument();
+
+    // Open Joke dialog
+    fireEvent.click(exploreBtn);
+    expect(await screen.findByText(/bro/i)).toBeInTheDocument();
   });
 });

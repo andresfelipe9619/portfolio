@@ -39,13 +39,9 @@ vi.mock('@/components/magicui/particles', () => ({
   Particles: () => <div data-testid="particles" />,
 }));
 
-vi.mock('@/components/magicui/blur-fade', () => ({
-  default: ({ children }: { children: any }) => <>{children}</>,
-}));
-
 describe('CaseStudy page', () => {
   beforeEach(() => {
-    vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+    vi.spyOn(window, 'scrollTo').mockImplementation(() => { });
   });
 
   it('renders case study content for a valid case-study id', () => {
