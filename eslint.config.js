@@ -29,7 +29,7 @@ export default tseslint.config(
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,
-      reactHooks.configs['recommended-latest'],
+      reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
     ],
     languageOptions: {
@@ -41,6 +41,11 @@ export default tseslint.config(
       'valid-jsdoc': 'off',
       'require-jsdoc': 'off',
       'spaced-comment': ['error', 'always', { markers: ['/'] }],
+      'react-hooks/immutability': 'off',
+      'react-hooks/purity': 'off',
+      'react-hooks/preserve-manual-memoization': 'off',
+      'react-hooks/set-state-in-effect': 'off',
+      'react-hooks/refs': 'off',
     },
   },
   prettier,
