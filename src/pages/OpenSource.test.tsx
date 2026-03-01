@@ -1,5 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import OpenSourcePage from './OpenSource';
+import { MemoryRouter } from 'react-router-dom';
+import { TooltipProvider } from '@/components/ui/tooltip';
 
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({
@@ -36,17 +38,15 @@ vi.mock('@/data/open-source', () => ({
   ],
 }));
 
-vi.mock('@/components/oss-card', () => ({
-  OssCard: ({ title }: { title: string }) => <article>{title}</article>,
-}));
-
-vi.mock('@/components/magicui/dot-pattern', () => ({
-  DotPattern: () => <div data-testid="dot-pattern" />,
-}));
-
 describe('OpenSource page', () => {
   it('renders grouped OSS sections and cards', () => {
-    render(<OpenSourcePage />);
+    render(
+      <MemoryRouter>
+        <TooltipProvider>
+          <OpenSourcePage />
+        </TooltipProvider>
+      </MemoryRouter>
+    );
 
     expect(screen.getByText('ossPage.title')).toBeInTheDocument();
     expect(screen.getByText('ossPage.productsTitle')).toBeInTheDocument();
