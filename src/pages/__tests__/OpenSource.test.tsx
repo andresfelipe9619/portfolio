@@ -1,13 +1,5 @@
-import { render, screen } from '@testing-library/react';
-import OpenSourcePage from './OpenSource';
-import { MemoryRouter } from 'react-router-dom';
-import { TooltipProvider } from '@/components/ui/tooltip';
-
-vi.mock('react-i18next', () => ({
-  useTranslation: () => ({
-    t: (key: string) => key,
-  }),
-}));
+import { render, screen } from '@/test/utils';
+import OpenSourcePage from '../OpenSource';
 
 vi.mock('@/hooks/use-easter-egg', () => ({
   useTimeEasterEgg: vi.fn(),
@@ -40,13 +32,7 @@ vi.mock('@/data/open-source', () => ({
 
 describe('OpenSource page', () => {
   it('renders grouped OSS sections and cards', () => {
-    render(
-      <MemoryRouter>
-        <TooltipProvider>
-          <OpenSourcePage />
-        </TooltipProvider>
-      </MemoryRouter>
-    );
+    render(<OpenSourcePage />);
 
     expect(screen.getByText('ossPage.title')).toBeInTheDocument();
     expect(screen.getByText('ossPage.productsTitle')).toBeInTheDocument();
