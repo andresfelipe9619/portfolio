@@ -2,7 +2,13 @@ import { StrictMode, Suspense, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
-import { BrowserRouter, createRoutesFromChildren, matchRoutes, useLocation, useNavigationType } from 'react-router-dom';
+import {
+  BrowserRouter,
+  createRoutesFromChildren,
+  matchRoutes,
+  useLocation,
+  useNavigationType,
+} from 'react-router-dom';
 import { initGA } from './lib/ga';
 import * as Sentry from '@sentry/react';
 import { Analytics } from '@vercel/analytics/react';

@@ -6,26 +6,24 @@ import { HelmetProvider } from 'react-helmet-async';
 import { TooltipProvider } from '@/components/ui/tooltip';
 
 interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
-    initialEntries?: string[];
+  initialEntries?: string[];
 }
 
 function render(
-    ui: ReactElement,
-    { initialEntries = ['/'], ...renderOptions }: CustomRenderOptions = {}
+  ui: ReactElement,
+  { initialEntries = ['/'], ...renderOptions }: CustomRenderOptions = {},
 ) {
-    function Wrapper({ children }: { children: React.ReactNode }) {
-        return (
-            <HelmetProvider>
-                <MemoryRouter initialEntries={initialEntries}>
-                    <TooltipProvider>
-                        {children}
-                    </TooltipProvider>
-                </MemoryRouter>
-            </HelmetProvider>
-        );
-    }
+  function Wrapper({ children }: { children: React.ReactNode }) {
+    return (
+      <HelmetProvider>
+        <MemoryRouter initialEntries={initialEntries}>
+          <TooltipProvider>{children}</TooltipProvider>
+        </MemoryRouter>
+      </HelmetProvider>
+    );
+  }
 
-    return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
+  return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
 }
 
 // re-export everything

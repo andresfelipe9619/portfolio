@@ -2,7 +2,7 @@ import { fireEvent, render, screen, waitFor } from '@/test/utils';
 import Contact from '../Contact';
 
 const tMap: Record<string, string> = {
-  'contact.title0': 'Let\'s',
+  'contact.title0': "Let's",
   'contact.title1': 'Talk',
   'contact.subtitle': 'Ping me anytime',
   'contact.cardTitle': 'Contact Card',
@@ -50,7 +50,9 @@ describe('Contact page', () => {
     render(<Contact />);
 
     const message = screen.getByLabelText(/message/i);
-    fireEvent.change(message, { target: { value: 'Hello there!', name: 'message' } });
+    fireEvent.change(message, {
+      target: { value: 'Hello there!', name: 'message' },
+    });
 
     expect(screen.getByText(/Just getting warmed up.../i)).toBeInTheDocument();
   });
@@ -89,6 +91,10 @@ describe('Contact page', () => {
     expect(toastMock).toHaveBeenCalledWith('Sent!', {
       description: 'Thanks for your message',
     });
-    expect(logEventMock).toHaveBeenCalledWith('Contact Form', 'Submit', 'Success');
+    expect(logEventMock).toHaveBeenCalledWith(
+      'Contact Form',
+      'Submit',
+      'Success',
+    );
   });
 });

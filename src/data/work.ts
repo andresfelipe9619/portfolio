@@ -8,7 +8,8 @@ const work = [
     logoUrl: '/turnstile.png',
     start: 'Sept 2025',
     end: 'February 2026',
-    description: 'MVP to Market-Fit: Partnering with technical founders to build a category-defining SaaS product, translating complex business logic into a scalable React/Node.js stack. Engineered mission-critical integrations with Stripe, Twilio, Segment, and Salesforce. Designed robust REST/GraphQL APIs and PostgreSQL schemas optimized for high-velocity startup iterations.'
+    description:
+      'MVP to Market-Fit: Partnering with technical founders to build a category-defining SaaS product, translating complex business logic into a scalable React/Node.js stack. Engineered mission-critical integrations with Stripe, Twilio, Segment, and Salesforce. Designed robust REST/GraphQL APIs and PostgreSQL schemas optimized for high-velocity startup iterations.',
   },
   {
     company: 'HireWorks — Client: Benekiva/Ro',
@@ -19,7 +20,8 @@ const work = [
     logoUrl: '/benekiva.jpeg',
     start: 'Apr 2025',
     end: 'Sept 2025',
-    description: 'Lifecycle Architecture: Architected complex patient journey eventing for Ro, utilizing Braze, webhooks, and HTML templates. Developed real-time dashboards for marketing KPIs. Acted as SME for reliability, implementing secure AWS architectures aligned with SOC 2 Type II compliance.'
+    description:
+      'Lifecycle Architecture: Architected complex patient journey eventing for Ro, utilizing Braze, webhooks, and HTML templates. Developed real-time dashboards for marketing KPIs. Acted as SME for reliability, implementing secure AWS architectures aligned with SOC 2 Type II compliance.',
   },
   {
     company: 'Usermuse.AI',
@@ -30,7 +32,8 @@ const work = [
     logoUrl: '/evermuse.jpeg',
     start: 'Oct 2024',
     end: 'Jan 2025',
-    description: 'AI Orchestration: Developed an intelligent requirement-gathering engine using LangChain, focusing on multi-model workflows. Built full-stack features using React and Firebase to transform customer conversations into actionable roadmap signals. Integrated major AI APIs for high-velocity prototyping.'
+    description:
+      'AI Orchestration: Developed an intelligent requirement-gathering engine using LangChain, focusing on multi-model workflows. Built full-stack features using React and Firebase to transform customer conversations into actionable roadmap signals. Integrated major AI APIs for high-velocity prototyping.',
   },
   {
     company: 'Brooklyn Vendor Assurance',
@@ -41,7 +44,8 @@ const work = [
     logoUrl: '/brooklyn.jpeg',
     start: 'Dec 2018',
     end: 'Apr 2025',
-    description: 'Investment & Due Diligence: Served as Technical Lead during investor audits. GenAI Pioneering: Led integration of generative AI workflows using AWS Bedrock and Anthropic Claude. Established SDLC governance and mentored engineers. Orchestrated heavy AWS environments, achieving a 90% reduction in vulnerabilities.'
+    description:
+      'Investment & Due Diligence: Served as Technical Lead during investor audits. GenAI Pioneering: Led integration of generative AI workflows using AWS Bedrock and Anthropic Claude. Established SDLC governance and mentored engineers. Orchestrated heavy AWS environments, achieving a 90% reduction in vulnerabilities.',
   },
   {
     company: 'Kuno Digital',
@@ -52,7 +56,8 @@ const work = [
     logoUrl: '/kuno-digital.png',
     start: '2023',
     end: '2023',
-    description: 'Served as primary technical authority for marketing automation and system integrations. Architected integrations for WhatsApp, SalesManago, and Kommo CRM, and mentored technical staff.'
+    description:
+      'Served as primary technical authority for marketing automation and system integrations. Architected integrations for WhatsApp, SalesManago, and Kommo CRM, and mentored technical staff.',
   },
   {
     company: 'Atentamente',
@@ -63,7 +68,8 @@ const work = [
     logoUrl: '/atentamente.png',
     start: '2023',
     end: '2023',
-    description: 'Led consolidation of fragmented data sources into a centralized AWS-based platform. Designed PostgreSQL infrastructure and built an internal data management dashboard using Strapi.'
+    description:
+      'Led consolidation of fragmented data sources into a centralized AWS-based platform. Designed PostgreSQL infrastructure and built an internal data management dashboard using Strapi.',
   },
   {
     company: 'Proaxdata',
@@ -74,7 +80,8 @@ const work = [
     logoUrl: '',
     start: '2023',
     end: '2023',
-    description: 'Designed geospatial visualization platform. Built automation workflows using Google Apps Script and Sheets, and implemented Mapbox performance optimizations.'
+    description:
+      'Designed geospatial visualization platform. Built automation workflows using Google Apps Script and Sheets, and implemented Mapbox performance optimizations.',
   },
   {
     company: 'Pontificia Universidad Javeriana',
@@ -85,7 +92,8 @@ const work = [
     logoUrl: '/javeriana.png',
     start: '2023',
     end: '2023',
-    description: 'Resolved critical bugs, implemented missing features, and improved authentication flows with Biometric on Android and iOS. Stabilized application for production readiness.'
+    description:
+      'Resolved critical bugs, implemented missing features, and improved authentication flows with Biometric on Android and iOS. Stabilized application for production readiness.',
   },
   {
     company: 'Klazia',
@@ -96,7 +104,8 @@ const work = [
     logoUrl: '/klazia.jpg',
     start: '2022',
     end: '2022',
-    description: 'Led Strapi upgrade and backend restructuring. Refined AWS infrastructure to improve performance and reduce costs via FinOps practices.'
+    description:
+      'Led Strapi upgrade and backend restructuring. Refined AWS infrastructure to improve performance and reduce costs via FinOps practices.',
   },
   {
     company: 'Cinekomuna',
@@ -107,7 +116,8 @@ const work = [
     logoUrl: '/cinekomuna.jpg',
     start: '2022',
     end: '2022',
-    description: 'Refactored backend services and optimized MongoDB indexing. Improved observability and AWS infrastructure reliability.'
+    description:
+      'Refactored backend services and optimized MongoDB indexing. Improved observability and AWS infrastructure reliability.',
   },
   {
     company: 'Factoring Abogados',
@@ -118,7 +128,8 @@ const work = [
     logoUrl: '/factoring-abogados.svg',
     start: '2022',
     end: '2022',
-    description: 'Designed secure multi-tenant judicial case automation platform. Built event-driven processing and secure authentication layers.'
+    description:
+      'Designed secure multi-tenant judicial case automation platform. Built event-driven processing and secure authentication layers.',
   },
   {
     company: 'TODOSURF',
@@ -129,8 +140,9 @@ const work = [
     logoUrl: '/todosurf.png',
     start: '2019',
     end: '2019',
-    description: 'Developed real-time surf conditions web application using React and Leaflet. Integrated multiple public APIs for environmental data and designed interactive GIS map interface.'
-  }
+    description:
+      'Developed real-time surf conditions web application using React and Leaflet. Integrated multiple public APIs for environmental data and designed interactive GIS map interface.',
+  },
 ];
 
 export default work;

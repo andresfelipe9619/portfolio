@@ -56,7 +56,11 @@ export function Footer() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() =>
-                  logEvent('Footer', 'GitHub Click', DATA.contact.social.GitHub.url)
+                  logEvent(
+                    'Footer',
+                    'GitHub Click',
+                    DATA.contact.social.GitHub.url,
+                  )
                 }
               >
                 <DockIcon className="p-2 text-white/70 hover:text-white">

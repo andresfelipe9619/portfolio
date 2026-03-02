@@ -40,7 +40,7 @@ vi.mock('@/components/magicui/particles', () => ({
 
 describe('CaseStudy page', () => {
   beforeEach(() => {
-    vi.spyOn(window, 'scrollTo').mockImplementation(() => { });
+    vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
   });
 
   it('renders case study content for a valid case-study id', () => {
@@ -48,12 +48,14 @@ describe('CaseStudy page', () => {
       <Routes>
         <Route path="/case-studies/:id" element={<CaseStudy />} />
       </Routes>,
-      { initialEntries: ['/case-studies/rocket-app'] }
+      { initialEntries: ['/case-studies/rocket-app'] },
     );
 
     expect(screen.getByText('Rocket App')).toBeInTheDocument();
     expect(screen.getByText('Acme Corp')).toBeInTheDocument();
-    expect(screen.getByText('Launches features at orbital speed.')).toBeInTheDocument();
+    expect(
+      screen.getByText('Launches features at orbital speed.'),
+    ).toBeInTheDocument();
     expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
   });
 
@@ -62,7 +64,7 @@ describe('CaseStudy page', () => {
       <Routes>
         <Route path="/case-studies/:id" element={<CaseStudy />} />
       </Routes>,
-      { initialEntries: ['/case-studies/unknown'] }
+      { initialEntries: ['/case-studies/unknown'] },
     );
 
     expect(screen.getByText('Case Study Not Found')).toBeInTheDocument();

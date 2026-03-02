@@ -4,7 +4,12 @@ import { vi } from 'vitest';
 
 vi.mock('@/data/timeline', () => ({
   TESTIMONIALS: [
-    { quote: 'Test quote', client: 'Test Client', country: 'Test Country', flag: '🇺🇸' }
+    {
+      quote: 'Test quote',
+      client: 'Test Client',
+      country: 'Test Country',
+      flag: '🇺🇸',
+    },
   ],
   TIMELINE_DATA: { timeline: { featured: [] } },
 }));
@@ -41,7 +46,9 @@ describe('Home page', () => {
     expect(screen.getByText('globalCompanies')).toBeInTheDocument();
 
     // Test dialogs
-    const exploreBtn = await screen.findByRole('button', { name: 'exploreUniverse' });
+    const exploreBtn = await screen.findByRole('button', {
+      name: 'exploreUniverse',
+    });
     expect(exploreBtn).toBeInTheDocument();
 
     // Open Joke dialog
