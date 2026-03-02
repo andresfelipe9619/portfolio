@@ -1,3 +1,5 @@
+import { PROFILE } from '@/data/common';
+
 export type TimelineItem = {
   title: string;
   area?: string;
@@ -35,8 +37,7 @@ export const TIMELINE_DATA: {
   asides: string[];
   timeline: TimelineByYear;
 } = {
-  summary:
-    'Innovative **Software & Solutions Engineer** with 8+ years delivering scalable SaaS, cloud, and GIS systems across 11 countries. Recognized for bridging business and technology, leading enterprise engineering, and building open-source projects.',
+  summary: PROFILE.summary,
   asides: [
     '💪 **28+ Projects Delivered**: from SaaS to GIS, every project marks innovation and real-world impact.',
     '🌎 **Global Reach**: successful deliveries in 11 countries prove adaptability in diverse markets.',
@@ -507,7 +508,7 @@ export const TIMELINE_DATA: {
         stack: ['Node.js', 'React', 'Profiling/Tracing'],
         country: 'Costa Rica',
         flag: '🇨🇷',
-        review:
+        testimonial:
           'We are very grateful to Andrés for his valuable contribution. Thanks to his work, we improved our platform and expanded our services. Highly recommended.',
         description:
           'Evaluation and optimization of a Node.js + React + Dato CMS project, including a training plan for the client team.',
@@ -728,9 +729,9 @@ export type Testimonial = {
 
 export const TESTIMONIALS: Testimonial[] = Object.values(TIMELINE_DATA.timeline)
   .flat()
-  .filter((item) => item.testimonial)
+  .filter((item) => item.testimonial || item.review)
   .map((item) => ({
-    quote: item.testimonial as string,
+    quote: (item.testimonial || item.review) as string,
     client: item.client ?? item.title,
     country: item.country,
     flag: item.flag,
