@@ -1,5 +1,5 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import Contact from './Contact';
+import { fireEvent, render, screen, waitFor } from '@/test/utils';
+import Contact from '../Contact';
 
 const tMap: Record<string, string> = {
   'contact.title0': 'Let\'s',

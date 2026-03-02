@@ -1,7 +1,6 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import { HelmetProvider } from 'react-helmet-async';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import CaseStudy from './CaseStudy';
+import { fireEvent, render, screen } from '@/test/utils';
+import { Route, Routes } from 'react-router-dom';
+import CaseStudy from '../CaseStudy';
 
 const navigateMock = vi.fn();
 
@@ -46,13 +45,10 @@ describe('CaseStudy page', () => {
 
   it('renders case study content for a valid case-study id', () => {
     render(
-      <HelmetProvider>
-        <MemoryRouter initialEntries={['/case-studies/rocket-app']}>
-          <Routes>
-            <Route path="/case-studies/:id" element={<CaseStudy />} />
-          </Routes>
-        </MemoryRouter>
-      </HelmetProvider>,
+      <Routes>
+        <Route path="/case-studies/:id" element={<CaseStudy />} />
+      </Routes>,
+      { initialEntries: ['/case-studies/rocket-app'] }
     );
 
     expect(screen.getByText('Rocket App')).toBeInTheDocument();
@@ -63,13 +59,10 @@ describe('CaseStudy page', () => {
 
   it('shows a not-found state for an unknown id', () => {
     render(
-      <HelmetProvider>
-        <MemoryRouter initialEntries={['/case-studies/unknown']}>
-          <Routes>
-            <Route path="/case-studies/:id" element={<CaseStudy />} />
-          </Routes>
-        </MemoryRouter>
-      </HelmetProvider>,
+      <Routes>
+        <Route path="/case-studies/:id" element={<CaseStudy />} />
+      </Routes>,
+      { initialEntries: ['/case-studies/unknown'] }
     );
 
     expect(screen.getByText('Case Study Not Found')).toBeInTheDocument();
