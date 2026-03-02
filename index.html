@@ -1,45 +1,58 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 🔥 Branding -->
+    <title>Andrés Suárez – Creative Developer</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
-  <!-- 🔥 Branding -->
-  <title>Andrés Suárez – Creative Developer</title>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!-- 🪄 SEO Meta -->
+    <meta
+      name="description"
+      content="Global companies trust me to build what others can’t. Creative Developer · Systems Thinker · Open Source Builder."
+    />
+    <meta
+      name="keywords"
+      content="Creative Developer, Open Source, Portfolio, React, TypeScript, Software Engineer, Web Development, Frontend Developer, Backend Developer, Systems Engineering"
+    />
+    <meta name="author" content="Andrés Suárez" />
 
-  <!-- 🪄 SEO Meta -->
-  <meta name="description"
-    content="Global companies trust me to build what others can’t. Creative Developer · Systems Thinker · Open Source Builder." />
-  <meta name="keywords"
-    content="Creative Developer, Open Source, Portfolio, React, TypeScript, Software Engineer, Web Development, Frontend Developer, Backend Developer, Systems Engineering" />
-  <meta name="author" content="Andrés Suárez" />
+    <!-- 📱 Social / Open Graph -->
+    <meta property="og:title" content="Andrés Suárez – Creative Developer" />
+    <meta
+      property="og:description"
+      content="Global companies trust me to build what others can’t. Explore my open source projects and work."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://andressuarez.dev" />
+    <meta property="og:image" content="https://andressuarez.dev/me.jpeg" />
+    <meta property="og:site_name" content="Andrés Suárez" />
 
-  <!-- 📱 Social / Open Graph -->
-  <meta property="og:title" content="Andrés Suárez – Creative Developer" />
-  <meta property="og:description"
-    content="Global companies trust me to build what others can’t. Explore my open source projects and work." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://andressuarez.dev" />
-  <meta property="og:image" content="https://andressuarez.dev/me.jpeg" />
-  <meta property="og:site_name" content="Andrés Suárez" />
+    <!-- 🐦 Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Andrés Suárez – Creative Developer" />
+    <meta
+      name="twitter:description"
+      content="Global companies trust me to build what others can’t."
+    />
+    <meta name="twitter:image" content="https://andressuarez.dev/me.jpeg" />
 
-  <!-- 🐦 Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Andrés Suárez – Creative Developer" />
-  <meta name="twitter:description" content="Global companies trust me to build what others can’t." />
-  <meta name="twitter:image" content="https://andressuarez.dev/me.jpeg" />
+    <!-- 🔍 Search Engines -->
+    <link
+      rel="sitemap"
+      type="application/xml"
+      title="Sitemap"
+      href="/sitemap.xml"
+    />
+    <link rel="canonical" href="https://andressuarez.dev/" />
 
-  <!-- 🔍 Search Engines -->
-  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
-  <link rel="canonical" href="https://andressuarez.dev/" />
+    <!-- ✅ Security -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <!-- ✅ Security -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-  <!-- JSON-LD Structured Data -->
-  <script type="application/ld+json">
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
@@ -55,29 +68,28 @@
       }
     </script>
 
-  <!-- Microsoft Clarity Tracking (Loads only if set) -->
-  <script type="text/javascript">
-    (function (c, l, a, r, i, t, y) {
-      c[a] =
-        c[a] ||
-        function () {
-          (c[a].q = c[a].q || []).push(arguments);
-        };
-      t = l.createElement(r);
-      t.async = 1;
-      t.src = 'https://www.clarity.ms/tag/' + i;
-      y = l.getElementsByTagName(r)[0];
-      y.parentNode.insertBefore(t, y);
-    })(window, document, 'clarity', 'script', 'vkvf3nb96r');
-  </script>
+    <!-- Microsoft Clarity Tracking (Loads only if set) -->
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = 'https://www.clarity.ms/tag/' + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, 'clarity', 'script', 'vkvf3nb96r');
+    </script>
 
-  <!-- 🧩 App -->
-  <link rel="manifest" href="/manifest.json" />
-</head>
+    <!-- 🧩 App -->
+    <link rel="manifest" href="/manifest.json" />
+  </head>
 
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.tsx"></script>
-</body>
-
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

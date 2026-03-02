@@ -6,7 +6,11 @@ import { useTimeEasterEgg } from '@/hooks/use-easter-egg';
 
 export default function Projects() {
   const { t } = useTranslation();
-  useTimeEasterEgg('projects-time', t('easterEggs.projectsTimeTitle'), t('easterEggs.watcherDesc'));
+  useTimeEasterEgg(
+    'projects-time',
+    t('easterEggs.projectsTimeTitle'),
+    t('easterEggs.watcherDesc'),
+  );
   return (
     <main className="relative flex flex-col min-h-[100dvh] overflow-hidden bg-gray-950 text-white">
       <section id="projects" className="relative py-24">

@@ -6,21 +6,21 @@ class IntersectionObserverMock implements IntersectionObserver {
   readonly rootMargin = '';
   readonly thresholds: ReadonlyArray<number> = [];
 
-  disconnect(): void { }
-  observe(): void { }
+  disconnect(): void {}
+  observe(): void {}
   takeRecords(): IntersectionObserverEntry[] {
     return [];
   }
-  unobserve(): void { }
+  unobserve(): void {}
 }
 
 vi.stubGlobal('IntersectionObserver', IntersectionObserverMock);
 
 // Global mock for ResizeObserver
 class ResizeObserverMock {
-  observe() { }
-  unobserve() { }
-  disconnect() { }
+  observe() {}
+  unobserve() {}
+  disconnect() {}
 }
 vi.stubGlobal('ResizeObserver', ResizeObserverMock);
 
@@ -35,13 +35,13 @@ vi.mock('react-i18next', () => ({
       return key;
     },
     i18n: {
-      changeLanguage: () => new Promise(() => { }),
+      changeLanguage: () => new Promise(() => {}),
       language: 'en',
     },
   }),
   initReactI18next: {
     type: '3rdParty',
-    init: () => { },
+    init: () => {},
   },
 }));
 

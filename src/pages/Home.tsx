@@ -78,7 +78,14 @@ export default function Home() {
   );
 
   useEffect(() => {
-    console.log("Flattened items available to ProjectDialog trigger (Home):", items.filter(i => i.title.toLowerCase().includes('benekiva') || i.client?.toLowerCase().includes('benekiva')));
+    console.log(
+      'Flattened items available to ProjectDialog trigger (Home):',
+      items.filter(
+        (i) =>
+          i.title.toLowerCase().includes('benekiva') ||
+          i.client?.toLowerCase().includes('benekiva'),
+      ),
+    );
   }, [items]);
 
   const navigate = useNavigate();

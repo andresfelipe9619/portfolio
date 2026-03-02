@@ -3,7 +3,15 @@ import BlurFade from '@/components/magicui/blur-fade';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTranslation } from 'react-i18next';
-import { Server, Monitor, Cloud, Database, Layers, Bot, ShieldCheck } from 'lucide-react';
+import {
+  Server,
+  Monitor,
+  Cloud,
+  Database,
+  Layers,
+  Bot,
+  ShieldCheck,
+} from 'lucide-react';
 
 const categoryIcons: Record<string, React.ReactNode> = {
   'Backend Engineering': <Server className="w-5 h-5 text-blue-400" />,

@@ -4,66 +4,77 @@ import { toast } from 'sonner';
 // Keep track of which easter eggs have been shown in this session
 const shownEasterEggs = new Set<string>();
 
-export const showEasterEggToast = (id: string, title: string, description: string) => {
-    if (shownEasterEggs.has(id)) return;
+export const showEasterEggToast = (
+  id: string,
+  title: string,
+  description: string,
+) => {
+  if (shownEasterEggs.has(id)) return;
 
-    shownEasterEggs.add(id);
-    toast(title, {
-        description,
-        duration: Number.POSITIVE_INFINITY,
-        icon: '🚀',
-        action: {
-            label: 'Close',
-            onClick: () => console.log('Easter egg acknowledged!'),
-        },
-    });
+  shownEasterEggs.add(id);
+  toast(title, {
+    description,
+    duration: Number.POSITIVE_INFINITY,
+    icon: '🚀',
+    action: {
+      label: 'Close',
+      onClick: () => console.log('Easter egg acknowledged!'),
+    },
+  });
 };
 
-export function useTimeEasterEgg(id: string, title: string, description: string, triggerSeconds: number = 30) {
-    const hasTriggered = useRef(false);
+export function useTimeEasterEgg(
+  id: string,
+  title: string,
+  description: string,
+  triggerSeconds: number = 30,
+) {
+  const hasTriggered = useRef(false);
 
-    useEffect(() => {
-        if (hasTriggered.current || shownEasterEggs.has(id)) return;
+  useEffect(() => {
+    if (hasTriggered.current || shownEasterEggs.has(id)) return;
 
-        const timer = setTimeout(() => {
-            showEasterEggToast(id, title, description);
-            hasTriggered.current = true;
-        }, triggerSeconds * 1000);
+    const timer = setTimeout(() => {
+      showEasterEggToast(id, title, description);
+      hasTriggered.current = true;
+    }, triggerSeconds * 1000);
 
-        return () => clearTimeout(timer);
-    }, [id, title, description, triggerSeconds]);
+    return () => clearTimeout(timer);
+  }, [id, title, description, triggerSeconds]);
 }
 
 const SUSPICIOUS_PATHS = ['/admin', '/wp-admin', '/backdoor', '/.env'];
 
 export function useHackAttemptEasterEgg(
-    pathname: string,
-    title: string,
-    description: string,
-    shortcutTitle: string,
+  pathname: string,
+  title: string,
+  description: string,
+  shortcutTitle: string,
 ) {
-    useEffect(() => {
-        const looksLikeBackdoorAttempt = SUSPICIOUS_PATHS.some((path) =>
-            pathname.toLowerCase().includes(path),
-        );
+  useEffect(() => {
+    const looksLikeBackdoorAttempt = SUSPICIOUS_PATHS.some((path) =>
+      pathname.toLowerCase().includes(path),
+    );
 
-        if (looksLikeBackdoorAttempt) {
-            showEasterEggToast('hack-path-attempt', title, description);
-        }
-    }, [pathname, title, description]);
+    if (looksLikeBackdoorAttempt) {
+      showEasterEggToast('hack-path-attempt', title, description);
+    }
+  }, [pathname, title, description]);
 
-    useEffect(() => {
-        const onKeyDown = (event: KeyboardEvent) => {
-            const isDevToolsShortcut =
-                event.key === 'F12' ||
-                ((event.metaKey || event.ctrlKey) && event.shiftKey && ['I', 'J', 'C'].includes(event.key.toUpperCase()));
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      const isDevToolsShortcut =
+        event.key === 'F12' ||
+        ((event.metaKey || event.ctrlKey) &&
+          event.shiftKey &&
+          ['I', 'J', 'C'].includes(event.key.toUpperCase()));
 
-            if (!isDevToolsShortcut) return;
+      if (!isDevToolsShortcut) return;
 
-            showEasterEggToast('hack-shortcut-attempt', shortcutTitle, description);
-        };
+      showEasterEggToast('hack-shortcut-attempt', shortcutTitle, description);
+    };
 
-        window.addEventListener('keydown', onKeyDown);
-        return () => window.removeEventListener('keydown', onKeyDown);
-    }, [description, shortcutTitle]);
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [description, shortcutTitle]);
 }

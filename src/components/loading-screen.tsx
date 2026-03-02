@@ -35,9 +35,10 @@ const LoadingScreen = ({
       .then((data) => {
         setIpData({
           ip: data.ip || '192.168.1.1',
-          location: data.city && data.country_name
-            ? `${data.city}, ${data.country_name}`
-            : 'Unknown Location',
+          location:
+            data.city && data.country_name
+              ? `${data.city}, ${data.country_name}`
+              : 'Unknown Location',
         });
       })
       .catch(() => {
@@ -100,31 +101,78 @@ const LoadingScreen = ({
               {`$ boot renderer --target=${site} --secure --${useH3 ? 'h3' : 'h2'} --gpu --measure`}
             </TypingAnimation>
             {/* === 1. BROWSER ID === */}
-            <TypingAnimation className="text-blue-400">{t('loading.ua')}</TypingAnimation>
+            <TypingAnimation className="text-blue-400">
+              {t('loading.ua')}
+            </TypingAnimation>
             {/* === 2. NETWORK RESOLUTION === */}
-            <TypingAnimation className="text-cyan-400">{t('loading.dns', { site, dns: timeMap.dns })}</TypingAnimation>
-            <TypingAnimation className="text-cyan-500">{t('loading.tcp', { tcp: timeMap.tcp })}</TypingAnimation>
+            <TypingAnimation className="text-cyan-400">
+              {t('loading.dns', { site, dns: timeMap.dns })}
+            </TypingAnimation>
+            <TypingAnimation className="text-cyan-500">
+              {t('loading.tcp', { tcp: timeMap.tcp })}
+            </TypingAnimation>
             {/* === 3. SECURITY & I18N HACK === */}
-            <TypingAnimation className="text-purple-400">{t('loading.tls', { alpn, tls: timeMap.tls })}</TypingAnimation>
-            <TypingAnimation className="text-yellow-400">{t('loading.exec', { geo: timeMap.geo })}</TypingAnimation>
-            <TypingAnimation className="text-yellow-500">{t('loading.geo', { ip: ipData.ip, location: ipData.location })}</TypingAnimation>
-            <TypingAnimation className="text-orange-400">{t('loading.i18n', { langLabel: langMatch.label, langCode: detectedLangCode, i18n: timeMap.i18n })}</TypingAnimation>
+            <TypingAnimation className="text-purple-400">
+              {t('loading.tls', { alpn, tls: timeMap.tls })}
+            </TypingAnimation>
+            <TypingAnimation className="text-yellow-400">
+              {t('loading.exec', { geo: timeMap.geo })}
+            </TypingAnimation>
+            <TypingAnimation className="text-yellow-500">
+              {t('loading.geo', { ip: ipData.ip, location: ipData.location })}
+            </TypingAnimation>
+            <TypingAnimation className="text-orange-400">
+              {t('loading.i18n', {
+                langLabel: langMatch.label,
+                langCode: detectedLangCode,
+                i18n: timeMap.i18n,
+              })}
+            </TypingAnimation>
             {/* === 4. REQUEST / RESPONSE === */}
-            <TypingAnimation className="text-green-400">{t('loading.req', { ttfb: timeMap.ttfb })}</TypingAnimation>
-            <TypingAnimation className="text-zinc-500">{t('loading.sec')}</TypingAnimation>
+            <TypingAnimation className="text-green-400">
+              {t('loading.req', { ttfb: timeMap.ttfb })}
+            </TypingAnimation>
+            <TypingAnimation className="text-zinc-500">
+              {t('loading.sec')}
+            </TypingAnimation>
             {/* === 5. RENDERING STAGE === */}
-            <TypingAnimation className="text-pink-400">{t('loading.dom', { parse: timeMap.parse, css: timeMap.css, jsCompile: timeMap.jsCompile })}</TypingAnimation>
-            <TypingAnimation className="text-indigo-400">{t('loading.render', { layout: timeMap.layout, paint: timeMap.paint })}</TypingAnimation>
-            <TypingAnimation className="text-teal-400">{t('loading.metrics', { fcp: timeMap.fcp, lcp: timeMap.lcp })}</TypingAnimation>
+            <TypingAnimation className="text-pink-400">
+              {t('loading.dom', {
+                parse: timeMap.parse,
+                css: timeMap.css,
+                jsCompile: timeMap.jsCompile,
+              })}
+            </TypingAnimation>
+            <TypingAnimation className="text-indigo-400">
+              {t('loading.render', {
+                layout: timeMap.layout,
+                paint: timeMap.paint,
+              })}
+            </TypingAnimation>
+            <TypingAnimation className="text-teal-400">
+              {t('loading.metrics', { fcp: timeMap.fcp, lcp: timeMap.lcp })}
+            </TypingAnimation>
             {/* === 6. BACKGROUND GOODIES === */}
-            <TypingAnimation className="text-orange-500">{t('loading.stor', { idb: timeMap.idb })}</TypingAnimation>
-            <TypingAnimation className="text-red-400">{t('loading.worker', { sw: timeMap.sw })}</TypingAnimation>
-            <TypingAnimation className="text-fuchsia-400">{t('loading.wss', { ws: timeMap.ws })}</TypingAnimation>
+            <TypingAnimation className="text-orange-500">
+              {t('loading.stor', { idb: timeMap.idb })}
+            </TypingAnimation>
+            <TypingAnimation className="text-red-400">
+              {t('loading.worker', { sw: timeMap.sw })}
+            </TypingAnimation>
+            <TypingAnimation className="text-fuchsia-400">
+              {t('loading.wss', { ws: timeMap.ws })}
+            </TypingAnimation>
             {/* === 7. FINAL READY === */}
-            <TypingAnimation className="text-emerald-400 font-bold">{t('loading.ready', { site })}</TypingAnimation>
+            <TypingAnimation className="text-emerald-400 font-bold">
+              {t('loading.ready', { site })}
+            </TypingAnimation>
             {/* === EXTRA PUNCHLINES === */}
-            <TypingAnimation className="text-slate-300">{t('loading.fact1')}</TypingAnimation>
-            <TypingAnimation className="text-slate-300">{t('loading.fact2')}</TypingAnimation>{' '}
+            <TypingAnimation className="text-slate-300">
+              {t('loading.fact1')}
+            </TypingAnimation>
+            <TypingAnimation className="text-slate-300">
+              {t('loading.fact2')}
+            </TypingAnimation>{' '}
           </Terminal>
         </div>
         {/* Footer with the skip action */}

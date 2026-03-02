@@ -78,7 +78,11 @@ export function LanguageSelector() {
             onClick={() => {
               clickedLanguages.current.add(lang.code);
               if (clickedLanguages.current.size === languages.length) {
-                showEasterEggToast('all-languages', t('easterEggs.allLanguagesTitle'), t('easterEggs.watcherDesc'));
+                showEasterEggToast(
+                  'all-languages',
+                  t('easterEggs.allLanguagesTitle'),
+                  t('easterEggs.watcherDesc'),
+                );
               }
               import('@/lib/ga').then(({ logEvent }) => {
                 logEvent('Language', 'Change', lang.code);
@@ -86,8 +90,9 @@ export function LanguageSelector() {
               i18n.changeLanguage(lang.code);
               playMemeSound(lang.soundFile);
             }}
-            className={`flex items-center gap-2 cursor-pointer ${i18n.language.startsWith(lang.code) ? 'bg-accent font-medium' : ''
-              }`}
+            className={`flex items-center gap-2 cursor-pointer ${
+              i18n.language.startsWith(lang.code) ? 'bg-accent font-medium' : ''
+            }`}
           >
             <motion.span
               whileHover={{ scale: 1.2, rotate: [0, -10, 10, 0] }}

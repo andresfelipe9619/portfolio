@@ -42,7 +42,11 @@ type Section = {
 
 export default function OpenSourcePage() {
   const { t } = useTranslation();
-  useTimeEasterEgg('oss-time', t('easterEggs.ossTimeTitle'), t('easterEggs.watcherDesc'));
+  useTimeEasterEgg(
+    'oss-time',
+    t('easterEggs.ossTimeTitle'),
+    t('easterEggs.watcherDesc'),
+  );
 
   // Agrupamos por secciones (sin cambiar tamaños)
   const groups = React.useMemo(() => {

@@ -37,7 +37,9 @@ describe('OpenSource page', () => {
     expect(screen.getByText('ossPage.title')).toBeInTheDocument();
     expect(screen.getByText('ossPage.productsTitle')).toBeInTheDocument();
     expect(screen.getByText('ossPage.cloudTitle')).toBeInTheDocument();
-    expect(screen.queryByText('ossPage.playgroundTitle')).not.toBeInTheDocument();
+    expect(
+      screen.queryByText('ossPage.playgroundTitle'),
+    ).not.toBeInTheDocument();
     expect(screen.getByText('ShipIt')).toBeInTheDocument();
     expect(screen.getByText('CloudNinja')).toBeInTheDocument();
   });

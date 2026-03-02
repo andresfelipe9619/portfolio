@@ -672,9 +672,11 @@ export const TIMELINE_DATA: {
         location: 'North Carolina, USA',
         date: '2021',
         role: 'Senior Software Engineer',
-        summary: 'Backend engineering and AWS infrastructure for an insurance claims automation SaaS.',
-        description: 'Delivered secure APIs with Node.js/GraphQL, optimized SQL & NoSQL performance, and built fraud detection services.',
-        tags: ['Insurtech', 'SaaS', 'AWS']
+        summary:
+          'Backend engineering and AWS infrastructure for an insurance claims automation SaaS.',
+        description:
+          'Delivered secure APIs with Node.js/GraphQL, optimized SQL & NoSQL performance, and built fraud detection services.',
+        tags: ['Insurtech', 'SaaS', 'AWS'],
       },
       {
         title: 'Open Source: Audiobaked Platform',
@@ -695,11 +697,12 @@ export const TIMELINE_DATA: {
         location: 'San Francisco, USA',
         date: '2025',
         role: 'Product Engineer',
-        summary: 'Partnering with technical founders to build a category-defining SaaS product.',
-        description: 'Translating complex business logic into a scalable React/Node.js stack and engineering mission-critical integrations.',
-        tags: ['Fintech', 'SaaS']
+        summary:
+          'Partnering with technical founders to build a category-defining SaaS product.',
+        description:
+          'Translating complex business logic into a scalable React/Node.js stack and engineering mission-critical integrations.',
+        tags: ['Fintech', 'SaaS'],
       },
-
     ],
     '2026': [
       {
@@ -716,7 +719,7 @@ export const TIMELINE_DATA: {
         kind: 'Milestone',
         stack: [],
       },
-    ]
+    ],
   },
 };
 

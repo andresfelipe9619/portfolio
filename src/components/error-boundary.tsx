@@ -19,17 +19,20 @@ const FallbackComponent = ({ error, eventId, resetError }: FallbackProps) => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
         className="max-w-md w-full relative z-10"
       >
         <div className="bg-card/50 backdrop-blur-xl border border-destructive/20 rounded-3xl p-8 shadow-2xl flex flex-col items-center text-center space-y-6">
           <motion.div
             initial={{ scale: 0.8, rotate: -10 }}
             animate={{ scale: 1, rotate: 0 }}
-            transition={{ type: "spring", bounce: 0.5, delay: 0.2 }}
+            transition={{ type: 'spring', bounce: 0.5, delay: 0.2 }}
             className="w-20 h-20 rounded-2xl bg-gradient-to-br from-destructive/20 to-destructive/5 flex items-center justify-center ring-1 ring-destructive/30 shadow-[0_0_40px_-10px_rgba(239,68,68,0.3)]"
           >
-            <AlertCircle className="w-10 h-10 text-destructive" strokeWidth={1.5} />
+            <AlertCircle
+              className="w-10 h-10 text-destructive"
+              strokeWidth={1.5}
+            />
           </motion.div>
 
           <div className="space-y-2">
@@ -37,7 +40,8 @@ const FallbackComponent = ({ error, eventId, resetError }: FallbackProps) => {
               System Anomaly
             </h1>
             <p className="text-muted-foreground leading-relaxed">
-              We encountered an unexpected glitch in the matrix. Don't worry, the incident has been logged.
+              We encountered an unexpected glitch in the matrix. Don't worry,
+              the incident has been logged.
             </p>
           </div>
 
@@ -58,7 +62,9 @@ const FallbackComponent = ({ error, eventId, resetError }: FallbackProps) => {
               Reboot Sequence
             </button>
             <button
-              onClick={() => Sentry.showReportDialog({ eventId: eventId || undefined })}
+              onClick={() =>
+                Sentry.showReportDialog({ eventId: eventId || undefined })
+              }
               className="flex items-center justify-center gap-2 w-full py-3.5 px-4 bg-secondary/80 hover:bg-secondary text-secondary-foreground font-medium rounded-xl border border-border/50 transition-all active:scale-[0.98]"
             >
               <MessageSquareWarning className="w-4 h-4" />
