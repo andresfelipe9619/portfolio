@@ -199,5 +199,11 @@
     "hackPathTitle": "🚨 Intento de puerta trasera detectado. Buen intento, Agente 00-HoyNo.",
     "hackShortcutTitle": "🕵️ ¿DevTools? Jugada valiente. Bienvenido a la carta trampa más nerd.",
     "hackDesc": "Aquí no hay panel secreto de admin; solo código limpio, manchas de café y daño emocional por deploys en producción."
+  },
+  "errorBoundary": {
+    "title": "Anomalía del Sistema",
+    "description": "Encontramos un fallo inesperado en la matrix. No te preocupes, el incidente ha sido registrado.",
+    "reboot": "Secuencia de Reinicio",
+    "submit": "Enviar Informe de Diagnóstico"
   }
 }

@@ -1,4 +1,5 @@
 import { type ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import * as Sentry from '@sentry/react';
 import { AlertCircle, RotateCcw, MessageSquareWarning } from 'lucide-react';
 import { motion } from 'motion/react';
@@ -11,6 +12,7 @@ interface FallbackProps {
 }
 
 const FallbackComponent = ({ error, eventId, resetError }: FallbackProps) => {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground p-6 selection:bg-primary/30 relative overflow-hidden">
       {/* Background Glow */}
@@ -37,11 +39,10 @@ const FallbackComponent = ({ error, eventId, resetError }: FallbackProps) => {
 
           <div className="space-y-2">
             <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent">
-              System Anomaly
+              {t('errorBoundary.title')}
             </h1>
             <p className="text-muted-foreground leading-relaxed">
-              We encountered an unexpected glitch in the matrix. Don't worry,
-              the incident has been logged.
+              {t('errorBoundary.description')}
             </p>
           </div>
 
@@ -59,7 +60,7 @@ const FallbackComponent = ({ error, eventId, resetError }: FallbackProps) => {
               className="flex items-center justify-center gap-2 w-full py-3.5 px-4 bg-primary text-primary-foreground font-medium rounded-xl hover:bg-primary/90 transition-all active:scale-[0.98] shadow-lg shadow-primary/20"
             >
               <RotateCcw className="w-4 h-4" />
-              Reboot Sequence
+              {t('errorBoundary.reboot')}
             </button>
             <button
               onClick={() =>
@@ -68,7 +69,7 @@ const FallbackComponent = ({ error, eventId, resetError }: FallbackProps) => {
               className="flex items-center justify-center gap-2 w-full py-3.5 px-4 bg-secondary/80 hover:bg-secondary text-secondary-foreground font-medium rounded-xl border border-border/50 transition-all active:scale-[0.98]"
             >
               <MessageSquareWarning className="w-4 h-4" />
-              Submit Diagnostic Report
+              {t('errorBoundary.submit')}
             </button>
           </div>
         </div>

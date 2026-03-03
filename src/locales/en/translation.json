@@ -199,5 +199,11 @@
     "hackPathTitle": "🚨 Backdoor attempt detected. Nice try, Agent 00-Not-Today.",
     "hackShortcutTitle": "🕵️ DevTools? Bold move. Welcome to the nerdiest trap card.",
     "hackDesc": "There is no hidden admin panel here, only clean code, coffee stains, and emotional damage from production deploys."
+  },
+  "errorBoundary": {
+    "title": "System Anomaly",
+    "description": "We encountered an unexpected glitch in the matrix. Don't worry, the incident has been logged.",
+    "reboot": "Reboot Sequence",
+    "submit": "Submit Diagnostic Report"
   }
 }

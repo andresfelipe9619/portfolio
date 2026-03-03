@@ -195,5 +195,11 @@
     "hackPathTitle": "🚨 Tentative de porte dérobée détectée. Bien essayé, Agent 00-Pas-Aujourd’hui.",
     "hackShortcutTitle": "🕵️ DevTools ? Audacieux. Bienvenue dans la carte piège la plus geek.",
     "hackDesc": "Aucun panneau admin caché ici : juste du code propre, des taches de café et des cicatrices émotionnelles de déploiements en prod."
+  },
+  "errorBoundary": {
+    "title": "Anomalie Système",
+    "description": "Nous avons rencontré un dysfonctionnement inattendu dans la matrice. Ne vous inquiétez pas, l'incident a été enregistré.",
+    "reboot": "Séquence de Redémarrage",
+    "submit": "Soumettre le Rapport de Diagnostic"
   }
 }
