@@ -4,7 +4,7 @@ description: Apply modern web development best practices for security, compatibi
 license: MIT
 metadata:
   author: web-quality-skills
-  version: "1.0"
+  version: '1.0'
 ---
 
 # Best practices
@@ -16,20 +16,22 @@ Modern web development standards based on Lighthouse best practices audits. Cove
 ### HTTPS everywhere
 
 **Enforce HTTPS:**
+
 ```html
 <!-- ❌ Mixed content -->
-<img src="http://example.com/image.jpg">
+<img src="http://example.com/image.jpg" />
 <script src="http://cdn.example.com/script.js"></script>
 
 <!-- ✅ HTTPS only -->
-<img src="https://example.com/image.jpg">
+<img src="https://example.com/image.jpg" />
 <script src="https://cdn.example.com/script.js"></script>
 
 <!-- ✅ Protocol-relative (will use page's protocol) -->
-<img src="//example.com/image.jpg">
+<img src="//example.com/image.jpg" />
 ```
 
 **HSTS Header:**
+
 ```
 Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 ```
@@ -38,19 +40,22 @@ Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 
 ```html
 <!-- Basic CSP via meta tag -->
-<meta http-equiv="Content-Security-Policy" 
-      content="default-src 'self'; 
+<meta
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self'; 
                script-src 'self' https://trusted-cdn.com; 
                style-src 'self' 'unsafe-inline';
                img-src 'self' data: https:;
-               connect-src 'self' https://api.example.com;">
+               connect-src 'self' https://api.example.com;"
+/>
 
 <!-- Better: HTTP header -->
 ```
 
 **CSP Header (recommended):**
+
 ```
-Content-Security-Policy: 
+Content-Security-Policy:
   default-src 'self';
   script-src 'self' 'nonce-abc123' https://trusted.com;
   style-src 'self' 'nonce-abc123';
@@ -62,6 +67,7 @@ Content-Security-Policy:
 ```
 
 **Using nonces for inline scripts:**
+
 ```html
 <script nonce="abc123">
   // This inline script is allowed
@@ -102,6 +108,7 @@ npm ls lodash
 ```
 
 **Keep dependencies updated:**
+
 ```json
 // package.json
 {
@@ -113,6 +120,7 @@ npm ls lodash
 ```
 
 **Known vulnerable patterns to avoid:**
+
 ```javascript
 // ❌ Prototype pollution vulnerable patterns
 Object.assign(target, userInput);
@@ -155,12 +163,13 @@ Set-Cookie: session=abc123; Secure; HttpOnly; SameSite=Strict; Path=/
 
 ```html
 <!-- ❌ Missing or invalid doctype -->
-<HTML>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 
-<!-- ✅ HTML5 doctype -->
-<!DOCTYPE html>
-<html lang="en">
+  <!-- ✅ HTML5 doctype -->
+  <!DOCTYPE html>
+  <html lang="en"></html>
+</html>
 ```
 
 ### Character encoding
@@ -168,17 +177,19 @@ Set-Cookie: session=abc123; Secure; HttpOnly; SameSite=Strict; Path=/
 ```html
 <!-- ❌ Missing or late charset -->
 <html>
-<head>
-  <title>Page</title>
-  <meta charset="UTF-8">
-</head>
+  <head>
+    <title>Page</title>
+    <meta charset="UTF-8" />
+  </head>
 
-<!-- ✅ Charset as first element in head -->
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Page</title>
-</head>
+  <!-- ✅ Charset as first element in head -->
+  <html>
+    <head>
+      <meta charset="UTF-8" />
+      <title>Page</title>
+    </head>
+  </html>
+</html>
 ```
 
 ### Viewport meta tag
@@ -191,8 +202,8 @@ Set-Cookie: session=abc123; Secure; HttpOnly; SameSite=Strict; Path=/
 
 <!-- ✅ Responsive viewport -->
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Page</title>
 </head>
 ```
@@ -313,15 +324,15 @@ try {
 ```jsx
 class ErrorBoundary extends React.Component {
   state = { hasError: false };
-  
+
   static getDerivedStateFromError(error) {
     return { hasError: true };
   }
-  
+
   componentDidCatch(error, info) {
     errorTracker.captureException(error, { extra: info });
   }
-  
+
   render() {
     if (this.state.hasError) {
       return <FallbackUI />;
@@ -333,7 +344,7 @@ class ErrorBoundary extends React.Component {
 // Usage
 <ErrorBoundary>
   <App />
-</ErrorBoundary>
+</ErrorBoundary>;
 ```
 
 ### Global error handler
@@ -399,7 +410,7 @@ module.exports = {
 
 ```javascript
 // ❌ Handler on every element
-items.forEach(item => {
+items.forEach((item) => {
   item.addEventListener('click', handleClick);
 });
 
@@ -415,11 +426,15 @@ container.addEventListener('click', (e) => {
 
 ```javascript
 // ❌ Memory leak (never removed)
-const handler = () => { /* ... */ };
+const handler = () => {
+  /* ... */
+};
 window.addEventListener('resize', handler);
 
 // ✅ Cleanup when done
-const handler = () => { /* ... */ };
+const handler = () => {
+  /* ... */
+};
 window.addEventListener('resize', handler);
 
 // Later, when component unmounts:
@@ -442,23 +457,27 @@ controller.abort();
 ```html
 <!-- ❌ Invalid HTML -->
 <div id="header">
-<div id="header"> <!-- Duplicate ID -->
+  <div id="header">
+    <!-- Duplicate ID -->
 
-<ul>
-  <div>Item</div> <!-- Invalid child -->
-</ul>
+    <ul>
+      <div>Item</div>
+      <!-- Invalid child -->
+    </ul>
 
-<a href="/"><button>Click</button></a> <!-- Invalid nesting -->
+    <a href="/"><button>Click</button></a>
+    <!-- Invalid nesting -->
 
-<!-- ✅ Valid HTML -->
-<header id="site-header">
-</header>
+    <!-- ✅ Valid HTML -->
+    <header id="site-header"></header>
 
-<ul>
-  <li>Item</li>
-</ul>
+    <ul>
+      <li>Item</li>
+    </ul>
 
-<a href="/" class="button">Click</a>
+    <a href="/" class="button">Click</a>
+  </div>
+</div>
 ```
 
 ### Semantic HTML
@@ -493,15 +512,15 @@ controller.abort();
 
 ```html
 <!-- ❌ Distorted images -->
-<img src="photo.jpg" width="300" height="100">
+<img src="photo.jpg" width="300" height="100" />
 <!-- If actual ratio is 4:3, this squishes the image -->
 
 <!-- ✅ Preserve aspect ratio -->
-<img src="photo.jpg" width="300" height="225">
+<img src="photo.jpg" width="300" height="225" />
 <!-- Actual 4:3 dimensions -->
 
 <!-- ✅ CSS object-fit for flexibility -->
-<img src="photo.jpg" style="width: 300px; height: 200px; object-fit: cover;">
+<img src="photo.jpg" style="width: 300px; height: 200px; object-fit: cover;" />
 ```
 
 ---
@@ -527,12 +546,16 @@ findNearbyButton.addEventListener('click', async () => {
 
 ```html
 <!-- Restrict powerful features -->
-<meta http-equiv="Permissions-Policy" 
-      content="geolocation=(), camera=(), microphone=()">
+<meta
+  http-equiv="Permissions-Policy"
+  content="geolocation=(), camera=(), microphone=()"
+/>
 
 <!-- Or allow for specific origins -->
-<meta http-equiv="Permissions-Policy" 
-      content="geolocation=(self 'https://maps.example.com')">
+<meta
+  http-equiv="Permissions-Policy"
+  content="geolocation=(self 'https://maps.example.com')"
+/>
 ```
 
 ---
@@ -540,6 +563,7 @@ findNearbyButton.addEventListener('click', async () => {
 ## Audit checklist
 
 ### Security (critical)
+
 - [ ] HTTPS enabled, no mixed content
 - [ ] No vulnerable dependencies (`npm audit`)
 - [ ] CSP headers configured
@@ -547,6 +571,7 @@ findNearbyButton.addEventListener('click', async () => {
 - [ ] No exposed source maps
 
 ### Compatibility
+
 - [ ] Valid HTML5 doctype
 - [ ] Charset declared first in head
 - [ ] Viewport meta tag present
@@ -554,6 +579,7 @@ findNearbyButton.addEventListener('click', async () => {
 - [ ] Passive event listeners for scroll/touch
 
 ### Code quality
+
 - [ ] No console errors
 - [ ] Valid HTML (no duplicate IDs)
 - [ ] Semantic HTML elements used
@@ -561,6 +587,7 @@ findNearbyButton.addEventListener('click', async () => {
 - [ ] Memory cleanup in components
 
 ### UX
+
 - [ ] No intrusive interstitials
 - [ ] Permission requests in context
 - [ ] Clear error messages
@@ -568,13 +595,13 @@ findNearbyButton.addEventListener('click', async () => {
 
 ## Tools
 
-| Tool | Purpose |
-|------|---------|
-| `npm audit` | Dependency vulnerabilities |
-| [SecurityHeaders.com](https://securityheaders.com) | Header analysis |
-| [W3C Validator](https://validator.w3.org) | HTML validation |
-| Lighthouse | Best practices audit |
-| [Observatory](https://observatory.mozilla.org) | Security scan |
+| Tool                                               | Purpose                    |
+| -------------------------------------------------- | -------------------------- |
+| `npm audit`                                        | Dependency vulnerabilities |
+| [SecurityHeaders.com](https://securityheaders.com) | Header analysis            |
+| [W3C Validator](https://validator.w3.org)          | HTML validation            |
+| Lighthouse                                         | Best practices audit       |
+| [Observatory](https://observatory.mozilla.org)     | Security scan              |
 
 ## References
 

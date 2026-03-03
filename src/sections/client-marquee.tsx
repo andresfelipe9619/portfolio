@@ -62,6 +62,10 @@ function ClientLogoItem({ client }: { client: (typeof clients)[0] }) {
     <img
       src={client.src}
       alt={client.name}
+      width={128}
+      height={48}
+      loading="lazy"
+      decoding="async"
       className="max-h-12 w-auto object-contain"
       onError={() => setError(true)}
     />

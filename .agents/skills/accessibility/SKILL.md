@@ -4,7 +4,7 @@ description: Audit and improve web accessibility following WCAG 2.1 guidelines. 
 license: MIT
 metadata:
   author: web-quality-skills
-  version: "1.0"
+  version: '1.0'
 ---
 
 # Accessibility (a11y)
@@ -13,20 +13,20 @@ Comprehensive accessibility guidelines based on WCAG 2.1 and Lighthouse accessib
 
 ## WCAG Principles: POUR
 
-| Principle | Description |
-|-----------|-------------|
-| **P**erceivable | Content can be perceived through different senses |
-| **O**perable | Interface can be operated by all users |
-| **U**nderstandable | Content and interface are understandable |
-| **R**obust | Content works with assistive technologies |
+| Principle          | Description                                       |
+| ------------------ | ------------------------------------------------- |
+| **P**erceivable    | Content can be perceived through different senses |
+| **O**perable       | Interface can be operated by all users            |
+| **U**nderstandable | Content and interface are understandable          |
+| **R**obust         | Content works with assistive technologies         |
 
 ## Conformance levels
 
-| Level | Requirement | Target |
-|-------|-------------|--------|
-| **A** | Minimum accessibility | Must pass |
-| **AA** | Standard compliance | Should pass (legal requirement in many jurisdictions) |
-| **AAA** | Enhanced accessibility | Nice to have |
+| Level   | Requirement            | Target                                                |
+| ------- | ---------------------- | ----------------------------------------------------- |
+| **A**   | Minimum accessibility  | Must pass                                             |
+| **AA**  | Standard compliance    | Should pass (legal requirement in many jurisdictions) |
+| **AAA** | Enhanced accessibility | Nice to have                                          |
 
 ---
 
@@ -35,20 +35,24 @@ Comprehensive accessibility guidelines based on WCAG 2.1 and Lighthouse accessib
 ### Text alternatives (1.1)
 
 **Images require alt text:**
+
 ```html
 <!-- ❌ Missing alt -->
-<img src="chart.png">
+<img src="chart.png" />
 
 <!-- ✅ Descriptive alt -->
-<img src="chart.png" alt="Bar chart showing 40% increase in Q3 sales">
+<img src="chart.png" alt="Bar chart showing 40% increase in Q3 sales" />
 
 <!-- ✅ Decorative image (empty alt) -->
-<img src="decorative-border.png" alt="" role="presentation">
+<img src="decorative-border.png" alt="" role="presentation" />
 
 <!-- ✅ Complex image with longer description -->
 <figure>
-  <img src="infographic.png" alt="2024 market trends infographic" 
-       aria-describedby="infographic-desc">
+  <img
+    src="infographic.png"
+    alt="2024 market trends infographic"
+    aria-describedby="infographic-desc"
+  />
   <figcaption id="infographic-desc">
     <!-- Detailed description -->
   </figcaption>
@@ -56,9 +60,12 @@ Comprehensive accessibility guidelines based on WCAG 2.1 and Lighthouse accessib
 ```
 
 **Icon buttons need accessible names:**
+
 ```html
 <!-- ❌ No accessible name -->
-<button><svg><!-- menu icon --></svg></button>
+<button>
+  <svg><!-- menu icon --></svg>
+</button>
 
 <!-- ✅ Using aria-label -->
 <button aria-label="Open menu">
@@ -73,6 +80,7 @@ Comprehensive accessibility guidelines based on WCAG 2.1 and Lighthouse accessib
 ```
 
 **Visually hidden class:**
+
 ```css
 .visually-hidden {
   position: absolute;
@@ -89,11 +97,11 @@ Comprehensive accessibility guidelines based on WCAG 2.1 and Lighthouse accessib
 
 ### Color contrast (1.4.3, 1.4.6)
 
-| Text Size | AA minimum | AAA enhanced |
-|-----------|------------|--------------|
-| Normal text (< 18px / < 14px bold) | 4.5:1 | 7:1 |
-| Large text (≥ 18px / ≥ 14px bold) | 3:1 | 4.5:1 |
-| UI components & graphics | 3:1 | 3:1 |
+| Text Size                          | AA minimum | AAA enhanced |
+| ---------------------------------- | ---------- | ------------ |
+| Normal text (< 18px / < 14px bold) | 4.5:1      | 7:1          |
+| Large text (≥ 18px / ≥ 14px bold)  | 3:1        | 4.5:1        |
+| UI components & graphics           | 3:1        | 3:1          |
 
 ```css
 /* ❌ Low contrast (2.5:1) */
@@ -116,14 +124,19 @@ Comprehensive accessibility guidelines based on WCAG 2.1 and Lighthouse accessib
 ```
 
 **Don't rely on color alone:**
+
 ```html
 <!-- ❌ Only color indicates error -->
-<input class="error-border">
-<style>.error-border { border-color: red; }</style>
+<input class="error-border" />
+<style>
+  .error-border {
+    border-color: red;
+  }
+</style>
 
 <!-- ✅ Color + icon + text -->
 <div class="field-error">
-  <input aria-invalid="true" aria-describedby="email-error">
+  <input aria-invalid="true" aria-describedby="email-error" />
   <span id="email-error" class="error-message">
     <svg aria-hidden="true"><!-- error icon --></svg>
     Please enter a valid email address
@@ -136,14 +149,25 @@ Comprehensive accessibility guidelines based on WCAG 2.1 and Lighthouse accessib
 ```html
 <!-- Video with captions -->
 <video controls>
-  <source src="video.mp4" type="video/mp4">
-  <track kind="captions" src="captions.vtt" srclang="en" label="English" default>
-  <track kind="descriptions" src="descriptions.vtt" srclang="en" label="Descriptions">
+  <source src="video.mp4" type="video/mp4" />
+  <track
+    kind="captions"
+    src="captions.vtt"
+    srclang="en"
+    label="English"
+    default
+  />
+  <track
+    kind="descriptions"
+    src="descriptions.vtt"
+    srclang="en"
+    label="Descriptions"
+  />
 </video>
 
 <!-- Audio with transcript -->
 <audio controls>
-  <source src="podcast.mp3" type="audio/mp3">
+  <source src="podcast.mp3" type="audio/mp3" />
 </audio>
 <details>
   <summary>Transcript</summary>
@@ -158,6 +182,7 @@ Comprehensive accessibility guidelines based on WCAG 2.1 and Lighthouse accessib
 ### Keyboard accessible (2.1)
 
 **All functionality must be keyboard accessible:**
+
 ```javascript
 // ❌ Only handles click
 element.addEventListener('click', handleAction);
@@ -173,15 +198,16 @@ element.addEventListener('keydown', (e) => {
 ```
 
 **No keyboard traps:**
+
 ```javascript
 // Modal focus management
 function openModal(modal) {
   const focusableElements = modal.querySelectorAll(
-    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
   );
   const firstElement = focusableElements[0];
   const lastElement = focusableElements[focusableElements.length - 1];
-  
+
   // Trap focus within modal
   modal.addEventListener('keydown', (e) => {
     if (e.key === 'Tab') {
@@ -197,7 +223,7 @@ function openModal(modal) {
       closeModal();
     }
   });
-  
+
   firstElement.focus();
 }
 ```
@@ -206,7 +232,9 @@ function openModal(modal) {
 
 ```css
 /* ❌ Never remove focus outlines */
-*:focus { outline: none; }
+*:focus {
+  outline: none;
+}
 
 /* ✅ Use :focus-visible for keyboard-only focus */
 :focus {
@@ -262,9 +290,9 @@ function showSessionWarning() {
     content: 'Your session will expire in 2 minutes.',
     actions: [
       { label: 'Extend session', action: extendSession },
-      { label: 'Log out', action: logout }
+      { label: 'Log out', action: logout },
     ],
-    timeout: 120000 // 2 minutes to respond
+    timeout: 120000, // 2 minutes to respond
   });
 }
 ```
@@ -294,12 +322,12 @@ function showSessionWarning() {
 ```html
 <!-- ❌ No language specified -->
 <html>
-
-<!-- ✅ Language specified -->
-<html lang="en">
-
-<!-- ✅ Language changes within page -->
-<p>The French word for hello is <span lang="fr">bonjour</span>.</p>
+  <!-- ✅ Language specified -->
+  <html lang="en">
+    <!-- ✅ Language changes within page -->
+    <p>The French word for hello is <span lang="fr">bonjour</span>.</p>
+  </html>
+</html>
 ```
 
 ### Consistent navigation (3.2.3)
@@ -319,26 +347,22 @@ function showSessionWarning() {
 
 ```html
 <!-- ❌ No label association -->
-<input type="email" placeholder="Email">
+<input type="email" placeholder="Email" />
 
 <!-- ✅ Explicit label -->
 <label for="email">Email address</label>
-<input type="email" id="email" name="email" 
-       autocomplete="email" required>
+<input type="email" id="email" name="email" autocomplete="email" required />
 
 <!-- ✅ Implicit label -->
 <label>
   Email address
-  <input type="email" name="email" autocomplete="email" required>
+  <input type="email" name="email" autocomplete="email" required />
 </label>
 
 <!-- ✅ With instructions -->
 <label for="password">Password</label>
-<input type="password" id="password" 
-       aria-describedby="password-requirements">
-<p id="password-requirements">
-  Must be at least 8 characters with one number.
-</p>
+<input type="password" id="password" aria-describedby="password-requirements" />
+<p id="password-requirements">Must be at least 8 characters with one number.</p>
 ```
 
 ### Error handling (3.3.1, 3.3.3)
@@ -348,9 +372,12 @@ function showSessionWarning() {
 <form novalidate>
   <div class="field" aria-live="polite">
     <label for="email">Email</label>
-    <input type="email" id="email" 
-           aria-invalid="true"
-           aria-describedby="email-error">
+    <input
+      type="email"
+      id="email"
+      aria-invalid="true"
+      aria-describedby="email-error"
+    />
     <p id="email-error" class="error" role="alert">
       Please enter a valid email address (e.g., name@example.com)
     </p>
@@ -365,7 +392,7 @@ form.addEventListener('submit', (e) => {
   if (firstError) {
     e.preventDefault();
     firstError.focus();
-    
+
     // Announce error summary
     const errorSummary = document.getElementById('error-summary');
     errorSummary.textContent = `${errors.length} errors found. Please fix them and try again.`;
@@ -399,6 +426,7 @@ form.addEventListener('submit', (e) => {
 ### ARIA usage (4.1.2)
 
 **Prefer native elements:**
+
 ```html
 <!-- ❌ ARIA role on div -->
 <div role="button" tabindex="0">Click me</div>
@@ -410,17 +438,26 @@ form.addEventListener('submit', (e) => {
 <div role="checkbox" aria-checked="false">Option</div>
 
 <!-- ✅ Native checkbox -->
-<label><input type="checkbox"> Option</label>
+<label><input type="checkbox" /> Option</label>
 ```
 
 **When ARIA is needed:**
+
 ```html
 <!-- Custom tabs component -->
 <div role="tablist" aria-label="Product information">
-  <button role="tab" id="tab-1" aria-selected="true" 
-          aria-controls="panel-1">Description</button>
-  <button role="tab" id="tab-2" aria-selected="false" 
-          aria-controls="panel-2" tabindex="-1">Reviews</button>
+  <button role="tab" id="tab-1" aria-selected="true" aria-controls="panel-1">
+    Description
+  </button>
+  <button
+    role="tab"
+    id="tab-2"
+    aria-selected="false"
+    aria-controls="panel-2"
+    tabindex="-1"
+  >
+    Reviews
+  </button>
 </div>
 <div role="tabpanel" id="panel-1" aria-labelledby="tab-1">
   <!-- Panel content -->
@@ -460,6 +497,7 @@ function showNotification(message, type = 'polite') {
 ## Testing checklist
 
 ### Automated testing
+
 ```bash
 # Lighthouse accessibility audit
 npx lighthouse https://example.com --only-categories=accessibility
@@ -480,20 +518,21 @@ axe https://example.com
 
 ### Screen reader commands
 
-| Action | VoiceOver (Mac) | NVDA (Windows) |
-|--------|-----------------|----------------|
-| Start/Stop | ⌘ + F5 | Ctrl + Alt + N |
-| Next item | VO + → | ↓ |
-| Previous item | VO + ← | ↑ |
-| Activate | VO + Space | Enter |
-| Headings list | VO + U, then arrows | H / Shift + H |
-| Links list | VO + U | K / Shift + K |
+| Action        | VoiceOver (Mac)     | NVDA (Windows) |
+| ------------- | ------------------- | -------------- |
+| Start/Stop    | ⌘ + F5              | Ctrl + Alt + N |
+| Next item     | VO + →              | ↓              |
+| Previous item | VO + ←              | ↑              |
+| Activate      | VO + Space          | Enter          |
+| Headings list | VO + U, then arrows | H / Shift + H  |
+| Links list    | VO + U              | K / Shift + K  |
 
 ---
 
 ## Common issues by impact
 
 ### Critical (fix immediately)
+
 1. Missing form labels
 2. Missing image alt text
 3. Insufficient color contrast
@@ -501,6 +540,7 @@ axe https://example.com
 5. No focus indicators
 
 ### Serious (fix before launch)
+
 1. Missing page language
 2. Missing heading structure
 3. Non-descriptive link text
@@ -508,6 +548,7 @@ axe https://example.com
 5. Missing skip links
 
 ### Moderate (fix soon)
+
 1. Missing ARIA labels on icons
 2. Inconsistent navigation
 3. Missing error identification
