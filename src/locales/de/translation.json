@@ -195,5 +195,11 @@
     "hackPathTitle": "🚨 Backdoor-Versuch erkannt. Netter Versuch, Agent 00-Nicht-Heute.",
     "hackShortcutTitle": "🕵️ DevTools? Mutiger Move. Willkommen in der nerdigsten Fallenkarte.",
     "hackDesc": "Hier gibt es kein geheimes Admin-Panel – nur sauberen Code, Kaffeeflecken und emotionale Deploy-Schäden aus der Produktion."
+  },
+  "errorBoundary": {
+    "title": "Systemanomalie",
+    "description": "Wir sind auf einen unerwarteten Fehler in der Matrix gestoßen. Keine Sorge, der Vorfall wurde protokolliert.",
+    "reboot": "Neustart-Sequenz",
+    "submit": "Diagnosebericht Senden"
   }
 }
