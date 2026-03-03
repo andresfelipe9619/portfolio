@@ -140,6 +140,8 @@ export function OssCard({
                     <img
                       src={details.coverUrl}
                       alt=""
+                      loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover opacity-90"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
