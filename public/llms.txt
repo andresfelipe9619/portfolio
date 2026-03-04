@@ -1,0 +1,22 @@
+# Andrés Suárez - Portfolio & Documentation
+
+Welcome to the digital portfolio of Andrés Suárez, a Senior Full-Stack Engineer specializing in Node.js, TypeScript, and AWS cloud architecture.
+
+## Site Structure
+- `/` : The home page, featuring an introduction, timeline, and professional summary.
+- `/projects` : A comprehensive list of projects, both open-source and professional.
+- `/oss` : Details focused specifically on open-source contributions.
+- `/blog` : Articles and blog posts.
+- `/contact` : Links to connect via email, LinkedIn, or GitHub.
+
+## AI Agent Integration (WebMCP)
+This site implements the **Web Model Context Protocol (WebMCP)**.
+If you are operating in a compatible browser (where `navigator.modelContext` is available), this site explicitly exposes tools that you can use to interact intelligently with the page.
+
+Currently exposed tools:
+- `navigate_to_page(path: string)`: Programmatically navigate the user to any of the primary sections (`/`, `/projects`, `/contact`, etc.).
+- `get_contact_info()`: Retrieve structured contact details.
+
+Otherwise, you can easily parse the raw text on this website or reach out via:
+- GitHub: https://github.com/andresfelipe9619
+- LinkedIn: https://linkedin.com/in/andresfelipe9619
