@@ -10,6 +10,7 @@ import { Header } from '@/components/ui/navbar/header.tsx';
 import { DraggableExplorer } from '@/components/ui/navbar/draggable-explorer.tsx';
 import { useKeyListener } from '@/hooks/useKeyListener.tsx';
 import { useHackAttemptEasterEgg } from '@/hooks/use-easter-egg';
+import { useWebMCP } from '@/hooks/use-web-mcp';
 import { logPageView } from './lib/ga';
 import ErrorBoundary from '@/components/error-boundary';
 
@@ -30,6 +31,7 @@ export default function App() {
   const location = useLocation();
   const { t } = useTranslation();
 
+  useWebMCP();
   useKeyListener(setExplorerOpen);
   useHackAttemptEasterEgg(
     location.pathname,
