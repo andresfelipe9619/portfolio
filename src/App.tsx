@@ -20,6 +20,7 @@ const Contact = lazy(() => import('./pages/Contact'));
 const Projects = lazy(() => import('./pages/Projects'));
 const Blog = lazy(() => import('./pages/Blog'));
 const CaseStudy = lazy(() => import('./pages/CaseStudy'));
+const TestError = lazy(() => import('./pages/TestError'));
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(
@@ -70,6 +71,7 @@ export default function App() {
                   <Route path="/projects" element={<Projects />} />
                   <Route path="/blog" element={<Blog />} />
                   <Route path="/case-studies/:id" element={<CaseStudy />} />
+                  <Route path="/test-error" element={<TestError />} />
                 </Routes>
               </Suspense>
             </ErrorBoundary>
