@@ -18,14 +18,73 @@ A modern, performant, and highly interactive web application built with a curate
 
 ---
 
-## ✨ Features & Architecture
+## ✨ Feature Inventory (What the app can actually do)
 
-- **Lightning Fast**: Powered by **React 19** and **Vite** for instantaneous builds and blazing fast performance.
-- **Type-Safe**: Extensively typed with **TypeScript 5.8**.
-- **Global & Localized**: Fully integrated **i18next** internationalization supporting English, Spanish, French, and German out of the box with browser persistence.
-- **Stunning UI**: Utility-first styling with **Tailwind CSS 4** and accessible, beautifully crafted components from **shadcn/ui**.
-- **Magical Animations**: Physics-based animations via **Framer Motion**, dazzling interactive components from **Magic UI** (like Terminal, Globe, Particles), hand-drawn aesthetics with `rough-notation`, and celebratory `canvas-confetti`.
-- **Robust Telemetry**: Integrated with **Sentry** for error tracking and **Google Analytics 4** / **Vercel Analytics** for insights.
+### Core experience
+
+- **Hero with smart intro behavior**: Plays the animated hero sequence once, then skips it on future visits in the same session using `sessionStorage`.
+- **Optional cinematic loading terminal**: Shows a fake-but-delightful boot sequence (network, TLS, i18n, render metrics, geo lookup) with a skip button, controlled by `VITE_LOADING_SCREEN_ENABLED`.
+- **Fast route transitions**: Page-level code splitting with React `lazy` + `Suspense` for better initial load and smoother route hops.
+- **Draggable “file explorer” overlay**: A movable and resizable mini explorer panel that can be toggled from the header.
+- **Keyboard shortcut support**: `Cmd/Ctrl + E` opens/closes the explorer.
+
+### Internationalization & localization
+
+- **Fully localized UI** via `react-i18next` + `i18next`.
+- **4 languages out of the box**: English, Spanish, French, German.
+- **Language auto-detection + persistence**: Detects language from querystring/cookies/localStorage/browser and caches selection in cookie + localStorage.
+- **Animated language selector with audio cues** per language.
+
+### Easter eggs & playful interactions
+
+- **Time-based easter eggs**: Shows toasts when users “linger” on pages like `/projects` and `/oss`.
+- **Suspicious-path easter egg**: Visiting paths like `/admin`, `/.env`, `/wp-admin`, etc. triggers a funny security toast.
+- **DevTools-shortcut easter egg**: Detects F12 and common inspect shortcuts and responds with a playful toast.
+- **Completion easter egg for language nerds**: Selecting all supported languages in one session unlocks a hidden toast.
+- **Joke modal trigger** from the hero “Explore Universe” CTA.
+- **“Virus scan” resume flow**: Fake scan dialog before download, with progress + comic “threat names.”
+- **Confetti-powered navigation**: “Let’s Talk” interaction fires confetti and then redirects to contact.
+
+### AI & MCP compatibility
+
+- **WebMCP support** when `navigator.modelContext` is available.
+- **Registered MCP tools in-browser**:
+  - `navigate_to_page(path)`
+  - `get_contact_info()`
+- **LLM discoverability document** at `public/llms.txt` describing routes and available model tools.
+
+### SEO, discoverability, and social metadata
+
+- **Rich base metadata** in `index.html`: title, description, keywords, author, canonical, Open Graph, and Twitter card tags.
+- **Structured data (JSON-LD)** using `schema.org/Person`.
+- **Sitemap + robots** in `public/sitemap.xml` and `public/robots.txt`.
+- **Route-specific head management** via `react-helmet-async` (including `noindex` for blog route).
+- **PWA-style manifest wiring** through `manifest.json`.
+
+### Analytics, observability, and error handling
+
+- **Google Analytics 4** initialization + pageview/event tracking helpers.
+- **Vercel Analytics** integration.
+- **Microsoft Clarity** script included for behavioral analytics.
+- **Sentry instrumentation** with router tracing + session replay.
+- **Global React error hooks** wired into root `createRoot` (`onUncaughtError`, `onCaughtError`, `onRecoverableError`).
+- **Custom Sentry Error Boundary UI** with user-triggered report dialog fallback.
+- **Dedicated Sentry test route** (`/test-error`) to validate crash reporting.
+
+### Content & interaction modules
+
+- **Timeline-driven project/case-study system** using structured data + flattening logic.
+- **Project detail modal** opened from testimonial interactions.
+- **Open Source section** grouped by category with animated cards.
+- **Contact form flow** with async submit, status feedback, and analytics events.
+- **Reusable “magic” visual system** (particles, globe, blur fades, typing animation, highlights, dock UI, etc.).
+- **Theme system** with persisted preference (`light` / `dark` / `system`).
+
+### Quality and performance guardrails
+
+- **Type-safe codebase** with TypeScript.
+- **Linting and tests** via ESLint + Vitest + Testing Library.
+- **Bundle size limits** with `size-limit` thresholds for JS and CSS output.
 
 For a deep dive into the underlying systems, check out [ARCHITECTURE.md](ARCHITECTURE.md).
 
