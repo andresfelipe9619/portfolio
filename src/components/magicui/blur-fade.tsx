@@ -4,6 +4,7 @@ import {
   AnimatePresence,
   motion,
   useInView,
+  type UseInViewOptions,
   type Variants,
 } from 'framer-motion';
 import { useRef } from 'react';
@@ -36,7 +37,7 @@ const BlurFade = ({
   const ref = useRef(null);
   const inViewResult = useInView(ref, {
     once: true,
-    margin: inViewMargin as any,
+    margin: inViewMargin as UseInViewOptions['margin'],
   });
   const isInView = !inView || inViewResult;
   const defaultVariants: Variants = {

@@ -4,10 +4,15 @@ import * as Sentry from '@sentry/react';
 import { AlertCircle, RotateCcw, MessageSquareWarning } from 'lucide-react';
 import { motion } from 'motion/react';
 
+/**
+ * Sentry hands the fallback an `unknown` error (anything can be thrown in JS,
+ * including strings and, memorably, `undefined`), so we take it as unknown and
+ * narrow before showing it.
+ */
 interface FallbackProps {
-  error: Error;
-  componentStack: string | null;
-  eventId: string | null;
+  error: unknown;
+  componentStack: string;
+  eventId: string;
   resetError: () => void;
 }
 
@@ -46,10 +51,10 @@ const FallbackComponent = ({ error, eventId, resetError }: FallbackProps) => {
             </p>
           </div>
 
-          {import.meta.env.DEV && error && (
+          {import.meta.env.DEV && error != null && (
             <div className="w-full text-left bg-black/40 border border-destructive/20 p-4 rounded-xl overflow-x-auto shadow-inner">
               <p className="text-xs font-mono text-destructive/90 select-all">
-                {error.toString()}
+                {error instanceof Error ? error.message : String(error)}
               </p>
             </div>
           )}

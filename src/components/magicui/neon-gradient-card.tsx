@@ -16,7 +16,9 @@ interface NeonColorsProps {
   secondColor: string;
 }
 
-interface NeonGradientCardProps {
+// Extending HTMLAttributes gives us properly-typed passthrough props instead of
+// the `[key: string]: any` escape hatch that used to live at the bottom.
+interface NeonGradientCardProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * @default <div />
    * @type ReactElement
@@ -63,8 +65,6 @@ interface NeonGradientCardProps {
    * The colors of the neon gradient
    * */
   neonColors?: NeonColorsProps;
-
-  [key: string]: any;
 }
 
 export const NeonGradientCard: React.FC<NeonGradientCardProps> = ({

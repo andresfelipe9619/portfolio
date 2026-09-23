@@ -17,20 +17,21 @@ const languages = [
   { code: 'de', label: 'Deutsch', icon: '🍺', soundFile: '/sounds/de.m4a' },
 ];
 
+/** Only one language jingle gets to play at a time. */
+let currentMemeAudio: HTMLAudioElement | null = null;
+
 const playMemeSound = (soundFile: string) => {
   try {
-    const w = typeof window !== 'undefined' ? (window as any) : null;
-    if (w && w.__currentMemeAudio) {
-      w.__currentMemeAudio.pause();
-      w.__currentMemeAudio.currentTime = 0;
+    if (typeof window === 'undefined') return;
+    if (currentMemeAudio) {
+      currentMemeAudio.pause();
+      currentMemeAudio.currentTime = 0;
     }
-    if (w) {
-      w.__currentMemeAudio = new Audio(soundFile);
-      w.__currentMemeAudio.volume = 0.5;
-      w.__currentMemeAudio.play().catch((e: any) => {
-        console.warn('Audio playback was blocked or file not found:', e);
-      });
-    }
+    currentMemeAudio = new Audio(soundFile);
+    currentMemeAudio.volume = 0.5;
+    currentMemeAudio.play().catch((e: unknown) => {
+      console.warn('Audio playback was blocked or file not found:', e);
+    });
   } catch {
     // Ignore audio errors
   }

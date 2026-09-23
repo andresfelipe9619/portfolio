@@ -18,7 +18,7 @@ import { RainbowButton } from '@/components/magicui/rainbow-button.tsx';
 import { AuroraText } from '@/components/magicui/aurora-text';
 import ReactGA from 'react-ga4';
 import { useNavigate } from 'react-router-dom';
-import { TESTIMONIALS, TIMELINE_DATA } from '@/data/timeline';
+import { TESTIMONIALS, TIMELINE_DATA, type Testimonial } from '@/data/timeline';
 import { flattenTimeline, type FlattenedItem } from '@/lib/timeline';
 import { Marquee } from '@/components/magicui/marquee';
 import { useTranslation } from 'react-i18next';
@@ -100,7 +100,7 @@ export default function Home() {
       clearTimeout(timer);
       setCompleted(skipAnimation);
     };
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -159,7 +159,7 @@ export default function Home() {
     });
   }
 
-  const handleTestimonialClick = (testimonial) => {
+  const handleTestimonialClick = (testimonial: Testimonial) => {
     const project = items.find(
       (item) => item.testimonial === testimonial.quote,
     );

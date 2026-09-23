@@ -11,10 +11,20 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import ReactGA from 'react-ga4';
 
-const FunnyVirusScanDialog = ({ open, onOpenChange }) => {
-  const [step, setStep] = useState('warning');
+interface FunnyVirusScanDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}
+
+type ScanStep = 'warning' | 'scanning' | 'finished';
+
+const FunnyVirusScanDialog = ({
+  open,
+  onOpenChange,
+}: FunnyVirusScanDialogProps) => {
+  const [step, setStep] = useState<ScanStep>('warning');
   const [progress, setProgress] = useState(0);
-  const [viruses, setViruses] = useState([]);
+  const [viruses, setViruses] = useState<string[]>([]);
 
   const virusNames = [
     'Over-Engineered_Perfectionism.dll',
@@ -49,7 +59,7 @@ const FunnyVirusScanDialog = ({ open, onOpenChange }) => {
       }, 500);
       return () => clearInterval(interval);
     }
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step, viruses.length]);
 
   const handleDownload = () => {

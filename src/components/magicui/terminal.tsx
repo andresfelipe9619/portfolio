@@ -56,8 +56,8 @@ export const AnimatedSpan = ({
       setHasStarted(true);
     }
   }, [
-    sequence.activeIndex,
-    sequence.sequenceStarted,
+    sequence?.activeIndex,
+    sequence?.sequenceStarted,
     hasStarted,
     itemIndex,
     sequence,
@@ -149,8 +149,8 @@ export const TypingAnimation = ({
     startOnView,
     isInView,
     started,
-    sequence.activeIndex,
-    sequence.sequenceStarted,
+    sequence?.activeIndex,
+    sequence?.sequenceStarted,
     itemIndex,
     sequence,
   ]);
@@ -174,7 +174,7 @@ export const TypingAnimation = ({
     return () => {
       clearInterval(typingEffect);
     };
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [children, duration, started]);
 
   return (
