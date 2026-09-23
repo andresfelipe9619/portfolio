@@ -1,5 +1,10 @@
 # Portfolio Review & Level-Up Plan
 
+> **Status: all four phases implemented.** This document is kept as the record
+> of what was found and why it mattered. Every finding below has been fixed on
+> this branch unless explicitly marked otherwise — see
+> [What changed](#9-what-changed) at the bottom for the before/after.
+
 **Date:** 2026-09-22
 **Commit reviewed:** `6250cbd` (master)
 **Scope:** professionalism, security & privacy, testing, and the engineering signals a
@@ -664,3 +669,68 @@ A PR is mergeable when all of the following are green in CI:
 
 _Findings verified against `6250cbd` by running the project's own toolchain. Every file
 and line reference above was read, and every measurement executed, at review time._
+
+---
+
+## 9. What changed
+
+Measured on the same commands as the baseline in §1, after all four phases.
+
+| Metric                          | Before                  | After                                                                          |
+| ------------------------------- | ----------------------- | ------------------------------------------------------------------------------ |
+| TypeScript `strict`             | `false`                 | `true`, zero errors                                                            |
+| `noImplicitAny`                 | `false`                 | `true`                                                                         |
+| ESLint warnings                 | 0 errors, `any` allowed | 0 errors, 0 warnings                                                           |
+| Unit tests                      | 8                       | 136                                                                            |
+| End-to-end tests                | 0                       | 36 (desktop + mobile)                                                          |
+| Coverage (all)                  | 21.15%                  | 32.83%, threshold-enforced                                                     |
+| Coverage (first-party)          | not measured            | ~51%                                                                           |
+| Coverage denominator            | pages + components      | + hooks + lib                                                                  |
+| Main JS chunk                   | 952.78 kB               | 468.61 kB                                                                      |
+| Main JS chunk (gzip)            | 313.60 kB               | 152.99 kB                                                                      |
+| Critical path (brotli)          | 326 kB combined         | 146 kB, budgeted at 160                                                        |
+| Source maps served              | 4.7 MB, public          | none                                                                           |
+| Security headers                | 0                       | 7 + Report-Only CSP                                                            |
+| Production vulnerabilities      | 2 high                  | 0                                                                              |
+| CI gates on a PR                | lint, test              | format, lint, typecheck, coverage, build, size, audit, E2E, CodeQL, Lighthouse |
+| Routes with own `<title>`       | 2 of 6                  | all, plus 404                                                                  |
+| Trackers running before consent | 4                       | 0                                                                              |
+
+### Findings resolved
+
+All 25 findings in §3 are fixed. Highlights, with the reasoning that made them
+matter rather than just the change:
+
+- **S1** Session Replay now masks all text, inputs and media, and
+  `sendDefaultPii` is off. Error reports no longer carry what a visitor typed
+  into the contact form.
+- **S2** Seven security headers plus a Report-Only CSP. Left in Report-Only
+  deliberately: a strict CSP on a site with four third-party beacons is easy to
+  get wrong, and this could not be verified against the live deployment from
+  here. Watch the reports for a week, then flip it to enforcing.
+- **S3** `sourcemap: 'hidden'` plus delete-after-upload. Verified: no `.map`
+  files in `dist`, no `sourceMappingURL` in any bundle, and an E2E test that
+  keeps it that way.
+- **T2** The contact form checks `response.ok` and preserves the draft on
+  failure. Covered by four unit tests and two Playwright tests. The original
+  mock that certified the bug is fixed.
+- **T5** `size-limit` now runs — one word, and the budget is split so a
+  regression in the critical path can't hide behind lazy chunks.
+- **E1** `strict: true`. Surfaced 11 real errors, including a `useState([])`
+  inferred as `never[]` that could never have held the value it was given, and
+  two props passed to a component that never accepted them.
+- **E7** `coverage/` ignored, plus a `.prettierignore`, so generated output can
+  never block a commit again.
+
+### Deliberately not done
+
+- **60% coverage.** The plan targeted it; the suite reaches 32.8% overall and
+  ~51% on first-party code. Closing that gap means writing jsdom tests for
+  vendored canvas and WebGL components, which would raise the number without
+  raising confidence. Those are covered by Playwright instead. The threshold is
+  set to the real figure and ratchets upward.
+- **Enforcing CSP.** Shipped in Report-Only for the reason above.
+- **PWA icons.** The conflicting root `manifest.json` is deleted and
+  `public/manifest.json` is the single source of truth, but the 192/512/maskable
+  PNG set still needs generating from the brand mark before install prompts work
+  properly. Left alone rather than inventing artwork.

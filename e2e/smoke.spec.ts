@@ -1,17 +1,19 @@
 import { test, expect } from '@playwright/test';
 
 /**
- * The loading screen is opt-in via env, but the hero animation still gates
- * content on first visit. Marking the hero as seen skips straight to content.
+ * Puts the browser in the state of a returning visitor: hero animation already
+ * seen, consent banner already answered. Most specs exercise the site proper,
+ * not the first-run prompts — those get their own tests below.
  */
-const skipHeroAnimation = async (page: import('@playwright/test').Page) => {
+const asReturningVisitor = async (page: import('@playwright/test').Page) => {
   await page.addInitScript(() => {
     sessionStorage.setItem('hasSeenHero', 'true');
+    localStorage.setItem('analytics-consent', 'denied');
   });
 };
 
 test.beforeEach(async ({ page }) => {
-  await skipHeroAnimation(page);
+  await asReturningVisitor(page);
 });
 
 test.describe('routes', () => {

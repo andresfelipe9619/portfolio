@@ -18,6 +18,18 @@ export function ConsentBanner() {
     setVisible(getConsent() === 'unset');
   }, []);
 
+  useEffect(() => {
+    // A fixed banner floats over whatever is at the bottom of the page, which
+    // on a phone is usually the thing you actually came to press — the contact
+    // form's submit button, for one. Reserve real layout space for it so the
+    // page can scroll clear instead of hiding controls underneath it.
+    if (typeof document === 'undefined') return;
+    document.body.classList.toggle('has-consent-banner', visible);
+    return () => {
+      document.body.classList.remove('has-consent-banner');
+    };
+  }, [visible]);
+
   const answer = (state: 'granted' | 'denied') => {
     setConsent(state);
     setVisible(false);
