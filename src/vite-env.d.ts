@@ -1,15 +1,45 @@
 /// <reference types="vite/client" />
 
+/**
+ * Every environment variable this app reads, in one place. If it isn't declared
+ * here, it doesn't exist — which is exactly the guardrail that would have caught
+ * the REACT_APP_ prefix that silently resolved to undefined for months.
+ */
+interface ImportMetaEnv {
+  /** Google Analytics 4 measurement ID. Analytics stay off when unset. */
+  readonly VITE_GA_TRACKING_ID?: string;
+  /** Microsoft Clarity project ID. Clarity stays off when unset. */
+  readonly VITE_CLARITY_PROJECT_ID?: string;
+  /** Web3Forms access key backing the contact form. */
+  readonly VITE_WEB3FORMS_ACCESS_KEY?: string;
+  /** Set to 'true' to play the cinematic boot sequence on load. */
+  readonly VITE_LOADING_SCREEN_ENABLED?: string;
+  /** Set to 'true' to show the under-construction ribbon in the header. */
+  readonly VITE_UNDER_CONSTRUCTION_ENABLED?: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
+
+/** JSON Schema shape accepted by WebMCP tool registration. */
+type JsonSchemaProperty = {
+  type: string;
+  description?: string;
+  enum?: readonly string[];
+  items?: JsonSchemaProperty;
+  properties?: Record<string, JsonSchemaProperty>;
+};
+
 interface ModelContextTool {
   name: string;
   description: string;
   inputSchema: {
     type: string;
-    properties?: Record<string, any>;
+    properties?: Record<string, JsonSchemaProperty>;
     required?: string[];
-    [key: string]: any;
   };
-  execute: (args: any) => Promise<any> | any;
+  execute: (args: never) => Promise<unknown> | unknown;
 }
 
 interface WebModelContext {

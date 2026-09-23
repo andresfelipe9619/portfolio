@@ -141,7 +141,9 @@
     "footerNote": "Built with ❤️ and probably too much caffeine. Response time: Usually < 24hrs",
     "successTitle": "Message sent! 🚀",
     "successDesc": "Thanks for reaching out! I'll get back to you faster than you can say 'async/await'.",
-    "errorMsg": "Something went wrong!"
+    "errorMsg": "Something went wrong!",
+    "errorTitle": "That didn't go through 😅",
+    "errorDesc": "The gremlins intercepted it. Your message is still right here, exactly as you wrote it — give send another go."
   },
   "ossPage": {
     "title": "Open Source as My Supernova.",

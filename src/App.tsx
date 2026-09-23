@@ -73,7 +73,11 @@ export default function App() {
                   <Route path="/projects" element={<Projects />} />
                   <Route path="/blog" element={<Blog />} />
                   <Route path="/case-studies/:id" element={<CaseStudy />} />
-                  <Route path="/test-error" element={<TestError />} />
+                  {/* Sentry's panic button. Handy in dev, a free way to burn
+                      error quota in production. */}
+                  {import.meta.env.DEV && (
+                    <Route path="/test-error" element={<TestError />} />
+                  )}
                 </Routes>
               </Suspense>
             </ErrorBoundary>

@@ -141,7 +141,9 @@
     "footerNote": "Gebaut mit ❤️ und wahrscheinlich zu viel Koffein. Antwortzeit: Normalerweise < 24 Std.",
     "successTitle": "Nachricht gesendet! 🚀",
     "successDesc": "Danke für die Kontaktaufnahme! Ich melde mich schneller zurück als Sie 'async/await' sagen können.",
-    "errorMsg": "Etwas ist schief gelaufen!"
+    "errorMsg": "Etwas ist schief gelaufen!",
+    "errorTitle": "Das kam nicht an 😅",
+    "errorDesc": "Die Gremlins waren schneller. Ihre Nachricht steht noch genau so da, wie Sie sie geschrieben haben — einfach nochmal senden."
   },
   "ossPage": {
     "title": "Open Source als Meine Supernova.",

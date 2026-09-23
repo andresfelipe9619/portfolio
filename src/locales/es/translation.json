@@ -141,7 +141,9 @@
     "footerNote": "Construido con ❤️ y probablemente demasiada cafeína. Tiempo de respuesta: Usualmente < 24hrs",
     "successTitle": "¡Mensaje enviado! 🚀",
     "successDesc": "¡Gracias por contactarme! Te responderé más rápido de lo que puedes decir 'async/await'.",
-    "errorMsg": "¡Algo salió mal!"
+    "errorMsg": "¡Algo salió mal!",
+    "errorTitle": "Eso no llegó 😅",
+    "errorDesc": "Se lo comieron los gremlins. Tu mensaje sigue aquí, tal como lo escribiste — dale a enviar otra vez."
   },
   "ossPage": {
     "title": "El Código Abierto como Mi Supernova.",

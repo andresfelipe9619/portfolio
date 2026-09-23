@@ -141,7 +141,9 @@
     "footerNote": "Construit avec ❤️ et probablement trop de caféine. Temps de réponse: Habituellement < 24h",
     "successTitle": "Message envoyé ! 🚀",
     "successDesc": "Merci d'avoir tendu la main! Je vous recontacterai plus vite que vous ne pouvez dire 'async/await'.",
-    "errorMsg": "Quelque chose a mal tourné !"
+    "errorMsg": "Quelque chose a mal tourné !",
+    "errorTitle": "Ça n'est pas passé 😅",
+    "errorDesc": "Les gremlins l'ont intercepté. Votre message est toujours là, exactement tel que vous l'avez écrit — réessayez."
   },
   "ossPage": {
     "title": "L'Open Source comme Ma Supernova.",

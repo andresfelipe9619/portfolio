@@ -7,7 +7,25 @@ import { sentryVitePlugin } from '@sentry/vite-plugin';
 // https://vite.dev/config/
 export default defineConfig({
   build: {
-    sourcemap: true,
+    // 'hidden' still emits maps (so Sentry can symbolicate stack traces like a
+    // grown-up) but omits the //# sourceMappingURL comment, so browsers never go
+    // looking for them. The plugin below then deletes them after upload, which
+    // means our source stays ours instead of being a curl away.
+    sourcemap: 'hidden',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ['react', 'react-dom', 'react-router-dom'],
+          sentry: ['@sentry/react'],
+          motion: ['motion'],
+          i18n: [
+            'i18next',
+            'react-i18next',
+            'i18next-browser-languagedetector',
+          ],
+        },
+      },
+    },
   },
   plugins: [
     react(),
@@ -16,6 +34,9 @@ export default defineConfig({
       org: process.env.SENTRY_ORG,
       project: process.env.SENTRY_PROJECT,
       authToken: process.env.SENTRY_AUTH_TOKEN,
+      sourcemaps: {
+        filesToDeleteAfterUpload: ['./dist/**/*.map'],
+      },
     }),
   ],
   resolve: {
@@ -30,7 +51,19 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
-      include: ['src/pages/**/*.tsx', 'src/components/**/*.tsx'],
+      include: [
+        'src/pages/**/*.tsx',
+        'src/components/**/*.tsx',
+        'src/hooks/**/*.{ts,tsx}',
+        'src/lib/**/*.{ts,tsx}',
+      ],
+      exclude: ['src/**/*.test.{ts,tsx}', 'src/test/**'],
+      thresholds: {
+        statements: 20,
+        branches: 20,
+        functions: 20,
+        lines: 20,
+      },
     },
   },
 });

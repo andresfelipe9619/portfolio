@@ -19,6 +19,13 @@ import { AuroraText } from '@/components/magicui/aurora-text.tsx';
 import { RetroGrid } from '@/components/magicui/retro-grid.tsx';
 import { logEvent } from '@/lib/ga';
 import { useTranslation } from 'react-i18next';
+import * as Sentry from '@sentry/react';
+
+// Web3Forms access keys are public by design, but keeping it in env means a fork
+// of this repo doesn't inherit a direct line into Andrés's inbox.
+const WEB3FORMS_ACCESS_KEY =
+  import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ??
+  'ce6a6db2-b865-4b4b-8f6c-c11ccb4481bf';
 
 export default function ContactPage() {
   const { t } = useTranslation();
@@ -53,15 +60,25 @@ export default function ContactPage() {
       fd.append('email', formData.email);
       fd.append('subject', formData.subject);
       fd.append('message', formData.message);
-      fd.append('access_key', 'ce6a6db2-b865-4b4b-8f6c-c11ccb4481bf');
+      fd.append('access_key', WEB3FORMS_ACCESS_KEY);
+      // Honeypot: humans can't see it, bots can't resist it.
+      fd.append('botcheck', '');
 
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         body: fd,
       });
 
-      const data = await response.json();
-      console.log(data);
+      // fetch only rejects on network failure, so a 429 or a 500 would sail
+      // straight into the success branch and quietly eat someone's message.
+      // Ask the response how it actually went before celebrating.
+      const data = await response.json().catch(() => null);
+
+      if (!response.ok || data?.success === false) {
+        throw new Error(
+          data?.message ?? `Web3Forms responded with ${response.status}`,
+        );
+      }
 
       toast(t('contact.successTitle'), {
         description: t('contact.successDesc'),
@@ -70,8 +87,13 @@ export default function ContactPage() {
       setFormData({ name: '', email: '', subject: '', message: '' });
       setCharCount(0);
     } catch (error) {
-      console.error('Error submitting form:', error);
-      toast(t('contact.errorMsg'));
+      // The draft stays exactly where they left it. Losing someone's carefully
+      // typed message is a far worse bug than showing them an error.
+      Sentry.captureException(error);
+      toast(t('contact.errorTitle'), {
+        description: t('contact.errorDesc'),
+      });
+      logEvent('Contact Form', 'Submit', 'Error');
     } finally {
       setIsSubmitting(false);
     }
@@ -120,6 +142,17 @@ export default function ContactPage() {
 
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Honeypot. If you're reading this in DevTools: hi, please don't. */}
+              <input
+                type="checkbox"
+                name="botcheck"
+                className="hidden"
+                style={{ display: 'none' }}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+              />
+
               {/* Name and Email Row */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">

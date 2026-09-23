@@ -6,11 +6,14 @@ import './index.css';
 import App from './App.tsx';
 import { BrowserRouter } from 'react-router-dom';
 import { initGA } from './lib/ga';
+import { initClarity } from './lib/clarity';
 import { reactErrorHandler } from '@sentry/react';
 import { Analytics } from '@vercel/analytics/react';
 import { HelmetProvider } from 'react-helmet-async';
 import './lib/i18n';
+
 initGA();
+initClarity();
 
 createRoot(document.getElementById('root')!, {
   onUncaughtError: reactErrorHandler(),

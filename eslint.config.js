@@ -37,15 +37,29 @@ export default tseslint.config(
       globals: globals.browser,
     },
     rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-explicit-any': 'warn',
       'valid-jsdoc': 'off',
       'require-jsdoc': 'off',
       'spaced-comment': ['error', 'always', { markers: ['/'] }],
+      // Forgotten debug logs are the fastest way to look unserious to the
+      // exact audience that opens DevTools on a portfolio. warn/error stay.
+      'no-console': ['error', { allow: ['warn', 'error'] }],
+      // Every suppression has to name the rule it's suppressing. A bare
+      // eslint-disable turns off rules that don't even exist yet.
+      'no-unused-private-class-members': 'error',
       'react-hooks/immutability': 'off',
       'react-hooks/purity': 'off',
       'react-hooks/preserve-manual-memoization': 'off',
       'react-hooks/set-state-in-effect': 'off',
       'react-hooks/refs': 'off',
+    },
+  },
+  {
+    // Tests get to shout into the console and reach for `any` when mocking.
+    files: ['**/*.test.{ts,tsx}', 'src/test/**/*.{ts,tsx}', 'e2e/**/*.ts'],
+    rules: {
+      'no-console': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
     },
   },
   prettier,

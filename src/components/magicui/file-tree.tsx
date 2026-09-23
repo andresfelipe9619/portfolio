@@ -367,11 +367,10 @@ const CollapseButton = forwardRef<
   }, []);
 
   useEffect(() => {
-    console.log(expandAll);
     if (expandAll) {
       expendAllTree(elements);
     }
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [expandAll]);
 
   return (

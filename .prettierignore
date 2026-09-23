@@ -1,0 +1,9 @@
+# Generated output — Prettier has no business here, and it must never be able to
+# block a commit just because someone ran the coverage reporter.
+dist
+coverage
+playwright-report
+test-results
+node_modules
+package-lock.json
+public/sitemap.xml
