@@ -217,5 +217,11 @@
     "pathLabel": "You asked for:",
     "backHome": "Back to Home",
     "reportIt": "Tell me about it"
+  },
+  "consent": {
+    "title": "Mind if I count visitors?",
+    "description": "Anonymous analytics only — no ads, no selling, no creepy retargeting. Decline and the site works exactly the same.",
+    "accept": "Sure, go ahead",
+    "decline": "No thanks"
   }
 }

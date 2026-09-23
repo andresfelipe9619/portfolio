@@ -16,19 +16,22 @@ vi.mock('react-ga4', () => ({
  * ga.ts reads the tracking ID once at module load, so each test stubs the env
  * and then re-imports the module with a fresh registry.
  */
-const loadGa = async (trackingId?: string) => {
+const loadGa = async (trackingId?: string, consent = true) => {
   vi.resetModules();
   vi.stubEnv('VITE_GA_TRACKING_ID', trackingId ?? '');
+  localStorage.setItem('analytics-consent', consent ? 'granted' : 'denied');
   return import('../ga');
 };
 
 describe('ga', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    localStorage.clear();
   });
 
   afterEach(() => {
     vi.unstubAllEnvs();
+    localStorage.clear();
   });
 
   describe('when VITE_GA_TRACKING_ID is set', () => {
@@ -89,6 +92,26 @@ describe('ga', () => {
 
     it('does not send events', async () => {
       const { logEvent } = await loadGa();
+      logEvent('Contact Form', 'Submit');
+      expect(eventMock).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('when the visitor has not consented', () => {
+    it('does not initialise even with an ID configured', async () => {
+      const { initGA } = await loadGa('G-TEST123', false);
+      initGA();
+      expect(initializeMock).not.toHaveBeenCalled();
+    });
+
+    it('does not send pageviews', async () => {
+      const { logPageView } = await loadGa('G-TEST123', false);
+      logPageView();
+      expect(sendMock).not.toHaveBeenCalled();
+    });
+
+    it('does not send events', async () => {
+      const { logEvent } = await loadGa('G-TEST123', false);
       logEvent('Contact Form', 'Submit');
       expect(eventMock).not.toHaveBeenCalled();
     });

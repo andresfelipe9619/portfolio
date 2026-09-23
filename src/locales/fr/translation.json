@@ -213,5 +213,11 @@
     "pathLabel": "Vous cherchiez :",
     "backHome": "Retour à l'accueil",
     "reportIt": "Dites-le moi"
+  },
+  "consent": {
+    "title": "Puis-je compter les visites ?",
+    "description": "Analytique anonyme uniquement — pas de pub, pas de revente, pas de reciblage inquiétant. Si vous refusez, le site fonctionne exactement pareil.",
+    "accept": "Bien sûr",
+    "decline": "Non merci"
   }
 }

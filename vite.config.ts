@@ -48,6 +48,8 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/test/setup.ts',
+    // e2e/ belongs to Playwright, which has its own runner and a real browser.
+    exclude: ['node_modules/**', 'dist/**', 'e2e/**'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
@@ -68,10 +70,10 @@ export default defineConfig({
       // components are covered by the Playwright suite instead, where an actual
       // browser runs them. First-party code sits around 51%.
       thresholds: {
-        statements: 30,
-        branches: 29,
-        functions: 32,
-        lines: 30,
+        statements: 32,
+        branches: 30,
+        functions: 34,
+        lines: 32,
       },
     },
   },

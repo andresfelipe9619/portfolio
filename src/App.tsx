@@ -14,6 +14,7 @@ import { useWebMCP } from '@/hooks/use-web-mcp';
 import { useDocumentLanguage } from '@/hooks/use-document-language';
 import { logPageView } from './lib/ga';
 import ErrorBoundary from '@/components/error-boundary';
+import { ConsentBanner } from '@/components/consent-banner';
 
 // Lazy loaded pages to improve initial load time (LCP, INP)
 const Home = lazy(() => import('./pages/Home'));
@@ -86,6 +87,7 @@ export default function App() {
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </Suspense>
+              <ConsentBanner />
             </ErrorBoundary>
           )}
         </div>

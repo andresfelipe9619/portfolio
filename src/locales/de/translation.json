@@ -213,5 +213,11 @@
     "pathLabel": "Gesucht haben Sie:",
     "backHome": "Zurück zur Startseite",
     "reportIt": "Sagen Sie es mir"
+  },
+  "consent": {
+    "title": "Darf ich Besuche zählen?",
+    "description": "Nur anonyme Analyse — keine Werbung, kein Datenverkauf, kein gruseliges Retargeting. Wenn Sie ablehnen, funktioniert die Seite genau gleich.",
+    "accept": "Klar, gerne",
+    "decline": "Nein danke"
   }
 }

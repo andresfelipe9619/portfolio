@@ -8,6 +8,8 @@
  * needs an 'unsafe-inline' exemption carved out just for it.
  */
 
+import { hasConsent } from './consent';
+
 type ClarityQueue = {
   (...args: unknown[]): void;
   q?: unknown[][];
@@ -23,6 +25,7 @@ const CLARITY_PROJECT_ID = import.meta.env.VITE_CLARITY_PROJECT_ID;
 
 export const initClarity = () => {
   if (!CLARITY_PROJECT_ID || typeof document === 'undefined') return;
+  if (!hasConsent()) return;
   if (document.getElementById('clarity-script')) return;
 
   const queue: ClarityQueue = (...args: unknown[]) => {

@@ -1,8 +1,9 @@
 import { vi, beforeEach, afterEach } from 'vitest';
 
-const loadClarity = async (projectId?: string) => {
+const loadClarity = async (projectId?: string, consent = true) => {
   vi.resetModules();
   vi.stubEnv('VITE_CLARITY_PROJECT_ID', projectId ?? '');
+  localStorage.setItem('analytics-consent', consent ? 'granted' : 'denied');
   return import('../clarity');
 };
 
@@ -53,5 +54,12 @@ describe('initClarity', () => {
     initClarity();
 
     expect(document.querySelectorAll('#clarity-script')).toHaveLength(1);
+  });
+
+  it('stays inert until the visitor consents', async () => {
+    const { initClarity } = await loadClarity('abc123', false);
+    initClarity();
+
+    expect(document.getElementById('clarity-script')).toBeNull();
   });
 });
