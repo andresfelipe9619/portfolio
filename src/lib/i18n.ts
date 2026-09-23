@@ -3,20 +3,44 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 import enTranslation from '../locales/en/translation.json';
-import esTranslation from '../locales/es/translation.json';
-import frTranslation from '../locales/fr/translation.json';
-import deTranslation from '../locales/de/translation.json';
+
+export const SUPPORTED_LANGUAGES = ['en', 'es', 'fr', 'de'] as const;
+export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number];
+
+/**
+ * Only English ships in the main bundle. The other three are fetched on demand
+ * the first time someone actually selects them — previously every visitor
+ * downloaded all four dictionaries to read the site in one of them.
+ */
+const loaders: Record<
+  Exclude<SupportedLanguage, 'en'>,
+  () => Promise<{ default: Record<string, unknown> }>
+> = {
+  es: () => import('../locales/es/translation.json'),
+  fr: () => import('../locales/fr/translation.json'),
+  de: () => import('../locales/de/translation.json'),
+};
+
+const loaded = new Set<string>(['en']);
+
+export async function loadLanguage(language: string) {
+  const base = language.split('-')[0];
+  if (loaded.has(base)) return;
+  const loader = loaders[base as Exclude<SupportedLanguage, 'en'>];
+  if (!loader) return;
+
+  const resource = await loader();
+  i18n.addResourceBundle(base, 'translation', resource.default, true, true);
+  loaded.add(base);
+}
 
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    supportedLngs: ['en', 'es', 'fr', 'de'],
+    supportedLngs: [...SUPPORTED_LANGUAGES],
     resources: {
       en: { translation: enTranslation },
-      es: { translation: esTranslation },
-      fr: { translation: frTranslation },
-      de: { translation: deTranslation },
     },
     fallbackLng: 'en',
     interpolation: {
@@ -35,5 +59,11 @@ i18n
       caches: ['localStorage', 'cookie'],
     },
   });
+
+// Fetch whatever the detector landed on, and anything chosen later.
+void loadLanguage(i18n.language ?? 'en');
+i18n.on('languageChanged', (language) => {
+  void loadLanguage(language);
+});
 
 export default i18n;

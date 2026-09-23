@@ -203,5 +203,15 @@
     "description": "Wir sind auf einen unerwarteten Fehler in der Matrix gestoßen. Keine Sorge, der Vorfall wurde protokolliert.",
     "reboot": "Neustart-Sequenz",
     "submit": "Diagnosebericht Senden"
+  },
+  "notFound": {
+    "metaTitle": "404 — Seite nicht gefunden | Andrés Suárez",
+    "metaDescription": "Diese Seite ist verschwunden. Der Rest des Portfolios ist sehr wohl da.",
+    "title0": "Diese Seite ist",
+    "title1": "von der Karte",
+    "description": "Entweder ist sie umgezogen, hat nie existiert, oder Sie haben einen Tippfehler gefunden, der eine Meldung wert ist. Alle anderen Routen funktionieren einwandfrei — versprochen, das ist keine Metapher für meinen Code.",
+    "pathLabel": "Gesucht haben Sie:",
+    "backHome": "Zurück zur Startseite",
+    "reportIt": "Sagen Sie es mir"
   }
 }

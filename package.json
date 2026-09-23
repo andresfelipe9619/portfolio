@@ -6,7 +6,7 @@
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run sitemap && tsc -b && vite build",
     "lint": "eslint .",
     "typecheck": "tsc -b --force",
     "format": "prettier --write .",
@@ -17,7 +17,8 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "prepare": "husky",
-    "size": "size-limit"
+    "size": "size-limit",
+    "sitemap": "node scripts/generate-sitemap.mjs"
   },
   "size-limit": [
     {

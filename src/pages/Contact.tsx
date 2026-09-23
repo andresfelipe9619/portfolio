@@ -20,6 +20,7 @@ import { RetroGrid } from '@/components/magicui/retro-grid.tsx';
 import { logEvent } from '@/lib/ga';
 import { useTranslation } from 'react-i18next';
 import * as Sentry from '@sentry/react';
+import { Seo } from '@/components/seo';
 
 // Web3Forms access keys are public by design, but keeping it in env means a fork
 // of this repo doesn't inherit a direct line into Andrés's inbox.
@@ -115,147 +116,157 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="p-4 w-full">
-      <RetroGrid opacity={0.8} />
-      <div className="mx-auto max-w-2xl py-8 ">
-        {/* Header Section */}
-        <div className="text-center mb-12">
-          <Badge variant="secondary" className="mb-4 text-sm font-mono">
-            /contact
-          </Badge>
-          <h1 className="text-4xl font-bold mb-4 text-balance">
-            {t('contact.title0')} <AuroraText>{t('contact.title1')}</AuroraText>
-          </h1>
-          <p className="text-lg text-muted-foreground text-pretty max-w-lg mx-auto">
-            {t('contact.subtitle')}
-          </p>
-        </div>
+    <>
+      <Seo
+        title="Contact"
+        description="Got a project in mind, a burning question, or just want to say hi? Response time is usually under 24 hours."
+        path="/contact"
+      />
+      <div className="p-4 w-full">
+        <RetroGrid opacity={0.8} />
+        <div className="mx-auto max-w-2xl py-8 ">
+          {/* Header Section */}
+          <div className="text-center mb-12">
+            <Badge variant="secondary" className="mb-4 text-sm font-mono">
+              /contact
+            </Badge>
+            <h1 className="text-4xl font-bold mb-4 text-balance">
+              {t('contact.title0')}{' '}
+              <AuroraText>{t('contact.title1')}</AuroraText>
+            </h1>
+            <p className="text-lg text-muted-foreground text-pretty max-w-lg mx-auto">
+              {t('contact.subtitle')}
+            </p>
+          </div>
 
-        {/* Contact Form */}
-        <Card className="shadow-lg border-0 bg-card/50 backdrop-blur-sm p-8">
-          <CardHeader className="text-center pb-6">
-            <CardTitle className="text-2xl">{t('contact.cardTitle')}</CardTitle>
-            <CardDescription className="text-base">
-              {t('contact.cardDesc')}
-            </CardDescription>
-          </CardHeader>
+          {/* Contact Form */}
+          <Card className="shadow-lg border-0 bg-card/50 backdrop-blur-sm p-8">
+            <CardHeader className="text-center pb-6">
+              <CardTitle className="text-2xl">
+                {t('contact.cardTitle')}
+              </CardTitle>
+              <CardDescription className="text-base">
+                {t('contact.cardDesc')}
+              </CardDescription>
+            </CardHeader>
 
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Honeypot. If you're reading this in DevTools: hi, please don't. */}
-              <input
-                type="checkbox"
-                name="botcheck"
-                className="hidden"
-                style={{ display: 'none' }}
-                tabIndex={-1}
-                autoComplete="off"
-                aria-hidden="true"
-              />
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Honeypot. If you're reading this in DevTools: hi, please don't. */}
+                <input
+                  type="checkbox"
+                  name="botcheck"
+                  className="hidden"
+                  style={{ display: 'none' }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                />
 
-              {/* Name and Email Row */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Name and Email Row */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="name" className="text-sm font-medium">
+                      {t('contact.nameLabel')}
+                      <span className="text-destructive">*</span>
+                    </Label>
+                    <Input
+                      id="name"
+                      name="name"
+                      type="text"
+                      placeholder={t('contact.namePlaceholder')}
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      required
+                      className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="text-sm font-medium">
+                      {t('contact.emailLabel')}
+                      <span className="text-destructive">*</span>
+                    </Label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="you@example.com"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
+                    />
+                  </div>
+                </div>
+
+                {/* Subject */}
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="text-sm font-medium">
-                    {t('contact.nameLabel')}
-                    <span className="text-destructive">*</span>
+                  <Label htmlFor="subject" className="text-sm font-medium">
+                    {t('contact.subjectLabel')}
                   </Label>
                   <Input
-                    id="name"
-                    name="name"
+                    id="subject"
+                    name="subject"
                     type="text"
-                    placeholder={t('contact.namePlaceholder')}
-                    value={formData.name}
+                    placeholder={t('contact.subjectPlaceholder')}
+                    value={formData.subject}
                     onChange={handleInputChange}
-                    required
                     className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                   />
                 </div>
 
+                {/* Message */}
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm font-medium">
-                    {t('contact.emailLabel')}
-                    <span className="text-destructive">*</span>
-                  </Label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="you@example.com"
-                    value={formData.email}
+                  <div className="flex justify-between items-center">
+                    <Label htmlFor="message" className="text-sm font-medium">
+                      {t('contact.messageLabel')}{' '}
+                      <span className="text-destructive">*</span>
+                    </Label>
+                    <span className={`text-xs ${getCharCountColor()}`}>
+                      {getCharCountMessage()} ({charCount} {t('contact.chars')})
+                    </span>
+                  </div>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    placeholder={t('contact.messagePlaceholder')}
+                    value={formData.message}
                     onChange={handleInputChange}
                     required
-                    className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
+                    rows={6}
+                    className="transition-all duration-200 focus:ring-2 focus:ring-primary/20 resize-none"
                   />
                 </div>
-              </div>
 
-              {/* Subject */}
-              <div className="space-y-2">
-                <Label htmlFor="subject" className="text-sm font-medium">
-                  {t('contact.subjectLabel')}
-                </Label>
-                <Input
-                  id="subject"
-                  name="subject"
-                  type="text"
-                  placeholder={t('contact.subjectPlaceholder')}
-                  value={formData.subject}
-                  onChange={handleInputChange}
-                  className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
-                />
-              </div>
-
-              {/* Message */}
-              <div className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <Label htmlFor="message" className="text-sm font-medium">
-                    {t('contact.messageLabel')}{' '}
-                    <span className="text-destructive">*</span>
-                  </Label>
-                  <span className={`text-xs ${getCharCountColor()}`}>
-                    {getCharCountMessage()} ({charCount} {t('contact.chars')})
-                  </span>
+                {/* Submit Button */}
+                <div className="pt-4">
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full text-base font-medium py-6 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+                  >
+                    {isSubmitting ? (
+                      <span className="flex items-center gap-2">
+                        <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                        {t('contact.sendingBtn')}
+                      </span>
+                    ) : (
+                      t('contact.sendBtn')
+                    )}
+                  </Button>
                 </div>
-                <Textarea
-                  id="message"
-                  name="message"
-                  placeholder={t('contact.messagePlaceholder')}
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
-                  rows={6}
-                  className="transition-all duration-200 focus:ring-2 focus:ring-primary/20 resize-none"
-                />
-              </div>
+              </form>
+            </CardContent>
+          </Card>
 
-              {/* Submit Button */}
-              <div className="pt-4">
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full text-base font-medium py-6 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
-                >
-                  {isSubmitting ? (
-                    <span className="flex items-center gap-2">
-                      <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-                      {t('contact.sendingBtn')}
-                    </span>
-                  ) : (
-                    t('contact.sendBtn')
-                  )}
-                </Button>
-              </div>
-            </form>
-          </CardContent>
-        </Card>
-
-        {/* Footer Note */}
-        <div className="text-center mt-8">
-          <p className="text-sm">{t('contact.footerNote')}</p>
+          {/* Footer Note */}
+          <div className="text-center mt-8">
+            <p className="text-sm">{t('contact.footerNote')}</p>
+          </div>
         </div>
+        <Toaster />
       </div>
-      <Toaster />
-    </div>
+    </>
   );
 }

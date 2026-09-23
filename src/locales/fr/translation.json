@@ -203,5 +203,15 @@
     "description": "Nous avons rencontré un dysfonctionnement inattendu dans la matrice. Ne vous inquiétez pas, l'incident a été enregistré.",
     "reboot": "Séquence de Redémarrage",
     "submit": "Soumettre le Rapport de Diagnostic"
+  },
+  "notFound": {
+    "metaTitle": "404 — Page introuvable | Andrés Suárez",
+    "metaDescription": "Cette page a disparu. Le reste du portfolio est bien là.",
+    "title0": "Cette page est",
+    "title1": "hors des sentiers",
+    "description": "Soit elle a déménagé, soit elle n'a jamais existé, soit vous avez trouvé une coquille qui mérite d'être signalée. Toutes les autres routes fonctionnent — promis, ce n'est pas une métaphore de mon code.",
+    "pathLabel": "Vous cherchiez :",
+    "backHome": "Retour à l'accueil",
+    "reportIt": "Dites-le moi"
   }
 }

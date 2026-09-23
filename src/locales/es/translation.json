@@ -207,5 +207,15 @@
     "description": "Encontramos un fallo inesperado en la matrix. No te preocupes, el incidente ha sido registrado.",
     "reboot": "Secuencia de Reinicio",
     "submit": "Enviar Informe de Diagnóstico"
+  },
+  "notFound": {
+    "metaTitle": "404 — Página no encontrada | Andrés Suárez",
+    "metaDescription": "Esta página se perdió. El resto del portafolio sigue aquí, muy presente.",
+    "title0": "Esta página está",
+    "title1": "fuera del mapa",
+    "description": "O la movieron, o nunca existió, o encontraste un typo que vale la pena reportar. Todas las demás rutas funcionan perfecto — prometo que esto no es una metáfora de mi código.",
+    "pathLabel": "Pediste:",
+    "backHome": "Volver al inicio",
+    "reportIt": "Cuéntame"
   }
 }

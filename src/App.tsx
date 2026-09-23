@@ -11,6 +11,7 @@ import { DraggableExplorer } from '@/components/ui/navbar/draggable-explorer.tsx
 import { useKeyListener } from '@/hooks/useKeyListener.tsx';
 import { useHackAttemptEasterEgg } from '@/hooks/use-easter-egg';
 import { useWebMCP } from '@/hooks/use-web-mcp';
+import { useDocumentLanguage } from '@/hooks/use-document-language';
 import { logPageView } from './lib/ga';
 import ErrorBoundary from '@/components/error-boundary';
 
@@ -22,6 +23,7 @@ const Projects = lazy(() => import('./pages/Projects'));
 const Blog = lazy(() => import('./pages/Blog'));
 const CaseStudy = lazy(() => import('./pages/CaseStudy'));
 const TestError = lazy(() => import('./pages/TestError'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(
@@ -32,6 +34,7 @@ export default function App() {
   const { t } = useTranslation();
 
   useWebMCP();
+  useDocumentLanguage();
   useKeyListener(setExplorerOpen);
   useHackAttemptEasterEgg(
     location.pathname,
@@ -78,6 +81,9 @@ export default function App() {
                   {import.meta.env.DEV && (
                     <Route path="/test-error" element={<TestError />} />
                   )}
+                  {/* Catches everything else, so unknown URLs stop rendering
+                      a blank page behind a cheerful HTTP 200. */}
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </Suspense>
             </ErrorBoundary>
