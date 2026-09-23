@@ -722,6 +722,15 @@ matter rather than just the change:
 - **E7** `coverage/` ignored, plus a `.prettierignore`, so generated output can
   never block a commit again.
 
+### One step left for a human
+
+The five CI workflow files could not be pushed from this session: the token has
+no `workflow` scope, so GitHub rejects any push touching `.github/workflows/`.
+They are committed to [`docs/ci/`](./ci/) instead, with a three-line activation
+command in [`docs/ci/README.md`](./ci/README.md). Until they are moved, the
+"CI gates on a PR" row in the table above describes `docs/ci/`, not what is
+actually running.
+
 ### Deliberately not done
 
 - **60% coverage.** The plan targeted it; the suite reaches 32.8% overall and
