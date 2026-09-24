@@ -83,8 +83,8 @@ export default function OpenSourcePage() {
   return (
     <>
       <Seo
-        title="Open Source"
-        description="Production-ready tools, serverless experiments and battle-tested utilities. Fork them, break them, remix them."
+        title={t('seo.oss.title')}
+        description={t('seo.oss.description')}
         path="/oss"
       />
       <main className="relative px-6 py-16 sm:px-8 lg:px-10">

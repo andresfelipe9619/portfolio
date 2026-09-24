@@ -219,5 +219,31 @@
     "description": "Analytique anonyme uniquement — pas de pub, pas de revente, pas de reciblage inquiétant. Si vous refusez, le site fonctionne exactement pareil.",
     "accept": "Bien sûr",
     "decline": "Non merci"
+  },
+  "languageLoadError": {
+    "title": "Impossible de charger cette langue 📡",
+    "description": "Le téléchargement n'a pas abouti, donc rien n'a changé. Réessayez dans un instant, ou rechargez la page."
+  },
+  "seo": {
+    "home": {
+      "title": "Développeur Créatif & Penseur Systémique",
+      "description": "Des entreprises du monde entier me confient ce que d'autres ne savent pas construire. Ingénieur logiciel senior : cloud, automatisation et architecture SaaS."
+    },
+    "projects": {
+      "title": "Projets",
+      "description": "Une sélection de projets en fintech, SaaS, e-commerce, santé et logistique — livrés dans onze pays et toujours debout."
+    },
+    "oss": {
+      "title": "Open Source",
+      "description": "Des outils prêts pour la production, des expériences serverless et des utilitaires éprouvés. Forkez-les, cassez-les, remixez-les."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Un projet en tête, une question brûlante, ou juste envie de dire bonjour ? Je réponds généralement en moins de 24 heures."
+    },
+    "caseStudy": {
+      "suffix": "En Profondeur",
+      "fallbackTitle": "Étude de Cas Introuvable"
+    }
   }
 }

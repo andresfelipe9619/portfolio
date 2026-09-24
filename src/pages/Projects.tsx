@@ -15,8 +15,8 @@ export default function Projects() {
   return (
     <>
       <Seo
-        title="Projects"
-        description="Selected work across fintech, SaaS, e-commerce, healthcare and logistics — shipped in eleven countries and still standing."
+        title={t('seo.projects.title')}
+        description={t('seo.projects.description')}
         path="/projects"
       />
       <main className="relative flex flex-col min-h-[100dvh] overflow-hidden bg-gray-950 text-white">

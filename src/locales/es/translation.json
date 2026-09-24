@@ -223,5 +223,31 @@
     "description": "Solo analítica anónima — sin anuncios, sin vender datos, sin retargeting espeluznante. Si dices que no, el sitio funciona exactamente igual.",
     "accept": "Claro, adelante",
     "decline": "No, gracias"
+  },
+  "languageLoadError": {
+    "title": "No pude cargar ese idioma 📡",
+    "description": "La descarga no llegó, así que nada cambió. Inténtalo de nuevo en un momento, o recarga la página."
+  },
+  "seo": {
+    "home": {
+      "title": "Desarrollador Creativo y Pensador Sistémico",
+      "description": "Empresas de todo el mundo confían en mí para construir lo que otros no pueden. Ingeniero de software senior en cloud, automatización y arquitectura SaaS."
+    },
+    "projects": {
+      "title": "Proyectos",
+      "description": "Trabajo seleccionado en fintech, SaaS, e-commerce, salud y logística — entregado en once países y todavía en pie."
+    },
+    "oss": {
+      "title": "Código Abierto",
+      "description": "Herramientas listas para producción, experimentos serverless y utilidades probadas en batalla. Hazles fork, rómpelas, remézclalas."
+    },
+    "contact": {
+      "title": "Contacto",
+      "description": "¿Tienes un proyecto en mente, una pregunta urgente o solo quieres saludar? Suelo responder en menos de 24 horas."
+    },
+    "caseStudy": {
+      "suffix": "A Fondo",
+      "fallbackTitle": "Caso de Estudio No Encontrado"
+    }
   }
 }

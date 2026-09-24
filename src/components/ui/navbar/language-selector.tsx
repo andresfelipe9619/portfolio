@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
-import { loadLanguage } from '@/lib/i18n';
 import { useRef } from 'react';
 import { showEasterEggToast } from '@/hooks/use-easter-egg';
+import { useLanguageSwitch } from '@/hooks/use-language-switch';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -40,6 +40,7 @@ const playMemeSound = (soundFile: string) => {
 
 export function LanguageSelector() {
   const { t, i18n } = useTranslation();
+  const switchLanguage = useLanguageSwitch();
   const clickedLanguages = useRef<Set<string>>(new Set());
 
   const currentLang =
@@ -89,11 +90,7 @@ export function LanguageSelector() {
               import('@/lib/ga').then(({ logEvent }) => {
                 logEvent('Language', 'Change', lang.code);
               });
-              // Fetch the dictionary before switching, so the UI never flashes
-              // untranslated keys while the chunk is still in flight.
-              void loadLanguage(lang.code).then(() =>
-                i18n.changeLanguage(lang.code),
-              );
+              void switchLanguage(lang.code);
               playMemeSound(lang.soundFile);
             }}
             lang={lang.code}

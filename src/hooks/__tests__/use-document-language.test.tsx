@@ -5,7 +5,8 @@ type Handler = (language: string) => void;
 
 const handlers = new Set<Handler>();
 const i18nStub = {
-  language: 'en',
+  language: 'en' as string | undefined,
+  resolvedLanguage: 'en' as string | undefined,
   on: (event: string, handler: Handler) => {
     if (event === 'languageChanged') handlers.add(handler);
   },
@@ -18,9 +19,15 @@ vi.mock('react-i18next', () => ({
   useTranslation: () => ({ i18n: i18nStub, t: (key: string) => key }),
 }));
 
-const emitLanguageChange = (language: string) => {
+/**
+ * Mimics i18next: `language` is what was requested, `resolvedLanguage` is what
+ * the text actually rendered in once the dictionary did (or didn't) arrive.
+ */
+const emitLanguageChange = (requested: string, resolved = requested) => {
   act(() => {
-    handlers.forEach((handler) => handler(language));
+    i18nStub.language = requested;
+    i18nStub.resolvedLanguage = resolved;
+    handlers.forEach((handler) => handler(requested));
   });
 };
 
@@ -28,6 +35,7 @@ describe('useDocumentLanguage', () => {
   beforeEach(() => {
     handlers.clear();
     i18nStub.language = 'en';
+    i18nStub.resolvedLanguage = 'en';
     document.documentElement.lang = '';
   });
 
@@ -38,7 +46,7 @@ describe('useDocumentLanguage', () => {
     expect(document.documentElement.lang).toBe('en');
   });
 
-  // The whole point: German content should not claim to be English.
+  // German content should not claim to be English.
   it.each(['es', 'fr', 'de'])('follows a switch to %s', async (language) => {
     const { useDocumentLanguage } = await import('../use-document-language');
     renderHook(() => useDocumentLanguage());
@@ -48,7 +56,19 @@ describe('useDocumentLanguage', () => {
     expect(document.documentElement.lang).toBe(language);
   });
 
-  it('strips the region subtag from tags like en-US', async () => {
+  // ...and English content should not claim to be Spanish. When a dictionary
+  // download fails the text falls back to English, so the tag must follow the
+  // text rather than the request.
+  it('stays on the language the text is actually in when a download fails', async () => {
+    const { useDocumentLanguage } = await import('../use-document-language');
+    renderHook(() => useDocumentLanguage());
+
+    emitLanguageChange('es', 'en');
+
+    expect(document.documentElement.lang).toBe('en');
+  });
+
+  it('strips the region subtag from tags like de-AT', async () => {
     const { useDocumentLanguage } = await import('../use-document-language');
     renderHook(() => useDocumentLanguage());
 
@@ -57,8 +77,18 @@ describe('useDocumentLanguage', () => {
     expect(document.documentElement.lang).toBe('de');
   });
 
-  it('defaults to en when i18n reports no language', async () => {
-    i18nStub.language = undefined as unknown as string;
+  it('falls back to language when nothing has resolved yet', async () => {
+    i18nStub.resolvedLanguage = undefined;
+    i18nStub.language = 'fr';
+    const { useDocumentLanguage } = await import('../use-document-language');
+    renderHook(() => useDocumentLanguage());
+
+    expect(document.documentElement.lang).toBe('fr');
+  });
+
+  it('defaults to en when i18n reports nothing at all', async () => {
+    i18nStub.resolvedLanguage = undefined;
+    i18nStub.language = undefined;
     const { useDocumentLanguage } = await import('../use-document-language');
     renderHook(() => useDocumentLanguage());
 

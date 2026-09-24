@@ -219,5 +219,31 @@
     "description": "Nur anonyme Analyse — keine Werbung, kein Datenverkauf, kein gruseliges Retargeting. Wenn Sie ablehnen, funktioniert die Seite genau gleich.",
     "accept": "Klar, gerne",
     "decline": "Nein danke"
+  },
+  "languageLoadError": {
+    "title": "Diese Sprache ließ sich nicht laden 📡",
+    "description": "Der Download ist nicht angekommen, also hat sich nichts geändert. Versuchen Sie es gleich nochmal, oder laden Sie die Seite neu."
+  },
+  "seo": {
+    "home": {
+      "title": "Kreativer Entwickler & Systemdenker",
+      "description": "Unternehmen weltweit vertrauen mir, zu bauen, was andere nicht können. Senior Software Engineer für Cloud, Automatisierung und SaaS-Architektur."
+    },
+    "projects": {
+      "title": "Projekte",
+      "description": "Ausgewählte Arbeiten aus Fintech, SaaS, E-Commerce, Gesundheitswesen und Logistik — ausgeliefert in elf Ländern und stehen immer noch."
+    },
+    "oss": {
+      "title": "Open Source",
+      "description": "Produktionsreife Tools, Serverless-Experimente und kampferprobte Utilities. Forken, kaputtmachen, remixen."
+    },
+    "contact": {
+      "title": "Kontakt",
+      "description": "Ein Projekt im Kopf, eine brennende Frage oder einfach nur Hallo sagen? Die Antwort kommt meist in unter 24 Stunden."
+    },
+    "caseStudy": {
+      "suffix": "Im Detail",
+      "fallbackTitle": "Fallstudie Nicht Gefunden"
+    }
   }
 }

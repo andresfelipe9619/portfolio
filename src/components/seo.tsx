@@ -1,54 +1,40 @@
 import { Helmet } from 'react-helmet-async';
 
 const SITE_URL = 'https://andressuarez.dev';
-const DEFAULT_IMAGE = `${SITE_URL}/me.jpeg`;
 
 interface SeoProps {
   /** Page title, rendered as "<title> | Andrés Suárez". */
   title: string;
-  description: string;
+  description?: string;
   /** Path this page canonically lives at, e.g. "/projects". */
   path: string;
-  image?: string;
   /** Set for pages that shouldn't be indexed (placeholders, errors). */
   noIndex?: boolean;
 }
 
 /**
- * Per-page metadata.
+ * Per-page title, description and canonical.
  *
- * Home, Projects, Contact and OpenSource all used to inherit the single static
- * title and description from index.html, so four different URLs showed up in
- * search results wearing the same outfit. Each page now describes itself.
+ * Two things this deliberately does *not* do, both learned the hard way:
+ *
+ * - index.html carries no <title>, description or canonical of its own. Under
+ *   React 19, react-helmet-async hoists these tags natively and never replaces
+ *   static ones, so a default in index.html meant every page shipped two
+ *   canonicals — the first pointing at the home page.
+ * - Open Graph and Twitter tags stay in index.html as the site-wide card.
+ *   Social crawlers don't run JavaScript, so per-page versions rendered here
+ *   would never be seen by them — only duplicated for everything else.
  */
-export function Seo({
-  title,
-  description,
-  path,
-  image = DEFAULT_IMAGE,
-  noIndex = false,
-}: SeoProps) {
-  const fullTitle = `${title} | Andrés Suárez`;
-  const canonical = `${SITE_URL}${path}`;
-
+export function Seo({ title, description, path, noIndex = false }: SeoProps) {
   return (
     <Helmet>
-      <title>{fullTitle}</title>
-      <meta name="description" content={description} />
-      <link rel="canonical" href={canonical} />
-
-      <meta property="og:title" content={fullTitle} />
-      <meta property="og:description" content={description} />
-      <meta property="og:url" content={canonical} />
-      <meta property="og:image" content={image} />
-      <meta property="og:type" content="website" />
-
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={fullTitle} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
-
-      {noIndex && <meta name="robots" content="noindex, follow" />}
+      <title>{`${title} | Andrés Suárez`}</title>
+      {description && <meta name="description" content={description} />}
+      {noIndex ? (
+        <meta name="robots" content="noindex, follow" />
+      ) : (
+        <link rel="canonical" href={`${SITE_URL}${path}`} />
+      )}
     </Helmet>
   );
 }

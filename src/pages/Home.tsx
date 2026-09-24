@@ -173,8 +173,8 @@ export default function Home() {
   return (
     <>
       <Seo
-        title="Creative Developer & Systems Thinker"
-        description="Global companies trust me to build what others can't. Senior software engineer working across cloud, automation and SaaS architecture."
+        title={t('seo.home.title')}
+        description={t('seo.home.description')}
         path="/"
       />
       <main className="relative flex flex-col min-h-[100dvh] overflow-hidden bg-gray-950 text-white">

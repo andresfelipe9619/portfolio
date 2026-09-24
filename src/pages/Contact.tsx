@@ -118,8 +118,8 @@ export default function ContactPage() {
   return (
     <>
       <Seo
-        title="Contact"
-        description="Got a project in mind, a burning question, or just want to say hi? Response time is usually under 24 hours."
+        title={t('seo.contact.title')}
+        description={t('seo.contact.description')}
         path="/contact"
       />
       <div className="p-4 w-full">

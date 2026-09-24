@@ -5,21 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- 🔥 Branding -->
-    <title>Andrés Suárez – Creative Developer</title>
+    <!--
+      No <title>, description or canonical here on purpose: each route renders
+      its own via <Seo>, and React 19 would add those next to any static ones
+      rather than replacing them. See src/components/seo.tsx.
+    -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
     <!-- 🪄 SEO Meta -->
-    <meta
-      name="description"
-      content="Global companies trust me to build what others can’t. Creative Developer · Systems Thinker · Open Source Builder."
-    />
     <meta
       name="keywords"
       content="Creative Developer, Open Source, Portfolio, React, TypeScript, Software Engineer, Web Development, Frontend Developer, Backend Developer, Systems Engineering"
     />
     <meta name="author" content="Andrés Suárez" />
 
-    <!-- 📱 Social / Open Graph -->
+    <!-- 📱 Social / Open Graph — the site-wide card. Social crawlers don't run JS,
+         so this is the only version they will ever see. -->
     <meta property="og:title" content="Andrés Suárez – Creative Developer" />
     <meta
       property="og:description"
@@ -46,7 +47,6 @@
       title="Sitemap"
       href="/sitemap.xml"
     />
-    <link rel="canonical" href="https://andressuarez.dev/" />
 
     <!-- ✅ Security -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />

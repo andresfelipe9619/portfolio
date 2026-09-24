@@ -223,5 +223,31 @@
     "description": "Anonymous analytics only — no ads, no selling, no creepy retargeting. Decline and the site works exactly the same.",
     "accept": "Sure, go ahead",
     "decline": "No thanks"
+  },
+  "languageLoadError": {
+    "title": "Couldn't load that language 📡",
+    "description": "The download didn't make it, so nothing's changed. Try again in a moment, or give the page a refresh."
+  },
+  "seo": {
+    "home": {
+      "title": "Creative Developer & Systems Thinker",
+      "description": "Global companies trust me to build what others can't. Senior software engineer working across cloud, automation and SaaS architecture."
+    },
+    "projects": {
+      "title": "Projects",
+      "description": "Selected work across fintech, SaaS, e-commerce, healthcare and logistics — shipped in eleven countries and still standing."
+    },
+    "oss": {
+      "title": "Open Source",
+      "description": "Production-ready tools, serverless experiments and battle-tested utilities. Fork them, break them, remix them."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Got a project in mind, a burning question, or just want to say hi? Response time is usually under 24 hours."
+    },
+    "caseStudy": {
+      "suffix": "Deep Dive",
+      "fallbackTitle": "Case Study Not Found"
+    }
   }
 }
