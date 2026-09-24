@@ -70,10 +70,10 @@ export default defineConfig({
       // components are covered by the Playwright suite instead, where an actual
       // browser runs them. First-party code sits around 51%.
       thresholds: {
-        statements: 32,
-        branches: 30,
-        functions: 34,
-        lines: 32,
+        statements: 33,
+        branches: 31,
+        functions: 36,
+        lines: 33,
       },
     },
   },

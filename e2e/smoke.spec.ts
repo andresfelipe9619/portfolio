@@ -1,9 +1,9 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures';
 
 /**
  * Puts the browser in the state of a returning visitor: hero animation already
  * seen, consent banner already answered. Most specs exercise the site proper,
- * not the first-run prompts — those get their own tests below.
+ * not the first-run prompts — those live in consent.spec.ts.
  */
 const asReturningVisitor = async (page: import('@playwright/test').Page) => {
   await page.addInitScript(() => {
@@ -28,7 +28,13 @@ test.describe('routes', () => {
   for (const { path, titleContains } of routes) {
     test(`${path} loads with its own title`, async ({ page }) => {
       await page.goto(path);
-      await expect(page).toHaveTitle(new RegExp(titleContains, 'i'));
+      // Home takes several seconds to render in headless Chromium, which has
+      // no GPU to hand the globe and particles to. It always did — a static
+      // <title> in index.html used to hide that from this test. The title
+      // arrives with the page, so give the page time to arrive.
+      await expect(page).toHaveTitle(new RegExp(titleContains, 'i'), {
+        timeout: 20_000,
+      });
       await expect(page.locator('body')).toBeVisible();
     });
   }
@@ -115,15 +121,77 @@ test.describe('internationalization', () => {
     expect(lang).toMatch(/^[a-z]{2}$/);
   });
 
-  test('switching language updates both the copy and html lang', async ({
+  test('switching language updates the copy and html lang together', async ({
     page,
   }) => {
-    await page.goto('/');
+    await page.goto('/contact');
+    await expect(page.locator('h1')).toContainText("Let's Build Something");
 
     await page.getByRole('button', { name: /toggle language/i }).click();
     await page.getByRole('menuitem', { name: /Español/i }).click();
 
+    await expect(page.locator('h1')).toContainText('Construyamos Algo');
     await expect(page.locator('html')).toHaveAttribute('lang', 'es');
+  });
+
+  test('a ?lng= link opens the site in that language', async ({ page }) => {
+    await page.goto('/contact?lng=fr');
+
+    await expect(page.locator('h1')).toContainText(
+      'Construisons Quelque Chose',
+    );
+    await expect(page.locator('html')).toHaveAttribute('lang', 'fr');
+  });
+
+  test.describe('a first visit from a German browser', () => {
+    // Just 'de-DE', the way Safari reports it. index.html's static lang="en"
+    // used to outrank it, so these visitors got English.
+    test.use({ locale: 'de-DE' });
+
+    test('arrives in German, text and html lang alike', async ({ page }) => {
+      await page.goto('/contact');
+
+      await expect(page.locator('h1')).toContainText('Lasst uns etwas');
+      await expect(page.locator('html')).toHaveAttribute('lang', 'de');
+    });
+
+    // Slow the dictionary right down: the page may wait, but it must never
+    // show English under lang="de" — the mismatch the review caught.
+    test('never shows English text under a German tag while loading', async ({
+      page,
+    }) => {
+      await page.route(/translation-[^/]*\.js$/, async (route) => {
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+        await route.continue();
+      });
+
+      const mismatches: string[] = [];
+      await page.exposeFunction('reportMismatch', (text: string) =>
+        mismatches.push(text),
+      );
+      await page.addInitScript(() => {
+        new MutationObserver(() => {
+          const h1 = document.querySelector('h1')?.textContent ?? '';
+          if (
+            document.documentElement.lang === 'de' &&
+            /Let's Build/.test(h1)
+          ) {
+            (
+              window as unknown as { reportMismatch: (t: string) => void }
+            ).reportMismatch(h1);
+          }
+        }).observe(document, {
+          subtree: true,
+          childList: true,
+          attributes: true,
+        });
+      });
+
+      await page.goto('/contact');
+      await expect(page.locator('h1')).toContainText('Lasst uns etwas');
+
+      expect(mismatches).toEqual([]);
+    });
   });
 });
 
@@ -172,10 +240,30 @@ test.describe('contact form', () => {
 });
 
 test.describe('security headers and hygiene', () => {
-  test('no source maps are exposed', async ({ page }) => {
-    const response = await page.goto('/');
-    const html = (await response?.text()) ?? '';
-    expect(html).not.toContain('sourceMappingURL');
+  // The old version of this test read index.html, which never contains a
+  // sourceMappingURL even when maps ship — so it could not fail. This one
+  // reads every script the page loads eagerly, and asks for each one's map.
+  test('no source maps are linked or served', async ({ page, request }) => {
+    await page.goto('/');
+
+    const scripts = await page
+      .locator('script[type="module"][src], link[rel="modulepreload"][href]')
+      .evaluateAll((elements) =>
+        elements.map(
+          (el) => el.getAttribute('src') ?? el.getAttribute('href') ?? '',
+        ),
+      );
+    expect(scripts.length).toBeGreaterThan(0);
+
+    for (const src of scripts) {
+      const js = await (await request.get(src)).text();
+      expect(js, `${src} links a source map`).not.toContain('sourceMappingURL');
+
+      // Vercel's SPA rewrite answers any unknown path with index.html and a
+      // 200, so check the body, not the status.
+      const map = await (await request.get(`${src}.map`)).text();
+      expect(map, `${src}.map is served`).not.toContain('"mappings"');
+    }
   });
 
   test('the dev-only error route is not reachable in a build', async ({

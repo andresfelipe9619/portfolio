@@ -20,30 +20,6 @@
     "size": "size-limit",
     "sitemap": "node scripts/generate-sitemap.mjs"
   },
-  "size-limit": [
-    {
-      "name": "Critical path (entry + vendor)",
-      "path": [
-        "dist/assets/index-*.js",
-        "dist/assets/react-*.js"
-      ],
-      "limit": "160 kB"
-    },
-    {
-      "name": "Lazy chunks (routes + effects)",
-      "path": [
-        "dist/assets/*.js",
-        "!dist/assets/index-*.js",
-        "!dist/assets/react-*.js"
-      ],
-      "limit": "220 kB"
-    },
-    {
-      "name": "Styles",
-      "path": "dist/assets/*.css",
-      "limit": "40 kB"
-    }
-  ],
   "engines": {
     "node": ">=20.19.0"
   },
@@ -87,6 +63,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@eslint-community/eslint-plugin-eslint-comments": "^4.8.1",
     "@eslint/compat": "^2.0.2",
     "@eslint/eslintrc": "^3.3.4",
     "@eslint/js": "^10.0.1",

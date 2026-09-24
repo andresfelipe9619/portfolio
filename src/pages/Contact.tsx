@@ -145,7 +145,8 @@ export default function ContactPage() {
           {/* Contact Form */}
           <Card className="shadow-lg border-0 bg-card/50 backdrop-blur-sm p-8">
             <CardHeader className="text-center pb-6">
-              <CardTitle className="text-2xl">
+              {/* h2: this card sits directly under the page's h1. */}
+              <CardTitle as="h2" className="text-2xl">
                 {t('contact.cardTitle')}
               </CardTitle>
               <CardDescription className="text-base">

@@ -5,6 +5,7 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import { globalIgnores } from 'eslint/config';
 import prettier from 'eslint-config-prettier';
+import eslintComments from '@eslint-community/eslint-plugin-eslint-comments';
 import { FlatCompat } from '@eslint/eslintrc';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -22,8 +23,19 @@ const googleConfig = compat.extends('eslint-config-google').map((config) => {
 });
 
 export default tseslint.config(
-  globalIgnores(['dist']),
+  globalIgnores(['dist', 'coverage', 'playwright-report', 'test-results']),
   ...googleConfig,
+  {
+    // Every suppression has to name the rule it's suppressing — a bare
+    // eslint-disable switches off every rule, including ones that don't exist
+    // yet. AGENTS.md promises this is enforced; this is what enforces it.
+    // Applies to every linted file, config and tests included.
+    plugins: { '@eslint-community/eslint-comments': eslintComments },
+    rules: {
+      '@eslint-community/eslint-comments/no-unlimited-disable': 'error',
+      '@eslint-community/eslint-comments/no-duplicate-disable': 'error',
+    },
+  },
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
@@ -44,9 +56,6 @@ export default tseslint.config(
       // Forgotten debug logs are the fastest way to look unserious to the
       // exact audience that opens DevTools on a portfolio. warn/error stay.
       'no-console': ['error', { allow: ['warn', 'error'] }],
-      // Every suppression has to name the rule it's suppressing. A bare
-      // eslint-disable turns off rules that don't even exist yet.
-      'no-unused-private-class-members': 'error',
       'react-hooks/immutability': 'off',
       'react-hooks/purity': 'off',
       'react-hooks/preserve-manual-memoization': 'off',

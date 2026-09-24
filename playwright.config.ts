@@ -47,7 +47,11 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'npm run preview -- --port 4173 --strictPort',
+    // --host pins the server to the same address baseURL uses. Left to
+    // "localhost", Node binds to whatever that resolves to first — ::1 on
+    // many CI runners — and a 127.0.0.1 baseURL then times out before a
+    // single test runs.
+    command: 'npm run preview -- --host 127.0.0.1 --port 4173 --strictPort',
     url: 'http://127.0.0.1:4173',
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
