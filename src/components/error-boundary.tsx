@@ -87,9 +87,15 @@ interface ErrorBoundaryProps {
   children: ReactNode;
 }
 
+/**
+ * `handled={false}`: by default a boundary with a fallback files its crashes as
+ * "handled", and Sentry ranks handled errors below the high-priority bar its
+ * default alert rule fires on. A visitor looking at "System Anomaly" instead of
+ * the page they came for has not been handled.
+ */
 export default function ErrorBoundary({ children }: ErrorBoundaryProps) {
   return (
-    <Sentry.ErrorBoundary fallback={FallbackComponent}>
+    <Sentry.ErrorBoundary fallback={FallbackComponent} handled={false}>
       {children}
     </Sentry.ErrorBoundary>
   );

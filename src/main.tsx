@@ -7,7 +7,7 @@ import App from './App.tsx';
 import { BrowserRouter } from 'react-router-dom';
 import { initGA } from './lib/ga';
 import { initClarity } from './lib/clarity';
-import { reactErrorHandler } from '@sentry/react';
+import { rootErrorHandlers } from './lib/root-error-handlers';
 import { HelmetProvider } from 'react-helmet-async';
 import { hasConsent, onConsentChange } from './lib/consent';
 import { ConsentedAnalytics } from './components/consented-analytics';
@@ -27,11 +27,7 @@ const bootMeasurement = () => {
 bootMeasurement();
 onConsentChange(bootMeasurement);
 
-createRoot(document.getElementById('root')!, {
-  onUncaughtError: reactErrorHandler(),
-  onCaughtError: reactErrorHandler(),
-  onRecoverableError: reactErrorHandler(),
-}).render(
+createRoot(document.getElementById('root')!, rootErrorHandlers).render(
   <StrictMode>
     <HelmetProvider>
       <ConsentedAnalytics />
