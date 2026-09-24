@@ -1,9 +1,11 @@
 # Portfolio Review & Level-Up Plan
 
-> **Status: all four phases implemented.** This document is kept as the record
-> of what was found and why it mattered. Every finding below has been fixed on
-> this branch unless explicitly marked otherwise — see
-> [What changed](#9-what-changed) at the bottom for the before/after.
+> **Status: all four phases implemented, then reviewed and corrected.** This
+> document is kept as the record of what was found and why it mattered. Every
+> finding below has been fixed on this branch unless explicitly marked
+> otherwise — see [What changed](#9-what-changed) for the before/after, and
+> [§10](#10-second-review-round) for what an independent code review of the
+> first pass caught.
 
 **Date:** 2026-09-22
 **Commit reviewed:** `6250cbd` (master)
@@ -469,8 +471,11 @@ the same wrong signal.
 and OpenSource all inherit the static `<title>` and description from `index.html`, so four
 URLs share one title and one description in search results.
 
-`public/sitemap.xml` also omits `/blog` and carries hardcoded `lastmod` dates of
-`2026-02-27`.
+`public/sitemap.xml` also carries hardcoded `lastmod` dates of `2026-02-27`.
+
+> _Correction:_ an earlier version of this paragraph also called the missing
+> `/blog` entry "drift". It wasn't — `/blog` renders `noindex`, so leaving it
+> out was right, and adding it was a mistake the second review caught (§10).
 
 #### P5 — Thin accessibility instrumentation · **MEDIUM**
 
@@ -676,25 +681,28 @@ and line reference above was read, and every measurement executed, at review tim
 
 Measured on the same commands as the baseline in §1, after all four phases.
 
-| Metric                          | Before                  | After                                                                          |
-| ------------------------------- | ----------------------- | ------------------------------------------------------------------------------ |
-| TypeScript `strict`             | `false`                 | `true`, zero errors                                                            |
-| `noImplicitAny`                 | `false`                 | `true`                                                                         |
-| ESLint warnings                 | 0 errors, `any` allowed | 0 errors, 0 warnings                                                           |
-| Unit tests                      | 8                       | 136                                                                            |
-| End-to-end tests                | 0                       | 36 (desktop + mobile)                                                          |
-| Coverage (all)                  | 21.15%                  | 32.83%, threshold-enforced                                                     |
-| Coverage (first-party)          | not measured            | ~51%                                                                           |
-| Coverage denominator            | pages + components      | + hooks + lib                                                                  |
-| Main JS chunk                   | 952.78 kB               | 468.61 kB                                                                      |
-| Main JS chunk (gzip)            | 313.60 kB               | 152.99 kB                                                                      |
-| Critical path (brotli)          | 326 kB combined         | 146 kB, budgeted at 160                                                        |
-| Source maps served              | 4.7 MB, public          | none                                                                           |
-| Security headers                | 0                       | 7 + Report-Only CSP                                                            |
-| Production vulnerabilities      | 2 high                  | 0                                                                              |
-| CI gates on a PR                | lint, test              | format, lint, typecheck, coverage, build, size, audit, E2E, CodeQL, Lighthouse |
-| Routes with own `<title>`       | 2 of 6                  | all, plus 404                                                                  |
-| Trackers running before consent | 4                       | 0                                                                              |
+| Metric                          | Before                  | After                                                  |
+| ------------------------------- | ----------------------- | ------------------------------------------------------ |
+| TypeScript `strict`             | `false`                 | `true`, zero errors                                    |
+| `noImplicitAny`                 | `false`                 | `true`                                                 |
+| ESLint warnings                 | 0 errors, `any` allowed | 0 errors, 0 warnings; bare disables rejected           |
+| Unit tests                      | 8                       | 174                                                    |
+| End-to-end tests                | 0                       | 56 (28 each, desktop + mobile)                         |
+| Coverage (all)                  | 21.15%                  | 33.6%, threshold-enforced                              |
+| Coverage (first-party)          | not measured            | 57.7%                                                  |
+| Coverage denominator            | pages + components      | + hooks + lib                                          |
+| Main JS chunk                   | 952.78 kB               | 468 kB                                                 |
+| Main JS chunk (gzip)            | 313.60 kB               | 153 kB                                                 |
+| Critical-path JS (brotli)       | not measured            | 266 kB, budgeted at 280, measured from `index.html`    |
+| Source maps served              | 4.7 MB, public          | none                                                   |
+| Security headers                | 0                       | 6 + Report-Only CSP, reporting to Sentry               |
+| Production vulnerabilities      | 2 high                  | 0                                                      |
+| CI gates on a PR                | lint, test              | format, lint, typecheck, coverage, build, size, audit, |
+|                                 |                         | E2E, CodeQL, Lighthouse — _pending activation, below_  |
+| Lighthouse SEO / a11y           | not measured            | 100 / 100 on `/`, `/projects`, `/contact`              |
+| Routes with own `<title>`       | 2 of 6                  | all, plus 404, localized                               |
+| Canonicals per page             | 1 (always home)         | exactly 1, correct — or none on `noindex` pages        |
+| Trackers running before consent | 4                       | 0 (Sentry error reports still run: no PII, no cookies) |
 
 ### Findings resolved
 
@@ -704,10 +712,14 @@ matter rather than just the change:
 - **S1** Session Replay now masks all text, inputs and media, and
   `sendDefaultPii` is off. Error reports no longer carry what a visitor typed
   into the contact form.
-- **S2** Seven security headers plus a Report-Only CSP. Left in Report-Only
+- **S2** HSTS, nosniff, frame-deny, Referrer-Policy, Permissions-Policy and COOP,
+  plus a Report-Only CSP. Left in Report-Only
   deliberately: a strict CSP on a site with four third-party beacons is easy to
   get wrong, and this could not be verified against the live deployment from
-  here. Watch the reports for a week, then flip it to enforcing.
+  here. Violations are reported to Sentry's security endpoint — watch those
+  for a week, then flip the header to enforcing. (The first version of this
+  paragraph said the same, but the policy had no `report-uri`, so there was
+  nothing to watch. §10 has the details.)
 - **S3** `sourcemap: 'hidden'` plus delete-after-upload. Verified: no `.map`
   files in `dist`, no `sourceMappingURL` in any bundle, and an E2E test that
   keeps it that way.
@@ -733,8 +745,8 @@ actually running.
 
 ### Deliberately not done
 
-- **60% coverage.** The plan targeted it; the suite reaches 32.8% overall and
-  ~51% on first-party code. Closing that gap means writing jsdom tests for
+- **60% coverage.** The plan targeted it; the suite reaches 33.6% overall and
+  57.7% on first-party code. Closing that gap means writing jsdom tests for
   vendored canvas and WebGL components, which would raise the number without
   raising confidence. Those are covered by Playwright instead. The threshold is
   set to the real figure and ratchets upward.
@@ -743,3 +755,61 @@ actually running.
   `public/manifest.json` is the single source of truth, but the 192/512/maskable
   PNG set still needs generating from the brand mark before install prompts work
   properly. Left alone rather than inventing artwork.
+- **A faster Home page.** Lighthouse scores it around 55 on GPU-less machines,
+  where the WebGL globe and particle canvases render in software. Its budget
+  is a floor that stops it getting worse. The biggest cheap win is the
+  portrait: `public/me.jpeg` is 977 KB and 3000 px wide, displayed at 110 px.
+  A small avatar export would help every visitor (keep the big one for the
+  social card).
+
+---
+
+## 10. Second review round
+
+An independent code review of the first implementation found 15 issues, and
+several made claims in this document untrue. All are fixed. Grouped by what
+went wrong:
+
+**Claims the branch made but didn't deliver**
+
+| #   | Finding                                                                                 | Fix                                                                                                                             |
+| --- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Lazy dictionaries never re-rendered: German visitors got English text under `lang="de"` | Dictionaries load through an i18next backend, so components suspend until they arrive; `<html lang>` follows `resolvedLanguage` |
+| 2   | Static canonical in `index.html` plus React 19 hoisting gave every page two canonicals  | `index.html` ships no title/description/canonical; a test keeps it that way                                                     |
+| 3   | Session Replay started without consent                                                  | Replay added via `addIntegration` only after a yes                                                                              |
+| 4   | Vercel Analytics read consent once, so "accept" did nothing until reload                | `useSyncExternalStore`-backed `useConsent()`                                                                                    |
+| 5   | "Every suppression names its rule" wasn't enforced                                      | `eslint-comments/no-unlimited-disable`, verified to reject a bare disable                                                       |
+| 6   | Two privacy E2E tests couldn't fail                                                     | Tests read the real JS and record every tracker request; mutation-tested in both directions                                     |
+
+**Functional bugs**
+
+| #   | Finding                                                                      | Fix                                                            |
+| --- | ---------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| 7   | `cp .env.example .env` gave an empty Web3Forms key; `??` kept it             | `\|\|`                                                         |
+| 8   | Honeypot sent a constant empty `botcheck`                                    | `FormData` read from the form itself                           |
+| 9   | Fast language switches could land out of order; failed downloads were silent | i18next's own ordering guard, plus revert-and-toast on failure |
+| 10  | Lighthouse audited the 404 page three times                                  | Real paths; category thresholds measured from 9 runs           |
+| 11  | Playwright could miss the preview server on IPv6-first runners               | `--host 127.0.0.1`                                             |
+| 12  | Contact rendered every toast twice (predates the branch)                     | Removed the page-level `<Toaster />`                           |
+
+**Conventions and accuracy**
+
+| #   | Finding                                                        | Fix                                            |
+| --- | -------------------------------------------------------------- | ---------------------------------------------- |
+| 13  | SEO copy was inline English, against AGENTS.md                 | Moved into all four locale files               |
+| 14  | `/blog` added to the sitemap despite rendering `noindex`       | Removed; the sitemap is also deterministic now |
+| 15  | Critical-path budget measured 146 kB of a 266 kB critical path | Eager set derived from `dist/index.html`       |
+
+Also fixed from the review's notes: the Report-Only CSP had nowhere to report
+to; direct `ReactGA` calls bypassed the consent gate; Dependabot's group order
+starved the named groups of anything but majors; production analytics IDs had
+been removed with no replacement (now in a committed `.env.production`); and
+missing hashed assets returned `index.html` with a one-year cache header.
+
+**Found while verifying the fixes.** Proving finding 1 in a real browser
+surfaced two language-detection bugs that were already on `master`: the
+detector read back `index.html`'s static `lang="en"` and ranked it above a
+`de-DE`-only browser (so Safari users in Germany got English), and the query
+lookup was spelled `queryString` where the detector expects `querystring`, so
+`?lng=` links never worked. Running Lighthouse for real surfaced a heading
+that skipped a level on `/contact` and a squashed portrait on Home. All fixed.

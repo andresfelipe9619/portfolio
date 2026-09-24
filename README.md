@@ -32,7 +32,8 @@ A modern, performant, and highly interactive web application built with a curate
 
 - **Fully localized UI** via `react-i18next` + `i18next`.
 - **4 languages out of the box**: English, Spanish, French, German.
-- **Language auto-detection + persistence**: Detects language from querystring/cookies/localStorage/browser and caches selection in cookie + localStorage.
+- **Language auto-detection + persistence**: Detects language from `?lng=` links, cookies, localStorage and the browser (a `de-DE` browser gets German), and caches the choice in cookie + localStorage.
+- **Lazy dictionaries**: only English ships in the main bundle; the others arrive as small chunks the first time they're needed, and the page waits for them rather than flashing the wrong language.
 - **Animated language selector with audio cues** per language.
 
 ### Easter eggs & playful interactions
@@ -55,26 +56,33 @@ A modern, performant, and highly interactive web application built with a curate
 
 ### SEO, discoverability, and social metadata
 
-- **Rich base metadata** in `index.html`: title, description, keywords, author, canonical, Open Graph, and Twitter card tags.
+- **Site-wide social card** in `index.html`: Open Graph and Twitter tags, plus keywords and author. Social crawlers don't run JavaScript, so this is the card every shared link shows.
 - **Structured data (JSON-LD)** using `schema.org/Person`.
 - **Sitemap + robots** in `public/sitemap.xml` and `public/robots.txt`.
-- **Per-page metadata** via a shared `<Seo>` component — every route has its own
-  title, description, canonical and social card rather than inheriting one.
-- **Generated sitemap**: `npm run sitemap` runs as part of the build, so `lastmod`
-  is always true and a new route can't be forgotten.
+- **Per-page metadata** via a shared `<Seo>` component — every route renders its
+  own localized title, description and canonical (or `noindex`). `index.html`
+  deliberately ships none of these: under React 19 a static default sits next
+  to the page's own tag instead of being replaced by it.
+- **Generated sitemap**: `npm run sitemap` runs as part of the build from one list
+  of indexable routes. `noindex` pages like `/blog` are left out on purpose, and
+  the output is deterministic, so a build never dirties the working tree.
 - **Custom 404** on a catch-all route, so unknown URLs stop returning a blank
   page behind an HTTP 200.
-- **`<html lang>` follows the active language**, which matters when four of them ship.
+- **`<html lang>` follows the language the text is actually in** — including
+  staying on English if a dictionary download fails.
 - **PWA-style manifest wiring** through `public/manifest.json`.
 
 ### Analytics, observability, and error handling
 
-- **Consent-gated by default**: GA4, Vercel Analytics and Microsoft Clarity all
-  wait for an explicit yes. Decline and the site behaves identically.
-- **Google Analytics 4** pageview/event helpers, inert unless `VITE_GA_TRACKING_ID` is set.
-- **Microsoft Clarity** loaded from a module (not an inline script), inert unless `VITE_CLARITY_PROJECT_ID` is set.
-- **Sentry instrumentation** with router tracing and session replay — replay
-  runs fully masked, so an error report never carries what someone typed.
+- **Consent-gated by default**: GA4, Vercel Analytics, Microsoft Clarity and Sentry
+  Session Replay all wait for an explicit yes, and start the moment it's given —
+  no reload needed. Decline and the site behaves identically.
+- **Google Analytics 4** and **Microsoft Clarity**, both loaded from modules (no
+  inline scripts). Their production IDs live in the committed `.env.production`,
+  which only `vite build` reads — so local development never pollutes
+  production dashboards.
+- **Sentry instrumentation** with router tracing for everyone (no PII, no
+  cookies), and session replay — fully masked — only after consent.
 - **Global React error hooks** wired into root `createRoot` (`onUncaughtError`, `onCaughtError`, `onRecoverableError`).
 - **Custom Sentry Error Boundary UI** with user-triggered report dialog fallback.
 - **Sentry test route** (`/test-error`) available in development only.
@@ -91,33 +99,54 @@ A modern, performant, and highly interactive web application built with a curate
 ### Quality and performance guardrails
 
 This is the part that's easy to claim and harder to keep true, so here's the
-bar as it actually stands — every number below is enforced in CI, not aspirational:
+bar as it actually stands. Every number below was measured, and every gate has
+been checked in both directions — it passes today, and it fails when broken.
 
-| Gate                 | Enforced by                     | Current             |
-| -------------------- | ------------------------------- | ------------------- |
-| TypeScript `strict`  | `npm run typecheck`             | ✅ zero errors      |
-| ESLint               | `npm run lint`                  | ✅ zero warnings    |
-| Prettier             | `npm run format:check`          | ✅ clean            |
-| Unit tests           | `npm run test:coverage`         | 136 tests           |
-| Coverage ratchet     | vitest `thresholds`             | 33% (51% own code)  |
-| End-to-end           | `npm run test:e2e` (Playwright) | 36 across 2 devices |
-| Critical JS bundle   | `npm run size`                  | 146 kB / 160 kB     |
-| Prod vulnerabilities | `npm audit --omit=dev`          | ✅ zero             |
-| SAST                 | CodeQL (`security-and-quality`) | every PR + weekly   |
-| Page quality         | Lighthouse CI budgets           | every PR            |
+| Gate                 | Enforced by                            | Current                        |
+| -------------------- | -------------------------------------- | ------------------------------ |
+| TypeScript `strict`  | `npm run typecheck`                    | ✅ zero errors                 |
+| ESLint               | `npm run lint`                         | ✅ zero warnings               |
+| Named suppressions   | `eslint-comments/no-unlimited-disable` | ✅ bare disables rejected      |
+| Prettier             | `npm run format:check`                 | ✅ clean                       |
+| Unit tests           | `npm run test:coverage`                | 174 tests                      |
+| Coverage ratchet     | vitest `thresholds`                    | 34% overall, 58% first-party   |
+| End-to-end           | `npm run test:e2e` (Playwright)        | 56 (28 each, desktop + mobile) |
+| Critical-path JS     | `npm run size`                         | 266 kB / 280 kB (brotli)       |
+| Prod vulnerabilities | `npm audit --omit=dev`                 | ✅ zero                        |
+| SAST                 | CodeQL (`security-and-quality`)        | every PR + weekly              |
+| Page quality         | Lighthouse CI                          | SEO & a11y 100 on all pages    |
 
-Two notes on honesty. The coverage headline is dragged down by
-`src/components/magicui/` — vendored canvas/WebGL components that jsdom cannot
-meaningfully execute; they're covered by Playwright instead, where a real
-browser runs them. And the coverage threshold is a **ratchet**: it's set to
-what the suite genuinely achieves and only ever goes up.
+> ⚠️ **The CI half of this isn't switched on yet.** Every command above runs
+> locally today. The GitHub workflows that run them on each PR are parked in
+> [`docs/ci/`](docs/ci/) until someone with `workflow` push rights moves them
+> into `.github/workflows/` — it's a three-line job, see
+> [`docs/ci/README.md`](docs/ci/README.md).
+
+A few notes on honesty:
+
+- **Coverage.** The headline is dragged down by `src/components/magicui/` —
+  vendored canvas/WebGL components that jsdom can't meaningfully execute.
+  Those are covered by Playwright, where a real browser runs them. The
+  threshold is a **ratchet**: set to what the suite achieves, and it only
+  goes up.
+- **Critical path.** 266 kB is every script `index.html` loads before first
+  render — measured straight from the built HTML, not guessed from chunk
+  names. It's heavy (Sentry and motion are most of it). The budget exists so
+  it can't quietly get heavier; slimming it is a project of its own.
+- **Home page performance.** The inner pages score 98–99 on Lighthouse. Home
+  scores around 55 on CI runners, because they have no GPU and the WebGL
+  globe and particle canvases render in software. Its budget is a floor to
+  catch regressions, not a pass mark.
 
 - **Security headers** (HSTS, nosniff, frame-deny, Referrer-Policy,
-  Permissions-Policy) plus a Report-Only CSP, served from `vercel.json`.
+  Permissions-Policy) plus a Report-Only CSP with no `'unsafe-inline'` for
+  scripts, all served from `vercel.json`. Violations are reported to Sentry.
 - **Source maps stay private** — uploaded to Sentry for symbolication, then
   deleted rather than served.
-- **Analytics require consent.** Nothing that measures a visitor runs until
-  they say yes, and declining costs them no functionality.
+- **Measurement waits for consent.** Google Analytics, Clarity, Vercel
+  Analytics and Sentry Session Replay start only after a visitor says yes, and
+  declining costs them nothing. Sentry error reports run for everyone: no
+  PII, no cookies, and they're how we find out something broke.
 
 For a deep dive into the underlying systems, check out [ARCHITECTURE.md](ARCHITECTURE.md).
 

@@ -105,10 +105,23 @@ You are here to help, not to replace. Here’s how you can be a good collaborato
 
 - **Privacy rules** (please don't quietly undo these):
   - Sentry Session Replay runs with `maskAllText`, `maskAllInputs` and
-    `blockAllMedia` on. There's a contact form on this site; what people type
-    into it is theirs.
-  - Analytics wait for consent. Declining must never degrade the experience.
+    `blockAllMedia` on — and only after consent. It is added with
+    `enableSessionReplay()`, never listed in `Sentry.init`. There's a contact
+    form on this site; what people type into it is theirs.
+  - Analytics (GA, Clarity, Vercel Analytics) wait for consent. Read consent
+    through `useConsent()` or `hasConsent()` at the moment you need it — never
+    once at render time, or "accept" does nothing until the next page load.
+  - Send analytics events through `logEvent` in `src/lib/ga.ts`, never
+    `ReactGA` directly: that's where the consent gate lives.
+  - Declining must never degrade the experience.
   - Source maps are uploaded to Sentry and then deleted, never served.
+
+- **SEO rules**:
+  - Every route renders `<Seo>` with localized copy. `index.html` ships no
+    `<title>`, description or canonical: React 19 adds page tags next to static
+    ones instead of replacing them, so a "default" there duplicates on every
+    page. A test enforces this.
+  - `noindex` pages stay out of `scripts/generate-sitemap.mjs`.
 - **Commits & Version Control**: We _strictly_ use **Gitmoji**.
   - Always prefix your commits with the appropriate emoji (e.g., `✨ feat:`, `🐛 fix:`, `📝 docs:`). This is Andrés's signature style. If you don't use Gitmoji, you're not doing it right.
 - **Animations**: Animations are a core part of the experience.

@@ -29,7 +29,7 @@ git push
 | `codeql.yml`     | PRs + weekly cron        | GitHub's SAST with the `security-and-quality` query pack.                                                                                                                                           |
 | `lighthouse.yml` | every PR                 | Performance, accessibility, best-practices and SEO budgets (see `lighthouserc.json`).                                                                                                               |
 
-## Two things worth knowing
+## Things worth knowing
 
 - **`pr-checks.yml` and `size-limit.yml` overwrite files that already exist.**
   That is intentional — the diff is the point. Read it before committing if
@@ -37,3 +37,24 @@ git push
 - **`lighthouse.yml` reads an optional secret**, `LHCI_GITHUB_APP_TOKEN`. Without
   it the job still runs and still enforces the budgets; it just can't post a
   status check back to the PR.
+- **The Lighthouse thresholds are measured, not guessed.** Nine local runs
+  (three per page) scored:
+
+  | Page        | Performance | Accessibility | Best practices | SEO |
+  | ----------- | ----------- | ------------- | -------------- | --- |
+  | `/`         | 54–56       | 100           | 96             | 100 |
+  | `/projects` | 98–99       | 100           | 96             | 100 |
+  | `/contact`  | 99          | 100           | 96             | 100 |
+
+  `lighthouserc.json` holds inner pages to performance ≥ 90 and every page to
+  accessibility and SEO ≥ 95. Home is held to performance ≥ 40: CI runners have
+  no GPU, so the WebGL globe and particle canvases render in software and
+  block the main thread for tens of seconds. That floor catches regressions;
+  it isn't a pass mark, and making Home faster is its own piece of work.
+  (JSON can't carry comments, which is why this lives here.)
+
+- **The E2E suite blocks every tracker and Sentry request.** Production builds
+  carry real analytics IDs, so without that block each CI run that accepts
+  the consent banner would send genuine hits to the live dashboards. Blocked
+  requests are still recorded, which is how the consent tests assert that
+  nothing was attempted.
