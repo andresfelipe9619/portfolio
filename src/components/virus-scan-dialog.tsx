@@ -9,12 +9,22 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import ReactGA from 'react-ga4';
+import { logEvent } from '@/lib/ga';
 
-const FunnyVirusScanDialog = ({ open, onOpenChange }) => {
-  const [step, setStep] = useState('warning');
+interface FunnyVirusScanDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}
+
+type ScanStep = 'warning' | 'scanning' | 'finished';
+
+const FunnyVirusScanDialog = ({
+  open,
+  onOpenChange,
+}: FunnyVirusScanDialogProps) => {
+  const [step, setStep] = useState<ScanStep>('warning');
   const [progress, setProgress] = useState(0);
-  const [viruses, setViruses] = useState([]);
+  const [viruses, setViruses] = useState<string[]>([]);
 
   const virusNames = [
     'Over-Engineered_Perfectionism.dll',
@@ -49,15 +59,13 @@ const FunnyVirusScanDialog = ({ open, onOpenChange }) => {
       }, 500);
       return () => clearInterval(interval);
     }
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step, viruses.length]);
 
   const handleDownload = () => {
-    ReactGA.event({
-      category: 'Resume',
-      action: 'Downloaded',
-      label: 'Resume Downloaded',
-    });
+    // Through logEvent, not ReactGA directly: that's where the consent gate
+    // lives. A direct call here used to queue events before anyone said yes.
+    logEvent('Resume', 'Downloaded', 'Resume Downloaded');
     const link = document.createElement('a');
     link.href = '/RESUME 3.3.pdf';
     link.download = 'andres-suarez-resume.pdf';

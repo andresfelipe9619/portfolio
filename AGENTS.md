@@ -83,8 +83,58 @@ You are here to help, not to replace. Here’s how you can be a good collaborato
 
 - **Build & Dev**: The project uses **Vite**.
   - `npm run dev`: Starts the development server.
-  - `npm run build`: Builds the production-ready application.
+  - `npm run build`: Generates the sitemap, typechecks, then builds.
   - `npm run lint`: Lints the codebase with ESLint.
+  - `npm run typecheck`: TypeScript in strict mode.
+  - `npm test` / `npm run test:coverage`: Vitest, with an enforced ratchet.
+  - `npm run test:e2e`: Playwright, in a real browser.
+  - `npm run size`: Bundle budgets.
+
+- **The quality bar** (all enforced on every PR — don't lower these to get green):
+  - TypeScript runs with `strict: true`. It is not decorative, and it is not
+    negotiable: `AGENTS.md` and `.cursorrules` both promise strong types, so
+    the config has to keep that promise. No `@ts-ignore` without a reason
+    written next to it.
+  - Every `eslint-disable` **names the rule it disables**. A bare
+    `// eslint-disable-next-line` switches off rules that don't exist yet.
+  - `no-console` is on (`warn`/`error` allowed). This portfolio has an easter
+    egg that fires when you press F12 — assume every visitor opens DevTools,
+    because the site literally invites them to.
+  - Coverage thresholds only ever go **up**.
+  - New user-facing copy goes in all four locale files, never inline.
+
+- **Privacy rules** (please don't quietly undo these):
+  - Sentry Session Replay runs with `maskAllText`, `maskAllInputs` and
+    `blockAllMedia` on — and only after consent. It is added with
+    `enableSessionReplay()`, never listed in `Sentry.init`. There's a contact
+    form on this site; what people type into it is theirs.
+  - Analytics (GA, Clarity, Vercel Analytics) wait for consent. Read consent
+    through `useConsent()` or `hasConsent()` at the moment you need it — never
+    once at render time, or "accept" does nothing until the next page load.
+  - Send analytics events through `logEvent` in `src/lib/ga.ts`, never
+    `ReactGA` directly: that's where the consent gate lives.
+  - Declining must never degrade the experience.
+  - Source maps are uploaded to Sentry and then deleted, never served.
+
+- **Error-reporting rules** (learned the hard way: months of errors, zero
+  alerts):
+  - The Sentry DSN lives in `.env.production`, never hardcoded. It must belong
+    to the project `SENTRY_ORG`/`SENTRY_PROJECT` name, where the source maps
+    go. `vercel.json`'s CSP follows it, and a test checks that part.
+  - One reporter per error. `Sentry.ErrorBoundary` reports what it catches, so
+    don't add `onCaughtError` to `createRoot` (see
+    `src/lib/root-error-handlers.ts` for what that broke).
+  - A crash the visitor saw is `handled={false}`. "Handled" ranks too low for
+    Sentry's default alert.
+  - `/test-error` exists in dev and on preview deploys only. Keep it out of
+    production.
+
+- **SEO rules**:
+  - Every route renders `<Seo>` with localized copy. `index.html` ships no
+    `<title>`, description or canonical: React 19 adds page tags next to static
+    ones instead of replacing them, so a "default" there duplicates on every
+    page. A test enforces this.
+  - `noindex` pages stay out of `scripts/generate-sitemap.mjs`.
 - **Commits & Version Control**: We _strictly_ use **Gitmoji**.
   - Always prefix your commits with the appropriate emoji (e.g., `✨ feat:`, `🐛 fix:`, `📝 docs:`). This is Andrés's signature style. If you don't use Gitmoji, you're not doing it right.
 - **Animations**: Animations are a core part of the experience.

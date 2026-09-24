@@ -6,7 +6,12 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 
-const JokeDialog = ({ open, onOpenChange }) => {
+interface JokeDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}
+
+const JokeDialog = ({ open, onOpenChange }: JokeDialogProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>

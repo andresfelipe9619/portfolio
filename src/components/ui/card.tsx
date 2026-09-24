@@ -23,10 +23,17 @@ const CardHeader = React.forwardRef<
 CardHeader.displayName = 'CardHeader';
 
 const CardTitle = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => (
-  <h3
+  HTMLHeadingElement,
+  React.HTMLAttributes<HTMLHeadingElement> & {
+    /**
+     * Heading level. Defaults to h3; pick whatever keeps the page outline in
+     * order — a card directly under the page's h1 wants an h2, or screen
+     * reader users navigating by heading find a gap where a level should be.
+     */
+    as?: 'h2' | 'h3' | 'h4';
+  }
+>(({ className, as: Heading = 'h3', ...props }, ref) => (
+  <Heading
     ref={ref}
     className={cn(
       'text-2xl font-semibold leading-none tracking-tight',

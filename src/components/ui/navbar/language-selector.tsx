@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useRef } from 'react';
 import { showEasterEggToast } from '@/hooks/use-easter-egg';
+import { useLanguageSwitch } from '@/hooks/use-language-switch';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -17,20 +18,21 @@ const languages = [
   { code: 'de', label: 'Deutsch', icon: '🍺', soundFile: '/sounds/de.m4a' },
 ];
 
+/** Only one language jingle gets to play at a time. */
+let currentMemeAudio: HTMLAudioElement | null = null;
+
 const playMemeSound = (soundFile: string) => {
   try {
-    const w = typeof window !== 'undefined' ? (window as any) : null;
-    if (w && w.__currentMemeAudio) {
-      w.__currentMemeAudio.pause();
-      w.__currentMemeAudio.currentTime = 0;
+    if (typeof window === 'undefined') return;
+    if (currentMemeAudio) {
+      currentMemeAudio.pause();
+      currentMemeAudio.currentTime = 0;
     }
-    if (w) {
-      w.__currentMemeAudio = new Audio(soundFile);
-      w.__currentMemeAudio.volume = 0.5;
-      w.__currentMemeAudio.play().catch((e: any) => {
-        console.warn('Audio playback was blocked or file not found:', e);
-      });
-    }
+    currentMemeAudio = new Audio(soundFile);
+    currentMemeAudio.volume = 0.5;
+    currentMemeAudio.play().catch((e: unknown) => {
+      console.warn('Audio playback was blocked or file not found:', e);
+    });
   } catch {
     // Ignore audio errors
   }
@@ -38,6 +40,7 @@ const playMemeSound = (soundFile: string) => {
 
 export function LanguageSelector() {
   const { t, i18n } = useTranslation();
+  const switchLanguage = useLanguageSwitch();
   const clickedLanguages = useRef<Set<string>>(new Set());
 
   const currentLang =
@@ -87,9 +90,13 @@ export function LanguageSelector() {
               import('@/lib/ga').then(({ logEvent }) => {
                 logEvent('Language', 'Change', lang.code);
               });
-              i18n.changeLanguage(lang.code);
+              void switchLanguage(lang.code);
               playMemeSound(lang.soundFile);
             }}
+            lang={lang.code}
+            aria-current={
+              i18n.language.startsWith(lang.code) ? 'true' : undefined
+            }
             className={`flex items-center gap-2 cursor-pointer ${
               i18n.language.startsWith(lang.code) ? 'bg-accent font-medium' : ''
             }`}
@@ -97,6 +104,7 @@ export function LanguageSelector() {
             <motion.span
               whileHover={{ scale: 1.2, rotate: [0, -10, 10, 0] }}
               className="text-base cursor-pointer"
+              aria-hidden="true"
             >
               {lang.icon}
             </motion.span>

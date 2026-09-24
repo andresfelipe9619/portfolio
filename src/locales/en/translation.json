@@ -141,7 +141,9 @@
     "footerNote": "Built with ❤️ and probably too much caffeine. Response time: Usually < 24hrs",
     "successTitle": "Message sent! 🚀",
     "successDesc": "Thanks for reaching out! I'll get back to you faster than you can say 'async/await'.",
-    "errorMsg": "Something went wrong!"
+    "errorMsg": "Something went wrong!",
+    "errorTitle": "That didn't go through 😅",
+    "errorDesc": "The gremlins intercepted it. Your message is still right here, exactly as you wrote it — give send another go."
   },
   "ossPage": {
     "title": "Open Source as My Supernova.",
@@ -205,5 +207,47 @@
     "description": "We encountered an unexpected glitch in the matrix. Don't worry, the incident has been logged.",
     "reboot": "Reboot Sequence",
     "submit": "Submit Diagnostic Report"
+  },
+  "notFound": {
+    "metaTitle": "404 — Page Not Found | Andrés Suárez",
+    "metaDescription": "This page went missing. The rest of the portfolio is very much here.",
+    "title0": "This page is",
+    "title1": "off the map",
+    "description": "Either it moved, it never existed, or you found a typo worth reporting. Every other route still works perfectly — I promise this isn't a metaphor for my code.",
+    "pathLabel": "You asked for:",
+    "backHome": "Back to Home",
+    "reportIt": "Tell me about it"
+  },
+  "consent": {
+    "title": "Mind if I count visitors?",
+    "description": "Anonymous analytics only — no ads, no selling, no creepy retargeting. Decline and the site works exactly the same.",
+    "accept": "Sure, go ahead",
+    "decline": "No thanks"
+  },
+  "languageLoadError": {
+    "title": "Couldn't load that language 📡",
+    "description": "The download didn't make it, so nothing's changed. Try again in a moment, or give the page a refresh."
+  },
+  "seo": {
+    "home": {
+      "title": "Creative Developer & Systems Thinker",
+      "description": "Global companies trust me to build what others can't. Senior software engineer working across cloud, automation and SaaS architecture."
+    },
+    "projects": {
+      "title": "Projects",
+      "description": "Selected work across fintech, SaaS, e-commerce, healthcare and logistics — shipped in eleven countries and still standing."
+    },
+    "oss": {
+      "title": "Open Source",
+      "description": "Production-ready tools, serverless experiments and battle-tested utilities. Fork them, break them, remix them."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Got a project in mind, a burning question, or just want to say hi? Response time is usually under 24 hours."
+    },
+    "caseStudy": {
+      "suffix": "Deep Dive",
+      "fallbackTitle": "Case Study Not Found"
+    }
   }
 }

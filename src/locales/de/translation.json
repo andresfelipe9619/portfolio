@@ -141,7 +141,9 @@
     "footerNote": "Gebaut mit ❤️ und wahrscheinlich zu viel Koffein. Antwortzeit: Normalerweise < 24 Std.",
     "successTitle": "Nachricht gesendet! 🚀",
     "successDesc": "Danke für die Kontaktaufnahme! Ich melde mich schneller zurück als Sie 'async/await' sagen können.",
-    "errorMsg": "Etwas ist schief gelaufen!"
+    "errorMsg": "Etwas ist schief gelaufen!",
+    "errorTitle": "Das kam nicht an 😅",
+    "errorDesc": "Die Gremlins waren schneller. Ihre Nachricht steht noch genau so da, wie Sie sie geschrieben haben — einfach nochmal senden."
   },
   "ossPage": {
     "title": "Open Source als Meine Supernova.",
@@ -201,5 +203,47 @@
     "description": "Wir sind auf einen unerwarteten Fehler in der Matrix gestoßen. Keine Sorge, der Vorfall wurde protokolliert.",
     "reboot": "Neustart-Sequenz",
     "submit": "Diagnosebericht Senden"
+  },
+  "notFound": {
+    "metaTitle": "404 — Seite nicht gefunden | Andrés Suárez",
+    "metaDescription": "Diese Seite ist verschwunden. Der Rest des Portfolios ist sehr wohl da.",
+    "title0": "Diese Seite ist",
+    "title1": "von der Karte",
+    "description": "Entweder ist sie umgezogen, hat nie existiert, oder Sie haben einen Tippfehler gefunden, der eine Meldung wert ist. Alle anderen Routen funktionieren einwandfrei — versprochen, das ist keine Metapher für meinen Code.",
+    "pathLabel": "Gesucht haben Sie:",
+    "backHome": "Zurück zur Startseite",
+    "reportIt": "Sagen Sie es mir"
+  },
+  "consent": {
+    "title": "Darf ich Besuche zählen?",
+    "description": "Nur anonyme Analyse — keine Werbung, kein Datenverkauf, kein gruseliges Retargeting. Wenn Sie ablehnen, funktioniert die Seite genau gleich.",
+    "accept": "Klar, gerne",
+    "decline": "Nein danke"
+  },
+  "languageLoadError": {
+    "title": "Diese Sprache ließ sich nicht laden 📡",
+    "description": "Der Download ist nicht angekommen, also hat sich nichts geändert. Versuchen Sie es gleich nochmal, oder laden Sie die Seite neu."
+  },
+  "seo": {
+    "home": {
+      "title": "Kreativer Entwickler & Systemdenker",
+      "description": "Unternehmen weltweit vertrauen mir, zu bauen, was andere nicht können. Senior Software Engineer für Cloud, Automatisierung und SaaS-Architektur."
+    },
+    "projects": {
+      "title": "Projekte",
+      "description": "Ausgewählte Arbeiten aus Fintech, SaaS, E-Commerce, Gesundheitswesen und Logistik — ausgeliefert in elf Ländern und stehen immer noch."
+    },
+    "oss": {
+      "title": "Open Source",
+      "description": "Produktionsreife Tools, Serverless-Experimente und kampferprobte Utilities. Forken, kaputtmachen, remixen."
+    },
+    "contact": {
+      "title": "Kontakt",
+      "description": "Ein Projekt im Kopf, eine brennende Frage oder einfach nur Hallo sagen? Die Antwort kommt meist in unter 24 Stunden."
+    },
+    "caseStudy": {
+      "suffix": "Im Detail",
+      "fallbackTitle": "Fallstudie Nicht Gefunden"
+    }
   }
 }

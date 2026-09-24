@@ -11,8 +11,10 @@ import { DraggableExplorer } from '@/components/ui/navbar/draggable-explorer.tsx
 import { useKeyListener } from '@/hooks/useKeyListener.tsx';
 import { useHackAttemptEasterEgg } from '@/hooks/use-easter-egg';
 import { useWebMCP } from '@/hooks/use-web-mcp';
+import { useDocumentLanguage } from '@/hooks/use-document-language';
 import { logPageView } from './lib/ga';
 import ErrorBoundary from '@/components/error-boundary';
+import { ConsentBanner } from '@/components/consent-banner';
 
 // Lazy loaded pages to improve initial load time (LCP, INP)
 const Home = lazy(() => import('./pages/Home'));
@@ -22,6 +24,7 @@ const Projects = lazy(() => import('./pages/Projects'));
 const Blog = lazy(() => import('./pages/Blog'));
 const CaseStudy = lazy(() => import('./pages/CaseStudy'));
 const TestError = lazy(() => import('./pages/TestError'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(
@@ -32,6 +35,7 @@ export default function App() {
   const { t } = useTranslation();
 
   useWebMCP();
+  useDocumentLanguage();
   useKeyListener(setExplorerOpen);
   useHackAttemptEasterEgg(
     location.pathname,
@@ -73,9 +77,20 @@ export default function App() {
                   <Route path="/projects" element={<Projects />} />
                   <Route path="/blog" element={<Blog />} />
                   <Route path="/case-studies/:id" element={<CaseStudy />} />
-                  <Route path="/test-error" element={<TestError />} />
+                  {/* Sentry's panic button. In dev, and on Vercel preview
+                      deploys so the whole path (report, issue, alert email)
+                      can be checked before a change ships. Never in
+                      production, where it's a free way to burn error quota. */}
+                  {(import.meta.env.DEV ||
+                    import.meta.env.VITE_VERCEL_ENV === 'preview') && (
+                    <Route path="/test-error" element={<TestError />} />
+                  )}
+                  {/* Catches everything else, so unknown URLs stop rendering
+                      a blank page behind a cheerful HTTP 200. */}
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </Suspense>
+              <ConsentBanner />
             </ErrorBoundary>
           )}
         </div>

@@ -56,8 +56,6 @@ export function OssCard({
             'relative h-full rounded-2xl p-[1px]',
             'group-hover:opacity-100 opacity-80 transition',
           )}
-          borderClassName="rounded-2xl"
-          glowClassName="rounded-2xl opacity-80"
         >
           <div className="relative h-full rounded-2xl p-2">
             <div className="mb-2 flex items-center justify-between text-xs opacity-70">

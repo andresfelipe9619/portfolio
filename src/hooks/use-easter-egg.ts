@@ -14,13 +14,20 @@ export const showEasterEggToast = (
   shownEasterEggs.add(id);
   toast(title, {
     description,
-    duration: Number.POSITIVE_INFINITY,
+    // Long enough to read and enjoy, short enough that it doesn't become a
+    // permanent resident for anyone navigating by keyboard.
+    duration: 15000,
     icon: '🚀',
     action: {
       label: 'Close',
-      onClick: () => console.log('Easter egg acknowledged!'),
+      onClick: () => dismissEasterEggToast(id),
     },
   });
+};
+
+/** Lets a dismissed easter egg be re-earned later in the session. */
+export const dismissEasterEggToast = (id: string) => {
+  shownEasterEggs.delete(id);
 };
 
 export function useTimeEasterEgg(

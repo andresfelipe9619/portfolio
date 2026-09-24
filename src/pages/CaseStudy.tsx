@@ -5,12 +5,14 @@ import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import BlurFade from '@/components/magicui/blur-fade';
 import { Badge } from '@/components/ui/badge';
 import { Particles } from '@/components/magicui/particles';
-import { Helmet } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
+import { Seo } from '@/components/seo';
 import { TIMELINE_DATA } from '@/data/timeline';
 
 export default function CaseStudy() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   // Scroll to top on mount
   useEffect(() => {
@@ -32,13 +34,18 @@ export default function CaseStudy() {
         refresh
       />
 
-      <Helmet>
-        <title>
-          {project?.title
-            ? `${project.title} | Deep Dive`
-            : 'Deep Dive Case Study'}
-        </title>
-      </Helmet>
+      <Seo
+        title={
+          project
+            ? `${project.title} — ${t('seo.caseStudy.suffix')}`
+            : t('seo.caseStudy.fallbackTitle')
+        }
+        description={project?.summary ?? project?.description}
+        path={`/case-studies/${id ?? ''}`}
+        // An unknown case-study id renders the "not found" state; don't let
+        // search engines index that under whatever URL someone typed.
+        noIndex={!project}
+      />
 
       {/* Floating Back Button */}
       <div className="fixed top-24 left-4 md:left-8 z-40">

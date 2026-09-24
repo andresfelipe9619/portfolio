@@ -242,3 +242,18 @@
 .no-scroll {
   overflow: hidden;
 }
+
+/*
+ * While the consent banner is up it occupies the bottom of the viewport. Reserve
+ * that space so nothing interactive ends up trapped underneath it — on a phone
+ * the bottom of the page is usually the submit button.
+ */
+body.has-consent-banner {
+  padding-bottom: 12rem;
+}
+
+@media (min-width: 640px) {
+  body.has-consent-banner {
+    padding-bottom: 8rem;
+  }
+}

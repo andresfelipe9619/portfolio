@@ -141,7 +141,9 @@
     "footerNote": "Construit avec ❤️ et probablement trop de caféine. Temps de réponse: Habituellement < 24h",
     "successTitle": "Message envoyé ! 🚀",
     "successDesc": "Merci d'avoir tendu la main! Je vous recontacterai plus vite que vous ne pouvez dire 'async/await'.",
-    "errorMsg": "Quelque chose a mal tourné !"
+    "errorMsg": "Quelque chose a mal tourné !",
+    "errorTitle": "Ça n'est pas passé 😅",
+    "errorDesc": "Les gremlins l'ont intercepté. Votre message est toujours là, exactement tel que vous l'avez écrit — réessayez."
   },
   "ossPage": {
     "title": "L'Open Source comme Ma Supernova.",
@@ -201,5 +203,47 @@
     "description": "Nous avons rencontré un dysfonctionnement inattendu dans la matrice. Ne vous inquiétez pas, l'incident a été enregistré.",
     "reboot": "Séquence de Redémarrage",
     "submit": "Soumettre le Rapport de Diagnostic"
+  },
+  "notFound": {
+    "metaTitle": "404 — Page introuvable | Andrés Suárez",
+    "metaDescription": "Cette page a disparu. Le reste du portfolio est bien là.",
+    "title0": "Cette page est",
+    "title1": "hors des sentiers",
+    "description": "Soit elle a déménagé, soit elle n'a jamais existé, soit vous avez trouvé une coquille qui mérite d'être signalée. Toutes les autres routes fonctionnent — promis, ce n'est pas une métaphore de mon code.",
+    "pathLabel": "Vous cherchiez :",
+    "backHome": "Retour à l'accueil",
+    "reportIt": "Dites-le moi"
+  },
+  "consent": {
+    "title": "Puis-je compter les visites ?",
+    "description": "Analytique anonyme uniquement — pas de pub, pas de revente, pas de reciblage inquiétant. Si vous refusez, le site fonctionne exactement pareil.",
+    "accept": "Bien sûr",
+    "decline": "Non merci"
+  },
+  "languageLoadError": {
+    "title": "Impossible de charger cette langue 📡",
+    "description": "Le téléchargement n'a pas abouti, donc rien n'a changé. Réessayez dans un instant, ou rechargez la page."
+  },
+  "seo": {
+    "home": {
+      "title": "Développeur Créatif & Penseur Systémique",
+      "description": "Des entreprises du monde entier me confient ce que d'autres ne savent pas construire. Ingénieur logiciel senior : cloud, automatisation et architecture SaaS."
+    },
+    "projects": {
+      "title": "Projets",
+      "description": "Une sélection de projets en fintech, SaaS, e-commerce, santé et logistique — livrés dans onze pays et toujours debout."
+    },
+    "oss": {
+      "title": "Open Source",
+      "description": "Des outils prêts pour la production, des expériences serverless et des utilitaires éprouvés. Forkez-les, cassez-les, remixez-les."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Un projet en tête, une question brûlante, ou juste envie de dire bonjour ? Je réponds généralement en moins de 24 heures."
+    },
+    "caseStudy": {
+      "suffix": "En Profondeur",
+      "fallbackTitle": "Étude de Cas Introuvable"
+    }
   }
 }

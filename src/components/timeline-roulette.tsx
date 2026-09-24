@@ -8,9 +8,10 @@ import {
   focusGlobe,
 } from '@/lib/timeline';
 import { cn } from '@/lib/utils';
+import type { TimelineByYear } from '@/data/timeline';
 
 type Props = {
-  data: { timeline: Record<string, any[]> }; // shape compatible with TIMELINE_DATA
+  data: { timeline: TimelineByYear }; // shape compatible with TIMELINE_DATA
   onChangeIndex?: (i: number, item: FlattenedItem) => void;
 };
 
@@ -37,7 +38,7 @@ export default function TimelineRoulette({ data, onChangeIndex }: Props) {
       }
       onChangeIndex?.(i, item);
     },
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [items, onChangeIndex],
   );
 

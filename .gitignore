@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+coverage
 *.local
 .env
 
@@ -26,3 +27,9 @@ dist-ssr
 
 Timeline MD
 canva.html
+# Playwright
+/playwright-report
+/test-results
+/blob-report
+/playwright/.cache
+.lighthouseci
