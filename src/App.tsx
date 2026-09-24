@@ -77,9 +77,12 @@ export default function App() {
                   <Route path="/projects" element={<Projects />} />
                   <Route path="/blog" element={<Blog />} />
                   <Route path="/case-studies/:id" element={<CaseStudy />} />
-                  {/* Sentry's panic button. Handy in dev, a free way to burn
-                      error quota in production. */}
-                  {import.meta.env.DEV && (
+                  {/* Sentry's panic button. In dev, and on Vercel preview
+                      deploys so the whole path (report, issue, alert email)
+                      can be checked before a change ships. Never in
+                      production, where it's a free way to burn error quota. */}
+                  {(import.meta.env.DEV ||
+                    import.meta.env.VITE_VERCEL_ENV === 'preview') && (
                     <Route path="/test-error" element={<TestError />} />
                   )}
                   {/* Catches everything else, so unknown URLs stop rendering

@@ -266,11 +266,12 @@ test.describe('security headers and hygiene', () => {
     }
   });
 
-  test('the dev-only error route is not reachable in a build', async ({
+  test('the Sentry test route is not reachable in a production build', async ({
     page,
   }) => {
     await page.goto('/test-error');
-    // Gated behind import.meta.env.DEV, so a production build falls to 404.
+    // Only dev servers and Vercel preview deploys get it (see App.tsx). This
+    // build is neither, so it falls through to the 404 page.
     await expect(page.getByText('404')).toBeVisible();
   });
 });
