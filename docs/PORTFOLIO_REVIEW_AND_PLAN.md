@@ -813,3 +813,37 @@ detector read back `index.html`'s static `lang="en"` and ranked it above a
 lookup was spelled `queryString` where the detector expects `querystring`, so
 `?lng=` links never worked. Running Lighthouse for real surfaced a heading
 that skipped a level on `/contact` and a squashed portrait on Home. All fixed.
+
+## 11. Sentry: a year without an alert
+
+The report: _"It's been like a year and I haven't received any alert."_ Alert
+emails from other Sentry projects were arriving fine, so the mail was never the
+problem. The errors were going somewhere else.
+
+| #   | Finding                                                                                                                                                                                     | Evidence                                                                                                                                                                                                                                                                                                            | Fix                                                                                      |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| 1   | The hardcoded DSN sent every error to project `4509940389707776` on org `o267366`. Source maps, weekly reports and alerts all belong to `andres-suarez-dev/portfolio` (`4510980472438784`). | The Vercel build log uploads maps to `Organization: andres-suarez-dev, Projects: portfolio`. The weekly report lists that org's three projects, and the DSN's isn't one of them. The project IDs decode to creation dates: 31 Aug 2025 for the DSN's, 3 Mar 2026 for `portfolio`, the day Sentry was re-integrated. | DSN moved to `.env.production`. **The value itself still has to be swapped.** See below. |
+| 2   | Every crash was reported twice, by the boundary and by `onCaughtError`. Dedupe kept the `onCaughtError` copy, so "Submit Diagnostic Report" filed feedback against the copy it dropped.     | A real browser on `/test-error` sent event `c31e…` and opened the dialog for `63fb…`.                                                                                                                                                                                                                               | `onCaughtError` removed. A test with the real SDK pins it.                               |
+| 3   | Boundary crashes defaulted to `handled: true`, which ranks below the "high priority issues" bar of Sentry's default alert. #2's duplicate hid this; fixing #2 alone would have exposed it.  | SDK source: `handled = props.handled ?? !!props.fallback`.                                                                                                                                                                                                                                                          | `handled={false}`.                                                                       |
+| 4   | CSP `script-src` blocked the feedback dialog, which loads its script from the DSN's host. Enforcing the CSP would have broken it.                                                           | `showReportDialog` injects `https://<dsn host>/api/embed/error-page/`.                                                                                                                                                                                                                                              | Host allowed. A test keeps `vercel.json` in step with the DSN.                           |
+| 5   | Every build reported itself as `production`: previews, laptops, CI and Lighthouse runs alike.                                                                                               | `environment: import.meta.env.MODE`.                                                                                                                                                                                                                                                                                | `production` / `preview` from Vercel, `local` everywhere else.                           |
+| 6   | There was no way to test the pipeline end to end without shipping a crash button to production.                                                                                             | `/test-error` was dev-only (S7).                                                                                                                                                                                                                                                                                    | Also available on Vercel preview deploys.                                                |
+
+Verified on a production build configured like a preview deploy: one event per
+crash, `handled: false`, `environment: preview`, release set to the commit, and
+the dialog opened for the event that was sent.
+
+### Still for a human
+
+Three things only the Sentry dashboard can do:
+
+1. **Swap the DSN.** Copy it from Sentry → Settings → Projects → `portfolio` →
+   Client Keys (DSN). Put it in `.env.production`, then update the Sentry host
+   and report endpoint in `vercel.json`. If they disagree,
+   `src/__tests__/sentry-config.test.ts` fails and prints the expected values.
+2. **Check there's an alert rule.** Alerts → Alert Rules, filtered to
+   `portfolio`. A site this quiet can afford "A new issue is created → email
+   me", which is also the rule that makes the next step prove something.
+3. **Break something on purpose.** Open `/test-error` on the PR's preview
+   deploy and press the button. Within a minute or two you should see an issue
+   in `portfolio` tagged `environment:preview`, and an email about it.

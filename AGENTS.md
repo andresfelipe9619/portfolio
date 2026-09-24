@@ -116,6 +116,19 @@ You are here to help, not to replace. Here’s how you can be a good collaborato
   - Declining must never degrade the experience.
   - Source maps are uploaded to Sentry and then deleted, never served.
 
+- **Error-reporting rules** (learned the hard way: months of errors, zero
+  alerts):
+  - The Sentry DSN lives in `.env.production`, never hardcoded. It must belong
+    to the project `SENTRY_ORG`/`SENTRY_PROJECT` name, where the source maps
+    go. `vercel.json`'s CSP follows it, and a test checks that part.
+  - One reporter per error. `Sentry.ErrorBoundary` reports what it catches, so
+    don't add `onCaughtError` to `createRoot` (see
+    `src/lib/root-error-handlers.ts` for what that broke).
+  - A crash the visitor saw is `handled={false}`. "Handled" ranks too low for
+    Sentry's default alert.
+  - `/test-error` exists in dev and on preview deploys only. Keep it out of
+    production.
+
 - **SEO rules**:
   - Every route renders `<Seo>` with localized copy. `index.html` ships no
     `<title>`, description or canonical: React 19 adds page tags next to static

@@ -83,9 +83,21 @@ A modern, performant, and highly interactive web application built with a curate
   production dashboards.
 - **Sentry instrumentation** with router tracing for everyone (no PII, no
   cookies), and session replay — fully masked — only after consent.
-- **Global React error hooks** wired into root `createRoot` (`onUncaughtError`, `onCaughtError`, `onRecoverableError`).
-- **Custom Sentry Error Boundary UI** with user-triggered report dialog fallback.
-- **Sentry test route** (`/test-error`) available in development only.
+- **One DSN, one project**: the DSN lives in `.env.production` next to the
+  analytics IDs, and a test keeps the CSP's report endpoint in `vercel.json`
+  pointing at the same Sentry project. It has to be the project the source maps
+  go to, too. For months it wasn't, and no alert ever came.
+- **Honest environments**: Vercel labels events `production` or `preview`;
+  anything built elsewhere (a laptop, CI, Lighthouse) is `local`, so it can't
+  pass for the live site.
+- **One report per crash**: the error boundary reports what it catches, marked
+  unhandled so it clears the bar for Sentry's default alert. The root's
+  `onUncaughtError` and `onRecoverableError` hooks cover the rest.
+- **Custom Sentry Error Boundary UI** whose "Submit Diagnostic Report" files
+  visitor feedback against the event that was actually sent.
+- **Sentry test route** (`/test-error`) in development and on Vercel preview
+  deploys, never in production. Open it on a PR's preview to follow an error
+  all the way to the alert email.
 
 ### Content & interaction modules
 
@@ -108,7 +120,7 @@ been checked in both directions — it passes today, and it fails when broken.
 | ESLint               | `npm run lint`                         | ✅ zero warnings               |
 | Named suppressions   | `eslint-comments/no-unlimited-disable` | ✅ bare disables rejected      |
 | Prettier             | `npm run format:check`                 | ✅ clean                       |
-| Unit tests           | `npm run test:coverage`                | 174 tests                      |
+| Unit tests           | `npm run test:coverage`                | 185 tests                      |
 | Coverage ratchet     | vitest `thresholds`                    | 34% overall, 58% first-party   |
 | End-to-end           | `npm run test:e2e` (Playwright)        | 56 (28 each, desktop + mobile) |
 | Critical-path JS     | `npm run size`                         | 266 kB / 280 kB (brotli)       |
