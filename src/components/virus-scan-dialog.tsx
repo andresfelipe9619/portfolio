@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import ReactGA from 'react-ga4';
+import { logEvent } from '@/lib/ga';
 
 interface FunnyVirusScanDialogProps {
   open: boolean;
@@ -63,11 +63,9 @@ const FunnyVirusScanDialog = ({
   }, [step, viruses.length]);
 
   const handleDownload = () => {
-    ReactGA.event({
-      category: 'Resume',
-      action: 'Downloaded',
-      label: 'Resume Downloaded',
-    });
+    // Through logEvent, not ReactGA directly: that's where the consent gate
+    // lives. A direct call here used to queue events before anyone said yes.
+    logEvent('Resume', 'Downloaded', 'Resume Downloaded');
     const link = document.createElement('a');
     link.href = '/RESUME 3.3.pdf';
     link.download = 'andres-suarez-resume.pdf';

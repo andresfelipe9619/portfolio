@@ -1,4 +1,4 @@
-import './instrument';
+import { enableSessionReplay } from './instrument';
 
 import { StrictMode, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -8,23 +8,24 @@ import { BrowserRouter } from 'react-router-dom';
 import { initGA } from './lib/ga';
 import { initClarity } from './lib/clarity';
 import { reactErrorHandler } from '@sentry/react';
-import { Analytics } from '@vercel/analytics/react';
 import { HelmetProvider } from 'react-helmet-async';
 import { hasConsent, onConsentChange } from './lib/consent';
+import { ConsentedAnalytics } from './components/consented-analytics';
 import './lib/i18n';
 
 /**
- * Analytics boot only for visitors who said yes — on first load if they already
- * agreed, or the moment they press accept on the banner.
+ * Measurement boots only for visitors who said yes — on first load if they
+ * already agreed, or the moment they press accept on the banner.
  */
-const bootAnalytics = () => {
+const bootMeasurement = () => {
   if (!hasConsent()) return;
   initGA();
   initClarity();
+  enableSessionReplay();
 };
 
-bootAnalytics();
-onConsentChange(bootAnalytics);
+bootMeasurement();
+onConsentChange(bootMeasurement);
 
 createRoot(document.getElementById('root')!, {
   onUncaughtError: reactErrorHandler(),
@@ -33,9 +34,7 @@ createRoot(document.getElementById('root')!, {
 }).render(
   <StrictMode>
     <HelmetProvider>
-      {/* Vercel Analytics is cookieless, but it still counts as measurement,
-          so it waits for the same yes as everything else. */}
-      {hasConsent() && <Analytics />}
+      <ConsentedAnalytics />
       <Suspense fallback={<div>Loading...</div>}>
         <BrowserRouter>
           <App />

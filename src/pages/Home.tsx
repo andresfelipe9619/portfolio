@@ -16,7 +16,7 @@ import { useEffect, useState, useMemo, Suspense, lazy } from 'react';
 import BlurFade from '@/components/magicui/blur-fade.tsx';
 import { RainbowButton } from '@/components/magicui/rainbow-button.tsx';
 import { AuroraText } from '@/components/magicui/aurora-text';
-import ReactGA from 'react-ga4';
+import { logEvent } from '@/lib/ga';
 import { useNavigate } from 'react-router-dom';
 import { TESTIMONIALS, TIMELINE_DATA, type Testimonial } from '@/data/timeline';
 import { flattenTimeline, type FlattenedItem } from '@/lib/timeline';
@@ -113,11 +113,7 @@ export default function Home() {
   }, [completed]);
 
   function handleResumeDownloadClick() {
-    ReactGA.event({
-      category: 'Resume',
-      action: 'Pre-Download',
-      label: 'Resume Download Button Click',
-    });
+    logEvent('Resume', 'Pre-Download', 'Resume Download Button Click');
     setShowVirusScan(true);
   }
 
@@ -152,9 +148,7 @@ export default function Home() {
 
       frame();
       setTimeout(() => {
-        import('@/lib/ga').then(({ logEvent }) => {
-          logEvent('Contact', 'Intent', "Let's Talk Button");
-        });
+        logEvent('Contact', 'Intent', "Let's Talk Button");
         navigate('/contact');
       }, 1000);
     });

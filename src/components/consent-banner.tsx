@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'motion/react';
 import { Cookie } from 'lucide-react';
-import { getConsent, setConsent } from '@/lib/consent';
+import { setConsent } from '@/lib/consent';
+import { useConsent } from '@/hooks/use-consent';
 
 /**
  * A small, non-blocking ask. No dark patterns, no "legitimate interest"
@@ -11,12 +12,8 @@ import { getConsent, setConsent } from '@/lib/consent';
  */
 export function ConsentBanner() {
   const { t } = useTranslation();
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    // Only ask people who haven't already answered.
-    setVisible(getConsent() === 'unset');
-  }, []);
+  // Only ask people who haven't answered — in this tab or any other.
+  const visible = useConsent() === 'unset';
 
   useEffect(() => {
     // A fixed banner floats over whatever is at the bottom of the page, which
@@ -32,7 +29,6 @@ export function ConsentBanner() {
 
   const answer = (state: 'granted' | 'denied') => {
     setConsent(state);
-    setVisible(false);
   };
 
   return (
