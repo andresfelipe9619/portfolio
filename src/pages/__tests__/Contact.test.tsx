@@ -185,4 +185,109 @@ describe('Contact page', () => {
       ).toBeEnabled();
     });
   });
+
+  /** Submits a filled form and hands back what was actually POSTed. */
+  const submitAndCapture = async (tickHoneypot = false) => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: vi.fn().mockResolvedValue({ success: true }),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    const { container } = render(<Contact />);
+    fillForm();
+    if (tickHoneypot) {
+      fireEvent.click(
+        container.querySelector('input[name="botcheck"]') as HTMLInputElement,
+      );
+    }
+    fireEvent.click(screen.getByRole('button', { name: /send message/i }));
+
+    await waitFor(() => expect(fetchMock).toHaveBeenCalled());
+    return fetchMock.mock.calls[0][1].body as FormData;
+  };
+
+  it('posts every field the visitor filled in', async () => {
+    const body = await submitAndCapture();
+
+    expect(body.get('name')).toBe('Andres');
+    expect(body.get('email')).toBe('andres@example.com');
+    expect(body.get('subject')).toBe('Hello');
+    expect(body.get('message')).toBe('This portfolio rocks.');
+    expect(body.get('access_key')).toBeTruthy();
+  });
+
+  describe('honeypot', () => {
+    it('stays out of the way for a human', async () => {
+      const body = await submitAndCapture();
+
+      expect(body.has('botcheck')).toBe(false);
+    });
+
+    // The finding: botcheck used to be appended as a constant empty string,
+    // so a bot ticking the hidden box changed nothing and the spam went out.
+    it('reports a bot that ticks the hidden box', async () => {
+      const body = await submitAndCapture(true);
+
+      expect(body.get('botcheck')).toBe('on');
+    });
+  });
+
+  // App mounts the global Toaster. A second one here made sonner render every
+  // contact toast twice.
+  it('does not mount a Toaster of its own', () => {
+    render(<Contact />);
+
+    expect(screen.queryByTestId('toaster')).not.toBeInTheDocument();
+  });
+});
+
+describe('Web3Forms access key', () => {
+  const FALLBACK_KEY = 'ce6a6db2-b865-4b4b-8f6c-c11ccb4481bf';
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  /** The key is read once at module load, so each case imports Contact fresh. */
+  const postedKeyWith = async (envValue: string | undefined) => {
+    vi.resetModules();
+    if (envValue !== undefined) {
+      vi.stubEnv('VITE_WEB3FORMS_ACCESS_KEY', envValue);
+    }
+    const { default: FreshContact } = await import('../Contact');
+
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: vi.fn().mockResolvedValue({ success: true }),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    render(<FreshContact />);
+    fireEvent.change(screen.getByLabelText(/name/i), {
+      target: { name: 'name', value: 'Ada' },
+    });
+    fireEvent.change(screen.getByLabelText(/email/i), {
+      target: { name: 'email', value: 'ada@example.com' },
+    });
+    fireEvent.change(screen.getByLabelText(/message/i), {
+      target: { name: 'message', value: 'Hello' },
+    });
+    fireEvent.click(screen.getByRole('button', { name: /send message/i }));
+
+    await waitFor(() => expect(fetchMock).toHaveBeenCalled());
+    return (fetchMock.mock.calls[0][1].body as FormData).get('access_key');
+  };
+
+  it('uses the configured key when one is set', async () => {
+    expect(await postedKeyWith('fork-owner-key')).toBe('fork-owner-key');
+  });
+
+  // The finding: `cp .env.example .env` sets this to "", and `??` kept the
+  // empty string, so every message was rejected.
+  it('falls back to the built-in key when the variable is blank', async () => {
+    expect(await postedKeyWith('')).toBe(FALLBACK_KEY);
+  });
 });

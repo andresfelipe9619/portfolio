@@ -14,7 +14,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { toast, Toaster } from 'sonner';
+import { toast } from 'sonner';
 import { AuroraText } from '@/components/magicui/aurora-text.tsx';
 import { RetroGrid } from '@/components/magicui/retro-grid.tsx';
 import { logEvent } from '@/lib/ga';
@@ -22,10 +22,15 @@ import { useTranslation } from 'react-i18next';
 import * as Sentry from '@sentry/react';
 import { Seo } from '@/components/seo';
 
-// Web3Forms access keys are public by design, but keeping it in env means a fork
-// of this repo doesn't inherit a direct line into Andrés's inbox.
+// Web3Forms access keys are public by design (this one ships in the bundle to
+// every visitor), so the real protection against abuse lives in the Web3Forms
+// dashboard, not here. The env var exists so a fork can point the form at its
+// own inbox; without one, messages land in Andrés's.
+//
+// `||`, not `??`: copying .env.example leaves this set to an empty string, and
+// an empty key would reject every single message.
 const WEB3FORMS_ACCESS_KEY =
-  import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ??
+  import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ||
   'ce6a6db2-b865-4b4b-8f6c-c11ccb4481bf';
 
 export default function ContactPage() {
@@ -50,20 +55,18 @@ export default function ContactPage() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const fd = new FormData();
+    // Read the form itself rather than rebuilding it from state. The fields are
+    // the same either way, but only the form knows whether the hidden botcheck
+    // box got ticked — which is the entire point of a honeypot. (It used to be
+    // sent as a constant empty string, so it could never catch anything.)
+    const fd = new FormData(e.currentTarget);
 
     try {
-      fd.append('name', formData.name);
-      fd.append('email', formData.email);
-      fd.append('subject', formData.subject);
-      fd.append('message', formData.message);
       fd.append('access_key', WEB3FORMS_ACCESS_KEY);
-      // Honeypot: humans can't see it, bots can't resist it.
-      fd.append('botcheck', '');
 
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -265,7 +268,6 @@ export default function ContactPage() {
             <p className="text-sm">{t('contact.footerNote')}</p>
           </div>
         </div>
-        <Toaster />
       </div>
     </>
   );
