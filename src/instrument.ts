@@ -8,8 +8,18 @@ import {
 } from 'react-router-dom';
 
 Sentry.init({
-  dsn: 'https://869f2b57b98cbe1f86a16043a6f3fd51@o267366.ingest.us.sentry.io/4509940389707776',
-  environment: import.meta.env.MODE,
+  // Lives in .env.production, public by design like the GA ID. Unset (as in
+  // `npm run dev` and the tests) means the SDK records and sends nothing.
+  // It used to be hardcoded here, pointing at a project outside the Sentry
+  // org that receives the source maps and sends the alerts. The errors went
+  // out; the alerts were never going to come.
+  dsn: import.meta.env.VITE_SENTRY_DSN,
+
+  // Vercel says 'production' or 'preview'. Anything built elsewhere (a laptop,
+  // CI, a Lighthouse run) is 'local', so it can't pass for the live site.
+  environment:
+    import.meta.env.VITE_VERCEL_ENV ??
+    (import.meta.env.DEV ? 'development' : 'local'),
 
   // Visitors type their name, email and life story into /contact. None of that is
   // ours to keep, so we don't collect it: no IP addresses, no cookies, no headers.

@@ -16,6 +16,13 @@ interface ImportMetaEnv {
   readonly VITE_LOADING_SCREEN_ENABLED?: string;
   /** Set to 'true' to show the under-construction ribbon in the header. */
   readonly VITE_UNDER_CONSTRUCTION_ENABLED?: string;
+  /** Sentry DSN, from .env.production. Sentry stays silent when unset. */
+  readonly VITE_SENTRY_DSN?: string;
+  /**
+   * Set by Vercel on its own builds: 'production', 'preview' or 'development'.
+   * Absent anywhere else, which is how local builds know they're local.
+   */
+  readonly VITE_VERCEL_ENV?: string;
 }
 
 interface ImportMeta {

@@ -21,13 +21,57 @@ const loadInstrument = async () => {
 };
 
 type InitOptions = {
+  dsn?: string;
+  environment: string;
   sendDefaultPii: boolean;
   integrations: Array<{ name: string }>;
 };
 
+const initOptions = () => init.mock.calls[0][0] as InitOptions;
+
 describe('instrument', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  it('reads the DSN from the environment', async () => {
+    const dsn = 'https://abc123@o1.ingest.us.sentry.io/42';
+    vi.stubEnv('VITE_SENTRY_DSN', dsn);
+
+    await loadInstrument();
+
+    expect(initOptions().dsn).toBe(dsn);
+  });
+
+  // No hardcoded fallback: a DSN pointing at the wrong project is how the
+  // errors ended up in a project nobody watched.
+  it('has no DSN of its own to fall back on', async () => {
+    vi.stubEnv('VITE_SENTRY_DSN', undefined);
+
+    await loadInstrument();
+
+    expect(initOptions().dsn).toBeUndefined();
+  });
+
+  it('labels events with the Vercel environment they came from', async () => {
+    vi.stubEnv('VITE_VERCEL_ENV', 'preview');
+
+    await loadInstrument();
+
+    expect(initOptions().environment).toBe('preview');
+  });
+
+  it('labels builds made off Vercel as local, never production', async () => {
+    vi.stubEnv('VITE_VERCEL_ENV', undefined);
+    vi.stubEnv('DEV', false);
+
+    await loadInstrument();
+
+    expect(initOptions().environment).toBe('local');
   });
 
   it('initialises Sentry without collecting default PII', async () => {
