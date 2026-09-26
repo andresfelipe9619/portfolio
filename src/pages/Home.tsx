@@ -143,6 +143,7 @@ export default function Home() {
           startVelocity: 60,
           origin: { x: 0, y: 0.5 },
           colors: colors,
+          disableForReducedMotion: true,
         });
         confetti({
           particleCount: 2,
@@ -151,6 +152,7 @@ export default function Home() {
           startVelocity: 60,
           origin: { x: 1, y: 0.5 },
           colors: colors,
+          disableForReducedMotion: true,
         });
 
         requestAnimationFrame(frame);
@@ -353,8 +355,17 @@ export default function Home() {
                 {TESTIMONIALS.map((t, i) => (
                   <Card
                     key={i}
-                    className="mx-4 w-80 border-white/10 bg-white/5 hover:bg-white/10 transition-colors cursor-pointer"
+                    // A clickable card has to be reachable without a mouse.
+                    role="button"
+                    tabIndex={0}
+                    className="mx-4 w-80 border-white/10 bg-white/5 hover:bg-white/10 transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-white/60"
                     onClick={() => handleTestimonialClick(t)}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        handleTestimonialClick(t);
+                      }
+                    }}
                   >
                     <CardContent className="flex h-full flex-col justify-between p-6">
                       <QuoteIcon className="h-5 w-5 text-blue-300" />

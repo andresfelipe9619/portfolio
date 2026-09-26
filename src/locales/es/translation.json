@@ -249,5 +249,9 @@
       "suffix": "A Fondo",
       "fallbackTitle": "Caso de Estudio No Encontrado"
     }
+  },
+  "marquee": {
+    "pause": "Pausar el desplazamiento",
+    "resume": "Reanudar el desplazamiento"
   }
 }

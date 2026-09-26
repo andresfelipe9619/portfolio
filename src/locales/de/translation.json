@@ -245,5 +245,9 @@
       "suffix": "Im Detail",
       "fallbackTitle": "Fallstudie Nicht Gefunden"
     }
+  },
+  "marquee": {
+    "pause": "Laufband anhalten",
+    "resume": "Laufband fortsetzen"
   }
 }

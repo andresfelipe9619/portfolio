@@ -253,3 +253,22 @@ body.has-consent-banner {
     padding-bottom: 8rem;
   }
 }
+
+/*
+ * Visitors who ask their OS for less motion get less motion here too: every
+ * CSS animation and transition (aurora, shimmer, rainbow buttons, dialogs)
+ * finishes instantly and smooth scrolling becomes a jump. Marquees pause
+ * rather than jump to their last frame (see Marquee). Effects driven from JS
+ * handle it themselves: MotionConfig, the typing hero, the highlighter, the
+ * particles, the globes and the confetti.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

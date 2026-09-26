@@ -303,3 +303,50 @@ test.describe('accessibility basics', () => {
     expect(missingAlt).toBe(0);
   });
 });
+
+test.describe('motion', () => {
+  const logoStrip = (page: import('@playwright/test').Page) =>
+    page.locator('#clients .animate-marquee').first();
+  const playState = (page: import('@playwright/test').Page) =>
+    logoStrip(page).evaluate((el) => getComputedStyle(el).animationPlayState);
+
+  test('reduced-motion visitors get a still page, all the words at once', async ({
+    page,
+  }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/');
+
+    // No typing: the punchline is there from the start.
+    await expect(page.locator('#hero')).toContainText("Can't", {
+      timeout: 3_000,
+    });
+
+    await logoStrip(page).scrollIntoViewIfNeeded();
+    expect(await playState(page)).toBe('paused');
+    // Nothing moves, so there's nothing to pause.
+    await expect(
+      page.locator('#clients').getByRole('button', { name: /pause/i }),
+    ).toBeHidden();
+  });
+
+  // WCAG 2.2.2: anything moving for more than five seconds needs a stop
+  // button, and hover-to-pause doesn't reach keyboards or touchscreens.
+  test('the logo strip can be paused with a real button', async ({ page }) => {
+    await asReturningVisitor(page);
+    await page.goto('/');
+    // The section, not the strip: Playwright waits for an element to stop
+    // moving before scrolling to it, and a running marquee never does.
+    await page.locator('#clients').scrollIntoViewIfNeeded();
+    expect(await playState(page)).toBe('running');
+
+    await page
+      .locator('#clients')
+      .getByRole('button', { name: /pause/i })
+      .click();
+    // Hover and focus pause it too, so take both away: this proves the button.
+    await page.mouse.move(0, 0);
+    await page.evaluate(() => (document.activeElement as HTMLElement)?.blur());
+
+    expect(await playState(page)).toBe('paused');
+  });
+});

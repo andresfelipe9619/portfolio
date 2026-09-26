@@ -11,7 +11,11 @@ vi.mock('@/data/timeline', () => ({
       flag: '🇺🇸',
     },
   ],
-  TIMELINE_DATA: { timeline: { featured: [] } },
+  TIMELINE_DATA: {
+    timeline: {
+      '2024': [{ title: 'Test Project', testimonial: 'Test quote' }],
+    },
+  },
 }));
 
 // Keep WebGL / Canvas / heavy DOM component mocks
@@ -57,6 +61,19 @@ describe('Home page', () => {
     render(<Home />);
 
     expect(screen.getByText('faqTitle')).toBeInTheDocument();
+  });
+
+  // The testimonial cards were clickable divs: no focus, no Enter key, no way
+  // in without a mouse.
+  it('opens a testimonial’s project from the keyboard', async () => {
+    sessionStorage.setItem('hasSeenHero', 'true');
+    render(<Home />);
+
+    const [card] = screen.getAllByRole('button', { name: /Test quote/ });
+    expect(card).toHaveAttribute('tabindex', '0');
+    fireEvent.keyDown(card, { key: 'Enter' });
+
+    expect(await screen.findByRole('dialog')).toHaveTextContent('Test Project');
   });
 
   it('renders hero content immediately if hasSeenHero is true', async () => {
