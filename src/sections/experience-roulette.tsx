@@ -13,10 +13,13 @@ import TimelineGlobe from '@/components/timeline-globe';
 import { cn } from '@/lib/utils';
 import ProjectDialog from '@/components/project-dialog';
 import { useTranslation } from 'react-i18next';
+import { useDecorativeEffects } from '@/hooks/use-decorative-effects';
 import { Link } from 'react-router-dom';
 
 export default function ExperienceRoulette() {
   const { t } = useTranslation();
+  // Same rule as the hero's globe: after load, and only where a GPU draws it.
+  const decor = useDecorativeEffects();
   const items = useMemo<FlattenedItem[]>(
     () => flattenTimeline(TIMELINE_DATA.timeline),
     [],
@@ -196,7 +199,7 @@ export default function ExperienceRoulette() {
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_20%,rgba(80,80,120,0.25),transparent_60%)]" />
           <div className="mx-auto h-[480px] sm:h-[520px] md:h-[560px] pointer-events-none">
             {/* pointer-events-none ensures hover/scroll never sticks here */}
-            <TimelineGlobe className="h-full w-full" />
+            {decor.globe && <TimelineGlobe className="h-full w-full" />}
           </div>
           <p className="mt-3 text-center text-sm text-white/60">
             {t('timelineCountries')}

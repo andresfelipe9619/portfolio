@@ -64,6 +64,14 @@ const ProjectDialog = lazy(() => import('@/components/project-dialog'));
 /** Milliseconds per character when the hero types. */
 const TYPE_MS = 60;
 
+/**
+ * Sections below the hero skip style, layout and paint until they near the
+ * viewport. They stay in the DOM for search engines and find-in-page, but they
+ * no longer cost a phone's CPU while it's still trying to show the headline.
+ */
+const OFFSCREEN =
+  '[content-visibility:auto] [contain-intrinsic-size:auto_800px]';
+
 export default function Home() {
   const { t } = useTranslation();
 
@@ -283,35 +291,35 @@ export default function Home() {
         </section>
 
         {/* 2. Instant Authority (Client Marquee) */}
-        <BlurFade delay={0.25} inView>
+        <BlurFade delay={0.25} inView className={OFFSCREEN}>
           <Suspense fallback={<div className="h-[200px]" />}>
             <ClientMarqueeSection />
           </Suspense>
         </BlurFade>
 
         {/* 3. The Journey (Experience Roulette) */}
-        <BlurFade delay={0.25} inView>
+        <BlurFade delay={0.25} inView className={OFFSCREEN}>
           <Suspense fallback={<div className="h-[400px]" />}>
             <ExperienceRoulette />
           </Suspense>
         </BlurFade>
 
         {/* 4. The Proof (OSS Highlights) */}
-        <BlurFade delay={0.25} inView>
+        <BlurFade delay={0.25} inView className={OFFSCREEN}>
           <Suspense fallback={<div className="h-[400px]" />}>
             <OssHighlights />
           </Suspense>
         </BlurFade>
 
         {/* 5. The Toolbox (Skills Section) */}
-        <BlurFade delay={0.25} inView>
+        <BlurFade delay={0.25} inView className={OFFSCREEN}>
           <Suspense fallback={<div className="h-[400px]" />}>
             <SkillsSection />
           </Suspense>
         </BlurFade>
 
         {/* 6. The Validation (Testimonials & Quote) */}
-        <BlurFade delay={0.25} inView>
+        <BlurFade delay={0.25} inView className={OFFSCREEN}>
           <div className="flex w-full flex-col items-center justify-center px-6 py-24 bg-gray-950">
             <div className="relative max-w-4xl text-center">
               <QuoteIcon className="absolute -top-12 -left-8 md:-left-16 h-24 w-24 text-white/5 -rotate-12 z-0" />
@@ -337,7 +345,7 @@ export default function Home() {
           </div>
         </BlurFade>
 
-        <BlurFade delay={0.25} inView>
+        <BlurFade delay={0.25} inView className={OFFSCREEN}>
           <section id="testimonials" className="bg-gray-950 text-white py-16">
             <div className="mx-auto max-w-6xl px-6">
               <h3 className="text-xl font-semibold">{t('testimonialTitle')}</h3>
@@ -379,7 +387,7 @@ export default function Home() {
         </BlurFade>
 
         {/* 7. The Climax (CTA) */}
-        <BlurFade delay={0.25} inView>
+        <BlurFade delay={0.25} inView className={OFFSCREEN}>
           <section id="ready" className="bg-gray-950 text-white py-16">
             <div className="mx-auto max-w-5xl px-6 grid items-center gap-8 md:grid-cols-2">
               <div>
@@ -418,7 +426,7 @@ export default function Home() {
         </BlurFade>
 
         {/* 8. The Post-Credits (FAQ) */}
-        <BlurFade delay={0.25} inView>
+        <BlurFade delay={0.25} inView className={OFFSCREEN}>
           <section id="faq" className="bg-gray-950 text-white py-8">
             <div className="mx-auto max-w-5xl px-6">
               <h3 className="text-xl font-semibold">{t('faqTitle')}</h3>
