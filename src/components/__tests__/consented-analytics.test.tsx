@@ -34,7 +34,8 @@ describe('ConsentedAnalytics', () => {
 
     act(() => setConsent('granted'));
 
-    expect(screen.getByTestId('vercel-analytics')).toBeInTheDocument();
+    // The code itself is only fetched now, so it arrives a tick later.
+    expect(await screen.findByTestId('vercel-analytics')).toBeInTheDocument();
   });
 
   it('stays off when the visitor declines', async () => {
@@ -51,6 +52,6 @@ describe('ConsentedAnalytics', () => {
     const { ConsentedAnalytics } = await load();
     render(<ConsentedAnalytics />);
 
-    expect(screen.getByTestId('vercel-analytics')).toBeInTheDocument();
+    expect(await screen.findByTestId('vercel-analytics')).toBeInTheDocument();
   });
 });
