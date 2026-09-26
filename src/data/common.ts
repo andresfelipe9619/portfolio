@@ -6,7 +6,11 @@ export const PROFILE = {
   url: 'https://andressuarez.dev',
   location: 'Cali, Colombia',
   locationLink: 'https://www.google.com/maps/place/Cali',
-  avatarUrl: '/me.jpeg',
+  // The avatar shows at 112 CSS px, so it ships at 1x/2x/3x (2–7 kB each).
+  // /me.jpeg (977 kB, 3000 px) stays for the social card, which wants pixels.
+  avatarUrl: '/me-avatar-224.webp',
+  avatarSrcSet:
+    '/me-avatar-112.webp 112w, /me-avatar-224.webp 224w, /me-avatar-336.webp 336w',
 
   // The very short pitch used in hero or top level description
   description:

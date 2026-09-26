@@ -406,7 +406,15 @@ export default function Home() {
                 </div>
                 <div className="justify-self-center">
                   <Avatar className="size-28 border shadow-xl">
-                    <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
+                    <AvatarImage
+                      alt={DATA.name}
+                      src={DATA.avatarUrl}
+                      srcSet={DATA.avatarSrcSet}
+                      sizes="112px"
+                      width={112}
+                      height={112}
+                      decoding="async"
+                    />
                     <AvatarFallback>{DATA.initials}</AvatarFallback>
                   </Avatar>
                 </div>
