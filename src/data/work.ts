@@ -1,8 +1,16 @@
+import { SKILLS_DICT } from './skills-dict';
+
 const work = [
   {
     company: 'Turnstile',
     href: 'https://turnstile.ai',
-    badges: ['React', 'Node.js', 'PostgreSQL', 'Stripe', 'Twilio'],
+    badges: [
+      SKILLS_DICT.REACT,
+      SKILLS_DICT.NODEJS,
+      SKILLS_DICT.POSTGRESQL,
+      SKILLS_DICT.STRIPE,
+      SKILLS_DICT.TWILIO,
+    ],
     location: 'Remote',
     title: 'Product Engineer',
     logoUrl: '/turnstile.png',
@@ -14,7 +22,13 @@ const work = [
   {
     company: 'HireWorks — Client: Benekiva/Ro',
     href: 'https://benekiva.com',
-    badges: ['AWS', 'Lambda', 'RDS', 'S3', 'Braze'],
+    badges: [
+      SKILLS_DICT.AWS,
+      SKILLS_DICT.AWS_LAMBDA,
+      SKILLS_DICT.RDS,
+      SKILLS_DICT.AWS_S3,
+      'Braze',
+    ],
     location: 'Remote',
     title: 'Senior Full-Stack Engineer (Contract)',
     logoUrl: '/benekiva.jpeg',
@@ -26,7 +40,14 @@ const work = [
   {
     company: 'Usermuse.AI',
     href: '#',
-    badges: ['LangChain', 'React', 'Firebase', 'OpenAI', 'Anthropic', 'Gemini'],
+    badges: [
+      SKILLS_DICT.LANGCHAIN,
+      SKILLS_DICT.REACT,
+      SKILLS_DICT.FIREBASE,
+      SKILLS_DICT.OPENAI,
+      SKILLS_DICT.ANTHROPIC,
+      SKILLS_DICT.GEMINI,
+    ],
     location: 'Remote',
     title: 'Senior Software Engineer (AI Specialist)',
     logoUrl: '/evermuse.jpeg',
@@ -38,7 +59,11 @@ const work = [
   {
     company: 'Brooklyn Vendor Assurance',
     href: 'https://www.brooklynsolutions.ai',
-    badges: ['AWS Bedrock', 'AWS CDK', 'CloudFormation'],
+    badges: [
+      SKILLS_DICT.AWS_BEDROCK,
+      SKILLS_DICT.AWS_CDK,
+      SKILLS_DICT.AWS_CLOUDFORMATION,
+    ],
     location: 'Remote',
     title: 'Lead Full-Stack Developer / Engineering Lead',
     logoUrl: '/brooklyn.jpeg',
@@ -50,7 +75,12 @@ const work = [
   {
     company: 'Kuno Digital',
     href: 'https://kunodigital.com/',
-    badges: ['Make', 'WhatsApp', 'CRM', 'Marketing Automation'],
+    badges: [
+      SKILLS_DICT.MAKE,
+      SKILLS_DICT.WHATSAPP,
+      SKILLS_DICT.CRM,
+      SKILLS_DICT.MARKETING_AUTOMATION,
+    ],
     location: 'Panama (Remote)',
     title: 'Senior Technical Consultant (Embedded)',
     logoUrl: '/kuno-digital.png',
@@ -62,7 +92,7 @@ const work = [
   {
     company: 'Atentamente',
     href: 'https://atentamente.mx/',
-    badges: ['AWS RDS', 'PostgreSQL', 'Strapi'],
+    badges: [SKILLS_DICT.RDS, SKILLS_DICT.POSTGRESQL, SKILLS_DICT.STRAPI],
     location: 'Mexico (Remote)',
     title: 'Platform Architect & Data Engineering Consultant',
     logoUrl: '/atentamente.png',
@@ -74,7 +104,7 @@ const work = [
   {
     company: 'Proaxdata',
     href: '#',
-    badges: ['GIS', 'Mapbox', 'Google Apps'],
+    badges: [SKILLS_DICT.GIS, SKILLS_DICT.MAPBOX, 'Google Apps'],
     location: 'Mexico (Remote)',
     title: 'Lead GIS Solutions Architect',
     logoUrl: '',
@@ -86,7 +116,12 @@ const work = [
   {
     company: 'Pontificia Universidad Javeriana',
     href: 'https://www.javerianacali.edu.co/',
-    badges: ['Mobile', 'Android', 'iOS', 'Biometric Auth'],
+    badges: [
+      SKILLS_DICT.MOBILE,
+      SKILLS_DICT.ANDROID,
+      SKILLS_DICT.IOS,
+      SKILLS_DICT.BIOMETRIC_AUTH,
+    ],
     location: 'Colombia',
     title: 'Mobile Application Stabilization Engineer',
     logoUrl: '/javeriana.png',
@@ -98,7 +133,7 @@ const work = [
   {
     company: 'Klazia',
     href: 'https://klazia.com/',
-    badges: ['AWS', 'Strapi', 'FinOps'],
+    badges: [SKILLS_DICT.AWS, SKILLS_DICT.STRAPI, SKILLS_DICT.FINOPS],
     location: 'Colombia (Remote)',
     title: 'AWS & Strapi Migration Consultant',
     logoUrl: '/klazia.jpg',
@@ -110,7 +145,12 @@ const work = [
   {
     company: 'Cinekomuna',
     href: '#',
-    badges: ['MongoDB', 'EC2', 'S3', 'CloudWatch'],
+    badges: [
+      SKILLS_DICT.MONGODB,
+      SKILLS_DICT.AWS_EC2,
+      SKILLS_DICT.AWS_S3,
+      SKILLS_DICT.AWS_CLOUDWATCH,
+    ],
     location: 'Mexico (Remote)',
     title: 'Lead Backend Developer / DevOps Consultant',
     logoUrl: '/cinekomuna.jpg',
@@ -122,7 +162,13 @@ const work = [
   {
     company: 'Factoring Abogados',
     href: 'https://factoringabogados.com/',
-    badges: ['AWS Amplify', 'Cognito', 'Lambda', 'SNS', 'RDS'],
+    badges: [
+      'AWS Amplify',
+      SKILLS_DICT.AWS_COGNITO,
+      SKILLS_DICT.AWS_LAMBDA,
+      SKILLS_DICT.AWS_SNS,
+      SKILLS_DICT.RDS,
+    ],
     location: 'Colombia (Remote)',
     title: 'AWS & Multi-Tenant Architecture Consultant',
     logoUrl: '/factoring-abogados.svg',
@@ -134,7 +180,12 @@ const work = [
   {
     company: 'TODOSURF',
     href: '#',
-    badges: ['React', 'Leaflet', 'GIS', 'API Integration'],
+    badges: [
+      SKILLS_DICT.REACT,
+      SKILLS_DICT.LEAFLET,
+      SKILLS_DICT.GIS,
+      'API Integration',
+    ],
     location: 'Spain (Remote)',
     title: 'Web & GIS Engineer',
     logoUrl: '/todosurf.png',

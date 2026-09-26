@@ -1,3 +1,5 @@
+import { SKILLS_DICT } from './skills-dict';
+
 // Estructura alineada 1:1 con OssCardProps (sin adapters)
 export type OssCardDetails = {
   longDescription?: string;
@@ -37,7 +39,12 @@ const openSource: OpenSourceProject[] = [
     year: '2018-11',
     active: true,
     subtitle: 'Uber-like booking flows with maps, routing, and clean state.',
-    badges: ['React Native', 'Redux', 'Google Maps', 'Mobile'],
+    badges: [
+      SKILLS_DICT.REACT_NATIVE,
+      SKILLS_DICT.REDUX,
+      'Google Maps',
+      SKILLS_DICT.MOBILE,
+    ],
     section: 'products',
     location: 'Cali, Colombia',
     details: {
@@ -53,7 +60,12 @@ const openSource: OpenSourceProject[] = [
     year: '2025-08',
     active: true,
     subtitle: 'Transcribe, diarize, subtitle, and summarize from the CLI.',
-    badges: ['Python', 'WhisperX', 'ffmpeg', 'OpenAI API'],
+    badges: [
+      SKILLS_DICT.PYTHON,
+      SKILLS_DICT.WHISPERX,
+      SKILLS_DICT.FFMPEG,
+      SKILLS_DICT.OPENAI_API,
+    ],
     section: 'products',
     location: 'Cali, Colombia',
     details: {
@@ -69,7 +81,13 @@ const openSource: OpenSourceProject[] = [
     year: '2024',
     active: true,
     subtitle: 'Forecasting sandbox with Prophet/ARIMA/XGBoost + metrics.',
-    badges: ['Python', 'Prophet', 'ARIMA', 'XGBoost', 'Matplotlib'],
+    badges: [
+      SKILLS_DICT.PYTHON,
+      SKILLS_DICT.PROPHET,
+      SKILLS_DICT.ARIMA,
+      SKILLS_DICT.XGBOOST,
+      SKILLS_DICT.MATPLOTLIB,
+    ],
     section: 'playground',
     location: 'Cali, Colombia',
     details: {
@@ -85,7 +103,12 @@ const openSource: OpenSourceProject[] = [
     year: '2022-06',
     active: true,
     subtitle: 'Lambda to capture SES bounces/complaints → DynamoDB events.',
-    badges: ['Node.js', 'AWS Lambda', 'AWS SES', 'DynamoDB'],
+    badges: [
+      SKILLS_DICT.NODEJS,
+      SKILLS_DICT.AWS_LAMBDA,
+      SKILLS_DICT.AWS_SES,
+      SKILLS_DICT.DYNAMODB,
+    ],
     section: 'cloud',
     location: 'Cali, Colombia',
     details: {
@@ -101,7 +124,7 @@ const openSource: OpenSourceProject[] = [
     year: '2025-08',
     active: true,
     subtitle: 'Flexible, catalog-based email sender built with JavaScript.',
-    badges: ['Node.js', 'Email Automation', 'DynamoDB'],
+    badges: [SKILLS_DICT.NODEJS, 'Email Automation', SKILLS_DICT.DYNAMODB],
     section: 'cloud',
     location: 'Cali, Colombia',
     details: {
@@ -117,7 +140,7 @@ const openSource: OpenSourceProject[] = [
     year: '2017-11',
     active: false,
     subtitle: 'Classic Battleship in pure Java + MySQL.',
-    badges: ['Java', 'MySQL'],
+    badges: [SKILLS_DICT.JAVA, SKILLS_DICT.MYSQL],
     section: 'playground',
     location: 'Cali, Colombia',
     details: {
@@ -133,7 +156,13 @@ const openSource: OpenSourceProject[] = [
     year: '2025-08',
     active: true,
     subtitle: 'Developer-first portfolio (Vite + React) with Magic UI/shadcn.',
-    badges: ['React', 'Vite', 'TypeScript', 'Tailwind', 'Vercel'],
+    badges: [
+      SKILLS_DICT.REACT,
+      SKILLS_DICT.VITE,
+      SKILLS_DICT.TYPESCRIPT,
+      SKILLS_DICT.TAILWIND,
+      SKILLS_DICT.VERCEL,
+    ],
     section: 'products',
     location: 'Cali, Colombia',
     details: {
