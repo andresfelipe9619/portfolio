@@ -67,20 +67,22 @@ export default defineConfig({
         'src/lib/**/*.{ts,tsx}',
       ],
       exclude: ['src/**/*.test.{ts,tsx}', 'src/test/**'],
-      // A ratchet, not a trophy: set to what the suite actually achieves today
+      // A ratchet, not a trophy: set just under what the suite achieves today,
       // so coverage can only go up. Raise these numbers as tests land; never
-      // lower them to make a red build green.
+      // lower them to make a red build green. Keep about a point of headroom:
+      // lazy chunks land a little earlier or later from run to run, and floors
+      // set right at the measured numbers once failed CI by a fraction of one.
       //
       // The headline number is dragged down by src/components/magicui, which is
       // vendored canvas/WebGL animation code that jsdom cannot meaningfully
       // execute — testing it here would buy confidence that isn't real. Those
       // components are covered by the Playwright suite instead, where an actual
-      // browser runs them. First-party code sits around 51%.
+      // browser runs them. First-party code sits around 63%.
       thresholds: {
-        statements: 35,
-        branches: 33,
-        functions: 39,
-        lines: 35,
+        statements: 37,
+        branches: 34,
+        functions: 40,
+        lines: 37,
       },
     },
   },

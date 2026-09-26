@@ -49,6 +49,16 @@ describe('hasHardwareWebGL', () => {
 
     expect(hasHardwareWebGL()).toBe(true);
   });
+
+  it('is false, not a crash, when asking for WebGL throws', () => {
+    vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockImplementation(
+      () => {
+        throw new Error('WebGL is disabled by policy');
+      },
+    );
+
+    expect(hasHardwareWebGL()).toBe(false);
+  });
 });
 
 describe('useDecorativeEffects', () => {
@@ -84,6 +94,52 @@ describe('useDecorativeEffects', () => {
     act(() => vi.advanceTimersByTime(250));
 
     expect(result.current).toEqual({ particles: true, globe: true });
+  });
+
+  // "After load" means after load: a page that's still arriving has better
+  // things to spend its main thread on.
+  it('waits for the page to finish loading before anything starts', () => {
+    stubWebGL('ANGLE (NVIDIA GeForce RTX 3060)');
+    vi.spyOn(document, 'readyState', 'get').mockReturnValue('loading');
+
+    const { result } = renderHook(() => useDecorativeEffects());
+    act(() => vi.advanceTimersByTime(5_000));
+    expect(result.current).toEqual({ particles: false, globe: false });
+
+    act(() => {
+      window.dispatchEvent(new Event('load'));
+      vi.advanceTimersByTime(250);
+    });
+    expect(result.current).toEqual({ particles: true, globe: true });
+  });
+
+  it('asks for an idle moment where the browser offers one', () => {
+    stubWebGL('ANGLE (NVIDIA GeForce RTX 3060)');
+    let idle: () => void = () => undefined;
+    const requestIdleCallback = vi.fn((callback: () => void) => {
+      idle = callback;
+      return 7;
+    });
+    vi.stubGlobal('requestIdleCallback', requestIdleCallback);
+
+    const { result } = renderHook(() => useDecorativeEffects());
+    expect(requestIdleCallback).toHaveBeenCalledWith(expect.any(Function), {
+      timeout: 2000,
+    });
+
+    act(() => idle());
+    expect(result.current).toEqual({ particles: true, globe: true });
+  });
+
+  it('cancels the idle callback if Home unmounts before it runs', () => {
+    const cancelIdleCallback = vi.fn();
+    vi.stubGlobal('requestIdleCallback', () => 7);
+    vi.stubGlobal('cancelIdleCallback', cancelIdleCallback);
+
+    const { unmount } = renderHook(() => useDecorativeEffects());
+    unmount();
+
+    expect(cancelIdleCallback).toHaveBeenCalledWith(7);
   });
 
   it('leaves both off for visitors saving data', () => {

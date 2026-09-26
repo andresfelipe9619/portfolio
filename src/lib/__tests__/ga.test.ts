@@ -109,6 +109,36 @@ describe('ga', () => {
       });
     });
 
+    // The download is remembered so it happens once, but a failed one must
+    // not be: that would switch GA off until the next page load.
+    it('tries the download again after one fails', async () => {
+      vi.resetModules();
+      let attempts = 0;
+      vi.doMock('react-ga4', () => {
+        attempts += 1;
+        if (attempts === 1) throw new Error('Failed to fetch');
+        return {
+          default: {
+            initialize: (...args: unknown[]) => initializeMock(...args),
+            send: (...args: unknown[]) => sendMock(...args),
+            event: (...args: unknown[]) => eventMock(...args),
+          },
+        };
+      });
+      vi.stubEnv('VITE_GA_TRACKING_ID', 'G-TEST123');
+      localStorage.setItem('analytics-consent', 'granted');
+      const { logEvent } = await import('../ga');
+
+      logEvent('Resume', 'Downloaded');
+      await settle();
+      expect(eventMock).not.toHaveBeenCalled();
+
+      logEvent('Resume', 'Downloaded');
+      await settle();
+      expect(attempts).toBe(2);
+      expect(eventMock).toHaveBeenCalledTimes(1);
+    });
+
     it('allows label and value to be omitted', async () => {
       const { logEvent } = await loadGa('G-TEST123');
       logEvent('Resume', 'Downloaded');
