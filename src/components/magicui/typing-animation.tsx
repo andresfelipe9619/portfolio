@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import { motion, type MotionProps, useInView } from 'motion/react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 interface TypingAnimationProps extends MotionProps {
   children: string;
@@ -24,9 +24,13 @@ export function TypingAnimation({
   disabled = false,
   ...props
 }: TypingAnimationProps) {
-  const MotionComponent = motion.create(Component, {
-    forwardMotionProps: true,
-  });
+  // Created once per element type. Calling motion.create() on every render
+  // hands React a brand-new component each time, so it threw away and rebuilt
+  // the DOM node on every single keystroke of the animation.
+  const MotionComponent = useMemo(
+    () => motion.create(Component, { forwardMotionProps: true }),
+    [Component],
+  );
 
   const [displayedText, setDisplayedText] = useState<string>(
     disabled ? children : '',

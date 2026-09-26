@@ -1,38 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import React, {
-  type ComponentPropsWithoutRef,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
-
-interface MousePosition {
-  x: number;
-  y: number;
-}
-
-function useMousePosition(): MousePosition {
-  const [mousePosition, setMousePosition] = useState<MousePosition>({
-    x: 0,
-    y: 0,
-  });
-
-  useEffect(() => {
-    const handleMouseMove = (event: MouseEvent) => {
-      setMousePosition({ x: event.clientX, y: event.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
-
-  return mousePosition;
-}
+import React, { type ComponentPropsWithoutRef, useEffect, useRef } from 'react';
 
 interface ParticlesProps extends ComponentPropsWithoutRef<'div'> {
   className?: string;
@@ -92,10 +61,14 @@ export const Particles: React.FC<ParticlesProps> = ({
   const canvasContainerRef = useRef<HTMLDivElement>(null);
   const context = useRef<CanvasRenderingContext2D | null>(null);
   const circles = useRef<Circle[]>([]);
-  const mousePosition = useMousePosition();
   const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
-  const dpr = typeof window !== 'undefined' ? window.devicePixelRatio : 1;
+  // Capped: at 3x a phone paints nine times the pixels of 1x, for dots a couple
+  // of pixels wide.
+  const dpr =
+    typeof window !== 'undefined'
+      ? Math.min(window.devicePixelRatio || 1, 2)
+      : 1;
   const rafID = useRef<number | null>(null);
   const resizeTimeout = useRef<NodeJS.Timeout | null>(null);
 
@@ -104,7 +77,44 @@ export const Particles: React.FC<ParticlesProps> = ({
       context.current = canvasRef.current.getContext('2d');
     }
     initCanvas();
-    animate();
+
+    // Asked for less motion: one still frame of stars, and no loop.
+    const still =
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+    if (still) drawStillFrame();
+
+    const start = () => {
+      if (!still && rafID.current == null) {
+        rafID.current = window.requestAnimationFrame(animate);
+      }
+    };
+    const stop = () => {
+      if (rafID.current != null) {
+        window.cancelAnimationFrame(rafID.current);
+        rafID.current = null;
+      }
+    };
+
+    // Nobody watches the sky once it has scrolled away, so stop painting it.
+    const observer =
+      typeof IntersectionObserver === 'function'
+        ? new IntersectionObserver(([entry]) =>
+            entry?.isIntersecting ? start() : stop(),
+          )
+        : null;
+    if (observer && canvasContainerRef.current) {
+      observer.observe(canvasContainerRef.current);
+    } else {
+      start();
+    }
+
+    // The pointer steers the particles every frame through a ref. It has no
+    // business re-rendering React on every pixel the mouse moves.
+    const handlePointerMove = (event: PointerEvent) =>
+      onPointerMove(event.clientX, event.clientY);
+    window.addEventListener('pointermove', handlePointerMove, {
+      passive: true,
+    });
 
     const handleResize = () => {
       if (resizeTimeout.current) {
@@ -118,9 +128,9 @@ export const Particles: React.FC<ParticlesProps> = ({
     window.addEventListener('resize', handleResize);
 
     return () => {
-      if (rafID.current != null) {
-        window.cancelAnimationFrame(rafID.current);
-      }
+      stop();
+      observer?.disconnect();
+      window.removeEventListener('pointermove', handlePointerMove);
       if (resizeTimeout.current) {
         clearTimeout(resizeTimeout.current);
       }
@@ -128,11 +138,6 @@ export const Particles: React.FC<ParticlesProps> = ({
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [color]);
-
-  useEffect(() => {
-    onMouseMove();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mousePosition.x, mousePosition.y]);
 
   useEffect(() => {
     initCanvas();
@@ -144,12 +149,12 @@ export const Particles: React.FC<ParticlesProps> = ({
     drawParticles();
   };
 
-  const onMouseMove = () => {
+  const onPointerMove = (clientX: number, clientY: number) => {
     if (canvasRef.current) {
       const rect = canvasRef.current.getBoundingClientRect();
       const { w, h } = canvasSize.current;
-      const x = mousePosition.x - rect.left - w / 2;
-      const y = mousePosition.y - rect.top - h / 2;
+      const x = clientX - rect.left - w / 2;
+      const y = clientY - rect.top - h / 2;
       const inside = x < w / 2 && x > -w / 2 && y < h / 2 && y > -h / 2;
       if (inside) {
         mouse.current.x = x;
@@ -230,6 +235,14 @@ export const Particles: React.FC<ParticlesProps> = ({
         canvasSize.current.h,
       );
     }
+  };
+
+  const drawStillFrame = () => {
+    clearContext();
+    circles.current.forEach((circle) => {
+      circle.alpha = circle.targetAlpha;
+      drawCircle(circle, true);
+    });
   };
 
   const drawParticles = () => {

@@ -37,6 +37,28 @@ describe('Home page', () => {
     vi.clearAllMocks();
   });
 
+  // The first line is the largest thing on the page, so it is what "loaded"
+  // means to a visitor (and to Lighthouse). It used to type in, letter by letter.
+  it('shows the headline’s first line from the very first frame', () => {
+    render(<Home />);
+
+    expect(screen.getByText('globalCompanies')).toBeInTheDocument();
+  });
+
+  // First visits used to lock scrolling for the whole 6.5 s intro.
+  it('never locks scrolling, even while the intro plays', () => {
+    render(<Home />);
+
+    expect(document.body).not.toHaveClass('no-scroll');
+  });
+
+  // ...and to hold back every section below the hero until it finished.
+  it('renders the rest of the page without waiting for the intro', () => {
+    render(<Home />);
+
+    expect(screen.getByText('faqTitle')).toBeInTheDocument();
+  });
+
   it('renders hero content immediately if hasSeenHero is true', async () => {
     sessionStorage.setItem('hasSeenHero', 'true');
 
