@@ -28,16 +28,21 @@ test.describe('routes', () => {
   for (const { path, titleContains } of routes) {
     test(`${path} loads with its own title`, async ({ page }) => {
       await page.goto(path);
-      // Home takes several seconds to render in headless Chromium, which has
-      // no GPU to hand the globe and particles to. It always did — a static
-      // <title> in index.html used to hide that from this test. The title
-      // arrives with the page, so give the page time to arrive.
-      await expect(page).toHaveTitle(new RegExp(titleContains, 'i'), {
-        timeout: 20_000,
-      });
+      await expect(page).toHaveTitle(new RegExp(titleContains, 'i'));
       await expect(page.locator('body')).toBeVisible();
     });
   }
+
+  // Home used to take 6–10 s to appear here, and this suite blamed the missing
+  // GPU. The real cause was the route's loading fallback: an animated terminal
+  // whose timer interrupted React's render of the incoming page every 25 ms, so
+  // Home could only finish once the terminal ran out of lines.
+  test('Home paints its headline promptly', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('#hero')).toContainText(/global companies/i, {
+      timeout: 3_000,
+    });
+  });
 
   test('an unknown URL renders the 404 page rather than a blank one', async ({
     page,

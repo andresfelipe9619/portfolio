@@ -6,6 +6,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { lazy, useEffect, useState, Suspense } from 'react';
 import LoadingScreen from '@/components/loading-screen';
+import { RouteFallback } from '@/components/route-fallback';
 import { Header } from '@/components/ui/navbar/header.tsx';
 import { DraggableExplorer } from '@/components/ui/navbar/draggable-explorer.tsx';
 import { useKeyListener } from '@/hooks/useKeyListener.tsx';
@@ -69,7 +70,7 @@ export default function App() {
                 open={explorerOpen}
                 onClose={() => setExplorerOpen(false)}
               />
-              <Suspense fallback={<LoadingScreen onSkip={() => {}} />}>
+              <Suspense fallback={<RouteFallback />}>
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/oss" element={<OpenSourcePage />} />
