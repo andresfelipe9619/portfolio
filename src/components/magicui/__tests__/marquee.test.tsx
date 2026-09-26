@@ -21,6 +21,9 @@ describe('Marquee', () => {
     tracks().forEach((track) => expect(track).not.toHaveClass(PAUSED));
   });
 
+  // Keyed to the tracks, not the whole strip: the pause button lives in the
+  // strip too, and a click leaves focus on it. The browser half of this, that
+  // "resume" really restarts it, is in e2e/smoke.spec.ts.
   it('pauses for keyboard focus as well as for the mouse', () => {
     const { container } = render(
       <Marquee pauseOnHover>
@@ -29,22 +32,23 @@ describe('Marquee', () => {
     );
 
     expect(container.querySelector('.animate-marquee')).toHaveClass(
-      'group-focus-within:[animation-play-state:paused]',
+      'group-has-[>div:focus-within]/marquee:[animation-play-state:paused]',
+      '[@media(hover:hover)]:group-has-[>div:hover]/marquee:[animation-play-state:paused]',
     );
+    expect(screen.getByRole('button').tagName).not.toBe('DIV');
   });
 
-  // The copies exist only to make the loop seamless. Screen readers used to
-  // read every logo and quote four times.
-  it('keeps the loop’s copies away from screen readers and the Tab key', () => {
+  // A visitor can't tell a copy from the original, and for much of every loop
+  // the copies are what's on screen. Inert copies ignored every click.
+  it('keeps every copy as clickable as the original', () => {
     const { container } = render(
       <Marquee repeat={3}>
         <a href="#client">logo</a>
       </Marquee>,
     );
-    const [original, ...copies] =
-      container.querySelectorAll('.animate-marquee');
+    const tracks = container.querySelectorAll('.animate-marquee');
 
-    expect(original).not.toHaveAttribute('inert');
-    copies.forEach((copy) => expect(copy).toHaveAttribute('inert'));
+    expect(tracks).toHaveLength(3);
+    tracks.forEach((track) => expect(track).not.toHaveAttribute('inert'));
   });
 });

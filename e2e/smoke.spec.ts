@@ -339,14 +339,71 @@ test.describe('motion', () => {
     await page.locator('#clients').scrollIntoViewIfNeeded();
     expect(await playState(page)).toBe('running');
 
-    await page
+    const pause = page
       .locator('#clients')
-      .getByRole('button', { name: /pause/i })
-      .click();
+      .getByRole('button', { name: /pause/i });
+    // On screen, where a visitor can see it. click() scrolls to its target
+    // first, so this passed while the button sat 3,500 px to the page's right.
+    await expect(pause).toBeInViewport();
+    await pause.click();
     // Hover and focus pause it too, so take both away: this proves the button.
     await page.mouse.move(0, 0);
     await page.evaluate(() => (document.activeElement as HTMLElement)?.blur());
 
     expect(await playState(page)).toBe('paused');
+  });
+
+  // A click leaves the pointer on the button and focus inside it. Both used to
+  // count as hovering the strip, so "resume" changed the label while the strip
+  // stayed frozen until the visitor moved the mouse away and tabbed out.
+  test('the logo strip resumes the moment its button says so', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    const clients = page.locator('#clients');
+    await clients.scrollIntoViewIfNeeded();
+
+    await clients.getByRole('button', { name: /pause/i }).click();
+    await clients.getByRole('button', { name: /resume/i }).click();
+
+    // No mouse.move and no blur: the pointer and focus stay where they were.
+    expect(await playState(page)).toBe('running');
+
+    // Focus on the logos themselves still holds it, for anyone tabbing through.
+    await logoStrip(page).getByRole('link').first().focus();
+    expect(await playState(page)).toBe('paused');
+  });
+
+  // For much of every loop, the strip's copies are what's on screen. Marking
+  // them inert left the logos a visitor could see ignoring the mouse: no link,
+  // no tooltip, no pause on hover.
+  test('every logo on screen answers the mouse', async ({ page }) => {
+    await page.goto('/');
+    const clients = page.locator('#clients');
+    await clients.scrollIntoViewIfNeeded();
+    // Hold it still, so each logo stays where it was measured.
+    await clients.getByRole('button', { name: /pause/i }).click();
+
+    const answers = await clients.evaluate((section) =>
+      [...section.querySelectorAll('a')]
+        .filter((link) => {
+          const box = link.getBoundingClientRect();
+          return (
+            box.left >= 0 &&
+            box.right <= innerWidth &&
+            box.top >= 0 &&
+            box.bottom <= innerHeight
+          );
+        })
+        .map((link) => {
+          const box = link.getBoundingClientRect();
+          const x = box.left + box.width / 2;
+          const y = box.top + box.height / 2;
+          return link.contains(document.elementFromPoint(x, y));
+        }),
+    );
+
+    expect(answers.length).toBeGreaterThan(0);
+    expect(answers).not.toContain(false);
   });
 });

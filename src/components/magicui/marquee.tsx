@@ -34,6 +34,15 @@ interface MarqueeProps extends ComponentPropsWithoutRef<'div'> {
   repeat?: number;
 }
 
+/**
+ * Pointing at the content, or focusing something in it, holds the strip
+ * still. "The content" is the tracks, the group's direct div children, and not
+ * the pause button: a click leaves the pointer and focus on the button, and
+ * when those counted, "resume" changed the label but left the strip frozen.
+ */
+const HOLD_WHILE_ENGAGED =
+  '[@media(hover:hover)]:group-has-[>div:hover]/marquee:[animation-play-state:paused] group-has-[>div:focus-within]/marquee:[animation-play-state:paused]';
+
 export function Marquee({
   className,
   reverse = false,
@@ -53,8 +62,11 @@ export function Marquee({
   return (
     <div
       {...props}
+      // max-w-full: in a centring flex column, like the logo strip's, the
+      // strip grew as wide as all four copies (8,000 px and more) and put its
+      // pause button off-screen, where no visitor could see or reach it.
       className={cn(
-        'group relative flex overflow-hidden p-2 [--duration:40s] [--gap:1rem] [gap:var(--gap)]',
+        'group/marquee relative flex max-w-full overflow-hidden p-2 [--duration:40s] [--gap:1rem] [gap:var(--gap)]',
         {
           'flex-row': !vertical,
           'flex-col': vertical,
@@ -67,17 +79,15 @@ export function Marquee({
         .map((_, i) => (
           <div
             key={i}
-            // The copies only exist to make the loop seamless. Without inert,
-            // a screen reader read every logo and quote four times, and each
-            // copy added more stops for the Tab key.
-            inert={i > 0}
+            // The copies must stay as alive as the original: for much of every
+            // loop, they're what's on screen. Marking them inert once left the
+            // logos a visitor could see ignoring the mouse.
             className={cn(
               'flex shrink-0 justify-around [gap:var(--gap)] motion-reduce:[animation-play-state:paused]',
               {
                 'animate-marquee flex-row': !vertical,
                 'animate-marquee-vertical flex-col': vertical,
-                'group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]':
-                  pauseOnHover,
+                [HOLD_WHILE_ENGAGED]: pauseOnHover,
                 '[animation-play-state:paused]': paused,
                 '[animation-direction:reverse]': reverse,
               },
