@@ -22,7 +22,9 @@ A modern, performant, and highly interactive web application built with a curate
 
 ### Core experience
 
-- **Hero with smart intro behavior**: Plays the animated hero sequence once, then skips it on future visits in the same session using `sessionStorage`.
+- **A hero that never makes you wait**: the headline's first line is on screen from the first frame; the rest types in as setup and punchline in about two seconds, once per session (and not at all for reduced-motion visitors). Every section renders straight away, and scrolling is never locked.
+- **Decoration waits its turn**: the WebGL globes and the particle field start after the page has loaded, only where a GPU will draw them, and stop painting when they scroll out of view. A GPU-less laptop used to spend tens of seconds of main thread on them.
+- **Motion with manners**: `prefers-reduced-motion` is honoured everywhere (CSS animations, motion/react, typing, highlights, particles, confetti), and every marquee has a real pause button, as WCAG 2.2.2 asks of anything that moves for more than five seconds.
 - **Optional cinematic loading terminal**: Shows a fake-but-delightful boot sequence (network, TLS, i18n, render metrics, geo lookup) with a skip button, controlled by `VITE_LOADING_SCREEN_ENABLED`.
 - **Fast route transitions**: Page-level code splitting with React `lazy` + `Suspense` for better initial load and smoother route hops.
 - **Draggable “file explorer” overlay**: A movable and resizable mini explorer panel that can be toggled from the header.
@@ -120,19 +122,15 @@ been checked in both directions — it passes today, and it fails when broken.
 | ESLint               | `npm run lint`                         | ✅ zero warnings               |
 | Named suppressions   | `eslint-comments/no-unlimited-disable` | ✅ bare disables rejected      |
 | Prettier             | `npm run format:check`                 | ✅ clean                       |
-| Unit tests           | `npm run test:coverage`                | 185 tests                      |
-| Coverage ratchet     | vitest `thresholds`                    | 34% overall, 58% first-party   |
-| End-to-end           | `npm run test:e2e` (Playwright)        | 56 (28 each, desktop + mobile) |
-| Critical-path JS     | `npm run size`                         | 266 kB / 280 kB (brotli)       |
+| Unit tests           | `npm run test:coverage`                | 211 tests                      |
+| Coverage ratchet     | vitest `thresholds`                    | 35% overall, 57% first-party   |
+| End-to-end           | `npm run test:e2e` (Playwright)        | 62 (31 each, desktop + mobile) |
+| Critical-path JS     | `npm run size`                         | 223 kB / 230 kB (brotli)       |
 | Prod vulnerabilities | `npm audit --omit=dev`                 | ✅ zero                        |
 | SAST                 | CodeQL (`security-and-quality`)        | every PR + weekly              |
-| Page quality         | Lighthouse CI                          | SEO & a11y 100 on all pages    |
+| Page quality         | Lighthouse CI                          | perf 98+, a11y & SEO 100       |
 
-> ⚠️ **The CI half of this isn't switched on yet.** Every command above runs
-> locally today. The GitHub workflows that run them on each PR are parked in
-> [`docs/ci/`](docs/ci/) until someone with `workflow` push rights moves them
-> into `.github/workflows/` — it's a three-line job, see
-> [`docs/ci/README.md`](docs/ci/README.md).
+All of it runs in CI on every pull request ([`.github/workflows/`](.github/workflows/)).
 
 A few notes on honesty:
 
@@ -141,14 +139,18 @@ A few notes on honesty:
   Those are covered by Playwright, where a real browser runs them. The
   threshold is a **ratchet**: set to what the suite achieves, and it only
   goes up.
-- **Critical path.** 266 kB is every script `index.html` loads before first
-  render — measured straight from the built HTML, not guessed from chunk
-  names. It's heavy (Sentry and motion are most of it). The budget exists so
-  it can't quietly get heavier; slimming it is a project of its own.
-- **Home page performance.** The inner pages score 98–99 on Lighthouse. Home
-  scores around 55 on CI runners, because they have no GPU and the WebGL
-  globe and particle canvases render in software. Its budget is a floor to
-  catch regressions, not a pass mark.
+- **Critical path.** 223 kB is every script `index.html` loads before first
+  render, measured straight from the built HTML rather than guessed from
+  chunk names. It was 267 kB until Session Replay, react-ga4, Vercel
+  Analytics and the file explorer stopped shipping to everyone: code that
+  only runs after consent now downloads on consent. The budget sits just
+  above today's number so the saving can't quietly erode.
+- **Page performance.** On Lighthouse's desktop profile every page scores
+  98–99, Home included (it was 56). On the mobile profile, a slow 4G phone,
+  Home scores about 80 and the inner pages 84–86: a client-rendered page has
+  to download and run its JavaScript before the headline can paint. Going
+  further means pre-rendering the hero's HTML, which is its own project on a
+  site that speaks four languages. CI holds every page to 90+ on desktop.
 
 - **Security headers** (HSTS, nosniff, frame-deny, Referrer-Policy,
   Permissions-Policy) plus a Report-Only CSP with no `'unsafe-inline'` for
