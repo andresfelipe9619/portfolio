@@ -29,6 +29,12 @@ updates:
       radix:
         patterns:
           - '@radix-ui/*'
+      # Session Replay is imported from @sentry-internal/replay directly and
+      # must match the SDK's version exactly (src/__tests__/sentry-config.test.ts).
+      sentry:
+        patterns:
+          - '@sentry/*'
+          - '@sentry-internal/*'
       tooling:
         patterns:
           - 'eslint*'

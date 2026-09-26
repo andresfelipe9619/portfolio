@@ -14,9 +14,16 @@ export default defineConfig({
     sourcemap: 'hidden',
     rollupOptions: {
       output: {
+        // A manual chunk takes its entries' dependencies with it, so naming
+        // @sentry/react "sentry" also filed Session Replay (~120 kB before
+        // compression) under it: a chunk every visitor downloads, for code
+        // that only runs after consent. Naming Replay as its own chunk keeps
+        // it out. Nothing imports it statically (see enableSessionReplay),
+        // so it downloads when a visitor says yes.
         manualChunks: {
           react: ['react', 'react-dom', 'react-router-dom'],
           sentry: ['@sentry/react'],
+          'sentry-replay': ['@sentry-internal/replay'],
           motion: ['motion'],
           i18n: [
             'i18next',

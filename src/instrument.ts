@@ -51,7 +51,7 @@ Sentry.init({
   enableLogs: true,
 });
 
-let replayEnabled = false;
+let replay: Promise<void> | undefined;
 
 /**
  * Starts Session Replay. Called only once the visitor has consented, and safe
@@ -60,16 +60,27 @@ let replayEnabled = false;
  * Replay with the blinds firmly closed: text is masked, media is blocked,
  * inputs are ignored. We get to see *that* something broke and roughly where,
  * never *what* someone was writing when it did.
+ *
+ * It's also the heaviest part of the SDK, about 120 kB before compression, so
+ * it downloads when someone says yes rather than with everyone's first page.
+ * It's imported from @sentry-internal/replay, pinned to the same version as
+ * @sentry/react (a test checks), because @sentry/react is already in the first
+ * download and a dynamic import of it would split nothing.
  */
-export function enableSessionReplay() {
-  if (replayEnabled) return;
-  replayEnabled = true;
-
-  Sentry.addIntegration(
-    Sentry.replayIntegration({
-      maskAllText: true,
-      blockAllMedia: true,
-      maskAllInputs: true,
-    }),
-  );
+export function enableSessionReplay(): Promise<void> {
+  replay ??= import('@sentry-internal/replay')
+    .then(({ replayIntegration }) => {
+      Sentry.addIntegration(
+        replayIntegration({
+          maskAllText: true,
+          blockAllMedia: true,
+          maskAllInputs: true,
+        }),
+      );
+    })
+    .catch(() => {
+      // A dropped connection shouldn't cost the next consent its replay.
+      replay = undefined;
+    });
+  return replay;
 }

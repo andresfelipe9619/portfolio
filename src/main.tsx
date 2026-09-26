@@ -21,7 +21,7 @@ const bootMeasurement = () => {
   if (!hasConsent()) return;
   initGA();
   initClarity();
-  enableSessionReplay();
+  void enableSessionReplay();
 };
 
 bootMeasurement();
