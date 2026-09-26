@@ -33,16 +33,18 @@ module.exports = [
   {
     name: 'Critical path (every script index.html loads before first render)',
     path: eager,
-    // Locked just above today's 266 kB so it can't creep. It's heavy — Sentry
-    // and motion are most of it — and shrinking it is its own project; this
-    // budget's job is to make sure nobody makes it worse without noticing.
-    limit: '280 kB',
+    // 267 kB until Session Replay, react-ga4, Vercel Analytics and the file
+    // explorer stopped shipping to everyone up front. Locked just above
+    // today's 223 kB, so the saving can't quietly erode.
+    limit: '230 kB',
   },
   {
-    name: 'Lazy chunks (routes, effects, dictionaries)',
+    name: 'Lazy chunks (routes, effects, dictionaries, consent-only code)',
     path: ['dist/assets/*.js', ...eager.map((file) => `!${file}`)],
-    // Was 220 kB back when this bucket wrongly included three eager chunks.
-    limit: '95 kB',
+    // Grew from 79 to 129 kB on purpose: Replay (~35 kB), react-ga4 and
+    // Vercel Analytics moved here from the critical path, and now download
+    // only after a visitor consents. The explorer waits for its first open.
+    limit: '135 kB',
   },
   {
     name: 'Styles',
