@@ -122,9 +122,9 @@ been checked in both directions — it passes today, and it fails when broken.
 | ESLint               | `npm run lint`                         | ✅ zero warnings               |
 | Named suppressions   | `eslint-comments/no-unlimited-disable` | ✅ bare disables rejected      |
 | Prettier             | `npm run format:check`                 | ✅ clean                       |
-| Unit tests           | `npm run test:coverage`                | 211 tests                      |
-| Coverage ratchet     | vitest `thresholds`                    | 35% overall, 57% first-party   |
-| End-to-end           | `npm run test:e2e` (Playwright)        | 62 (31 each, desktop + mobile) |
+| Unit tests           | `npm run test:coverage`                | 220 tests                      |
+| Coverage ratchet     | vitest `thresholds`                    | 38% overall, 63% first-party   |
+| End-to-end           | `npm run test:e2e` (Playwright)        | 66 (33 each, desktop + mobile) |
 | Critical-path JS     | `npm run size`                         | 223 kB / 230 kB (brotli)       |
 | Prod vulnerabilities | `npm audit --omit=dev`                 | ✅ zero                        |
 | SAST                 | CodeQL (`security-and-quality`)        | every PR + weekly              |

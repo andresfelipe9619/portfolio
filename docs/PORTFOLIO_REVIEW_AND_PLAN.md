@@ -890,9 +890,9 @@ On mobile, `/projects` went from 78 to 84–86, and `/contact` now scores 84–8
 6. **The avatar was a camera original.** A 977 KB, 3000 px JPEG with its EXIF,
    displayed at 112 px.
 7. **Accessibility gaps.** Reduced motion was ignored everywhere except the
-   globe. Marquees couldn't be paused without a mouse. Screen readers read
-   every marquee item four times. Testimonial cards couldn't be opened from
-   the keyboard. The highlighter never removed its SVG.
+   globe. Marquees couldn't be paused without a mouse. Testimonial cards
+   couldn't be opened from the keyboard. The highlighter never removed its
+   SVG.
 
 ### Tried, measured and rejected
 
@@ -904,6 +904,31 @@ On mobile, `/projects` went from 78 to 84–86, and `/contact` now scores 84–8
   not worth the bigger main bundle.
 - **A function-form `manualChunks`.** It split Replay out, but reshuffled the
   vendor chunks into a cycle that crashed the page on load. Only E2E caught it.
+
+### Found in review
+
+- **"Resume" didn't resume.** Codex caught this one. A click leaves the
+  pointer and focus on the pause button, and both counted as hovering the
+  strip. Now only the logos themselves hold it still.
+- **The logo strip's pause button was off-screen.** In a centring flex
+  column, the strip grew as wide as all four copies, 8,448 px, and put its
+  button 3,500 px to the right of the page. E2E missed it because `click()`
+  scrolls to its target first. The test now checks the button is in view.
+- **The logos on screen ignored the mouse.** The loop's copies were made
+  inert so screen readers would read each logo once. In that too-wide strip,
+  every logo on screen was a copy, and inert content can't be hovered or
+  clicked. The copies are live again, so screen readers are back to reading
+  each item four times, as they did before this phase. Fixing both needs
+  copies that are hidden from assistive tech and out of the Tab order but
+  still clickable, and a way to keep the focused logo on screen. That's
+  follow-up work.
+- **The coverage floor had no headroom.** It was set right at the measured
+  numbers, and CI came in a fraction of a point under. The paths this phase
+  added without tests now have them: the route fallback, the GA retry, the
+  load and idle fallbacks, and the confetti. A test also opens the résumé
+  dialog. Its lazy chunk used to arrive before the suite finished on some
+  runs and not others, which moved coverage by about 0.4 points. The floor
+  is now 37/34/40/37, a point under what the suite reaches.
 
 ### Where mobile stands
 
