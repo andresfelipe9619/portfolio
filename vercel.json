@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/RESUME(.*).pdf",
+      "destination": "/cv.pdf",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/((?!assets/).*)",

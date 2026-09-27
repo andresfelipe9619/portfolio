@@ -8,6 +8,7 @@ Welcome to the digital portfolio of Andrés Suárez, a Senior Full-Stack Enginee
 - `/oss` : Details focused specifically on open-source contributions.
 - `/blog` : Articles and blog posts.
 - `/contact` : Links to connect via email, LinkedIn, or GitHub.
+- `/cv.pdf` : Andrés's CV, always the current version.
 
 ## AI Agent Integration (WebMCP)
 This site implements the **Web Model Context Protocol (WebMCP)**.

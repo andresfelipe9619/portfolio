@@ -50,6 +50,7 @@ export function useWebMCP() {
             url: PROFILE.url,
             summary: PROFILE.summary,
             description: PROFILE.description,
+            cv: `${PROFILE.url}/cv.pdf`,
             github: 'https://github.com/andresfelipe9619',
             linkedin: 'https://linkedin.com/in/andresfelipe9619',
           };

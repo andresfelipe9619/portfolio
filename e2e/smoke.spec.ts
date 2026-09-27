@@ -281,6 +281,19 @@ test.describe('security headers and hygiene', () => {
   });
 });
 
+test.describe('hiring', () => {
+  // One stable address for the CV, for applications and email signatures.
+  // Replacing public/cv.pdf updates it everywhere at once.
+  test('the CV lives at /cv.pdf', async ({ request }) => {
+    const response = await request.get('/cv.pdf');
+
+    expect(response.headers()['content-type']).toContain('application/pdf');
+    // Vercel answers unknown paths with index.html and a 200, so check the
+    // bytes, not the status.
+    expect((await response.body()).subarray(0, 5).toString()).toBe('%PDF-');
+  });
+});
+
 test.describe('accessibility basics', () => {
   test('every page has exactly one h1', async ({ page }) => {
     for (const path of ['/projects', '/contact', '/blog', '/nope']) {

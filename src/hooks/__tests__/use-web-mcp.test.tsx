@@ -75,6 +75,7 @@ describe('useWebMCP', () => {
     >;
 
     expect(info).toMatchObject({
+      cv: 'https://andressuarez.dev/cv.pdf',
       github: expect.stringContaining('github.com'),
       linkedin: expect.stringContaining('linkedin.com'),
     });

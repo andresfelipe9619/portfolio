@@ -136,6 +136,7 @@ describe('Home page', () => {
       fireEvent.click(screen.getByRole('button', { name: /download resume/i }));
 
       expect(download).toHaveBeenCalledTimes(1);
+      expect(download.mock.contexts[0]).toHaveAttribute('href', '/cv.pdf');
       expect(download.mock.contexts[0]).toHaveAttribute(
         'download',
         'andres-suarez-resume.pdf',

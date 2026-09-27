@@ -67,7 +67,7 @@ const FunnyVirusScanDialog = ({
     // lives. A direct call here used to queue events before anyone said yes.
     logEvent('Resume', 'Downloaded', 'Resume Downloaded');
     const link = document.createElement('a');
-    link.href = '/RESUME 3.3.pdf';
+    link.href = '/cv.pdf';
     link.download = 'andres-suarez-resume.pdf';
     document.body.appendChild(link);
     link.click();

@@ -18,7 +18,7 @@ export const PROFILE = {
 
   // The timeline / shorter summary
   summary:
-    'Innovative **Software & Solutions Engineer** with 8+ years delivering scalable SaaS, cloud, and GIS systems across 11 countries. Recognized for bridging business and technology, leading enterprise engineering, and building open-source projects.',
+    'Innovative **Software & Solutions Engineer** with 9+ years delivering scalable SaaS, cloud, and GIS systems across 11 countries. Recognized for bridging business and technology, leading enterprise engineering, and building open-source projects.',
 
   // The longer, more detailed summary for the resume
   longSummary:
