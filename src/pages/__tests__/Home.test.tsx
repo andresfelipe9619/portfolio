@@ -37,6 +37,18 @@ vi.mock('canvas-confetti', () => ({
 }));
 
 describe('Home page', () => {
+  // The dialogs are lazy chunks. Without this, the first test to open each
+  // one also paid for compiling and loading it inside findBy's one-second
+  // wait: 0.5 s on an idle machine, 0.7 s with every core busy, and more than
+  // a second on the first run after a clean install.
+  beforeAll(async () => {
+    await Promise.all([
+      import('@/components/project-dialog'),
+      import('@/components/joke-dialog'),
+      import('@/components/virus-scan-dialog'),
+    ]);
+  });
+
   beforeEach(() => {
     // Reset any storage state to ensure predictable tests
     sessionStorage.clear();
