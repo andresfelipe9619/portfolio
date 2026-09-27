@@ -83,3 +83,29 @@ describe('Sentry configuration', () => {
     });
   });
 });
+
+/**
+ * Session Replay is imported from @sentry-internal/replay directly, so that it
+ * can download after consent instead of with the SDK. That only works while it
+ * is the exact version the rest of the SDK runs: if they drift, Replay
+ * registers with a different copy of Sentry and quietly records nothing.
+ * Dependabot bumps them as one group; this is the backstop.
+ */
+describe('Sentry package versions', () => {
+  const installed = (pkg: string): string =>
+    (
+      JSON.parse(
+        readFileSync(
+          resolve(repo, 'node_modules', pkg, 'package.json'),
+          'utf8',
+        ),
+      ) as { version: string }
+    ).version;
+
+  it('keeps Session Replay on the same version as the SDK', () => {
+    const sdk = installed('@sentry/react');
+
+    expect(installed('@sentry-internal/replay')).toBe(sdk);
+    expect(installed('@sentry/core')).toBe(sdk);
+  });
+});

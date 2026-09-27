@@ -2,7 +2,7 @@
 
 import type React from 'react';
 import { useEffect, useRef } from 'react';
-import { useInView } from 'motion/react';
+import { useInView, useReducedMotion } from 'motion/react';
 import { annotate } from 'rough-notation';
 
 type AnnotationAction =
@@ -46,6 +46,7 @@ export function Highlighter({
   });
 
   const shouldShow = !inView || isInView;
+  const drawInstantly = useReducedMotion() === true;
 
   useEffect(() => {
     if (!shouldShow) return;
@@ -53,27 +54,32 @@ export function Highlighter({
     const element = elementRef.current;
     if (!element) return;
 
+    // Removed in the effect's cleanup. It used to be returned from inside the
+    // setTimeout callback, where nothing ever read it, so every underline
+    // outlived the component that drew it.
+    let annotation: ReturnType<typeof annotate> | undefined;
     const timeout = setTimeout(() => {
-      const annotation = annotate(element, {
+      annotation = annotate(element, {
         type: action,
         color,
         strokeWidth,
         animationDuration,
+        animate: !drawInstantly,
         iterations,
         padding,
         multiline,
       });
 
       annotation.show();
-
-      return () => {
-        annotation.remove();
-      };
     }, delay);
 
-    return () => clearTimeout(timeout);
+    return () => {
+      clearTimeout(timeout);
+      annotation?.remove();
+    };
   }, [
     shouldShow,
+    drawInstantly,
     action,
     color,
     strokeWidth,

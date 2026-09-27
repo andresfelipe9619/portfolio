@@ -13,6 +13,7 @@ export const DATA = {
   description: PROFILE.description,
   summary: PROFILE.longSummary,
   avatarUrl: PROFILE.avatarUrl,
+  avatarSrcSet: PROFILE.avatarSrcSet,
   skills: SKILLS,
   categorizedSkills: CATEGORIZED_SKILLS,
   navbar: [

@@ -19,6 +19,9 @@ export default function TimelineGlobe({ className }: Props) {
 
     let width = 0;
     let height = 0;
+    // The timeline sits below the fold, and a globe nobody can see still
+    // costs a WebGL frame every 16 ms. It only renders while on screen.
+    let visible = false;
 
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
@@ -67,8 +70,15 @@ export default function TimelineGlobe({ className }: Props) {
             s.markers = markers.current;
           },
         });
+        globe.toggle(visible);
       }
     });
+
+    const io = new IntersectionObserver(([entry]) => {
+      visible = entry?.isIntersecting ?? false;
+      globe?.toggle(visible);
+    });
+    io.observe(canvas);
 
     if (canvas.parentElement) {
       ro.observe(canvas.parentElement);
@@ -89,6 +99,7 @@ export default function TimelineGlobe({ className }: Props) {
     return () => {
       window.removeEventListener('globe:focus', onFocus as EventListener);
       ro.disconnect();
+      io.disconnect();
       if (globe) globe.destroy();
     };
   }, []);

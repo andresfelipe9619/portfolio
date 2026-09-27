@@ -736,12 +736,9 @@ matter rather than just the change:
 
 ### One step left for a human
 
-The five CI workflow files could not be pushed from this session: the token has
-no `workflow` scope, so GitHub rejects any push touching `.github/workflows/`.
-They are committed to [`docs/ci/`](./ci/) instead, with a three-line activation
-command in [`docs/ci/README.md`](./ci/README.md). Until they are moved, the
-"CI gates on a PR" row in the table above describes `docs/ci/`, not what is
-actually running.
+Done. The session's token had no `workflow` scope, so the five CI workflows
+were parked in `docs/ci/`. Andrés moved them into `.github/workflows/` in
+`a12bcec`, and every gate in the table above now runs on every pull request.
 
 ### Deliberately not done
 
@@ -755,12 +752,8 @@ actually running.
   `public/manifest.json` is the single source of truth, but the 192/512/maskable
   PNG set still needs generating from the brand mark before install prompts work
   properly. Left alone rather than inventing artwork.
-- **A faster Home page.** Lighthouse scores it around 55 on GPU-less machines,
-  where the WebGL globe and particle canvases render in software. Its budget
-  is a floor that stops it getting worse. The biggest cheap win is the
-  portrait: `public/me.jpeg` is 977 KB and 3000 px wide, displayed at 110 px.
-  A small avatar export would help every visitor (keep the big one for the
-  social card).
+- **A faster Home page.** Since done: see §12. Home scores 98 on desktop and
+  80 on mobile, and the avatar ships as 2–7 kB WebP.
 
 ---
 
@@ -847,3 +840,113 @@ Two things only the Sentry dashboard can do:
 2. **Break something on purpose.** Open `/test-error` on this branch's preview
    deploy and press the button. Within a minute or two you should see an issue
    in `portfolio` tagged `environment:preview`, and an email about it.
+
+## 12. Level-up plan, Phase 1: the first impression
+
+The level-up plan has five phases:
+
+1. **The first impression.** This section.
+2. **Proof over claims.** Case studies with numbers.
+3. **Showing how Andrés thinks.** A real blog.
+4. **Making hiring easy.** A clean CV URL, a booking link, per-page social cards.
+5. **The signature layer.** A command palette, a type system, `/uses` and `/now`.
+
+Phase 1 measured Home before touching anything, and again after each change.
+
+| Home                               | Before (`a12bcec`) | After  |
+| ---------------------------------- | ------------------ | ------ |
+| Lighthouse, desktop                | 56                 | 98     |
+| Largest paint, desktop             | 1.8 s              | 0.96 s |
+| Blocking time, desktop             | 29 s               | ~5 ms  |
+| Lighthouse, mobile                 | 43–47              | 80     |
+| Largest paint, mobile              | 4.6–5.1 s          | 3.8 s  |
+| Blocking time, mobile              | 4.6–7.5 s          | 0.23 s |
+| Headline on screen (local build)   | 5.5 s              | 0.66 s |
+| JavaScript before first paint (br) | 261 kB             | 223 kB |
+| Page weight                        | 1.7 MB             | 346 KB |
+| Layout shift                       | 0.03–0.046         | 0.016  |
+
+On mobile, `/projects` went from 78 to 84–86, and `/contact` now scores 84–86.
+
+### What was actually wrong
+
+1. **The loading fallback starved the page.** The route's Suspense fallback was
+   the animated loading terminal. Every 25 ms tick restarted Home's render, so
+   Home could only appear once the terminal ran out of lines: 5.5 s on a
+   production build and 18 s in dev. That was about 150 wasted renders, each
+   re-requesting the avatar. This was already on `master`, and the E2E suite
+   had blamed the missing GPU.
+2. **The intro held the page hostage.** It typed the whole headline at 100 ms
+   a letter, held back every section and locked scrolling for 6.5 s.
+3. **Two globes rendered on the CPU.** Without a GPU, cobe falls back to a
+   software renderer at about 100 ms of main thread per frame. Lighthouse
+   charged 10–42 s of it to Sentry's `requestAnimationFrame` wrappers. The
+   timeline's globe also kept rendering off-screen, forever.
+4. **The headline was rebuilt on every keystroke.** `TypingAnimation` called
+   `motion.create()` during render, so React replaced the DOM node each time.
+5. **Consent-only code shipped to everyone.** Session Replay (about 120 kB
+   before compression) sat in the Sentry chunk every visitor downloads, as did
+   react-ga4, Vercel Analytics and the file explorer.
+6. **The avatar was a camera original.** A 977 KB, 3000 px JPEG with its EXIF,
+   displayed at 112 px.
+7. **Accessibility gaps.** Reduced motion was ignored everywhere except the
+   globe. Marquees couldn't be paused without a mouse. Testimonial cards
+   couldn't be opened from the keyboard. The highlighter never removed its
+   SVG.
+
+### Tried, measured and rejected
+
+- **Preloading Home's chunk from `index.html`.** First paint went from
+  2.69 s to 2.9 s through bandwidth contention, and largest paint didn't
+  improve.
+- **Bundling Home with the app.** Largest paint improved by about 0.4 s, but
+  first paint got about 0.3 s slower on every page. That's within noise, and
+  not worth the bigger main bundle.
+- **A function-form `manualChunks`.** It split Replay out, but reshuffled the
+  vendor chunks into a cycle that crashed the page on load. Only E2E caught it.
+
+### Found in review
+
+- **"Resume" didn't resume.** Codex caught this one. A click leaves the
+  pointer and focus on the pause button, and both counted as hovering the
+  strip. Now only the logos themselves hold it still.
+- **The logo strip's pause button was off-screen.** In a centring flex
+  column, the strip grew as wide as all four copies, 8,448 px, and put its
+  button 3,500 px to the right of the page. E2E missed it because `click()`
+  scrolls to its target first. The test now checks the button is in view.
+- **The logos on screen ignored the mouse.** The loop's copies were made
+  inert so screen readers would read each logo once. In that too-wide strip,
+  every logo on screen was a copy, and inert content can't be hovered or
+  clicked. The copies are live again, so screen readers are back to reading
+  each item four times, as they did before this phase. Fixing both needs
+  copies that are hidden from assistive tech and out of the Tab order but
+  still clickable, and a way to keep the focused logo on screen. That's
+  follow-up work.
+- **The coverage floor had no headroom.** It was set right at the measured
+  numbers, and CI came in a fraction of a point under. The paths this phase
+  added without tests now have them: the route fallback, the GA retry, the
+  load and idle fallbacks, and the confetti. A test also opens the résumé
+  dialog. Its lazy chunk used to arrive before the suite finished on some
+  runs and not others, which moved coverage by about 0.4 points. The floor
+  is now 37/34/40/37, a point under what the suite reaches.
+
+### Where mobile stands
+
+A client-rendered page has to download and run its JavaScript before the
+headline can paint. On Lighthouse's slow-4G phone profile, that puts Home at
+about 80. Going further means pre-rendering the hero's HTML, per language, so
+the headline arrives with the page. That's the natural next step, and it's
+bigger than a tweak.
+
+### Locked in
+
+- **Budgets.** The critical path is capped at 230 kB. Lighthouse CI now holds
+  every page, Home included, to performance 90+, largest paint under 2.5 s
+  and blocking time under 300 ms, as errors rather than warnings.
+- **Tests.**
+  - An E2E check fails if the headline takes longer than 3 s.
+  - Motion is tested in a real browser with reduced motion emulated.
+  - Unit tests cover the typing remount, the GPU gate, the marquee control,
+    the keyboard testimonial, and "declining analytics never downloads it".
+  - Each of those tests was confirmed to fail on the old code.
+- **Rules.** AGENTS.md now carries the performance rules behind all of this.

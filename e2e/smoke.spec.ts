@@ -28,16 +28,21 @@ test.describe('routes', () => {
   for (const { path, titleContains } of routes) {
     test(`${path} loads with its own title`, async ({ page }) => {
       await page.goto(path);
-      // Home takes several seconds to render in headless Chromium, which has
-      // no GPU to hand the globe and particles to. It always did — a static
-      // <title> in index.html used to hide that from this test. The title
-      // arrives with the page, so give the page time to arrive.
-      await expect(page).toHaveTitle(new RegExp(titleContains, 'i'), {
-        timeout: 20_000,
-      });
+      await expect(page).toHaveTitle(new RegExp(titleContains, 'i'));
       await expect(page.locator('body')).toBeVisible();
     });
   }
+
+  // Home used to take 6–10 s to appear here, and this suite blamed the missing
+  // GPU. The real cause was the route's loading fallback: an animated terminal
+  // whose timer interrupted React's render of the incoming page every 25 ms, so
+  // Home could only finish once the terminal ran out of lines.
+  test('Home paints its headline promptly', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('#hero')).toContainText(/global companies/i, {
+      timeout: 3_000,
+    });
+  });
 
   test('an unknown URL renders the 404 page rather than a blank one', async ({
     page,
@@ -296,5 +301,109 @@ test.describe('accessibility basics', () => {
 
     const missingAlt = await page.locator('img:not([alt])').count();
     expect(missingAlt).toBe(0);
+  });
+});
+
+test.describe('motion', () => {
+  const logoStrip = (page: import('@playwright/test').Page) =>
+    page.locator('#clients .animate-marquee').first();
+  const playState = (page: import('@playwright/test').Page) =>
+    logoStrip(page).evaluate((el) => getComputedStyle(el).animationPlayState);
+
+  test('reduced-motion visitors get a still page, all the words at once', async ({
+    page,
+  }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/');
+
+    // No typing: the punchline is there from the start.
+    await expect(page.locator('#hero')).toContainText("Can't", {
+      timeout: 3_000,
+    });
+
+    await logoStrip(page).scrollIntoViewIfNeeded();
+    expect(await playState(page)).toBe('paused');
+    // Nothing moves, so there's nothing to pause.
+    await expect(
+      page.locator('#clients').getByRole('button', { name: /pause/i }),
+    ).toBeHidden();
+  });
+
+  // WCAG 2.2.2: anything moving for more than five seconds needs a stop
+  // button, and hover-to-pause doesn't reach keyboards or touchscreens.
+  test('the logo strip can be paused with a real button', async ({ page }) => {
+    await asReturningVisitor(page);
+    await page.goto('/');
+    // The section, not the strip: Playwright waits for an element to stop
+    // moving before scrolling to it, and a running marquee never does.
+    await page.locator('#clients').scrollIntoViewIfNeeded();
+    expect(await playState(page)).toBe('running');
+
+    const pause = page
+      .locator('#clients')
+      .getByRole('button', { name: /pause/i });
+    // On screen, where a visitor can see it. click() scrolls to its target
+    // first, so this passed while the button sat 3,500 px to the page's right.
+    await expect(pause).toBeInViewport();
+    await pause.click();
+    // Hover and focus pause it too, so take both away: this proves the button.
+    await page.mouse.move(0, 0);
+    await page.evaluate(() => (document.activeElement as HTMLElement)?.blur());
+
+    expect(await playState(page)).toBe('paused');
+  });
+
+  // A click leaves the pointer on the button and focus inside it. Both used to
+  // count as hovering the strip, so "resume" changed the label while the strip
+  // stayed frozen until the visitor moved the mouse away and tabbed out.
+  test('the logo strip resumes the moment its button says so', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    const clients = page.locator('#clients');
+    await clients.scrollIntoViewIfNeeded();
+
+    await clients.getByRole('button', { name: /pause/i }).click();
+    await clients.getByRole('button', { name: /resume/i }).click();
+
+    // No mouse.move and no blur: the pointer and focus stay where they were.
+    expect(await playState(page)).toBe('running');
+
+    // Focus on the logos themselves still holds it, for anyone tabbing through.
+    await logoStrip(page).getByRole('link').first().focus();
+    expect(await playState(page)).toBe('paused');
+  });
+
+  // For much of every loop, the strip's copies are what's on screen. Marking
+  // them inert left the logos a visitor could see ignoring the mouse: no link,
+  // no tooltip, no pause on hover.
+  test('every logo on screen answers the mouse', async ({ page }) => {
+    await page.goto('/');
+    const clients = page.locator('#clients');
+    await clients.scrollIntoViewIfNeeded();
+    // Hold it still, so each logo stays where it was measured.
+    await clients.getByRole('button', { name: /pause/i }).click();
+
+    const answers = await clients.evaluate((section) =>
+      [...section.querySelectorAll('a')]
+        .filter((link) => {
+          const box = link.getBoundingClientRect();
+          return (
+            box.left >= 0 &&
+            box.right <= innerWidth &&
+            box.top >= 0 &&
+            box.bottom <= innerHeight
+          );
+        })
+        .map((link) => {
+          const box = link.getBoundingClientRect();
+          const x = box.left + box.width / 2;
+          const y = box.top + box.height / 2;
+          return link.contains(document.elementFromPoint(x, y));
+        }),
+    );
+
+    expect(answers.length).toBeGreaterThan(0);
+    expect(answers).not.toContain(false);
   });
 });

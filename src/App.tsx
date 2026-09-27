@@ -6,8 +6,8 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { lazy, useEffect, useState, Suspense } from 'react';
 import LoadingScreen from '@/components/loading-screen';
+import { RouteFallback } from '@/components/route-fallback';
 import { Header } from '@/components/ui/navbar/header.tsx';
-import { DraggableExplorer } from '@/components/ui/navbar/draggable-explorer.tsx';
 import { useKeyListener } from '@/hooks/useKeyListener.tsx';
 import { useHackAttemptEasterEgg } from '@/hooks/use-easter-egg';
 import { useWebMCP } from '@/hooks/use-web-mcp';
@@ -23,6 +23,13 @@ const Contact = lazy(() => import('./pages/Contact'));
 const Projects = lazy(() => import('./pages/Projects'));
 const Blog = lazy(() => import('./pages/Blog'));
 const CaseStudy = lazy(() => import('./pages/CaseStudy'));
+// The file explorer and its GitHub-backed tree are code nobody needs until
+// they press Cmd+E or the header button.
+const DraggableExplorer = lazy(() =>
+  import('@/components/ui/navbar/draggable-explorer.tsx').then((m) => ({
+    default: m.DraggableExplorer,
+  })),
+);
 const TestError = lazy(() => import('./pages/TestError'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
@@ -31,6 +38,11 @@ export default function App() {
     import.meta.env.VITE_LOADING_SCREEN_ENABLED === 'true',
   );
   const [explorerOpen, setExplorerOpen] = useState(false);
+  // Downloaded on first open, then kept mounted so it remembers where it was
+  // dragged to. (Setting state during render is React's own pattern for
+  // latching a value from a previous render.)
+  const [explorerLoaded, setExplorerLoaded] = useState(false);
+  if (explorerOpen && !explorerLoaded) setExplorerLoaded(true);
   const location = useLocation();
   const { t } = useTranslation();
 
@@ -65,11 +77,15 @@ export default function App() {
           ) : (
             <ErrorBoundary>
               <Header onClick={() => setExplorerOpen((v) => !v)} />
-              <DraggableExplorer
-                open={explorerOpen}
-                onClose={() => setExplorerOpen(false)}
-              />
-              <Suspense fallback={<LoadingScreen onSkip={() => {}} />}>
+              {explorerLoaded && (
+                <Suspense fallback={null}>
+                  <DraggableExplorer
+                    open={explorerOpen}
+                    onClose={() => setExplorerOpen(false)}
+                  />
+                </Suspense>
+              )}
+              <Suspense fallback={<RouteFallback />}>
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/oss" element={<OpenSourcePage />} />

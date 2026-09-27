@@ -10,8 +10,12 @@ const replayIntegration = vi.fn((options: unknown) => ({
 vi.mock('@sentry/react', () => ({
   init: (...args: unknown[]) => init(...args),
   addIntegration: (...args: unknown[]) => addIntegration(...args),
-  replayIntegration: (options: unknown) => replayIntegration(options),
   reactRouterV7BrowserTracingIntegration: () => ({ name: 'BrowserTracing' }),
+}));
+
+// Replay comes from its own package, imported only once consent arrives.
+vi.mock('@sentry-internal/replay', () => ({
+  replayIntegration: (options: unknown) => replayIntegration(options),
 }));
 
 /** instrument.ts calls Sentry.init on import, so each test loads it fresh. */
@@ -96,7 +100,7 @@ describe('instrument', () => {
   it('adds Session Replay, fully masked, once consent arrives', async () => {
     const { enableSessionReplay } = await loadInstrument();
 
-    enableSessionReplay();
+    await enableSessionReplay();
 
     expect(addIntegration).toHaveBeenCalledTimes(1);
     expect(replayIntegration).toHaveBeenCalledWith({
@@ -109,9 +113,11 @@ describe('instrument', () => {
   it('adds Session Replay only once, however often consent fires', async () => {
     const { enableSessionReplay } = await loadInstrument();
 
-    enableSessionReplay();
-    enableSessionReplay();
-    enableSessionReplay();
+    await Promise.all([
+      enableSessionReplay(),
+      enableSessionReplay(),
+      enableSessionReplay(),
+    ]);
 
     expect(addIntegration).toHaveBeenCalledTimes(1);
   });

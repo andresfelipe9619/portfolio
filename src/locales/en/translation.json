@@ -249,5 +249,9 @@
       "suffix": "Deep Dive",
       "fallbackTitle": "Case Study Not Found"
     }
+  },
+  "marquee": {
+    "pause": "Pause the scrolling",
+    "resume": "Resume the scrolling"
   }
 }

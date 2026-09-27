@@ -9,6 +9,7 @@ import { initGA } from './lib/ga';
 import { initClarity } from './lib/clarity';
 import { rootErrorHandlers } from './lib/root-error-handlers';
 import { HelmetProvider } from 'react-helmet-async';
+import { MotionConfig } from 'motion/react';
 import { hasConsent, onConsentChange } from './lib/consent';
 import { ConsentedAnalytics } from './components/consented-analytics';
 import './lib/i18n';
@@ -21,7 +22,7 @@ const bootMeasurement = () => {
   if (!hasConsent()) return;
   initGA();
   initClarity();
-  enableSessionReplay();
+  void enableSessionReplay();
 };
 
 bootMeasurement();
@@ -29,13 +30,16 @@ onConsentChange(bootMeasurement);
 
 createRoot(document.getElementById('root')!, rootErrorHandlers).render(
   <StrictMode>
-    <HelmetProvider>
-      <ConsentedAnalytics />
-      <Suspense fallback={<div>Loading...</div>}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Suspense>
-    </HelmetProvider>
+    {/* Transforms and layout animations stand down for reduced-motion visitors. */}
+    <MotionConfig reducedMotion="user">
+      <HelmetProvider>
+        <ConsentedAnalytics />
+        <Suspense fallback={<div>Loading...</div>}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </Suspense>
+      </HelmetProvider>
+    </MotionConfig>
   </StrictMode>,
 );

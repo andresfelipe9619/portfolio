@@ -245,5 +245,9 @@
       "suffix": "En Profondeur",
       "fallbackTitle": "Étude de Cas Introuvable"
     }
+  },
+  "marquee": {
+    "pause": "Mettre le défilement en pause",
+    "resume": "Reprendre le défilement"
   }
 }

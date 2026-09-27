@@ -129,6 +129,19 @@ You are here to help, not to replace. Here’s how you can be a good collaborato
   - `/test-error` exists in dev and on preview deploys only. Keep it out of
     production.
 
+- **Performance rules** (each was measured, and each cost seconds):
+  - A Suspense fallback never has a heartbeat: no timers, no state updates.
+    The route fallback used to be the animated loading terminal, and it kept
+    Home from rendering for 5.5 s.
+  - Decorative WebGL and canvas effects go through `useDecorativeEffects()`:
+    after load, GPU only, paused off-screen. Two globes rendering in software
+    cost Lighthouse up to 42 s of main thread.
+  - Code that only runs after consent is imported dynamically, so visitors
+    who decline never download it (Replay, react-ga4, Vercel Analytics).
+  - Anything that moves on its own respects `prefers-reduced-motion`, and
+    anything that moves for more than five seconds gets a pause control.
+  - The critical-path budget (230 kB, `npm run size`) only goes down.
+
 - **SEO rules**:
   - Every route renders `<Seo>` with localized copy. `index.html` ships no
     `<title>`, description or canonical: React 19 adds page tags next to static

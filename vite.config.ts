@@ -14,9 +14,16 @@ export default defineConfig({
     sourcemap: 'hidden',
     rollupOptions: {
       output: {
+        // A manual chunk takes its entries' dependencies with it, so naming
+        // @sentry/react "sentry" also filed Session Replay (~120 kB before
+        // compression) under it: a chunk every visitor downloads, for code
+        // that only runs after consent. Naming Replay as its own chunk keeps
+        // it out. Nothing imports it statically (see enableSessionReplay),
+        // so it downloads when a visitor says yes.
         manualChunks: {
           react: ['react', 'react-dom', 'react-router-dom'],
           sentry: ['@sentry/react'],
+          'sentry-replay': ['@sentry-internal/replay'],
           motion: ['motion'],
           i18n: [
             'i18next',
@@ -60,20 +67,22 @@ export default defineConfig({
         'src/lib/**/*.{ts,tsx}',
       ],
       exclude: ['src/**/*.test.{ts,tsx}', 'src/test/**'],
-      // A ratchet, not a trophy: set to what the suite actually achieves today
+      // A ratchet, not a trophy: set just under what the suite achieves today,
       // so coverage can only go up. Raise these numbers as tests land; never
-      // lower them to make a red build green.
+      // lower them to make a red build green. Keep about a point of headroom:
+      // lazy chunks land a little earlier or later from run to run, and floors
+      // set right at the measured numbers once failed CI by a fraction of one.
       //
       // The headline number is dragged down by src/components/magicui, which is
       // vendored canvas/WebGL animation code that jsdom cannot meaningfully
       // execute — testing it here would buy confidence that isn't real. Those
       // components are covered by the Playwright suite instead, where an actual
-      // browser runs them. First-party code sits around 51%.
+      // browser runs them. First-party code sits around 63%.
       thresholds: {
-        statements: 33,
-        branches: 31,
-        functions: 36,
-        lines: 33,
+        statements: 37,
+        branches: 34,
+        functions: 40,
+        lines: 37,
       },
     },
   },

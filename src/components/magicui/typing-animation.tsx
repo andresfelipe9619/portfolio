@@ -1,8 +1,13 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { motion, type MotionProps, useInView } from 'motion/react';
-import { useEffect, useRef, useState } from 'react';
+import {
+  motion,
+  type MotionProps,
+  useInView,
+  useReducedMotion,
+} from 'motion/react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 interface TypingAnimationProps extends MotionProps {
   children: string;
@@ -24,12 +29,20 @@ export function TypingAnimation({
   disabled = false,
   ...props
 }: TypingAnimationProps) {
-  const MotionComponent = motion.create(Component, {
-    forwardMotionProps: true,
-  });
+  // Reduced-motion visitors get the words, not the performance.
+  const prefersReducedMotion = useReducedMotion();
+  const instant = disabled || prefersReducedMotion === true;
+
+  // Created once per element type. Calling motion.create() on every render
+  // hands React a brand-new component each time, so it threw away and rebuilt
+  // the DOM node on every single keystroke of the animation.
+  const MotionComponent = useMemo(
+    () => motion.create(Component, { forwardMotionProps: true }),
+    [Component],
+  );
 
   const [displayedText, setDisplayedText] = useState<string>(
-    disabled ? children : '',
+    instant ? children : '',
   );
   const [started, setStarted] = useState(false);
   const elementRef = useRef<HTMLElement | null>(null);
@@ -39,11 +52,11 @@ export function TypingAnimation({
   });
 
   useEffect(() => {
-    if (disabled) setDisplayedText(children);
-  }, [children, disabled]);
+    if (instant) setDisplayedText(children);
+  }, [children, instant]);
 
   useEffect(() => {
-    if (disabled) return;
+    if (instant) return;
 
     if (!startOnView) {
       const startTimeout = setTimeout(() => {
@@ -59,10 +72,10 @@ export function TypingAnimation({
     }, delay);
 
     return () => clearTimeout(startTimeout);
-  }, [delay, startOnView, isInView, disabled]);
+  }, [delay, startOnView, isInView, instant]);
 
   useEffect(() => {
-    if (disabled || !started) return;
+    if (instant || !started) return;
 
     const graphemes = Array.from(children);
     let i = 0;
@@ -78,7 +91,7 @@ export function TypingAnimation({
     return () => {
       clearInterval(typingEffect);
     };
-  }, [children, duration, started, disabled]);
+  }, [children, duration, started, instant]);
 
   return (
     <MotionComponent
