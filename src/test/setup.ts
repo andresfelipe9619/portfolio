@@ -32,6 +32,9 @@ vi.mock('react-i18next', () => ({
       if (opts?.returnObjects && key === 'faq') {
         return [{ question: 'Q1', answer: 'A1' }];
       }
+      if (opts?.returnObjects && key === 'heroStats') {
+        return [{ value: '9+', label: 'heroStats.years' }];
+      }
       return key;
     },
     i18n: {

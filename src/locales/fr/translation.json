@@ -6,109 +6,79 @@
   "globalCompanies": "On me fait confiance pour",
   "toBuildWhatOthers": "bâtir ce que d'autres",
   "cant": "Ne peuvent pas",
-  "professionalTitle": "Ingénieur Logiciel Senior — Architecte Cloud, Automatisation & SaaS",
+  "professionalTitle": "Ingénieur Logiciel & Solutions Senior — Cloud, Automatisation & SaaS",
   "testimonialTitle": "Ce que disent ceux pour qui j'ai construit",
   "faqTitle": "Aucune question n'est trop petite, aucun doute ne reste en suspens.",
   "faq": [
     {
       "id": "engagement",
       "question": "Quel est votre modèle de collaboration ?",
-      "answer": "Projets définis ou acomptes. Priorité asynchrone, démos hebdomadaires. Pas de surprises (sauf les bonnes)."
+      "answer": "Projets cadrés, forfaits récurrents ou intégré à votre équipe. Asynchrone d'abord, démos chaque semaine. Pas de surprises, sauf les bonnes."
     },
     {
       "id": "quality",
       "question": "Comment garantissez-vous la qualité ?",
-      "answer": "Pipelines CI/CD, tests automatisés, linting, budgets de performance, observabilité. Grosso modo, la qualité avec des preuves."
+      "answer": "CI/CD, tests automatisés, linting, budgets de performance et observabilité. La qualité avec des preuves, pas des impressions. (Ce site lui-même casse son build s'il devient plus lent.)"
     },
     {
       "id": "stacks",
       "question": "Quelles technologies préférez-vous ?",
-      "answer": "TypeScript, React/Next.js, Node, Python, AWS, Postgres, Redis, edge functions. Je ne suis pas marié aux technos, juste engagé vers l'excellence."
+      "answer": "TypeScript et Node.js sur AWS, React/Next.js devant et PostgreSQL derrière. Python quand le besoin s'en fait sentir. Fidèle au problème, pas au framework."
+    },
+    {
+      "id": "industries",
+      "question": "Dans quels secteurs avez-vous travaillé ?",
+      "answer": "Quinze et ça continue : fintech, insurtech, santé, juridique, SIG et mines, éducation, e-commerce, médias… Plus de 30 projets dans 12 pays. Les bugs, eux, parlent toutes les langues."
+    },
+    {
+      "id": "security",
+      "question": "Pouvez-vous travailler en environnement réglementé ?",
+      "answer": "Oui. J'ai piloté des systèmes en production sous SOC 2, réduit de 90 % les failles de sécurité et tenu le siège éjectable lors de due diligences techniques avec des investisseurs. Les auditeurs avaient des questions difficiles ; j'avais les réponses."
+    },
+    {
+      "id": "cloud",
+      "question": "Gérez-vous l'infrastructure cloud ?",
+      "answer": "AWS, c'est chez moi : Lambda, CDK, RDS, IAM, tout le kit. J'ai réduit des factures d'environ 30 % sans que personne ne s'en aperçoive, sauf la comptabilité. Je lis des politiques IAM pour le plaisir, ce qui inquiète mes amis."
+    },
+    {
+      "id": "legacy",
+      "question": "Pouvez-vous sauver du code legacy ?",
+      "answer": "Oui. Comme Indiana Jones, mais au lieu d'un fouet, j'utilise git bisect. Mises à jour Strapi, réécritures de jQuery vers React, migrations de millions d'enregistrements — sans jamais arrêter le spectacle."
+    },
+    {
+      "id": "automation",
+      "question": "Faites-vous de l'IA et de l'automatisation ?",
+      "answer": "Oui : AWS Bedrock, LangChain, workflows multi-modèles et beaucoup de plomberie Make/n8n. Si ça peut être automatisé, je l'automatise. Sinon, j'écris un script très poli et j'essaie quand même."
     },
     {
       "id": "teams",
       "question": "Travaillez-vous seul ou en équipe ?",
-      "answer": "Les deux. Je m'entends bien avec les autres, mais je sais aussi marquer quand je suis attaquant."
-    },
-    {
-      "id": "legacy",
-      "question": "Pouvez-vous sauver du vieux code (legacy) ?",
-      "answer": "Oui. Comme Indiana Jones, mais au lieu d'un fouet, j'utilise git rebase."
-    },
-    {
-      "id": "deadlines",
-      "question": "Comment gérez-vous les délais ?",
-      "answer": "Avec respect, caféine, et une priorisation impitoyable."
-    },
-    {
-      "id": "industries",
-      "question": "Dans quelles industries avez-vous travaillé ?",
-      "answer": "Fintech, SaaS, e-commerce, santé, logistique—nommez-les, je les ai probablement mises à l'échelle."
-    },
-    {
-      "id": "architecture",
-      "question": "Faites-vous de l'architecture ou seulement du code ?",
-      "answer": "Les deux. Pensez à un architecte qui n'a pas peur de prendre un marteau."
+      "answer": "Les deux. J'ai dirigé et accompagné des ingénieurs sur plusieurs fuseaux horaires, et je suis tout aussi à l'aise en attaquant qui marque seul. En code review, je fais ma meilleure imitation de maître Jedi."
     },
     {
       "id": "communication",
       "question": "Comment communiquez-vous ?",
-      "answer": "Asynchrone par défaut, mais toujours clair. Slack, e-mail, Notion, ou pigeon voyageur si nécessaire."
+      "answer": "Asynchrone par défaut, clair toujours : Slack, e-mail, Notion, Loom. Pigeon voyageur disponible sur demande, SLA non garanti."
     },
     {
-      "id": "difference",
-      "question": "Qu'est-ce qui vous différencie des autres devs ?",
-      "answer": "L'expérience mondiale, l'obsession de la scalabilité, et un humour assez pointu pour couper le code spaghetti (legacy)."
-    },
-    {
-      "id": "clients",
-      "question": "Travaillez-vous avec des startups ou des grandes entreprises ?",
-      "answer": "Les deux. Des MVPs rudimentaires aux migrations du Fortune 500, j'ai tout vu—et tout réparé."
-    },
-    {
-      "id": "cloud",
-      "question": "Pouvez-vous gérer l'infrastructure Cloud ?",
-      "answer": "Absolument. Natif d'AWS. Je mange des politiques IAM au petit-déjeuner."
+      "id": "deadlines",
+      "question": "Comment gérez-vous les délais ?",
+      "answer": "Avec respect, caféine et une priorisation sans pitié. Le périmètre se négocie tôt, pour que l'échéance n'ait jamais à se négocier tard."
     },
     {
       "id": "philosophy",
-      "question": "Quelle est votre philosophie sur la conception de logiciels ?",
-      "answer": "Construire pour les humains, optimiser pour la charge (scale), et éviter que les futurs développeurs ne vous détestent."
+      "question": "Quelle est votre philosophie de conception logicielle ?",
+      "answer": "Construire pour les humains, optimiser pour l'échelle, et écrire du code que le prochain développeur ne maudira pas à 2 h du matin. Ce prochain développeur, c'est souvent moi."
     },
     {
-      "id": "automation",
-      "question": "Faites-vous de l'automatisation ?",
-      "answer": "Oui. Si ça peut être automatisé, je l'automatiserai. Si ça ne peut pas, j'essaierai quand même."
-    },
-    {
-      "id": "skills",
-      "question": "Comment maintenez-vous vos compétences à jour ?",
-      "answer": "Contributions Open Source (OSS), projets annexes, conférences, lire des RFCs pour s'amuser (ne jugez pas)."
-    },
-    {
-      "id": "mentorship",
-      "question": "Pouvez-vous encadrer ou diriger des équipes ?",
-      "answer": "Oui. J'ai dirigé des équipes sur plusieurs continents. Pensez à un maître Jedi, mais avec des revues de code."
-    },
-    {
-      "id": "bugs",
-      "question": "Quelle est votre attitude face aux bugs ?",
-      "answer": "Ce ne sont que des fonctionnalités mal comprises... jusqu'à ce que je les écrase sans pitié."
-    },
-    {
-      "id": "async",
-      "question": "Travaillez-vous de façon asynchrone avec des équipes mondiales ?",
-      "answer": "Oui. Mon calendrier est aussi favorable aux fuseaux horaires que mes commits."
-    },
-    {
-      "id": "delivery",
-      "question": "Quel est votre style de livraison ?",
-      "answer": "Itératif, transparent, axé sur les démos. Vous ne vous demanderez jamais \"que se passe-t-il ?\""
+      "id": "difference",
+      "question": "Qu’est-ce qui vous distingue des autres devs ?",
+      "answer": "Je parle business et code, et je traduis entre les deux sans rien perdre en route. Plus un humour assez aiguisé pour trancher les spaghettis legacy."
     },
     {
       "id": "whyhire",
       "question": "Pourquoi devrions-nous vous recruter ?",
-      "answer": "Parce que je n'écris pas seulement du code—je construis un avantage stratégique. Et je rends ça amusant tout au long."
+      "answer": "Parce que je n'écris pas seulement du code — je crée un effet de levier. Votre problème est résolu, votre équipe va plus vite, et les réunions deviennent un peu plus drôles."
     }
   ],
   "ctaTitle1": "Prêt à transformer des idées en logiciels qui fonctionnent vraiment ?",
@@ -117,7 +87,7 @@
   "timelineTitle": "Chronologie",
   "timelineSubtitle": "Survolez la colonne de gauche pour la faire défiler — le globe à droite suit.",
   "viewAllProjects": "Voir tous les projets",
-  "timelineCountries": "11 pays (et ça continue)",
+  "timelineCountries": "12 pays (et ça continue)",
   "ossTitle": "Projets Open Source Remarquables",
   "ossViewAll": "Voir tout →",
   "projectsTitle": "Projets",
@@ -147,7 +117,7 @@
   },
   "ossPage": {
     "title": "L'Open Source comme Ma Supernova.",
-    "subtitle": "Je ne me contente pas de livrer du code — je libère des systèmes. Brutaux, éprouvés et sans complexe. Forkez, cassez, remixez. Ce ne sont pas des démos. Ce sont des armes vivantes pour les constructeurs audacieux.",
+    "subtitle": "De petits outils, des expériences honnêtes et quelques classiques que je n'ai pas pu m'empêcher de reconstruire. Rien ici n'est une arme — juste du code que je défendrais volontiers en code review. Forkez, cassez, remixez.",
     "outro": "Envie de contribuer, de fork ou simplement de jeter un œil sous le capot ? Chaque étoile ⭐ signie beaucoup.",
     "productsTitle": "Produits & Expérimentations",
     "productsDesc": "Une collection d'outils et d'expériences prêts pour la production, axée sur les applications mobiles et multimédias.",
@@ -160,7 +130,8 @@
   "footer": {
     "linkedinTooltip": "🤝 Approuvé pour \"Savoir vraiment ce que je fais\"",
     "githubTooltip": "🍷 Ah, un homme de bon goût",
-    "instagramTooltip": "📸 J'essaie d'avoir l'air cool quand je ne code pas"
+    "instagramTooltip": "📸 J'essaie d'avoir l'air cool quand je ne code pas",
+    "sourceLink": "Construit en public — jetez un œil sous le capot"
   },
   "loading": {
     "skipBtn": "🤖 Je ne suis pas là pour les logs, montre-moi le code →",
@@ -196,7 +167,8 @@
   "easterEggs": {
     "hackPathTitle": "🚨 Tentative de porte dérobée détectée. Bien essayé, Agent 00-Pas-Aujourd’hui.",
     "hackShortcutTitle": "🕵️ DevTools ? Audacieux. Bienvenue dans la carte piège la plus geek.",
-    "hackDesc": "Aucun panneau admin caché ici : juste du code propre, des taches de café et des cicatrices émotionnelles de déploiements en prod."
+    "hackDesc": "Aucun panneau admin caché ici : juste du code propre, des taches de café et des cicatrices émotionnelles de déploiements en prod.",
+    "watcherDesc": "Prenez votre temps. Tout ici a été fait main, testé, et à peine sur-ingénié. 👋"
   },
   "errorBoundary": {
     "title": "Anomalie Système",
@@ -226,12 +198,12 @@
   },
   "seo": {
     "home": {
-      "title": "Développeur Créatif & Penseur Systémique",
-      "description": "Des entreprises du monde entier me confient ce que d'autres ne savent pas construire. Ingénieur logiciel senior : cloud, automatisation et architecture SaaS."
+      "title": "Ingénieur Logiciel & Solutions Senior",
+      "description": "Des entreprises du monde entier me confient ce que d'autres ne savent pas construire. Ingénieur logiciel & solutions senior : 9+ ans, 30+ projets, 12 pays, en cloud, automatisation et SaaS."
     },
     "projects": {
       "title": "Projets",
-      "description": "Une sélection de projets en fintech, SaaS, e-commerce, santé et logistique — livrés dans onze pays et toujours debout."
+      "description": "Une sélection de projets en fintech, SaaS, e-commerce, santé et logistique — livrés dans douze pays et toujours debout."
     },
     "oss": {
       "title": "Open Source",
@@ -249,5 +221,53 @@
   "marquee": {
     "pause": "Mettre le défilement en pause",
     "resume": "Reprendre le défilement"
+  },
+  "heroStats": [
+    {
+      "value": "9+",
+      "label": "ans en production"
+    },
+    {
+      "value": "30+",
+      "label": "projets livrés"
+    },
+    {
+      "value": "12",
+      "label": "pays"
+    },
+    {
+      "value": "~30 %",
+      "label": "d'économies sur AWS"
+    }
+  ],
+  "exploreToast": {
+    "title": "Franchement… il suffisait de scroller.",
+    "description": "Mais je respecte l'engagement. Je vous y emmène. 🛸"
+  },
+  "favoriteQuote": {
+    "label": "Citation préférée",
+    "before": "« Le ",
+    "highlight1": "logiciel pourri",
+    "middle": " des uns est le ",
+    "highlight2": "job à plein temps",
+    "after": " des autres. »"
+  },
+  "resumeScan": {
+    "warningTitle": "⚠️ Attention : ce PDF est hautement contagieux",
+    "warningDesc": "Effets secondaires connus : invitations soudaines à des entretiens et envie de tout refactoriser. On lance d'abord un petit scan de sécurité. Ou pas — c'est vous qui voyez.",
+    "cancel": "Annuler",
+    "skip": "Passer le scan",
+    "confirm": "Lancer le scan",
+    "scanningTitle": "Recherche de menaces…",
+    "finishedTitle": "Scan terminé… à peu près.",
+    "finishedDesc": "Nous avons trouvé quelques « fichiers peu conventionnels » et les avons ajoutés au .gitignore, pour que vous n'ayez pas à vous en soucier. Votre téléchargement est prêt.",
+    "download": "Télécharger le CV",
+    "threats": [
+      "Over-Engineered_Perfectionism.dll",
+      "ScopeCreep.exe",
+      "Infinite_Refactoring_Loop.sys",
+      "Sleep_Deprivation_Caffeine_Overload.com",
+      "Rubber_Duck_Driven_Development.bat"
+    ]
   }
 }

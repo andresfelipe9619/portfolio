@@ -4,24 +4,25 @@ This document outlines the marketing, targeting, and SEO strategies employed in 
 
 ## 1. Value Proposition & Positioning
 
-**Tagline:** "Global companies trust me to build what others can’t. Creative Developer · Systems Thinker · Open Source Builder."
+**Title (everywhere):** Senior Software & Solutions Engineer.
+
+**Tagline:** "Global companies trust me to build what others can’t." It is backed straight away by the numbers under the hero: 9+ years in production, 30+ projects shipped, 12 countries, ~30% off the AWS bill.
+
+**Voice:** funny where it's free (toasts, tooltips, the 404, the loading terminal), never on the path to something a visitor came for. Every claim has a receipt: a number, a client quote or a line in the résumé.
 
 **Target Audience:**
 
 - **Engineering Managers & CTOs:** Looking for someone who understands systems engineering and is not just a UI developer.
-- **Creative Agencies:** Seeking highly interactive, polished, and dynamic interfaces (Creative Developers).
-- **Recruiters from Top-Tier Companies:** Searching for unique profiles that blend backend logic with frontend magic.
+- **Founders & product teams:** Who need one person who speaks both business and code.
+- **Recruiters from Top-Tier Companies:** Searching for unique profiles that blend backend logic with frontend craft.
 
 ## 2. SEO (Search Engine Optimization)
 
-To rank globally and reach the desired audience, the portfolio implements several technical SEO strategies:
-
-- **Meta Tags:** Defined in `index.html` to clearly articulate the value proposition.
-  - _Keywords:_ Creative Developer, Open Source, Portfolio, React, TypeScript, Software Engineer, Web Development, Frontend Developer, Backend Developer, Systems Engineering.
-- **Open Graph (OG) & Twitter Cards:** Ensures that when the portfolio is shared on LinkedIn, Twitter, or Discord, it displays a highly professional preview image (`preview.jpg`), title, and description.
-- **JSON-LD Structured Data:** Provides search engines (Google, Bing) with structured context that the entity is a "Person" (Andrés Suárez), linking directly to GitHub and LinkedIn profiles to consolidate domain authority.
-- **Canonical URLs:** Prevents duplicate content issues by pointing back to `https://andressuarez.dev/`.
-- **Sitemap & Robots.txt:** Provides a clear indexing path for search engine bots.
+- **Per-page metadata:** every route renders its own localized `<title>`, description and canonical through `<Seo>`. `index.html` deliberately ships none of them (React 19 would duplicate them).
+- **Open Graph (OG) & Twitter Cards:** defined in `index.html`, the only version social crawlers see. The image is `public/og-card.jpg`, a designed 1200×630 card with name, title and numbers.
+- **JSON-LD Structured Data:** a `schema.org/Person` (Andrés Suárez) with `jobTitle` and `sameAs` links to GitHub and LinkedIn to consolidate authority.
+- **Sitemap & Robots.txt:** generated at build time by `scripts/generate-sitemap.mjs`; `noindex` pages stay out.
+- **`llms.txt`:** the same positioning, for AI agents.
 
 ## 3. Analytics & Conversion Tracking
 
@@ -55,4 +56,4 @@ In addition to GA4, **Microsoft Clarity** is configured. This provides:
 
 - **Review GA4 Monthly:** Check which languages are used most and ensure translations for those are perfect.
 - **Monitor Bounce Rate:** If users are leaving quickly, reconsider the hero section's time-to-interactivity.
-- **Update Metadata:** Keep the `description` and `keywords` in `index.html` updated as your tech stack or target roles evolve.
+- **Update Metadata:** Keep the social card, `llms.txt` and the localized `seo.*` copy in step with the title and the numbers.

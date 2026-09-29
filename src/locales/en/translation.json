@@ -6,109 +6,79 @@
   "globalCompanies": "Global companies trust me to",
   "toBuildWhatOthers": "build what others",
   "cant": "Can't",
-  "professionalTitle": "Senior Software Engineer — Cloud, Automation & SaaS Architect",
+  "professionalTitle": "Senior Software & Solutions Engineer — Cloud, Automation & SaaS",
   "testimonialTitle": "What folks I've built for say",
   "faqTitle": "No question too small, no doubt left hanging.",
   "faq": [
     {
       "id": "engagement",
       "question": "What’s your engagement model?",
-      "answer": "Scoped projects or retainers. Async-first, demos weekly. No surprises (except pleasant ones)."
+      "answer": "Scoped projects, retainers, or embedded in your team. Async-first, demos every week. No surprises, except the pleasant kind."
     },
     {
       "id": "quality",
       "question": "How do you ensure quality?",
-      "answer": "CI/CD pipelines, automated tests, linting, perf budgets, observability. Basically, quality with receipts."
+      "answer": "CI/CD, automated tests, linting, performance budgets and observability. Quality with receipts, not vibes. (This very site fails its own build if it gets slower.)"
     },
     {
       "id": "stacks",
       "question": "What stacks do you prefer?",
-      "answer": "TypeScript, React/Next.js, Node, Python, AWS, Postgres, Redis, edge functions. Not married to stacks, just committed to excellence."
-    },
-    {
-      "id": "teams",
-      "question": "Do you work solo or with teams?",
-      "answer": "Both. I play well with others but also know how to score when I’m the striker."
-    },
-    {
-      "id": "legacy",
-      "question": "Can you rescue legacy codebases?",
-      "answer": "Yes. Like Indiana Jones, but instead of whips, I use git rebase."
-    },
-    {
-      "id": "deadlines",
-      "question": "How do you handle deadlines?",
-      "answer": "With respect, caffeine, and ruthless prioritization."
+      "answer": "TypeScript and Node.js on AWS, with React/Next.js up front and PostgreSQL underneath. Python when the job calls for it. Loyal to the problem, not the framework."
     },
     {
       "id": "industries",
       "question": "What industries have you worked in?",
-      "answer": "Fintech, SaaS, e-commerce, healthcare, logistics—you name it, I’ve probably scaled it."
+      "answer": "Fifteen and counting: fintech, insurtech, healthtech, legal, GIS and mining, education, e-commerce, media… 30+ projects across 12 countries. Turns out bugs are the same in every language."
     },
     {
-      "id": "architecture",
-      "question": "Do you do architecture or just coding?",
-      "answer": "Both. Think architect who also isn’t afraid to grab a hammer."
-    },
-    {
-      "id": "communication",
-      "question": "How do you communicate?",
-      "answer": "Async by default, but always clear. Slack, email, Notion, carrier pigeon if required."
-    },
-    {
-      "id": "difference",
-      "question": "What makes you different from other devs?",
-      "answer": "Global experience, obsession with scalability, and humor sharp enough to cut through legacy spaghetti code."
-    },
-    {
-      "id": "clients",
-      "question": "Do you work with startups or enterprises?",
-      "answer": "Both. From scrappy MVPs to Fortune 500 migrations, I’ve seen—and fixed—it all."
+      "id": "security",
+      "question": "Can you work in regulated environments?",
+      "answer": "Yes. I've led production systems under SOC 2, cut security findings by 90%, and sat in the hot seat during investor technical due diligence. The auditors brought hard questions; I brought answers."
     },
     {
       "id": "cloud",
       "question": "Can you handle cloud infrastructure?",
-      "answer": "Absolutely. AWS native. I eat IAM policies for breakfast."
+      "answer": "AWS is home: Lambda, CDK, RDS, IAM, the works. I've trimmed bills by ~30% without anyone noticing, except accounting. I read IAM policies for fun, which worries my friends."
+    },
+    {
+      "id": "legacy",
+      "question": "Can you rescue legacy codebases?",
+      "answer": "Yes. Like Indiana Jones, but instead of a whip, I use git bisect. Strapi upgrades, jQuery-to-React rewrites, migrations of millions of records — all without stopping the show."
+    },
+    {
+      "id": "automation",
+      "question": "Do you do AI and automation?",
+      "answer": "Yes: AWS Bedrock, LangChain, multi-model workflows, and plenty of Make/n8n plumbing. If it can be automated, I'll automate it. If it can't, I'll write a very polite script and try anyway."
+    },
+    {
+      "id": "teams",
+      "question": "Do you work solo or with teams?",
+      "answer": "Both. I've led and mentored engineers across time zones, and I'm just as happy as the striker who scores alone. Code reviews are where I do my best Jedi-master impression."
+    },
+    {
+      "id": "communication",
+      "question": "How do you communicate?",
+      "answer": "Async by default, clear always: Slack, email, Notion, Loom. Carrier pigeon available on request, SLA not guaranteed."
+    },
+    {
+      "id": "deadlines",
+      "question": "How do you handle deadlines?",
+      "answer": "With respect, caffeine and ruthless prioritization. Scope gets negotiated early, so the deadline never has to be negotiated late."
     },
     {
       "id": "philosophy",
       "question": "What’s your philosophy on software design?",
-      "answer": "Build for humans, optimize for scale, keep future developers from hating you."
+      "answer": "Build for humans, optimize for scale, and write code the next developer won't curse at 2 a.m. That next developer is usually me."
     },
     {
-      "id": "automation",
-      "question": "Do you do automation?",
-      "answer": "Yes. If it can be automated, I’ll automate it. If it can’t, I’ll try anyway."
-    },
-    {
-      "id": "skills",
-      "question": "How do you keep skills sharp?",
-      "answer": "OSS contributions, side projects, conferences, reading RFCs for fun (don’t judge)."
-    },
-    {
-      "id": "mentorship",
-      "question": "Can you mentor or lead teams?",
-      "answer": "Yes. I’ve led teams across continents. Think Jedi master, but with code reviews."
-    },
-    {
-      "id": "bugs",
-      "question": "What’s your attitude toward bugs?",
-      "answer": "They’re just misunderstood features… until I squash them mercilessly."
-    },
-    {
-      "id": "async",
-      "question": "Do you work async with global teams?",
-      "answer": "Yes. My calendar is as timezone-friendly as my commits."
-    },
-    {
-      "id": "delivery",
-      "question": "What’s your delivery style?",
-      "answer": "Iterative, transparent, demo-driven. You’ll never wonder “what’s happening?”"
+      "id": "difference",
+      "question": "What makes you different from other devs?",
+      "answer": "I speak both business and code, and translate between them without losing anything on the way. Plus a sense of humor sharp enough to cut through legacy spaghetti."
     },
     {
       "id": "whyhire",
       "question": "Why should we hire you?",
-      "answer": "Because I don’t just write code—I build leverage. And I make it fun along the way."
+      "answer": "Because I don’t just write code — I build leverage. Your problem gets solved, your team gets faster, and the meetings get a little funnier."
     }
   ],
   "ctaTitle1": "Ready to turn ideas into software that actually works?",
@@ -117,7 +87,7 @@
   "timelineTitle": "Timeline",
   "timelineSubtitle": "Hover left column to scroll it — the globe on the right follows.",
   "viewAllProjects": "View All Projects",
-  "timelineCountries": "11 countries (and counting)",
+  "timelineCountries": "12 countries (and counting)",
   "ossTitle": "Open Source Highlights",
   "ossViewAll": "View all →",
   "projectsTitle": "Projects",
@@ -147,7 +117,7 @@
   },
   "ossPage": {
     "title": "Open Source as My Supernova.",
-    "subtitle": "I don’t just ship code — I unleash systems. Brutal, battle-tested, and unapologetically opinionated. Fork it, break it, remix it. These aren’t playground demos. They’re living, breathing weapons for builders who dare.",
+    "subtitle": "Small tools, honest experiments, and a few classics I couldn't resist rebuilding. Nothing here is a weapon — just code I'd happily defend in a code review. Fork it, break it, remix it.",
     "outro": "Want to contribute, fork, or just peek under the hood? Every star ⭐ and pull request means a lot.",
     "productsTitle": "Products & Experiments",
     "productsDesc": "A collection of production-ready tools and experiments, focusing on mobile and media applications.",
@@ -160,7 +130,8 @@
   "footer": {
     "linkedinTooltip": "🤝 Endorsed for \"Actually knowing what I'm doing\"",
     "githubTooltip": "🍷 Ah, a man of good taste",
-    "instagramTooltip": "📸 Trying to look cool when I'm not coding"
+    "instagramTooltip": "📸 Trying to look cool when I'm not coding",
+    "sourceLink": "Built in the open — peek under the hood"
   },
   "loading": {
     "skipBtn": "🤖 I'm not here for logs, show me the code →",
@@ -197,7 +168,7 @@
     "allLanguagesTitle": "You really just clicked every flag to hear the memes, didn't you? Respect. 🎧",
     "projectsTimeTitle": "You've been staring at these projects for a while. Don't worry, they're not going anywhere. (Except maybe to production) 🚀",
     "ossTimeTitle": "Deep diving into the open source, huh? Careful, you might accidentally merge a PR while you're down there. 🤿",
-    "watcherDesc": "We are proud, but remember... we are watchers. I created, I own every piece of this code hahaha. 👁️ [faster than your ex texting back]",
+    "watcherDesc": "Take your time. Everything here was hand-built, tested, and only slightly over-engineered. 👋",
     "hackPathTitle": "🚨 Backdoor attempt detected. Nice try, Agent 00-Not-Today.",
     "hackShortcutTitle": "🕵️ DevTools? Bold move. Welcome to the nerdiest trap card.",
     "hackDesc": "There is no hidden admin panel here, only clean code, coffee stains, and emotional damage from production deploys."
@@ -230,12 +201,12 @@
   },
   "seo": {
     "home": {
-      "title": "Creative Developer & Systems Thinker",
-      "description": "Global companies trust me to build what others can't. Senior software engineer working across cloud, automation and SaaS architecture."
+      "title": "Senior Software & Solutions Engineer",
+      "description": "Global companies trust me to build what others can't. Senior software & solutions engineer: 9+ years, 30+ projects, 12 countries, across cloud, automation and SaaS."
     },
     "projects": {
       "title": "Projects",
-      "description": "Selected work across fintech, SaaS, e-commerce, healthcare and logistics — shipped in eleven countries and still standing."
+      "description": "Selected work across fintech, SaaS, e-commerce, healthcare and logistics — shipped in twelve countries and still standing."
     },
     "oss": {
       "title": "Open Source",
@@ -253,5 +224,53 @@
   "marquee": {
     "pause": "Pause the scrolling",
     "resume": "Resume the scrolling"
+  },
+  "heroStats": [
+    {
+      "value": "9+",
+      "label": "years in production"
+    },
+    {
+      "value": "30+",
+      "label": "projects shipped"
+    },
+    {
+      "value": "12",
+      "label": "countries"
+    },
+    {
+      "value": "~30%",
+      "label": "off the AWS bill"
+    }
+  ],
+  "exploreToast": {
+    "title": "Bro… you could've just scrolled.",
+    "description": "But I respect the commitment. Taking you there. 🛸"
+  },
+  "favoriteQuote": {
+    "label": "Favorite Quote",
+    "before": "“One man’s ",
+    "highlight1": "crappy software",
+    "middle": " is another man’s ",
+    "highlight2": "full‑time job",
+    "after": ".”"
+  },
+  "resumeScan": {
+    "warningTitle": "⚠️ Heads up: this PDF is highly contagious",
+    "warningDesc": "Known side effects: sudden interview invites and an urge to refactor everything. We'll run a quick safety scan first. Or not — your call.",
+    "cancel": "Cancel",
+    "skip": "Skip the scan",
+    "confirm": "Run the scan",
+    "scanningTitle": "Scanning for threats…",
+    "finishedTitle": "Scan complete… ish.",
+    "finishedDesc": "We found a few 'unconventional files' and added them to .gitignore, so you don't have to worry about them. Your download is ready.",
+    "download": "Download Resume",
+    "threats": [
+      "Over-Engineered_Perfectionism.dll",
+      "ScopeCreep.exe",
+      "Infinite_Refactoring_Loop.sys",
+      "Sleep_Deprivation_Caffeine_Overload.com",
+      "Rubber_Duck_Driven_Development.bat"
+    ]
   }
 }

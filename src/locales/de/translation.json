@@ -6,109 +6,79 @@
   "globalCompanies": "Firmen vertrauen mir, um",
   "toBuildWhatOthers": "zu bauen, was andere",
   "cant": "Nicht können",
-  "professionalTitle": "Senior Software Engineer — Cloud, Automation & SaaS-Architekt",
+  "professionalTitle": "Senior Software & Solutions Engineer — Cloud, Automatisierung & SaaS",
   "testimonialTitle": "Was Leute sagen, für die ich gebaut habe",
   "faqTitle": "Keine Frage ist zu klein, kein Zweifel bleibt offen.",
   "faq": [
     {
       "id": "engagement",
       "question": "Was ist Ihr Zusammenarbeitsmodell?",
-      "answer": "Fest definierte Projekte oder Retainer. Asynchron-first, wöchentliche Demos. Keine Überraschungen (außer positiven)."
+      "answer": "Fest umrissene Projekte, Retainer oder eingebettet in Ihr Team. Asynchron zuerst, jede Woche Demos. Keine Überraschungen, außer den angenehmen."
     },
     {
       "id": "quality",
       "question": "Wie stellen Sie Qualität sicher?",
-      "answer": "CI/CD-Pipelines, automatisierte Tests, Linting, Performance-Budgets, Observability. Im Grunde: Qualität mit Belegen."
+      "answer": "CI/CD, automatisierte Tests, Linting, Performance-Budgets und Observability. Qualität mit Belegen, nicht nach Gefühl. (Diese Website bricht ihren eigenen Build ab, wenn sie langsamer wird.)"
     },
     {
       "id": "stacks",
       "question": "Welche Tech-Stacks bevorzugen Sie?",
-      "answer": "TypeScript, React/Next.js, Node, Python, AWS, Postgres, Redis, Edge Functions. Nicht an Stacks gebunden, nur der Exzellenz verpflichtet."
-    },
-    {
-      "id": "teams",
-      "question": "Arbeiten Sie alleine oder in Teams?",
-      "answer": "Beides. Ich spiele gut mit anderen zusammen, weiß aber auch, wie man punktet, wenn ich der Stürmer bin."
-    },
-    {
-      "id": "legacy",
-      "question": "Können Sie Legacy-Codebasen retten?",
-      "answer": "Ja. Wie Indiana Jones, aber statt einer Peitsche benutze ich git rebase."
-    },
-    {
-      "id": "deadlines",
-      "question": "Wie gehen Sie mit Deadlines um?",
-      "answer": "Mit Respekt, Koffein und gnadenloser Priorisierung."
+      "answer": "TypeScript und Node.js auf AWS, vorne React/Next.js, darunter PostgreSQL. Python, wenn die Aufgabe es verlangt. Dem Problem treu, nicht dem Framework."
     },
     {
       "id": "industries",
       "question": "In welchen Branchen haben Sie gearbeitet?",
-      "answer": "Fintech, SaaS, E-Commerce, Gesundheitswesen, Logistik – nennen Sie es, ich habe es wahrscheinlich skaliert."
+      "answer": "Fünfzehn und es werden mehr: Fintech, Insurtech, Healthtech, Recht, GIS und Bergbau, Bildung, E-Commerce, Medien… Über 30 Projekte in 12 Ländern. Bugs sprechen übrigens jede Sprache."
     },
     {
-      "id": "architecture",
-      "question": "Machen Sie Architektur oder nur Code?",
-      "answer": "Beides. Denken Sie an einen Architekten, der auch keine Angst hat, zum Hammer zu greifen."
+      "id": "security",
+      "question": "Können Sie in regulierten Umgebungen arbeiten?",
+      "answer": "Ja. Ich habe Produktivsysteme unter SOC 2 verantwortet, Sicherheitsbefunde um 90 % reduziert und bei technischen Due-Diligence-Prüfungen durch Investoren auf dem heißen Stuhl gesessen. Die Prüfer hatten harte Fragen; ich hatte Antworten."
+    },
+    {
+      "id": "cloud",
+      "question": "Können Sie Cloud-Infrastruktur übernehmen?",
+      "answer": "AWS ist mein Zuhause: Lambda, CDK, RDS, IAM, das volle Programm. Ich habe Rechnungen um ~30 % gesenkt, ohne dass es jemand gemerkt hat, außer der Buchhaltung. Ich lese IAM-Policies zum Spaß, was meinen Freunden Sorgen macht."
+    },
+    {
+      "id": "legacy",
+      "question": "Können Sie Legacy-Codebasen retten?",
+      "answer": "Ja. Wie Indiana Jones, nur statt Peitsche nehme ich git bisect. Strapi-Upgrades, Umbauten von jQuery auf React, Migrationen von Millionen Datensätzen — alles, ohne die Show anzuhalten."
+    },
+    {
+      "id": "automation",
+      "question": "Machen Sie KI und Automatisierung?",
+      "answer": "Ja: AWS Bedrock, LangChain, Multi-Modell-Workflows und jede Menge Make/n8n-Klempnerei. Was sich automatisieren lässt, automatisiere ich. Was nicht, bekommt ein sehr höfliches Skript — und ich versuche es trotzdem."
+    },
+    {
+      "id": "teams",
+      "question": "Arbeiten Sie allein oder im Team?",
+      "answer": "Beides. Ich habe Ingenieure über Zeitzonen hinweg geführt und gecoacht und bin genauso gern der Stürmer, der allein trifft. In Code-Reviews gebe ich meine beste Jedi-Meister-Imitation."
     },
     {
       "id": "communication",
       "question": "Wie kommunizieren Sie?",
-      "answer": "Standardmäßig asynchron, aber immer klar. Slack, E-Mail, Notion, Brieftaube falls nötig."
+      "answer": "Standardmäßig asynchron, immer klar: Slack, E-Mail, Notion, Loom. Brieftaube auf Anfrage, SLA ohne Gewähr."
+    },
+    {
+      "id": "deadlines",
+      "question": "Wie gehen Sie mit Deadlines um?",
+      "answer": "Mit Respekt, Koffein und gnadenloser Priorisierung. Der Umfang wird früh verhandelt, damit die Deadline nie spät verhandelt werden muss."
+    },
+    {
+      "id": "philosophy",
+      "question": "Was ist Ihre Philosophie beim Softwaredesign?",
+      "answer": "Für Menschen bauen, für Skalierung optimieren und Code schreiben, den der nächste Entwickler nicht um 2 Uhr nachts verflucht. Dieser nächste Entwickler bin meistens ich."
     },
     {
       "id": "difference",
       "question": "Was unterscheidet Sie von anderen Entwicklern?",
-      "answer": "Globale Erfahrung, Obsession für Skalierbarkeit und ein Humor, der scharf genug ist, um Legacy-Spaghetti-Code zu durchschneiden."
-    },
-    {
-      "id": "clients",
-      "question": "Arbeiten Sie mit Startups oder Unternehmen?",
-      "answer": "Beides. Von scrappy MVPs bis zu Fortune 500-Migrationen habe ich alles gesehen – und repariert."
-    },
-    {
-      "id": "cloud",
-      "question": "Können Sie Cloud-Infrastruktur verwalten?",
-      "answer": "Absolut. AWS-nativ. Ich esse IAM-Richtlinien zum Frühstück."
-    },
-    {
-      "id": "philosophy",
-      "question": "Was ist Ihre Philosophie beim Software-Design?",
-      "answer": "Für Menschen bauen, für Skalierbarkeit optimieren, verhindern, dass zukünftige Entwickler Sie hassen."
-    },
-    {
-      "id": "automation",
-      "question": "Machen Sie Automatisierung?",
-      "answer": "Ja. Wenn es automatisiert werden kann, automatisiere ich es. Wenn nicht, versuche ich es trotzdem."
-    },
-    {
-      "id": "skills",
-      "question": "Wie halten Sie Ihre Fähigkeiten scharf?",
-      "answer": "OSS-Beiträge, Nebenprojekte, Konferenzen, RFCs zum Spaß lesen (urteilen Sie nicht)."
-    },
-    {
-      "id": "mentorship",
-      "question": "Können Sie Teams betreuen oder leiten?",
-      "answer": "Ja. Ich habe Teams auf verschiedenen Kontinenten geleitet. Denken Sie an einen Jedi-Meister, aber mit Code-Reviews."
-    },
-    {
-      "id": "bugs",
-      "question": "Wie stehen Sie zu Bugs?",
-      "answer": "Das sind nur missverstandene Funktionen... bis ich sie gnadenlos zerquetsche."
-    },
-    {
-      "id": "async",
-      "question": "Arbeiten Sie asynchron mit globalen Teams?",
-      "answer": "Ja. Mein Kalender ist genauso zeitzonenfreundlich wie meine Commits."
-    },
-    {
-      "id": "delivery",
-      "question": "Was ist Ihr Lieferstil?",
-      "answer": "Iterativ, transparent, demo-gesteuert. Sie werden sich nie fragen: 'Was passiert gerade?'"
+      "answer": "Ich spreche Business und Code und übersetze zwischen beiden, ohne unterwegs etwas zu verlieren. Dazu ein Humor, scharf genug, um Legacy-Spaghetti zu durchschneiden."
     },
     {
       "id": "whyhire",
       "question": "Warum sollten wir Sie einstellen?",
-      "answer": "Weil ich nicht nur Code schreibe – ich baue Hebelwirkung auf. Und dabei mache ich es spaßig."
+      "answer": "Weil ich nicht nur Code schreibe — ich schaffe Hebelwirkung. Ihr Problem wird gelöst, Ihr Team wird schneller, und die Meetings werden ein bisschen lustiger."
     }
   ],
   "ctaTitle1": "Bereit, Ideen in Software zu verwandeln, die wirklich funktioniert?",
@@ -117,7 +87,7 @@
   "timelineTitle": "Zeitachse",
   "timelineSubtitle": "Fahren Sie über die linke Spalte, um zu scrollen — der Globus rechts folgt.",
   "viewAllProjects": "Alle Projekte anzeigen",
-  "timelineCountries": "11 Länder (und es werden mehr)",
+  "timelineCountries": "12 Länder (Tendenz steigend)",
   "ossTitle": "Open-Source-Highlights",
   "ossViewAll": "Alle ansehen →",
   "projectsTitle": "Projekte",
@@ -147,7 +117,7 @@
   },
   "ossPage": {
     "title": "Open Source als Meine Supernova.",
-    "subtitle": "Ich liefere nicht nur Code — ich entfessle Systeme. Brutal, kampferprobt und kompromisslos. Fork es, brich es, mixe es. Das sind keine Spielplatz-Demos. Sie sind lebende Waffen für Entwickler, die sich trauen.",
+    "subtitle": "Kleine Tools, ehrliche Experimente und ein paar Klassiker, die ich einfach nachbauen musste. Nichts davon ist eine Waffe — nur Code, den ich in jedem Code-Review gern verteidige. Forken, kaputtmachen, remixen.",
     "outro": "Möchten Sie beitragen, forken oder einfach nur einen Blick unter die Haube werfen? Jeder Stern ⭐ bedeutet viel.",
     "productsTitle": "Produkte & Experimente",
     "productsDesc": "Eine Sammlung von produktionsreifen Werkzeugen und Experimenten, fokussiert auf mobile und Medienanwendungen.",
@@ -160,7 +130,8 @@
   "footer": {
     "linkedinTooltip": "🤝 Bestätigt für \"Weiß tatsächlich, was er tut\"",
     "githubTooltip": "🍷 Ah, ein Mann von gutem Geschmack",
-    "instagramTooltip": "📸 Versuche cool auszusehen, wenn ich nicht programmiere"
+    "instagramTooltip": "📸 Versuche cool auszusehen, wenn ich nicht programmiere",
+    "sourceLink": "Offen gebaut — werfen Sie einen Blick unter die Haube"
   },
   "loading": {
     "skipBtn": "🤖 Ich bin nicht wegen der Logs hier, zeig mir den Code →",
@@ -196,7 +167,8 @@
   "easterEggs": {
     "hackPathTitle": "🚨 Backdoor-Versuch erkannt. Netter Versuch, Agent 00-Nicht-Heute.",
     "hackShortcutTitle": "🕵️ DevTools? Mutiger Move. Willkommen in der nerdigsten Fallenkarte.",
-    "hackDesc": "Hier gibt es kein geheimes Admin-Panel – nur sauberen Code, Kaffeeflecken und emotionale Deploy-Schäden aus der Produktion."
+    "hackDesc": "Hier gibt es kein geheimes Admin-Panel – nur sauberen Code, Kaffeeflecken und emotionale Deploy-Schäden aus der Produktion.",
+    "watcherDesc": "Lassen Sie sich Zeit. Alles hier ist handgebaut, getestet und nur ein kleines bisschen over-engineered. 👋"
   },
   "errorBoundary": {
     "title": "Systemanomalie",
@@ -226,12 +198,12 @@
   },
   "seo": {
     "home": {
-      "title": "Kreativer Entwickler & Systemdenker",
-      "description": "Unternehmen weltweit vertrauen mir, zu bauen, was andere nicht können. Senior Software Engineer für Cloud, Automatisierung und SaaS-Architektur."
+      "title": "Senior Software & Solutions Engineer",
+      "description": "Unternehmen weltweit vertrauen mir, zu bauen, was andere nicht können. Senior Software & Solutions Engineer: 9+ Jahre, 30+ Projekte, 12 Länder, in Cloud, Automatisierung und SaaS."
     },
     "projects": {
       "title": "Projekte",
-      "description": "Ausgewählte Arbeiten aus Fintech, SaaS, E-Commerce, Gesundheitswesen und Logistik — ausgeliefert in elf Ländern und stehen immer noch."
+      "description": "Ausgewählte Arbeiten aus Fintech, SaaS, E-Commerce, Gesundheitswesen und Logistik — ausgeliefert in zwölf Ländern und immer noch in Betrieb."
     },
     "oss": {
       "title": "Open Source",
@@ -249,5 +221,53 @@
   "marquee": {
     "pause": "Laufband anhalten",
     "resume": "Laufband fortsetzen"
+  },
+  "heroStats": [
+    {
+      "value": "9+",
+      "label": "Jahre in Produktion"
+    },
+    {
+      "value": "30+",
+      "label": "ausgelieferte Projekte"
+    },
+    {
+      "value": "12",
+      "label": "Länder"
+    },
+    {
+      "value": "~30 %",
+      "label": "AWS-Kosten gespart"
+    }
+  ],
+  "exploreToast": {
+    "title": "Ehrlich… Scrollen hätte gereicht.",
+    "description": "Aber ich respektiere den Einsatz. Ich bringe Sie hin. 🛸"
+  },
+  "favoriteQuote": {
+    "label": "Lieblingszitat",
+    "before": "„Des einen ",
+    "highlight1": "Schrottsoftware",
+    "middle": " ist des anderen ",
+    "highlight2": "Vollzeitjob",
+    "after": ".“"
+  },
+  "resumeScan": {
+    "warningTitle": "⚠️ Achtung: Dieses PDF ist hochansteckend",
+    "warningDesc": "Bekannte Nebenwirkungen: plötzliche Einladungen zu Vorstellungsgesprächen und der Drang, alles zu refactoren. Wir machen zuerst einen kurzen Sicherheitsscan. Oder auch nicht — Ihre Entscheidung.",
+    "cancel": "Abbrechen",
+    "skip": "Scan überspringen",
+    "confirm": "Scan starten",
+    "scanningTitle": "Suche nach Bedrohungen…",
+    "finishedTitle": "Scan abgeschlossen… so ungefähr.",
+    "finishedDesc": "Wir haben ein paar „unkonventionelle Dateien“ gefunden und sie zur .gitignore hinzugefügt, damit Sie sich keine Sorgen machen müssen. Ihr Download ist bereit.",
+    "download": "Lebenslauf herunterladen",
+    "threats": [
+      "Over-Engineered_Perfectionism.dll",
+      "ScopeCreep.exe",
+      "Infinite_Refactoring_Loop.sys",
+      "Sleep_Deprivation_Caffeine_Overload.com",
+      "Rubber_Duck_Driven_Development.bat"
+    ]
   }
 }

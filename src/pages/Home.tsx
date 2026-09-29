@@ -25,6 +25,7 @@ import { useTranslation } from 'react-i18next';
 import { useReducedMotion } from 'motion/react';
 import { Seo } from '@/components/seo';
 import { useDecorativeEffects } from '@/hooks/use-decorative-effects';
+import { showEasterEggToast } from '@/hooks/use-easter-egg';
 
 const Globe = lazy(() =>
   import('@/components/magicui/globe').then((m) => ({ default: m.Globe })),
@@ -40,7 +41,6 @@ const OssHighlights = lazy(() =>
 const FunnyVirusScanDialog = lazy(
   () => import('@/components/virus-scan-dialog.tsx'),
 );
-const JokeDialog = lazy(() => import('@/components/joke-dialog.tsx'));
 const Particles = lazy(() =>
   import('@/components/magicui/particles').then((m) => ({
     default: m.Particles,
@@ -83,7 +83,6 @@ export default function Home() {
   const decor = useDecorativeEffects();
 
   const [showVirusScan, setShowVirusScan] = useState(false);
-  const [showJokeDialog, setShowJokeDialog] = useState(false);
   const [showProjectDialog, setShowProjectDialog] = useState(false);
   const [selectedProject, setSelectedProject] = useState<FlattenedItem | null>(
     null,
@@ -111,6 +110,10 @@ export default function Home() {
     | Array<{ id?: string; question: string; answer: string }>
     | string;
   const typedFaqItems = Array.isArray(FAQ_ITEMS) ? FAQ_ITEMS : [];
+  const HERO_STATS = t('heroStats', { returnObjects: true }) as
+    | Array<{ value: string; label: string }>
+    | string;
+  const heroStats = Array.isArray(HERO_STATS) ? HERO_STATS : [];
 
   useEffect(() => {
     if (skipAnimation) return;
@@ -121,6 +124,20 @@ export default function Home() {
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // The joke used to be the whole button: a dialog that said "just scroll
+  // down" and went nowhere. Now the button does the scrolling, and the joke
+  // rides along as a toast.
+  function handleExploreClick() {
+    document.getElementById('explore')?.scrollIntoView({
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+    });
+    showEasterEggToast(
+      'explore-universe',
+      t('exploreToast.title'),
+      t('exploreToast.description'),
+    );
+  }
 
   function handleResumeDownloadClick() {
     logEvent('Resume', 'Pre-Download', 'Resume Download Button Click');
@@ -191,9 +208,6 @@ export default function Home() {
           />
         </Suspense>
         <Suspense fallback={null}>
-          <JokeDialog open={showJokeDialog} onOpenChange={setShowJokeDialog} />
-        </Suspense>
-        <Suspense fallback={null}>
           <ProjectDialog
             open={showProjectDialog}
             onOpenChange={setShowProjectDialog}
@@ -252,14 +266,14 @@ export default function Home() {
                   {t('professionalTitle')}
                 </p>
               </BlurFade>
-              <div className="mt-8 flex items-center justify-center gap-3">
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                 <BlurFade
                   delay={skipAnimation ? 0.25 : (introDoneAt + 250) / 1000}
                   inView
                 >
                   <ShimmerButton
                     className="rounded-full px-6 py-3"
-                    onClick={() => setShowJokeDialog(true)}
+                    onClick={handleExploreClick}
                   >
                     {t('exploreUniverse')}
                   </ShimmerButton>
@@ -276,8 +290,28 @@ export default function Home() {
                   </RainbowButton>
                 </BlurFade>
               </div>
+              <BlurFade
+                delay={skipAnimation ? 0.4 : (introDoneAt + 400) / 1000}
+                inView
+              >
+                <dl className="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-4">
+                  {heroStats.map((stat) => (
+                    <div
+                      key={stat.label}
+                      className="flex min-w-0 flex-col-reverse justify-end"
+                    >
+                      <dt className="text-balance text-xs uppercase tracking-wider text-white/50">
+                        {stat.label}
+                      </dt>
+                      <dd className="text-2xl font-semibold text-white sm:text-3xl">
+                        {stat.value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </BlurFade>
             </div>
-            <div className="mt-28 flex w-full flex-col items-center gap-6 ">
+            <div className="mt-56 sm:mt-40 flex w-full flex-col items-center gap-6 ">
               <div className="relative flex items-center justify-center overflow-hidden max-h-[30vh] pt-[32%]">
                 {decor.globe ? (
                   <Suspense fallback={<div className="h-[400px]" />}>
@@ -293,6 +327,7 @@ export default function Home() {
         </section>
 
         {/* 2. Instant Authority (Client Marquee) */}
+        <div id="explore" className="scroll-mt-16" />
         <BlurFade delay={0.25} inView className={OFFSCREEN}>
           <Suspense fallback={<div className="h-[200px]" />}>
             <ClientMarqueeSection />
@@ -329,13 +364,16 @@ export default function Home() {
 
               <div className="relative z-10 mb-8 flex items-center justify-center gap-4 text-blue-400/80 uppercase tracking-[0.3em] text-xs font-semibold">
                 <span className="h-[1px] w-12 bg-blue-400/30"></span>
-                Favorite Quote
+                {t('favoriteQuote.label')}
                 <span className="h-[1px] w-12 bg-blue-400/30"></span>
               </div>
 
               <blockquote className="relative z-10 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.3] text-white/90">
-                "One man's <AuroraText>crappy software</AuroraText> is another
-                man's <AuroraText>full‑time job</AuroraText>."
+                {t('favoriteQuote.before')}
+                <AuroraText>{t('favoriteQuote.highlight1')}</AuroraText>
+                {t('favoriteQuote.middle')}
+                <AuroraText>{t('favoriteQuote.highlight2')}</AuroraText>
+                {t('favoriteQuote.after')}
               </blockquote>
 
               <div className="relative z-10 mt-10">

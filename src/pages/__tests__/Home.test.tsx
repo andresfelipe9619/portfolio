@@ -4,8 +4,10 @@ import { vi } from 'vitest';
 import { Route, Routes } from 'react-router-dom';
 import confetti from 'canvas-confetti';
 import { logEvent } from '@/lib/ga';
+import { showEasterEggToast } from '@/hooks/use-easter-egg';
 
 vi.mock('@/lib/ga', () => ({ logEvent: vi.fn() }));
+vi.mock('@/hooks/use-easter-egg', () => ({ showEasterEggToast: vi.fn() }));
 
 vi.mock('@/data/timeline', () => ({
   TESTIMONIALS: [
@@ -118,10 +120,12 @@ describe('Home page', () => {
     vi.useFakeTimers();
     try {
       fireEvent.click(
-        within(dialog).getByRole('button', { name: /unleash the genius/i }),
+        within(dialog).getByRole('button', { name: 'resumeScan.confirm' }),
       );
-      act(() => vi.advanceTimersByTime(6_000));
-      fireEvent.click(screen.getByRole('button', { name: /download resume/i }));
+      act(() => vi.advanceTimersByTime(3_000));
+      fireEvent.click(
+        screen.getByRole('button', { name: 'resumeScan.download' }),
+      );
 
       expect(download).toHaveBeenCalledTimes(1);
       expect(download.mock.contexts[0]).toHaveAttribute(
@@ -139,22 +143,53 @@ describe('Home page', () => {
     }
   });
 
-  it('renders hero content immediately if hasSeenHero is true', async () => {
+  // Anyone in a hurry skips the joke and still gets the PDF in one click.
+  it('lets a visitor skip the scan and download straight away', async () => {
     sessionStorage.setItem('hasSeenHero', 'true');
+    const download = vi
+      .spyOn(HTMLAnchorElement.prototype, 'click')
+      .mockImplementation(() => undefined);
+    try {
+      render(<Home />);
 
+      fireEvent.click(screen.getByRole('button', { name: 'downloadResume' }));
+      const dialog = await screen.findByRole('dialog');
+      fireEvent.click(
+        within(dialog).getByRole('button', { name: 'resumeScan.skip' }),
+      );
+
+      expect(download).toHaveBeenCalledTimes(1);
+    } finally {
+      download.mockRestore();
+    }
+  });
+
+  // The hero button used to open a dialog that said "just scroll down" and
+  // went nowhere. It now does the scrolling itself; the joke rides along.
+  it('scrolls to the work when asked to explore, with the joke as a toast', async () => {
+    sessionStorage.setItem('hasSeenHero', 'true');
+    const scroll = vi.fn();
+    Element.prototype.scrollIntoView = scroll;
     render(<Home />);
 
-    // Using real UI components we should see the text
-    expect(screen.getByText('globalCompanies')).toBeInTheDocument();
+    fireEvent.click(
+      await screen.findByRole('button', { name: 'exploreUniverse' }),
+    );
 
-    // Test dialogs
-    const exploreBtn = await screen.findByRole('button', {
-      name: 'exploreUniverse',
-    });
-    expect(exploreBtn).toBeInTheDocument();
+    expect(scroll).toHaveBeenCalledTimes(1);
+    expect(scroll.mock.contexts[0]).toHaveAttribute('id', 'explore');
+    expect(showEasterEggToast).toHaveBeenCalledWith(
+      'explore-universe',
+      'exploreToast.title',
+      'exploreToast.description',
+    );
+  });
 
-    // Open Joke dialog
-    fireEvent.click(exploreBtn);
-    expect(await screen.findByText(/bro/i)).toBeInTheDocument();
+  // A headline that claims "build what others can't" needs receipts next to it.
+  it('backs the headline with numbers', () => {
+    render(<Home />);
+
+    expect(screen.getByText('9+')).toBeInTheDocument();
+    expect(screen.getByText('heroStats.years')).toBeInTheDocument();
   });
 });

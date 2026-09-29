@@ -1,6 +1,6 @@
 ## **Professional Summary**
 
-Senior Full-Stack Engineer with 9+ years of experience building secure, scalable platforms across SaaS, Fintech, Insurtech, AI, Marketing Automation, GIS, and HealthTech. Backend-leaning engineer specializing in Node.js/TypeScript and AWS cloud architecture.
+Senior Software & Solutions Engineer with 9+ years of experience building secure, scalable platforms across SaaS, Fintech, Insurtech, AI, Marketing Automation, GIS, and HealthTech. Backend-leaning engineer specializing in Node.js/TypeScript and AWS cloud architecture.
 
 Experienced in leading production systems within SOC 2–regulated environments, designing centralized data platforms, and supporting investor technical due diligence. Proven ability to mentor engineers, drive architectural decisions, and deliver reliable systems across cross-functional and multicultural teams. Seeking a long-term product-focused role centered on performance, system design, and sustainable engineering practices.
 
@@ -12,7 +12,7 @@ Experienced in leading production systems within SOC 2–regulated environments,
 - **Platform Hardening (SOC 2):** Reduced security vulnerabilities by 90% through infrastructure redesign, AWS security controls, and secure SDLC governance.
 - **Cloud Cost Optimization:** Achieved \~30% AWS cost reduction via architectural right-sizing, observability improvements, and CI/CD optimization.
 - **AI & Automation Integration:** Designed and implemented enterprise-grade AI workflows using AWS Bedrock, LangChain, and multi-model orchestration strategies.
-- **Global Engineering Impact:** Delivered 30+ production systems across 11 countries and 15 industries, demonstrating strong cross-domain adaptability.
+- **Global Engineering Impact:** Delivered 30+ production systems across 12 countries and 15 industries, demonstrating strong cross-domain adaptability.
 - **Technical Recognition:** Recognized by **Codealike** for efficiency and innovation in software development patterns and high-velocity engineering. ([**interview**](https://www.torc.dev/blog/codealike-interview---january-concentration-connoisseur-winner))
 
 ---
@@ -21,9 +21,9 @@ Experienced in leading production systems within SOC 2–regulated environments,
 
 **Full Stack Engineer (Contract)** **Turnstile** · Sept 2025 – February 2026 · Remote
 
-- **MVP to Market-Fit:** Partnering with technical founders to build a category-defining SaaS product, translating complex business logic into a scalable React/Node.js stack.
-- **Third-Party Orchestration:** Engineering mission-critical integrations with Stripe, Twilio, Segment, and Salesforce to drive product functionality and user growth.
-- **Backend Architecture:** Designing robust REST/GraphQL APIs and PostgreSQL schemas optimized for high-velocity startup iterations and system reliability.
+- **MVP to Market-Fit:** Partnered with technical founders to build a category-defining SaaS product, translated complex business logic into a scalable React/Node.js stack.
+- **Third-Party Orchestration:** Engineered mission-critical integrations with Stripe, Twilio, Segment, and Salesforce to drive product functionality and user growth.
+- **Backend Architecture:** Designed robust REST/GraphQL APIs and PostgreSQL schemas optimized for high-velocity startup iterations and system reliability.
 
 **Senior Full-Stack Engineer (Contract)** **HireWorks — Client: Benekiva/Ro** · Apr 2025 – Sept 2025 · Remote
 
