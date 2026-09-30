@@ -19,7 +19,7 @@ Experienced in leading production systems within SOC 2–regulated environments,
 
 # **Professional Experience**
 
-**Full Stack Engineer (Contract)** **Turnstile** · Sept 2025 – February 2026 · Remote
+**Product Engineer (Contract)** **Turnstile** · Sept 2025 – February 2026 · Remote
 
 - **MVP to Market-Fit:** Partnered with technical founders to build a category-defining SaaS product, translated complex business logic into a scalable React/Node.js stack.
 - **Third-Party Orchestration:** Engineered mission-critical integrations with Stripe, Twilio, Segment, and Salesforce to drive product functionality and user growth.

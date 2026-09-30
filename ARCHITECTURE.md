@@ -40,7 +40,7 @@ src/
 
 ```mermaid
 flowchart TD
-  A[andressuarez.dev/] --> B[/]
+  A[portfolio-lake-nine-unco625inq.vercel.app/] --> B[/]
   A --> C[/projects]
   A --> D[/oss]
   A --> E[/contact]

@@ -74,6 +74,7 @@ You are here to help, not to replace. Here’s how you can be a good collaborato
 - **`/src/data/`**: The single source of truth for content.
   - **`resume.tsx`**: Defines the developer's professional experience and configuration details.
   - **The numbers**: 9+ years, 30+ projects, 12 countries, 15 industries; the title is **Senior Software & Solutions Engineer**. They appear in the locales, `common.ts`, `timeline.ts`, `index.html`, `llms.txt`, the résumé and `og-card.jpg`. Change one, change them all.
+  - **The site URL**: `https://portfolio-lake-nine-unco625inq.vercel.app` while the custom domain is gone. It lives in `seo.tsx`, `generate-sitemap.mjs`, `index.html`, `common.ts`, `robots.txt` and `instrument.ts`. Moving to a new domain means changing all of them in one commit.
   - **`timeline.ts`**: Contains elaborate CV history blocks. Keep big lists here.
 - **`/src/locales/`**: The single source of truth for UI copy (`en`, `es`, `fr`, `de`). When editing text on pages, update the JSON files here.
 - **`/src/assets/`**: Static assets like images and logos.

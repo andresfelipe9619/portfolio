@@ -18,7 +18,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const SITE_URL = 'https://andressuarez.dev';
+const SITE_URL = 'https://portfolio-lake-nine-unco625inq.vercel.app';
 
 /**
  * Every route worth indexing. Keep in step with the router in src/App.tsx —

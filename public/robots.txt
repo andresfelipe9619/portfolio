@@ -2,4 +2,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://andressuarez.dev/sitemap.xml
+Sitemap: https://portfolio-lake-nine-unco625inq.vercel.app/sitemap.xml

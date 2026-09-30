@@ -3,7 +3,7 @@ import { SKILLS_DICT } from './skills-dict';
 export const PROFILE = {
   name: 'Andrés Suárez',
   initials: 'AS',
-  url: 'https://andressuarez.dev',
+  url: 'https://portfolio-lake-nine-unco625inq.vercel.app',
   location: 'Cali, Colombia',
   locationLink: 'https://www.google.com/maps/place/Cali',
   // The avatar shows at 112 CSS px, so it ships at 1x/2x/3x (2–7 kB each).
