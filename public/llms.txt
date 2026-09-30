@@ -1,6 +1,6 @@
 # Andrés Suárez - Portfolio & Documentation
 
-Welcome to the digital portfolio of Andrés Suárez, a Senior Full-Stack Engineer specializing in Node.js, TypeScript, and AWS cloud architecture.
+Welcome to the digital portfolio of Andrés Suárez, a Senior Software & Solutions Engineer specializing in Node.js, TypeScript, and AWS cloud architecture.
 
 ## Site Structure
 - `/` : The home page, featuring an introduction, timeline, and professional summary.
@@ -19,4 +19,4 @@ Currently exposed tools:
 
 Otherwise, you can easily parse the raw text on this website or reach out via:
 - GitHub: https://github.com/andresfelipe9619
-- LinkedIn: https://linkedin.com/in/andresfelipe9619
+- LinkedIn: https://linkedin.com/in/suarezdev96

@@ -17,7 +17,7 @@ const work = [
     start: 'Sept 2025',
     end: 'February 2026',
     description:
-      'MVP to Market-Fit: Partnering with technical founders to build a category-defining SaaS product, translating complex business logic into a scalable React/Node.js stack. Engineered mission-critical integrations with Stripe, Twilio, Segment, and Salesforce. Designed robust REST/GraphQL APIs and PostgreSQL schemas optimized for high-velocity startup iterations.',
+      'MVP to Market-Fit: Partnered with technical founders to build a category-defining SaaS product, translating complex business logic into a scalable React/Node.js stack. Engineered mission-critical integrations with Stripe, Twilio, Segment, and Salesforce. Designed robust REST/GraphQL APIs and PostgreSQL schemas optimized for high-velocity startup iterations.',
   },
   {
     company: 'HireWorks — Client: Benekiva/Ro',
@@ -103,7 +103,7 @@ const work = [
   },
   {
     company: 'Proaxdata',
-    href: '#',
+    href: 'https://proaxdata.com/',
     badges: [SKILLS_DICT.GIS, SKILLS_DICT.MAPBOX, 'Google Apps'],
     location: 'Mexico (Remote)',
     title: 'Lead GIS Solutions Architect',
@@ -144,7 +144,7 @@ const work = [
   },
   {
     company: 'Cinekomuna',
-    href: '#',
+    href: 'https://cinekomuna.com/',
     badges: [
       SKILLS_DICT.MONGODB,
       SKILLS_DICT.AWS_EC2,
@@ -179,7 +179,7 @@ const work = [
   },
   {
     company: 'TODOSURF',
-    href: '#',
+    href: 'https://www.todosurf.com/',
     badges: [
       SKILLS_DICT.REACT,
       SKILLS_DICT.LEAFLET,
