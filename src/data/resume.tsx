@@ -58,10 +58,10 @@ export const DATA = {
     {
       school: 'Universidad del Valle',
       href: 'https://www.univalle.edu.co',
-      degree: 'Bachelor’s in Systems Engineering (in progress)',
+      degree: 'Systems Engineering coursework',
       logoUrl: '/univalle.jpg',
       start: '2014',
-      end: '—',
+      end: '2021',
     },
     {
       school: 'Self-Learning & Bootcamps',

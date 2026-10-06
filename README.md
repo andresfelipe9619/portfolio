@@ -44,8 +44,8 @@ A modern, performant, and highly interactive web application built with a curate
 - **Suspicious-path easter egg**: Visiting paths like `/admin`, `/.env`, `/wp-admin`, etc. triggers a funny security toast.
 - **DevTools-shortcut easter egg**: Detects F12 and common inspect shortcuts and responds with a playful toast.
 - **Completion easter egg for language nerds**: Selecting all supported languages in one session unlocks a hidden toast.
-- **Joke modal trigger** from the hero “Explore Universe” CTA.
-- **“Virus scan” resume flow**: Fake scan dialog before download, with progress + comic “threat names.”
+- **“Explore My Universe”** scrolls you to the work, and a toast gently points out you could have just scrolled.
+- **“Virus scan” resume flow**: Fake scan dialog before download, with progress + comic “threat names” — and a one-click skip for anyone in a hurry.
 - **Confetti-powered navigation**: “Let’s Talk” interaction fires confetti and then redirects to contact.
 
 ### AI & MCP compatibility
@@ -58,7 +58,7 @@ A modern, performant, and highly interactive web application built with a curate
 
 ### SEO, discoverability, and social metadata
 
-- **Site-wide social card** in `index.html`: Open Graph and Twitter tags, plus keywords and author. Social crawlers don't run JavaScript, so this is the card every shared link shows.
+- **Site-wide social card** in `index.html`: Open Graph and Twitter tags pointing at `public/og-card.jpg` (1200×630), plus keywords and author. Social crawlers don't run JavaScript, so this is the card every shared link shows.
 - **Structured data (JSON-LD)** using `schema.org/Person`.
 - **Sitemap + robots** in `public/sitemap.xml` and `public/robots.txt`.
 - **Per-page metadata** via a shared `<Seo>` component — every route renders its

@@ -69,9 +69,12 @@ You are here to help, not to replace. Here’s how you can be a good collaborato
 - **`/src/components/`**: The building blocks of the UI.
   - **`ui/`**: Your standard UI components (Button, Card, etc.), mostly from `shadcn/ui`.
   - **`magicui/`**: The fun stuff. This is where the portfolio's personality shines. Look at `Terminal.tsx`, `Globe.tsx`, and `Particles.tsx` for inspiration.
-  - **`joke-dialog.tsx` & `virus-scan-dialog.tsx`**: Prime examples of the portfolio's humor.
+  - **`virus-scan-dialog.tsx`** & the easter-egg toasts in `hooks/use-easter-egg.ts`: Prime examples of the portfolio's humor.
+- **Where the jokes go**: humor lives in the places that cost nothing — toasts, tooltips, the 404, the loading terminal, F12. Never on the path to something a visitor came for: a button that promises something does it, and the joke rides along (the hero's "Explore" button scrolls _and_ jokes; the résumé scan has a one-click skip).
 - **`/src/data/`**: The single source of truth for content.
   - **`resume.tsx`**: Defines the developer's professional experience and configuration details.
+  - **The numbers**: 9+ years, 30+ projects, 12 countries, 15 industries; the title is **Senior Software & Solutions Engineer**. They appear in the locales, `common.ts`, `timeline.ts`, `index.html`, `llms.txt`, the résumé and `og-card.jpg`. Change one, change them all.
+  - **The site URL**: `https://portfolio-lake-nine-unco625inq.vercel.app` while the custom domain is gone. It lives in `seo.tsx`, `generate-sitemap.mjs`, `index.html`, `common.ts`, `robots.txt` and `instrument.ts`. Moving to a new domain means changing all of them in one commit.
   - **`timeline.ts`**: Contains elaborate CV history blocks. Keep big lists here.
 - **`/src/locales/`**: The single source of truth for UI copy (`en`, `es`, `fr`, `de`). When editing text on pages, update the JSON files here.
 - **`/src/assets/`**: Static assets like images and logos.

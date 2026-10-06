@@ -10,6 +10,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { logEvent } from '@/lib/ga';
+import { useTranslation } from 'react-i18next';
 
 interface FunnyVirusScanDialogProps {
   open: boolean;
@@ -22,17 +23,13 @@ const FunnyVirusScanDialog = ({
   open,
   onOpenChange,
 }: FunnyVirusScanDialogProps) => {
+  const { t } = useTranslation();
   const [step, setStep] = useState<ScanStep>('warning');
   const [progress, setProgress] = useState(0);
   const [viruses, setViruses] = useState<string[]>([]);
 
-  const virusNames = [
-    'Over-Engineered_Perfectionism.dll',
-    'ScopeCreep.exe',
-    'Infinite_Refactoring_Loop.sys',
-    'Sleep_Deprivation_Caffeine_Overload.com',
-    'Rubber_Duck_Driven_Development.bat',
-  ];
+  const threats = t('resumeScan.threats', { returnObjects: true });
+  const virusNames = Array.isArray(threats) ? (threats as string[]) : [];
 
   const handleConfirm = () => {
     setStep('scanning');
@@ -48,7 +45,7 @@ const FunnyVirusScanDialog = ({
             return 100;
           }
           const newProgress = prev + 10;
-          if (newProgress % 20 === 0 && viruses.length < 5) {
+          if (newProgress % 20 === 0 && viruses.length < virusNames.length) {
             setViruses((prevViruses) => [
               ...prevViruses,
               virusNames[prevViruses.length],
@@ -56,7 +53,7 @@ const FunnyVirusScanDialog = ({
           }
           return newProgress;
         });
-      }, 500);
+      }, 250);
       return () => clearInterval(interval);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -81,25 +78,28 @@ const FunnyVirusScanDialog = ({
         {step === 'warning' && (
           <>
             <DialogHeader>
-              <DialogTitle>
-                ⚠️ Warning: Genius-Level Content Detected
-              </DialogTitle>
+              <DialogTitle>{t('resumeScan.warningTitle')}</DialogTitle>
             </DialogHeader>
-            <DialogDescription>
-              The resume you're about to download contains a dangerously high
-              concentration of skills and experience. Your system might flag it
-              as a 'productivity anomaly.' Proceed with caution.
-            </DialogDescription>
+            <DialogDescription>{t('resumeScan.warningDesc')}</DialogDescription>
             <DialogFooter>
               <Button
                 onClick={() => onOpenChange(false)}
                 variant="outline"
                 className="cursor-pointer"
               >
-                Cancel
+                {t('resumeScan.cancel')}
+              </Button>
+              {/* The scan is the joke, the résumé is the point: anyone in a
+                  hurry gets the PDF in one click. */}
+              <Button
+                onClick={handleDownload}
+                variant="secondary"
+                className="cursor-pointer"
+              >
+                {t('resumeScan.skip')}
               </Button>
               <Button onClick={handleConfirm} className="cursor-pointer">
-                Unleash the Genius
+                {t('resumeScan.confirm')}
               </Button>
             </DialogFooter>
           </>
@@ -107,7 +107,7 @@ const FunnyVirusScanDialog = ({
         {step === 'scanning' && (
           <>
             <DialogHeader>
-              <DialogTitle>Scanning for threats...</DialogTitle>
+              <DialogTitle>{t('resumeScan.scanningTitle')}</DialogTitle>
             </DialogHeader>
             <Progress value={progress} />
             <div className="text-sm text-muted-foreground mt-2">
@@ -122,16 +122,14 @@ const FunnyVirusScanDialog = ({
         {step === 'finished' && (
           <>
             <DialogHeader>
-              <DialogTitle>Scan Complete... Ish.</DialogTitle>
+              <DialogTitle>{t('resumeScan.finishedTitle')}</DialogTitle>
             </DialogHeader>
             <DialogDescription>
-              We found a few... 'unconventional files'. We've added them to{' '}
-              <code>.gitignore</code> so you don't have to worry about them.
-              Your download is ready.
+              {t('resumeScan.finishedDesc')}
             </DialogDescription>
             <DialogFooter>
               <Button onClick={handleDownload} className="cursor-pointer">
-                Download Resume
+                {t('resumeScan.download')}
               </Button>
             </DialogFooter>
           </>

@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-const SITE_URL = 'https://andressuarez.dev';
+const SITE_URL = 'https://portfolio-lake-nine-unco625inq.vercel.app';
 
 interface SeoProps {
   /** Page title, rendered as "<title> | Andrés Suárez". */

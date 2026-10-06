@@ -17,7 +17,7 @@ type LoadingScreenProps = {
 const r = (a: number, b: number) => Math.floor(Math.random() * (b - a + 1)) + a;
 
 const LoadingScreen = ({
-  site = 'andressuarez.dev',
+  site = 'portfolio-lake-nine-unco625inq.vercel.app',
   useH3 = false,
   onSkip,
 }: LoadingScreenProps) => {

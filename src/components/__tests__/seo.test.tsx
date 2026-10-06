@@ -26,7 +26,9 @@ describe('Seo', () => {
       expect(headTags()).toEqual({
         title: 'Projects | Andrés Suárez',
         descriptions: ['Selected work.'],
-        canonicals: ['https://andressuarez.dev/projects'],
+        canonicals: [
+          'https://portfolio-lake-nine-unco625inq.vercel.app/projects',
+        ],
         robots: [],
       });
     });

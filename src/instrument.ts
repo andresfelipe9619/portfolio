@@ -42,7 +42,10 @@ Sentry.init({
   // A portfolio is not a trading floor. 20% of traces is plenty of signal
   // without burning the quota by lunchtime.
   tracesSampleRate: 0.2,
-  tracePropagationTargets: ['localhost', 'https://andressuarez.dev/'],
+  tracePropagationTargets: [
+    'localhost',
+    'https://portfolio-lake-nine-unco625inq.vercel.app/',
+  ],
 
   // Read by the replay integration when it's added after consent.
   replaysSessionSampleRate: 0.1,

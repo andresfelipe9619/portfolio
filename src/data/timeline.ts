@@ -39,11 +39,10 @@ export const TIMELINE_DATA: {
 } = {
   summary: PROFILE.summary,
   asides: [
-    '💪 **28+ Projects Delivered**: from SaaS to GIS, every project marks innovation and real-world impact.',
-    '🌎 **Global Reach**: successful deliveries in 11 countries prove adaptability in diverse markets.',
+    '💪 **30+ Projects Delivered**: from SaaS to GIS, every project marks innovation and real-world impact.',
+    '🌎 **Global Reach**: successful deliveries in 12 countries prove adaptability in diverse markets.',
     '🐙 **Versatility Across 15 Categories**: e-commerce, healthcare, finance, mining, education, and more.',
     '🏆 **Expert Recognition**: featured in a Codealike interview highlighting measurable engineering excellence.',
-    '🚫 **Integrity First**: stood against unfair practices (Workana expulsion) while prioritizing value and transparency.',
     '💡 **Innovation-Driven**: committed to cutting-edge solutions with SaaS, cloud automation, and open source.',
   ],
   timeline: {
@@ -190,6 +189,9 @@ export const TIMELINE_DATA: {
         stack: ['Mapbox GL JS', 'Node.js', 'React'],
         country: 'Spain',
         flag: '🇪🇸',
+        client: 'TODOSURF',
+        testimonial:
+          '“Working with Andrés was fundamental to our project. His mastery of GIS and React brought an advanced technical perspective, key to the successful implementation of our solutions.”',
       },
       {
         title: 'BROOKLYN - CRM & Financial',
@@ -348,6 +350,9 @@ export const TIMELINE_DATA: {
         stack: ['Strapi', 'AWS (EC2, RDS, S3)', 'PostgreSQL'],
         country: 'Colombia',
         flag: '🇨🇴',
+        client: 'Klazia',
+        testimonial:
+          '“Andrés came in and saved the day. A migration that was anything but easy, and he knew exactly how to pull it off. A great professional: honest, and with the knowledge to solve any problem.”',
       },
       {
         title: 'Lawyers SaaS',
@@ -356,6 +361,9 @@ export const TIMELINE_DATA: {
         stack: ['Node.js', 'React', 'PostgreSQL', 'AWS'],
         country: 'Colombia',
         flag: '🇨🇴',
+        client: 'Factoring Abogados',
+        testimonial:
+          '“The final result fully met my expectations. Andrés delivered on time, listened carefully to my needs and turned them into the application. I wouldn’t hesitate to recommend him to anyone looking for a talented, committed developer.”',
       },
       {
         title: 'Cinekomuna - Improve Performance',
@@ -499,6 +507,9 @@ export const TIMELINE_DATA: {
         stack: ['Mapbox', 'Node.js', 'React'],
         country: 'Mexico',
         flag: '🇲🇽',
+        client: 'Proax Data',
+        testimonial:
+          '“Thanks to his dedication, we found the ideal solution for our SaaS application, a project we had been planning for over a year. Andrés not only displayed technical expertise but also significantly improved the user experience.”',
         caseStudyId: 'proaxdata',
       },
       {
@@ -593,12 +604,6 @@ export const TIMELINE_DATA: {
         country: 'Panama',
         flag: '🇵🇦',
       },
-      {
-        title: 'Expelled from Workana for integrity stance',
-        area: 'Career',
-        kind: 'Milestone',
-        stack: [],
-      },
     ],
 
     '2024': [
@@ -609,6 +614,9 @@ export const TIMELINE_DATA: {
         stack: ['AWS (API Gateway, Lambda, S3, RDS)', 'Node.js'],
         country: 'United States',
         flag: '🇺🇸',
+        client: 'Joseph Cook',
+        testimonial:
+          '“We hired Andres as an AWS Cognito and Lambda expert for our React Native project, and we couldn’t be more satisfied. He tackled complex challenges with ease and delivered high-quality work within the timeline.”',
       },
       {
         title: 'Torc - Codealike Interview',
@@ -698,9 +706,9 @@ export const TIMELINE_DATA: {
         date: '2025',
         role: 'Product Engineer',
         summary:
-          'Partnering with technical founders to build a category-defining SaaS product.',
+          'Partnered with technical founders to build a category-defining SaaS product.',
         description:
-          'Translating complex business logic into a scalable React/Node.js stack and engineering mission-critical integrations.',
+          'Translated complex business logic into a scalable React/Node.js stack and engineered mission-critical integrations.',
         tags: ['Fintech', 'SaaS'],
       },
     ],
@@ -730,8 +738,10 @@ export type Testimonial = {
   flag?: string;
 };
 
+// Newest first: the most recent work is the most relevant proof.
 export const TESTIMONIALS: Testimonial[] = Object.values(TIMELINE_DATA.timeline)
   .flat()
+  .reverse()
   .filter((item) => item.testimonial || item.review)
   .map((item) => ({
     quote: (item.testimonial || item.review) as string,

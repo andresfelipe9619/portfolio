@@ -10,13 +10,28 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 
+const SOURCE_URL = 'https://github.com/andresfelipe9619/portfolio';
+
 export function Footer() {
   const { t } = useTranslation();
   return (
     <section id="footer" className="bg-gray-950 text-white">
       <div className="mx-auto max-w-6xl px-6 py-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <div className="text-sm text-white/60">
-          © {new Date().getFullYear()} {DATA.name}. {t('footerRights')}
+        <div className="flex flex-col gap-1 text-sm text-white/60">
+          <span>
+            © {new Date().getFullYear()} {DATA.name}. {t('footerRights')}
+          </span>
+          {/* The consent gate, the CSP, the perf budgets and the tests are the
+              best proof of craft on this site, and none of it is visible. */}
+          <a
+            href={SOURCE_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="text-white/50 underline-offset-4 hover:text-white hover:underline"
+            onClick={() => logEvent('Footer', 'Source Click', SOURCE_URL)}
+          >
+            {t('footer.sourceLink')} ↗
+          </a>
         </div>
         <Dock className="border-white/10 bg-white/5">
           <Tooltip>

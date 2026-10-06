@@ -3,26 +3,27 @@ import { SKILLS_DICT } from './skills-dict';
 export const PROFILE = {
   name: 'Andrés Suárez',
   initials: 'AS',
-  url: 'https://andressuarez.dev',
+  url: 'https://portfolio-lake-nine-unco625inq.vercel.app',
   location: 'Cali, Colombia',
   locationLink: 'https://www.google.com/maps/place/Cali',
   // The avatar shows at 112 CSS px, so it ships at 1x/2x/3x (2–7 kB each).
-  // /me.jpeg (977 kB, 3000 px) stays for the social card, which wants pixels.
+  // /me.jpeg (3000 px) stays for the JSON-LD portrait; the social card is
+  // /og-card.jpg, a designed 1200x630 image.
   avatarUrl: '/me-avatar-224.webp',
   avatarSrcSet:
     '/me-avatar-112.webp 112w, /me-avatar-224.webp 224w, /me-avatar-336.webp 336w',
 
   // The very short pitch used in hero or top level description
   description:
-    'Senior Full-Stack Engineer with 9+ years of experience building secure, scalable platforms across SaaS, Fintech, Insurtech, AI, Marketing Automation, GIS, and HealthTech.',
+    'Senior Software & Solutions Engineer with 9+ years of experience building secure, scalable platforms across SaaS, Fintech, Insurtech, AI, Marketing Automation, GIS, and HealthTech.',
 
   // The timeline / shorter summary
   summary:
-    'Innovative **Software & Solutions Engineer** with 8+ years delivering scalable SaaS, cloud, and GIS systems across 11 countries. Recognized for bridging business and technology, leading enterprise engineering, and building open-source projects.',
+    'Innovative **Software & Solutions Engineer** with 9+ years delivering scalable SaaS, cloud, and GIS systems across 12 countries. Recognized for bridging business and technology, leading enterprise engineering, and building open-source projects.',
 
   // The longer, more detailed summary for the resume
   longSummary:
-    'Senior Full-Stack Engineer with 9+ years of experience building secure, scalable platforms across SaaS, Fintech, Insurtech, AI, Marketing Automation, GIS, and HealthTech. Backend-leaning engineer specializing in Node.js/TypeScript and AWS cloud architecture. Experienced in leading production systems within SOC 2–regulated environments, designing centralized data platforms, and supporting investor technical due diligence. Proven ability to mentor engineers, drive architectural decisions, and deliver reliable systems across cross-functional and multicultural teams. Seeking a long-term product-focused role centered on performance, system design, and sustainable engineering practices.',
+    'Senior Software & Solutions Engineer with 9+ years of experience building secure, scalable platforms across SaaS, Fintech, Insurtech, AI, Marketing Automation, GIS, and HealthTech. Backend-leaning engineer specializing in Node.js/TypeScript and AWS cloud architecture. Experienced in leading production systems within SOC 2–regulated environments, designing centralized data platforms, and supporting investor technical due diligence. Proven ability to mentor engineers, drive architectural decisions, and deliver reliable systems across cross-functional and multicultural teams. Seeking a long-term product-focused role centered on performance, system design, and sustainable engineering practices.',
 } as const;
 
 export const SKILLS = [
